@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Artigos — Seguro Garantia Fácil</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,700;1,400&family=Outfit:wght@300;400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,700;0,8..60,900;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+:root{--ivory:#FBF8F2;--ivory-2:#F4EFE4;--ivory-3:#EDE6D6;--ink:#1A1612;--ink-mid:#3D342A;--ink-soft:#6B5E52;--ink-mute:#9C9088;--terra:#C05A35;--terra-lt:#D97A52;--amber:#C4900A;--sage:#4A6741;--blue:#1A6199;--line:rgba(90,70,50,0.12);--serif:'Source Serif 4',Georgia,serif;--body:'Lora',Georgia,serif;--ui:'Outfit',system-ui,sans-serif}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--body);background:var(--ivory);color:var(--ink-mid);-webkit-font-smoothing:antialiased}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--ivory-2)}::-webkit-scrollbar-thumb{background:var(--ivory-3);border-radius:99px}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(251,248,242,0.94);backdrop-filter:blur(16px);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 56px;height:64px}
+.nav-logo{font-family:var(--serif);font-size:17px;font-weight:700;color:var(--ink);text-decoration:none}
+.nav-logo em{font-style:italic;color:var(--terra)}
+.nav-back{font-family:var(--ui);font-size:13px;font-weight:500;color:var(--ink-soft);text-decoration:none;display:flex;align-items:center;gap:6px;transition:color .2s}
+.nav-back:hover{color:var(--terra)}
+.hero{padding:110px 56px 64px;text-align:center;border-bottom:1px solid var(--line)}
+.hero-ey{font-family:var(--ui);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--terra);margin-bottom:20px;display:flex;align-items:center;justify-content:center;gap:10px}
+.hero-ey::before,.hero-ey::after{content:'';width:24px;height:1px;background:var(--terra)}
+.hero h1{font-family:var(--serif);font-size:clamp(34px,5vw,58px);font-weight:900;color:var(--ink);letter-spacing:-.03em;line-height:1.08;margin-bottom:18px}
+.hero h1 em{font-style:italic;color:var(--terra)}
+.hero p{font-size:17px;color:var(--ink-soft);line-height:1.75;max-width:540px;margin:0 auto}
+.anav{background:var(--ivory-2);border-bottom:1px solid var(--line);padding:0 56px;display:flex;gap:0;overflow-x:auto;position:sticky;top:64px;z-index:90}
+.anav a{font-family:var(--ui);font-size:13px;font-weight:500;color:var(--ink-mute);text-decoration:none;padding:15px 18px;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s}
+.anav a:hover{color:var(--terra)}
+.anav a.on{color:var(--terra);border-bottom-color:var(--terra)}
+.art{padding:80px 0 96px;border-bottom:1px solid var(--line)}
+.art:nth-child(even){background:var(--ivory-2)}
+.ai{max-width:820px;margin:0 auto;padding:0 56px}
+.tag{display:inline-flex;align-items:center;gap:6px;font-family:var(--ui);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 12px;border-radius:99px;margin-bottom:18px}
+.tj{background:rgba(26,97,153,.1);color:#1a6199}
+.tc{background:rgba(196,144,10,.12);color:#8A6500}
+.ta{background:rgba(74,103,65,.1);color:var(--sage)}
+.tt{background:rgba(192,90,53,.1);color:var(--terra)}
+.tr{background:rgba(100,60,120,.1);color:#64388A}
+.ts{background:rgba(192,90,53,.08);color:var(--terra)}
+.h2{font-family:var(--serif);font-size:clamp(26px,3.5vw,40px);font-weight:900;color:var(--ink);line-height:1.1;letter-spacing:-.025em;margin-bottom:14px}
+.lead{font-size:18px;color:var(--ink-soft);line-height:1.8;margin-bottom:36px;border-left:3px solid var(--terra);padding-left:20px;font-style:italic}
+.body p{font-size:16.5px;line-height:1.9;color:var(--ink-soft);margin-bottom:20px}
+.body p strong{color:var(--ink);font-weight:600}
+.body p em{color:var(--terra);font-style:italic}
+.body h3{font-family:var(--serif);font-size:21px;font-weight:700;color:var(--ink);margin:36px 0 12px;letter-spacing:-.02em}
+.body ul{margin:0 0 20px;padding:0;list-style:none}
+.body ul li{font-size:16px;color:var(--ink-soft);line-height:1.8;padding:5px 0 5px 22px;position:relative}
+.body ul li::before{content:'▸';position:absolute;left:0;color:var(--terra);font-size:12px;top:8px}
+.vis{margin:32px 0;border-radius:14px;overflow:hidden;border:1px solid var(--ivory-3);background:var(--ivory)}
+.vis svg{display:block;width:100%;height:auto}
+.vis figcaption{font-family:var(--ui);font-size:12px;color:var(--ink-mute);text-align:center;padding:11px 16px;background:var(--ivory-2);border-top:1px solid var(--ivory-3)}
+.box{padding:18px 22px;margin:24px 0;border-radius:0 12px 12px 0}
+.box-terra{background:rgba(192,90,53,.06);border-left:3px solid var(--terra);border:1px solid rgba(192,90,53,.2);border-left:3px solid var(--terra)}
+.box-amber{background:rgba(196,144,10,.06);border-left:3px solid var(--amber);border:1px solid rgba(196,144,10,.2);border-left:3px solid var(--amber)}
+.box-title{font-family:var(--ui);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--terra);margin-bottom:8px}
+.box-amber .box-title{color:var(--amber)}
+.box p{font-size:15px;color:var(--ink-mid);line-height:1.75;margin:0}
+.box p strong{color:var(--terra)}
+.box-amber p strong{color:var(--amber)}
+.aft{margin-top:44px;padding-top:28px;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
+.aut{display:flex;align-items:center;gap:12px}
+.av{width:40px;height:40px;border-radius:50%;background:rgba(192,90,53,.12);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:14px;font-weight:700;color:var(--terra);flex-shrink:0}
+.an{font-family:var(--ui);font-size:13px;font-weight:600;color:var(--ink)}
+.ar{font-family:var(--ui);font-size:12px;color:var(--ink-mute)}
+.rt{font-family:var(--ui);font-size:12px;color:var(--ink-mute)}
+.btm{display:block;text-align:center;padding:48px 0}
+.btm a{font-family:var(--ui);font-size:13px;font-weight:600;color:var(--terra);text-decoration:none;display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:99px;border:1.5px solid rgba(192,90,53,.25);transition:all .2s}
+.btm a:hover{background:rgba(192,90,53,.06)}
+@media(max-width:768px){nav,div.anav{padding:0 20px}.hero{padding:96px 20px 52px}.ai{padding:0 20px}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="segurogarantiafacil_v6.html" class="nav-logo">Seguro Garantia <em>Fácil</em></a>
+  <a href="segurogarantiafacil_v6.html" class="nav-back">← Início</a>
+</nav>
+<div class="hero">
+  <div class="hero-ey">Biblioteca</div>
+  <h1>Aprenda Seguro Garantia<br><em>de verdade</em></h1>
+  <p>Seis artigos fundamentais com diagramas, exemplos reais e cálculos práticos — por quem trabalha com subscrição no dia a dia.</p>
+</div>
+<div class="anav" id="anav">
+  <a href="#a1" class="on">1. Erro de prazo</a>
+  <a href="#a2">2. Cálculo do prêmio</a>
+  <a href="#a3">3. Portaria RFB 315</a>
+  <a href="#a4">4. Bid Bond vs. Performance</a>
+  <a href="#a5">5. Lendo o balanço</a>
+  <a href="#a6">6. O sinistro</a>
+</div>
+
+<!-- ART 1 -->
+<article class="art" id="a1">
+<div class="ai">
+  <span class="tag tj">⚖️ Garantia Judicial</span>
+  <h2 class="h2">O erro de prazo que transforma uma apólice em penhora</h2>
+  <p class="lead">A apólice está ativa. O processo corre. Ninguém percebe que o vencimento se aproxima. Trinta dias depois, o juízo determina a penhora de bens. Esse é o sinistro mais comum — e o mais evitável — do mercado de Seguro Garantia Judicial.</p>
+  <div class="body">
+    <p>Quando uma empresa apresenta uma apólice de Seguro Garantia em substituição ao depósito judicial, o juízo aceita e o processo segue. O capital de giro está livre. O problema começa quando ninguém assume a responsabilidade de monitorar o que acontece com essa apólice ao longo do tempo.</p>
+    <figure class="vis">
+      <svg viewBox="0 0 760 290" xmlns="http://www.w3.org/2000/svg" font-family="Outfit,system-ui,sans-serif">
+        <rect width="760" height="290" fill="#FBF8F2"/>
+        <text x="380" y="30" text-anchor="middle" font-size="13" fill="#3D342A" font-weight="700" font-family="Source Serif 4,Georgia,serif">O que acontece sem controle de vencimentos</text>
+        <line x1="50" y1="130" x2="710" y2="130" stroke="#EDE6D6" stroke-width="3"/>
+        <circle cx="90" cy="130" r="11" fill="#1A6199"/>
+        <text x="90" y="160" text-anchor="middle" font-size="10" fill="#6B5E52" font-weight="600">Processo</text>
+        <text x="90" y="173" text-anchor="middle" font-size="10" fill="#6B5E52">iniciado</text>
+        <circle cx="220" cy="130" r="11" fill="#4A6741"/>
+        <text x="220" y="160" text-anchor="middle" font-size="10" fill="#6B5E52" font-weight="600">Apólice</text>
+        <text x="220" y="173" text-anchor="middle" font-size="10" fill="#6B5E52">emitida</text>
+        <line x1="220" y1="119" x2="220" y2="78" stroke="#4A6741" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <rect x="148" y="58" width="144" height="24" rx="6" fill="#EAF3DE" stroke="#4A6741"/>
+        <text x="220" y="74" text-anchor="middle" font-size="11" fill="#4A6741" font-weight="600">Capital livre ✓</text>
+        <circle cx="450" cy="130" r="13" fill="#C05A35"/>
+        <text x="450" y="160" text-anchor="middle" font-size="10" fill="#C05A35" font-weight="700">Apólice</text>
+        <text x="450" y="173" text-anchor="middle" font-size="10" fill="#C05A35" font-weight="700">vence</text>
+        <line x1="450" y1="117" x2="450" y2="76" stroke="#C05A35" stroke-width="2"/>
+        <polygon points="450,68 445,80 455,80" fill="#C05A35"/>
+        <rect x="360" y="48" width="180" height="24" rx="6" fill="#FBEAF0" stroke="#C05A35" stroke-width="1.5"/>
+        <text x="450" y="64" text-anchor="middle" font-size="11" fill="#C05A35" font-weight="700">⚠ Ninguém renovou</text>
+        <rect x="300" y="110" width="300" height="18" rx="4" fill="rgba(192,90,53,0.08)" stroke="rgba(192,90,53,0.3)" stroke-width="1" stroke-dasharray="3,2"/>
+        <text x="450" y="123" text-anchor="middle" font-size="10" fill="#C05A35" font-weight="600">mín. 60 dias de margem requeridos pela lei</text>
+        <circle cx="620" cy="130" r="13" fill="#1A1612"/>
+        <text x="620" y="160" text-anchor="middle" font-size="10" fill="#1A1612" font-weight="700">Penhora</text>
+        <text x="620" y="173" text-anchor="middle" font-size="10" fill="#1A1612" font-weight="700">de bens</text>
+        <line x1="620" y1="143" x2="620" y2="200" stroke="#1A1612" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <rect x="548" y="200" width="144" height="24" rx="6" fill="#F0EDE8" stroke="#9C9088"/>
+        <text x="620" y="216" text-anchor="middle" font-size="11" fill="#3D342A">Ativos bloqueados</text>
+        <circle cx="335" cy="130" r="5" fill="#EDE6D6"/>
+        <circle cx="535" cy="130" r="5" fill="#EDE6D6"/>
+        <text x="380" y="255" text-anchor="middle" font-size="12" fill="#C05A35" font-weight="700">Este sinistro é 100% evitável com controle adequado</text>
+      </svg>
+      <figcaption>Linha do tempo do sinistro por vencimento de apólice sem monitoramento</figcaption>
+    </figure>
+    <h3>A regra dos 60 dias</h3>
+    <p>A legislação processual exige que a apólice mantenha vigência por <strong>pelo menos 60 dias além da data prevista para o encerramento do processo</strong>. Como ninguém sabe exatamente quando um processo vai terminar, a apólice precisa ser renovada proativamente — o que exige controle ativo e sistemático.</p>
+    <div class="box box-terra">
+      <div class="box-title">⚖️ Base legal</div>
+      <p>O CPC (art. 835, §2º) e a jurisprudência do STJ consolidaram que a apólice de Seguro Garantia é substituta idônea ao depósito em dinheiro, desde que mantenha <strong>vigência adequada durante todo o curso do processo</strong>.</p>
+    </div>
+    <h3>Como evitar</h3>
+    <ul>
+      <li><strong>Planilha de controle:</strong> coluna com data de vencimento e fórmula de alerta para 90 dias antes.</li>
+      <li><strong>Automação:</strong> sistemas em Python ou VBA monitoram carteiras inteiras e disparam alertas — elimina o risco humano em grandes volumes.</li>
+      <li><strong>Responsabilidade definida:</strong> alguém precisa ser o dono do processo — advogado, controller ou corretor.</li>
+    </ul>
+    <div class="box box-amber">
+      <div class="box-title">⚠ Atenção</div>
+      <p>Execuções fiscais podem durar 10, 15, 20 anos. A apólice precisará ser renovada múltiplas vezes. Um sistema de controle não é opcional — é obrigatório para quem tem <strong>volume relevante de garantias judiciais ativas</strong>.</p>
+    </div>
+  </div>
+  <div class="aft"><div class="aut"><div class="av">AA</div><div><div class="an">Alex Abreu</div><div class="ar">Coord. Técnico · Infinite Seguradora · Mestre em Direito (PUC-SP)</div></div></div><div class="rt">⏱ 6 min</div></div>
+</div>
+</article>
+
+<!-- ART 2 -->
+<article class="art" id="a2">
+<div class="ai">
+  <span class="tag tc">🧮 Precificação</span>
+  <h2 class="h2">Como é calculado o prêmio do Seguro Garantia</h2>
+  <p class="lead">A fórmula é simples. O que faz a diferença é entender o que determina a taxa — e o que você pode negociar para reduzi-la.</p>
+  <div class="body">
+    <p>A primeira pergunta de quase todo profissional que entra em contato com o Seguro Garantia é sempre a mesma: <em>"quanto vai custar?"</em>. A resposta depende de três variáveis — e entender a lógica por trás de cada uma é fundamental.</p>
+    <figure class="vis">
+      <svg viewBox="0 0 760 180" xmlns="http://www.w3.org/2000/svg" font-family="Outfit,system-ui,sans-serif">
+        <rect width="760" height="180" fill="#FBF8F2"/>
+        <text x="380" y="28" text-anchor="middle" font-size="13" fill="#3D342A" font-weight="700" font-family="Source Serif 4,Georgia,serif">Prêmio = IS × Taxa × Prazo</text>
+        <rect x="44" y="48" width="158" height="80" rx="12" fill="#E6F1FB" stroke="#1A6199" stroke-width="1.5"/>
+        <text x="123" y="80" text-anchor="middle" font-size="11" fill="#1A6199" font-weight="700">IMPORTÂNCIA</text>
+        <text x="123" y="95" text-anchor="middle" font-size="11" fill="#1A6199" font-weight="700">SEGURADA</text>
+        <text x="123" y="112" text-anchor="middle" font-size="11" fill="#6B5E52">valor garantido</text>
+        <text x="222" y="94" text-anchor="middle" font-size="26" fill="#C05A35" font-weight="700">×</text>
+        <rect x="242" y="48" width="158" height="80" rx="12" fill="#FAEEDA" stroke="#C4900A" stroke-width="1.5"/>
+        <text x="321" y="87" text-anchor="middle" font-size="11" fill="#8A6500" font-weight="700">TAXA ANUAL</text>
+        <text x="321" y="105" text-anchor="middle" font-size="11" fill="#6B5E52">0,5% a 4% a.a.</text>
+        <text x="420" y="94" text-anchor="middle" font-size="26" fill="#C05A35" font-weight="700">×</text>
+        <rect x="440" y="48" width="158" height="80" rx="12" fill="#EAF3DE" stroke="#4A6741" stroke-width="1.5"/>
+        <text x="519" y="87" text-anchor="middle" font-size="11" fill="#4A6741" font-weight="700">PRAZO</text>
+        <text x="519" y="105" text-anchor="middle" font-size="11" fill="#6B5E52">dias ÷ 365</text>
+        <text x="618" y="94" text-anchor="middle" font-size="26" fill="#C05A35" font-weight="700">=</text>
+        <rect x="638" y="44" width="92" height="88" rx="12" fill="#C05A35"/>
+        <text x="684" y="84" text-anchor="middle" font-size="12" fill="white" font-weight="700">PRÊMIO</text>
+        <text x="684" y="100" text-anchor="middle" font-size="11" fill="rgba(255,255,255,.8)">sem IOF</text>
+        <text x="380" y="158" text-anchor="middle" font-size="11" fill="#4A6741" font-weight="600">✓ Seguro Garantia (ramos 0775/0776) não está sujeito a IOF</text>
+      </svg>
+      <figcaption>Fórmula base do prêmio de Seguro Garantia — sem incidência de IOF</figcaption>
+    </figure>
+    <h3>Exemplo prático</h3>
+    <p>Uma empresa precisa garantir <strong>R$ 500.000</strong> em uma execução fiscal por <strong>3 anos</strong>, com taxa de <strong>1,8% ao ano</strong>.</p>
+    <p><strong>Prêmio = R$ 500.000 × 1,8% × 3 = R$ 27.000</strong></p>
+    <p>Compare com a alternativa: R$ 500.000 parados em depósito judicial durante 3 anos. Considerando apenas 10% ao ano de custo de oportunidade, o capital imobilizado representa <strong>R$ 150.000 em retorno perdido</strong>. O Seguro Garantia custou R$ 27.000 e liberou R$ 500.000 para trabalhar.</p>
+    <h3>O que determina a taxa</h3>
+    <p>A taxa não é fixa — ela é definida pelo subscritor caso a caso. Os principais fatores:</p>
+    <figure class="vis">
+      <svg viewBox="0 0 760 270" xmlns="http://www.w3.org/2000/svg" font-family="Outfit,system-ui,sans-serif">
+        <rect width="760" height="270" fill="#FBF8F2"/>
+        <text x="380" y="28" text-anchor="middle" font-size="13" fill="#3D342A" font-weight="700" font-family="Source Serif 4,Georgia,serif">Fatores que definem a taxa — peso relativo</text>
+        <text x="50" y="60" font-size="12" fill="#3D342A" font-weight="600">1. Risco de crédito do tomador</text>
+        <rect x="50" y="66" width="660" height="14" rx="4" fill="#EDE6D6"/>
+        <rect x="50" y="66" width="440" height="14" rx="4" fill="#1A6199"/>
+        <text x="500" y="78" font-size="10" fill="#1A6199" font-weight="700">maior impacto na taxa</text>
+        <text x="50" y="106" font-size="12" fill="#3D342A" font-weight="600">2. Natureza da obrigação garantida</text>
+        <rect x="50" y="112" width="660" height="14" rx="4" fill="#EDE6D6"/>
+        <rect x="50" y="112" width="330" height="14" rx="4" fill="#4A6741"/>
+        <text x="390" y="124" font-size="10" fill="#4A6741" font-weight="700">impacto médio-alto</text>
+        <text x="50" y="152" font-size="12" fill="#3D342A" font-weight="600">3. Modalidade (judicial, bid, performance…)</text>
+        <rect x="50" y="158" width="660" height="14" rx="4" fill="#EDE6D6"/>
+        <rect x="50" y="158" width="280" height="14" rx="4" fill="#C4900A"/>
+        <text x="340" y="170" font-size="10" fill="#C4900A" font-weight="700">impacto médio</text>
+        <text x="50" y="198" font-size="12" fill="#3D342A" font-weight="600">4. Exposição acumulada na seguradora</text>
+        <rect x="50" y="204" width="660" height="14" rx="4" fill="#EDE6D6"/>
+        <rect x="50" y="204" width="200" height="14" rx="4" fill="#C05A35"/>
+        <text x="260" y="216" font-size="10" fill="#C05A35" font-weight="700">impacto variável</text>
+        <text x="50" y="244" font-size="12" fill="#3D342A" font-weight="600">5. Contragarantias oferecidas</text>
+        <rect x="50" y="250" width="660" height="14" rx="4" fill="#EDE6D6"/>
+        <rect x="50" y="250" width="160" height="14" rx="4" fill="#64388A"/>
+        <text x="220" y="262" font-size="10" fill="#64388A" font-weight="700">pode reduzir a taxa em até 40%</text>
+      </svg>
+      <figcaption>Peso relativo de cada fator na composição da taxa</figcaption>
+    </figure>
+    <div class="box box-terra">
+      <div class="box-title">💡 O que você pode negociar</div>
+      <p>Oferecer <strong>contragarantias sólidas</strong> — imóvel, recebíveis, aval dos sócios — pode reduzir a taxa entre 20% e 40%. Volume de carteira e antecipação de renovações também abrem margem de negociação.</p>
+    </div>
+    <h3>Faixas de referência do mercado</h3>
+    <ul>
+      <li><strong>Garantia Judicial (bom rating):</strong> 0,8% a 1,8% a.a.</li>
+      <li><strong>Garantia Administrativa:</strong> 0,5% a 1,5% a.a.</li>
+      <li><strong>Bid Bond:</strong> 0,8% a 1,5% a.a.</li>
+      <li><strong>Performance Bond (infraestrutura):</strong> 1,5% a 3,5% a.a.</li>
+      <li><strong>Perfis de alto risco:</strong> 3% a 5% a.a. (ou recusa técnica)</li>
+    </ul>
+  </div>
+  <div class="aft"><div class="aut"><div class="av">AA</div><div><div class="an">Alex Abreu</div><div class="ar">Coord. Técnico · Infinite Seguradora · Mestre em Direito (PUC-SP)</div></div></div><div class="rt">⏱ 8 min</div></div>
+</div>
+</article>
+
+<!-- ART 3 -->
+<article class="art" id="a3">
+<div class="ai">
+  <span class="tag ta">🏛️ Garantia Administrativa</span>
+  <h2 class="h2">Portaria RFB nº 315/2023 — o arrolamento substituído por apólice</h2>
+  <p class="lead">Empresas com débitos fiscais acima de R$ 2 milhões podem substituir o arrolamento de bens junto à Receita Federal por uma apólice de Seguro Garantia. É uma das mudanças mais relevantes dos últimos anos — e ainda pouco utilizada no mercado.</p>
+  <div class="body">
+    <p>O arrolamento de bens é um procedimento pelo qual a Receita Federal registra o patrimônio de um contribuinte como forma de acompanhar seus ativos enquanto existem débitos fiscais de grande vulto. Na prática, cria uma trava informal — o contribuinte não fica impedido de alienar bens, mas qualquer movimentação relevante precisa ser comunicada à RFB.</p>
+    <figure class="vis">
+      <svg viewBox="0 0 760 300" xmlns="http://www.w3.org/2000/svg" font-family="Outfit,system-ui,sans-serif">
+        <rect width="760" height="300" fill="#FBF8F2"/>
+        <text x="380" y="28" text-anchor="middle" font-size="13" fill="#3D342A" font-weight="700" font-family="Source Serif 4,Georgia,serif">Antes e depois da Portaria RFB 315/2023</text>
+        <rect x="30" y="44" width="330" height="228" rx="14" fill="#FBEAF0" stroke="#C05A35" stroke-width="1.5"/>
+        <rect x="30" y="44" width="330" height="40" rx="14" fill="#C05A35"/>
+        <rect x="30" y="70" width="330" height="14" fill="#C05A35"/>
+        <text x="195" y="69" text-anchor="middle" font-size="12" fill="white" font-weight="700">ANTES — Arrolamento tradicional</text>
+        <g transform="translate(52,104)">
+          <circle cx="10" cy="8" r="5" fill="#C05A35"/>
+          <text x="22" y="13" font-size="12" fill="#3D342A">Bens e direitos registrados na RFB</text>
+          <circle cx="10" cy="40" r="5" fill="#C05A35"/>
+          <text x="22" y="45" font-size="12" fill="#3D342A">Alienações exigem aviso prévio formal</text>
+          <circle cx="10" cy="76" r="5" fill="#C05A35"/>
+          <text x="22" y="81" font-size="12" fill="#3D342A">Gestão patrimonial complexa</text>
+          <circle cx="10" cy="112" r="5" fill="#C05A35"/>
+          <text x="22" y="117" font-size="12" fill="#3D342A">Inventário e controle permanentes</text>
+          <circle cx="10" cy="148" r="5" fill="#C05A35"/>
+          <text x="22" y="153" font-size="12" fill="#3D342A">Capital imobilizado indiretamente</text>
+        </g>
+        <text x="195" y="256" text-anchor="middle" font-size="12" fill="#C05A35" font-weight="700">Custo operacional alto</text>
+        <rect x="400" y="44" width="330" height="228" rx="14" fill="#EAF3DE" stroke="#4A6741" stroke-width="1.5"/>
+        <rect x="400" y="44" width="330" height="40" rx="14" fill="#4A6741"/>
+        <rect x="400" y="70" width="330" height="14" fill="#4A6741"/>
+        <text x="565" y="69" text-anchor="middle" font-size="12" fill="white" font-weight="700">DEPOIS — Portaria RFB 315/2023</text>
+        <g transform="translate(422,104)">
+          <circle cx="10" cy="8" r="5" fill="#4A6741"/>
+          <text x="22" y="13" font-size="12" fill="#3D342A">Apólice de SG substitui o arrolamento</text>
+          <circle cx="10" cy="40" r="5" fill="#4A6741"/>
+          <text x="22" y="45" font-size="12" fill="#3D342A">Bens patrimoniais ficam completamente livres</text>
+          <circle cx="10" cy="76" r="5" fill="#4A6741"/>
+          <text x="22" y="81" font-size="12" fill="#3D342A">Sem obrigação de comunicação prévia</text>
+          <circle cx="10" cy="112" r="5" fill="#4A6741"/>
+          <text x="22" y="117" font-size="12" fill="#3D342A">Gestão patrimonial simplificada</text>
+          <circle cx="10" cy="148" r="5" fill="#4A6741"/>
+          <text x="22" y="153" font-size="12" fill="#3D342A">Prêmio do seguro = único custo operacional</text>
+        </g>
+        <text x="565" y="256" text-anchor="middle" font-size="12" fill="#4A6741" font-weight="700">Flexibilidade · Custo controlado</text>
+        <text x="380" y="184" text-anchor="middle" font-size="22" fill="#C05A35">→</text>
+      </svg>
+      <figcaption>Comparativo entre arrolamento de bens tradicional e substituição por apólice</figcaption>
+    </figure>
+    <h3>Quem pode usar</h3>
+    <ul>
+      <li>Débitos fiscais superiores a <strong>R$ 2 milhões</strong> que tenham gerado o arrolamento</li>
+      <li>Apólice emitida por seguradora <strong>autorizada pela SUSEP</strong> com produto específico registrado</li>
+      <li>IS correspondendo ao <strong>valor total dos débitos</strong> sujeitos ao arrolamento</li>
+      <li>Vigência da apólice compatível com o prazo do débito e de eventual discussão administrativa ou judicial</li>
+    </ul>
+    <div class="box box-terra">
+      <div class="box-title">🏛️ Por que isso importa</div>
+      <p>Uma empresa com R$ 5 milhões em débitos fiscais pode ter bens arrolados que valem R$ 10 milhões. Com a nova portaria, esses ativos ficam completamente livres. <strong>O prêmio do seguro é o único custo operacional</strong> — e costuma ser muito menor do que o custo de oportunidade dos ativos imobilizados.</p>
+    </div>
+    <p>Trabalhei diretamente no desenvolvimento desse produto na Allianz Trade. O maior desafio na subscrição é a vigência: debates tributários de grande porte podem se estender por 10 a 15 anos, exigindo múltiplas renovações e acompanhamento ativo do processo administrativo e judicial paralelo.</p>
+  </div>
+  <div class="aft"><div class="aut"><div class="av">AA</div><div><div class="an">Alex Abreu</div><div class="ar">Coord. Técnico · Infinite Seguradora · Mestre em Direito (PUC-SP)</div></div></div><div class="rt">⏱ 7 min</div></div>
+</div>
+</article>
+
+<!-- ART 4 -->
+<article class="art" id="a4">
+<div class="ai">
+  <span class="tag tt">🏗️ Garantia Tradicional</span>
+  <h2 class="h2">Bid Bond e Performance Bond — dois produtos, dois momentos</h2>
+  <p class="lead">São frequentemente confundidos, mas têm finalidades completamente diferentes. Um garante a proposta. O outro, a execução. Entender a diferença é essencial para quem trabalha com licitações e contratos.</p>
+  <div class="body">
+    <p>Quem participa de licitações já ouviu os dois termos. O problema é que muitas empresas chegam ao edital sem saber qual contratar, em que momento e com quais valores — o que pode resultar em proposta desclassificada ou sinistro por garantia inadequada.</p>
+    <figure class="vis">
+      <svg viewBox="0 0 760 240" xmlns="http://www.w3.org/2000/svg" font-family="Outfit,system-ui,sans-serif">
+        <rect width="760" height="240" fill="#FBF8F2"/>
+        <text x="380" y="26" text-anchor="middle" font-size="13" fill="#3D342A" font-weight="700" font-family="Source Serif 4,Georgia,serif">Linha do tempo — quando cada produto entra em cena</text>
+        <line x1="50" y1="112" x2="710" y2="112" stroke="#EDE6D6" stroke-width="3"/>
+        <rect x="50" y="44" width="250" height="76" rx="12" fill="#E6F1FB" stroke="#1A6199" stroke-width="1.5"/>
+        <text x="175" y="66" text-anchor="middle" font-size="11" fill="#1A6199" font-weight="700">FASE 1 · LICITAÇÃO</text>
+        <text x="175" y="84" text-anchor="middle" font-size="11" fill="#3D342A">Empresa apresenta proposta</text>
+        <text x="175" y="102" text-anchor="middle" font-size="13" fill="#1A6199" font-weight="800">BID BOND</text>
+        <line x1="175" y1="120" x2="175" y2="152" stroke="#1A6199" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <text x="175" y="168" text-anchor="middle" font-size="11" fill="#6B5E52">1%–5% da proposta</text>
+        <text x="175" y="182" text-anchor="middle" font-size="11" fill="#6B5E52">até assinar o contrato</text>
+        <text x="348" y="118" text-anchor="middle" font-size="18" fill="#C05A35" font-weight="700">→</text>
+        <text x="348" y="134" text-anchor="middle" font-size="10" fill="#6B5E52">empresa vence</text>
+        <rect x="400" y="44" width="310" height="76" rx="12" fill="#EAF3DE" stroke="#4A6741" stroke-width="1.5"/>
+        <text x="555" y="66" text-anchor="middle" font-size="11" fill="#4A6741" font-weight="700">FASE 2 · EXECUÇÃO DO CONTRATO</text>
+        <text x="555" y="84" text-anchor="middle" font-size="11" fill="#3D342A">Empresa executa a obrigação</text>
+        <text x="555" y="102" text-anchor="middle" font-size="13" fill="#4A6741" font-weight="800">PERFORMANCE BOND</text>
+        <line x1="555" y1="120" x2="555" y2="152" stroke="#4A6741" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <text x="555" y="168" text-anchor="middle" font-size="11" fill="#6B5E52">5%–30% do contrato</text>
+        <text x="555" y="182" text-anchor="middle" font-size="11" fill="#6B5E52">duração da execução</text>
+        <circle cx="175" cy="112" r="8" fill="#1A6199"/>
+        <circle cx="348" cy="112" r="8" fill="#C05A35"/>
+        <circle cx="555" cy="112" r="8" fill="#4A6741"/>
+        <circle cx="710" cy="112" r="8" fill="#EDE6D6" stroke="#9C9088" stroke-width="2"/>
+        <text x="348" y="134" text-anchor="middle" font-size="10" fill="#C05A35">assinatura</text>
+        <text x="710" y="134" text-anchor="middle" font-size="10" fill="#6B5E52">conclusão</text>
+        <text x="380" y="220" text-anchor="middle" font-size="11" fill="#6B5E52">Em PPPs e concessões, podem ser exigidos simultaneamente — cada um com clausulado próprio</text>
+      </svg>
+      <figcaption>Os dois produtos em sua posição natural dentro do ciclo de uma licitação</figcaption>
+    </figure>
+    <h3>Bid Bond — garantia de proposta</h3>
+    <p>Garante que a empresa vencedora vai <strong>efetivamente assinar o contrato</strong>. Se desistir — por qualquer motivo — o órgão público aciona a apólice e recebe indenização pelos custos de relicitar. Valor típico entre 1% e 5% da proposta. Vigência curta — encerra com a assinatura do contrato.</p>
+    <h3>Performance Bond — garantia de execução</h3>
+    <p>Cobre o descumprimento das obrigações contratuais: não entrega da obra, abandono do contrato, descumprimento de prazos críticos. Os valores são <strong>significativamente maiores — de 5% a 30% do valor do contrato</strong> — e a vigência acompanha toda a execução.</p>
+    <div class="box box-terra">
+      <div class="box-title">🔍 Diferença prática no sinistro</div>
+      <p>No <strong>Bid Bond</strong>, o sinistro é a recusa em assinar após vencer. No <strong>Performance Bond</strong>, é o inadimplemento das obrigações de execução. Lógicas distintas, análises de risco distintas, clausulados distintos.</p>
+    </div>
+    <div class="box box-amber">
+      <div class="box-title">⚠ PPPs e concessões</div>
+      <p>Em contratos de maior complexidade, pode haver exigência de <strong>múltiplas garantias simultâneas</strong> — Bid Bond, Performance Bond e ainda garantias regulatórias específicas das agências (ANTT, ANAC, ANEEL). Cada uma tem seu próprio clausulado e forma de acionamento.</p>
+    </div>
+  </div>
+  <div class="aft"><div class="aut"><div class="av">AA</div><div><div class="an">Alex Abreu</div><div class="ar">Coord. Técnico · Infinite Seguradora · Mestre em Direito (PUC-SP)</div></div></div><div class="rt">⏱ 5 min</div></div>
+</div>
+</article>
+
+<!-- ART 5 -->
+<article class="art" id="a5">
+<div class="ai">
+  <span class="tag tr">📊 Análise de Crédito</span>
+  <h2 class="h2">Os 5 indicadores que leio em todo balanço antes de subscrever</h2>
+  <p class="lead">Em anos de subscrição, aprendi que cinco indicadores respondem 80% das perguntas que importam. Não substituem a análise completa — mas orientam o olhar nos primeiros minutos.</p>
+  <div class="body">
+    <p>Quando uma proposta chega, o subscritor precisa responder rapidamente a uma pergunta central: <em>esse tomador tem condições de honrar a obrigação garantida?</em> A resposta está no balanço — mas saber onde olhar primeiro faz toda a diferença.</p>
+    <figure class="vis">
+      <svg viewBox="0 0 760 330" xmlns="http://www.w3.org/2000/svg" font-family="Outfit,system-ui,sans-serif">
+        <rect width="760" height="330" fill="#FBF8F2"/>
+        <text x="380" y="28" text-anchor="middle" font-size="13" fill="#3D342A" font-weight="700" font-family="Source Serif 4,Georgia,serif">Os 5 indicadores e o que cada um revela</text>
+        <rect x="30" y="44" width="330" height="106" rx="12" fill="white" stroke="#E6F1FB" stroke-width="1.5"/>
+        <rect x="30" y="44" width="8" height="106" rx="4" fill="#1A6199"/>
+        <text x="54" y="68" font-size="11" fill="#1A6199" font-weight="700">01 · LIQUIDEZ CORRENTE</text>
+        <text x="54" y="88" font-size="12" fill="#3D342A" font-weight="600">Ativo Circulante ÷ Passivo Circulante</text>
+        <text x="54" y="108" font-size="11" fill="#6B5E52">Abaixo de 1,0 → alerta imediato</text>
+        <text x="54" y="124" font-size="11" fill="#6B5E52">Acima de 1,5 → situação confortável</text>
+        <rect x="264" y="60" width="86" height="34" rx="8" fill="#E6F1FB"/>
+        <text x="307" y="82" text-anchor="middle" font-size="16" fill="#1A6199" font-weight="800">&gt; 1,0</text>
+        <rect x="400" y="44" width="330" height="106" rx="12" fill="white" stroke="#EAF3DE" stroke-width="1.5"/>
+        <rect x="400" y="44" width="8" height="106" rx="4" fill="#4A6741"/>
+        <text x="424" y="68" font-size="11" fill="#4A6741" font-weight="700">02 · ENDIVIDAMENTO / PL</text>
+        <text x="424" y="88" font-size="12" fill="#3D342A" font-weight="600">Passivo Total ÷ Patrimônio Líquido</text>
+        <text x="424" y="108" font-size="11" fill="#6B5E52">Acima de 2,0× → alta alavancagem</text>
+        <text x="424" y="124" font-size="11" fill="#6B5E52">Abaixo de 1,0× → saudável</text>
+        <rect x="634" y="60" width="86" height="34" rx="8" fill="#EAF3DE"/>
+        <text x="677" y="82" text-anchor="middle" font-size="16" fill="#4A6741" font-weight="800">&lt; 2×</text>
+        <rect x="30" y="168" width="330" height="106" rx="12" fill="white" stroke="#FAEEDA" stroke-width="1.5"/>
+        <rect x="30" y="168" width="8" height="106" rx="4" fill="#C4900A"/>
+        <text x="54" y="192" font-size="11" fill="#8A6500" font-weight="700">03 · MARGEM EBITDA</text>
+        <text x="54" y="212" font-size="12" fill="#3D342A" font-weight="600">EBITDA ÷ Receita Líquida</text>
+        <text x="54" y="232" font-size="11" fill="#6B5E52">EBITDA negativo → consumindo caixa</text>
+        <text x="54" y="248" font-size="11" fill="#6B5E52">Crescente e positivo → operação sadia</text>
+        <rect x="264" y="184" width="86" height="34" rx="8" fill="#FAEEDA"/>
+        <text x="307" y="206" text-anchor="middle" font-size="16" fill="#8A6500" font-weight="800">+▲</text>
+        <rect x="400" y="168" width="330" height="106" rx="12" fill="white" stroke="#FBEAF0" stroke-width="1.5"/>
+        <rect x="400" y="168" width="8" height="106" rx="4" fill="#C05A35"/>
+        <text x="424" y="192" font-size="11" fill="#C05A35" font-weight="700">04 · CONCENTRAÇÃO DE RECEITA</text>
+        <text x="424" y="212" font-size="12" fill="#3D342A" font-weight="600">% da receita no principal cliente</text>
+        <text x="424" y="232" font-size="11" fill="#6B5E52">Acima de 50% → risco concentrado</text>
+        <text x="424" y="248" font-size="11" fill="#6B5E52">Diversificada → mais resiliente</text>
+        <rect x="634" y="184" width="86" height="34" rx="8" fill="#FBEAF0"/>
+        <text x="677" y="206" text-anchor="middle" font-size="16" fill="#C05A35" font-weight="800">&lt;50%</text>
+        <rect x="30" y="292" width="700" height="30" rx="10" fill="white" stroke="#F0EBF8" stroke-width="1.5"/>
+        <rect x="30" y="292" width="8" height="30" rx="4" fill="#64388A"/>
+        <text x="54" y="308" font-size="11" fill="#64388A" font-weight="700">05 · TENDÊNCIA (3 anos) — </text>
+        <text x="54" y="318" font-size="10" fill="#6B5E52">Balanço isolado é foto. Três anos em deterioração progressiva é padrão — e padrão importa mais que resultado pontual.</text>
+      </svg>
+      <figcaption>Os cinco indicadores com seus valores de referência e o que cada sinal significa</figcaption>
+    </figure>
+    <h3>Por que tendência importa mais do que o número absoluto</h3>
+    <p>Um balanço ruim em um ano de crise setorial pode ser aceitável — desde que os exercícios anteriores mostrem solidez. O que preocupa é o <strong>padrão de deterioração progressiva</strong>: liquidez caindo, endividamento subindo, margem se comprimindo por 3 anos consecutivos.</p>
+    <p>Por isso o subscritor analisa <strong>pelo menos três exercícios</strong> — não apenas o último balanço. Quando o tomador apresenta apenas um exercício, isso já é, por si só, um sinal de atenção.</p>
+    <div class="box box-terra">
+      <div class="box-title">📌 Nota do subscritor</div>
+      <p>Esses cinco indicadores são o filtro de triagem dos primeiros dois minutos. Empresas que passam vão para análise aprofundada. As que não passam precisam de <strong>justificativa consistente ou contragarantias robustas</strong> para avançar.</p>
+    </div>
+  </div>
+  <div class="aft"><div class="aut"><div class="av">AA</div><div><div class="an">Alex Abreu</div><div class="ar">Coord. Técnico · Infinite Seguradora · Mestre em Direito (PUC-SP)</div></div></div><div class="rt">⏱ 9 min</div></div>
+</div>
+</article>
+
+<!-- ART 6 -->
+<article class="art" id="a6">
+<div class="ai">
+  <span class="tag ts">🔔 Sinistro</span>
+  <h2 class="h2">O que acontece quando ocorre um sinistro no Seguro Garantia</h2>
+  <p class="lead">O Seguro Garantia tem uma lógica de sinistro fundamentalmente diferente dos seguros tradicionais. Entender o fluxo — e o direito de regresso — é o que separa quem usa bem o produto de quem se surpreende quando algo dá errado.</p>
+  <div class="body">
+    <p>Nos seguros de dano tradicionais, o sinistro é um evento externo. Ninguém quer que seu carro seja roubado. No Seguro Garantia, o sinistro é o <strong>descumprimento de uma obrigação que o próprio tomador assumiu</strong>. Isso muda completamente a lógica do produto.</p>
+    <figure class="vis">
+      <svg viewBox="0 0 760 310" xmlns="http://www.w3.org/2000/svg" font-family="Outfit,system-ui,sans-serif">
+        <defs>
+          <marker id="a1" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#1A6199"/></marker>
+          <marker id="a2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#C05A35"/></marker>
+          <marker id="a3" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#4A6741"/></marker>
+        </defs>
+        <rect width="760" height="310" fill="#FBF8F2"/>
+        <text x="380" y="26" text-anchor="middle" font-size="13" fill="#3D342A" font-weight="700" font-family="Source Serif 4,Georgia,serif">Fluxo completo do sinistro no Seguro Garantia</text>
+        <rect x="30" y="44" width="140" height="58" rx="10" fill="#FAEEDA" stroke="#C4900A" stroke-width="1.5"/>
+        <text x="100" y="68" text-anchor="middle" font-size="12" fill="#3D342A" font-weight="700">Tomador</text>
+        <text x="100" y="84" text-anchor="middle" font-size="11" fill="#6B5E52">assumiu a obrigação</text>
+        <text x="100" y="98" text-anchor="middle" font-size="11" fill="#6B5E52">e descumpriu</text>
+        <rect x="310" y="44" width="140" height="58" rx="10" fill="#EAF3DE" stroke="#4A6741" stroke-width="1.5"/>
+        <text x="380" y="68" text-anchor="middle" font-size="12" fill="#3D342A" font-weight="700">Seguradora</text>
+        <text x="380" y="84" text-anchor="middle" font-size="11" fill="#6B5E52">emitiu a apólice</text>
+        <text x="380" y="98" text-anchor="middle" font-size="11" fill="#6B5E52">assumiu o risco</text>
+        <rect x="590" y="44" width="140" height="58" rx="10" fill="#E6F1FB" stroke="#1A6199" stroke-width="1.5"/>
+        <text x="660" y="68" text-anchor="middle" font-size="12" fill="#3D342A" font-weight="700">Beneficiário</text>
+        <text x="660" y="84" text-anchor="middle" font-size="11" fill="#6B5E52">recebeu a garantia</text>
+        <text x="660" y="98" text-anchor="middle" font-size="11" fill="#6B5E52">e acionou</text>
+        <text x="100" y="126" text-anchor="middle" font-size="10" fill="#C05A35" font-weight="700">① descumprimento</text>
+        <line x1="100" y1="102" x2="100" y2="150" stroke="#C05A35" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <rect x="30" y="150" width="140" height="28" rx="6" fill="#FBEAF0" stroke="#C05A35"/>
+        <text x="100" y="168" text-anchor="middle" font-size="11" fill="#C05A35">obrigação não cumprida</text>
+        <line x1="660" y1="102" x2="660" y2="130" stroke="#1A6199" stroke-width="1.5"/>
+        <line x1="660" y1="130" x2="460" y2="158" stroke="#1A6199" stroke-width="1.5" marker-end="url(#a1)"/>
+        <text x="580" y="148" text-anchor="middle" font-size="10" fill="#1A6199" font-weight="600">② notifica seguradora</text>
+        <line x1="380" y1="102" x2="380" y2="158" stroke="#4A6741" stroke-width="1.5"/>
+        <rect x="310" y="158" width="140" height="28" rx="6" fill="#EAF3DE" stroke="#4A6741"/>
+        <text x="380" y="176" text-anchor="middle" font-size="11" fill="#4A6741">③ analisa a reclamação</text>
+        <line x1="380" y1="186" x2="380" y2="216" stroke="#4A6741" stroke-width="1.5"/>
+        <line x1="380" y1="216" x2="580" y2="216" stroke="#4A6741" stroke-width="1.5" marker-end="url(#a3)"/>
+        <rect x="590" y="204" width="140" height="28" rx="6" fill="#E6F1FB" stroke="#1A6199"/>
+        <text x="660" y="222" text-anchor="middle" font-size="11" fill="#1A6199">④ paga ao beneficiário</text>
+        <line x1="380" y1="186" x2="380" y2="244" stroke="#C05A35" stroke-width="2" stroke-dasharray="5,3"/>
+        <line x1="380" y1="244" x2="180" y2="244" stroke="#C05A35" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#a2)"/>
+        <rect x="30" y="232" width="140" height="28" rx="6" fill="#FBEAF0" stroke="#C05A35" stroke-width="1.5"/>
+        <text x="100" y="250" text-anchor="middle" font-size="11" fill="#C05A35" font-weight="700">⑤ REGRESSO</text>
+        <text x="280" y="240" text-anchor="middle" font-size="10" fill="#C05A35" font-weight="600">cobra de volta</text>
+        <rect x="30" y="278" width="700" height="24" rx="8" fill="rgba(192,90,53,0.07)" stroke="rgba(192,90,53,0.2)"/>
+        <text x="380" y="294" text-anchor="middle" font-size="12" fill="#C05A35" font-weight="700">A seguradora não "doa" o valor — ela adianta e exerce o direito de regresso contra o tomador</text>
+      </svg>
+      <figcaption>Do descumprimento ao regresso: o ciclo completo do sinistro em Seguro Garantia</figcaption>
+    </figure>
+    <h3>O direito de regresso — o que muda tudo</h3>
+    <p>Quando a seguradora paga ao beneficiário, ela <strong>não encerra sua relação com o tomador</strong>. Ela passa a ter um crédito contra o tomador pelo valor pago — e vai buscá-lo de volta. É por isso que a subscrição é tão rigorosa e que as contragarantias são exigidas.</p>
+    <div class="box box-terra">
+      <div class="box-title">💡 Implicação para a precificação</div>
+      <p>A lógica do regresso explica por que a sinistralidade do Seguro Garantia é estruturalmente mais baixa do que a dos seguros de dano. O tomador tem <strong>forte incentivo financeiro para cumprir a obrigação</strong> — porque se não cumprir, além de perder o contrato, ainda responde ao regresso da seguradora.</p>
+    </div>
+    <h3>O que fazer como beneficiário ao acionar</h3>
+    <ul>
+      <li>Guardar a apólice original e verificar o prazo de vigência antes de qualquer notificação</li>
+      <li>Notificar a seguradora dentro do prazo previsto no clausulado — prazos perdidos podem inviabilizar o acionamento</li>
+      <li>Documentar o descumprimento com evidências claras: notificações extrajudiciais, laudos, correspondências</li>
+      <li>Verificar se a obrigação descumprida está coberta pelo clausulado — as exclusões importam tanto quanto as coberturas</li>
+    </ul>
+  </div>
+  <div class="aft"><div class="aut"><div class="av">AA</div><div><div class="an">Alex Abreu</div><div class="ar">Coord. Técnico · Infinite Seguradora · Mestre em Direito (PUC-SP)</div></div></div><div class="rt">⏱ 6 min</div></div>
+</div>
+</article>
+
+<div class="btm"><a href="segurogarantiafacil_v6.html">← Voltar para Seguro Garantia Fácil</a></div>
+
+<script>
+const ids=['a1','a2','a3','a4','a5','a6'];
+const links=document.querySelectorAll('.anav a');
+window.addEventListener('scroll',()=>{
+  let cur='a1';
+  ids.forEach(id=>{const el=document.getElementById(id);if(el&&scrollY>=el.offsetTop-130)cur=id;});
+  links.forEach(a=>{a.classList.toggle('on',a.getAttribute('href')==='#'+cur);});
+});
+</script>
+</body>
+</html>
