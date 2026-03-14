@@ -327,6 +327,9 @@ nav {
   transition: all 0.2s;
 }
 .soc-btn:hover { border-color: var(--terra); color: var(--terra); background: rgba(192,90,53,0.04); }
+a.soc-btn[href*="linkedin"]:hover { border-color: #0077B5; color: #0077B5; background: rgba(0,119,181,0.05); }
+a.soc-btn[href*="tiktok"]:hover { border-color: #1A1A1A; color: #1A1A1A; background: rgba(0,0,0,0.04); }
+a.soc-btn[href*="mailto"]:hover { border-color: var(--terra); color: var(--terra); }
 .soc-btn svg { flex-shrink: 0; }
 
 /* ─── O QUE É ────────────────────────────────────── */
@@ -417,7 +420,8 @@ nav {
   padding: 28px 28px 24px;
   border-bottom: 1px solid var(--ivory-3);
 }
-.mcard-icon { font-size: 36px; margin-bottom: 12px; display: block; }
+.mcard-icon { width: 40px; height: 40px; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; }
+.mcard-icon svg { display: block; }
 .mcard-label {
   font-family: var(--ui); font-size: 10.5px; font-weight: 700;
   letter-spacing: 0.12em; text-transform: uppercase;
@@ -444,7 +448,8 @@ nav {
   border-radius: 18px; padding: 24px 28px; margin-bottom: 24px;
   display: flex; align-items: center; gap: 18px;
 }
-.calc-hero-icon { font-size: 34px; flex-shrink: 0; }
+.calc-hero-icon { width: 48px; height: 48px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+.calc-hero-icon svg { display: block; }
 .calc-hero-text h3 { font-family: var(--serif); font-size: 19px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
 .calc-hero-text p { font-size: 13.5px; color: var(--ink-soft); line-height: 1.6; }
 .calc-modes { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
@@ -453,7 +458,9 @@ nav {
   border: 1.5px solid var(--ivory-3); background: var(--ivory);
   font-family: var(--ui); font-size: 12.5px; font-weight: 600;
   color: var(--ink-soft); cursor: pointer; transition: all 0.2s;
+  display: inline-flex; align-items: center; gap: 7px;
 }
+.mode-btn svg { flex-shrink: 0; }
 .mode-btn:hover { border-color: var(--terra); color: var(--terra); }
 .mode-btn.active { background: var(--terra); border-color: var(--terra); color: #fff; }
 .calc-box {
@@ -706,7 +713,11 @@ nav {
   transition: all 0.25s;
 }
 .cta-card:hover { border-color: var(--terra); transform: translateY(-4px); box-shadow: 0 16px 40px rgba(192,90,53,0.1); }
-.cta-ico { font-size: 28px; margin-bottom: 10px; display: block; }
+.cta-ico { font-size: 28px; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; }
+.cta-ico svg { display: block; }
+a[href*="wa.me"] .cta-ico svg { color: #25D366; }
+a[href*="linkedin"] .cta-ico svg { color: #0077B5; }
+a[href*="mailto"] .cta-ico svg { color: var(--terra); }
 .cta-label {
   font-family: var(--ui); font-size: 10.5px; font-weight: 700;
   letter-spacing: 0.1em; text-transform: uppercase;
@@ -774,12 +785,11 @@ footer {
   <div class="hero-kicker">por Alex Abreu · Mestre em Direito · PUC-SP</div>
   <h1 class="hero-h1">Seguro Garantia<br><em>explicado por quem vive isso</em></h1>
   <p class="hero-lead">
-    Conteúdo especializado para advogados, contadores, gestores e corretores que precisam entender, saber como aplicar e usar o Seguro Garantia de verdade. Sem juridiquês. Sem enrolação.
+    Conteúdo especializado para advogados, contadores, gestores e corretores que precisam entender — e usar — o Seguro Garantia de verdade. Sem juridiquês. Sem enrolação.
   </p>
   <div class="hero-actions">
     <a href="#sobre" class="btn-terra">Conhecer o projeto →</a>
-    <a href="#conteudo" class="btn-terra">Lições sobre Seguro Garantia →</a>
-    <a href="#calcule" class="btn-terra">Veja nossa Calculadora  →</a>
+    <a href="#calcule" class="btn-ghost">Calcular um prêmio</a>
   </div>
   <div class="hero-line"></div>
   <div class="hero-stats">
@@ -835,7 +845,7 @@ footer {
         </p>
 
         <p class="manifesto-body">
-          <strong>Advogados que nunca propuseram a substituição de depósito judicial.</strong> Contadores que nunca mencionaram a Portaria RFB 315/2023. Gestores que renovam fiança bancária por inércia há anos. <em>Bilhões de reais imobilizados desnecessariamente — por falta de informação.</em>
+          <strong>Advogados que nunca propuseram a substituição de depósito judicial.</strong> Contadores que desconhecem as possibilidades abertas pela Lei nº 15.040/2024. Gestores que renovam fiança bancária por inércia há anos. <em>Bilhões de reais imobilizados desnecessariamente — por falta de informação.</em>
         </p>
 
         <p class="manifesto-body">
@@ -852,14 +862,14 @@ footer {
 
         <div class="about-socials">
           <a href="https://www.linkedin.com/in/abreusalex/" target="_blank" class="soc-btn">
-            <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-label="LinkedIn"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
             LinkedIn
           </a>
           <a href="https://www.tiktok.com/@abreusalex" target="_blank" class="soc-btn">
-            <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.34 6.34 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.79 1.54V6.79a4.85 4.85 0 01-1.02-.1z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-label="TikTok"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.34 6.34 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.79 1.54V6.79a4.85 4.85 0 01-1.02-.1z"/></svg>
             TikTok
           </a>
-          <a href="mailto:contato@abreusalex.com" class="soc-btn">✉ contato@abreusalex.com</a>
+          <a href="mailto:contato@abreusalex.com" class="soc-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="E-mail"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 01-2.06 0L2 7"/></svg> contato@abreusalex.com</a>
         </div>
       </div>
     </div>
@@ -885,7 +895,7 @@ footer {
           <span class="pill">Judicial</span>
           <span class="pill">Administrativa</span>
           <span class="pill">Tradicional</span>
-          <span class="pill">Ramo 0775 / 0776</span>
+          <span class="pill">Ramos 0775 / 0776</span>
           <span class="pill">SUSEP</span>
         </div>
       </div>
@@ -893,12 +903,12 @@ footer {
         <div class="wcard">
           <div class="wcard-icon">⚖️</div>
           <div class="wcard-title">Garantia Judicial</div>
-          <div class="wcard-desc">Substitui depósitos em execuções fiscais, trabalhistas e cíveis. Prazo mínimo de 60 dias além do processo.</div>
+          <div class="wcard-desc">Substitui depósitos em execuções fiscais, trabalhistas e cíveis. A apólice deve permanecer vigente enquanto perdurar o risco coberto.</div>
         </div>
         <div class="wcard">
           <div class="wcard-icon">🏛️</div>
           <div class="wcard-title">Garantia Administrativa</div>
-          <div class="wcard-desc">Parcelamentos tributários, arrolamento de bens (Portaria RFB 315/2023), fast-tracks fiscais.</div>
+          <div class="wcard-desc">Parcelamentos tributários, arrolamento de bens e demais obrigações fiscais e regulatórias, nos termos da Lei nº 15.040/2024.</div>
         </div>
         <div class="wcard">
           <div class="wcard-icon">🏗️</div>
@@ -963,12 +973,12 @@ footer {
     <div class="mod-grid">
       <div class="mcard">
         <div class="mcard-top">
-          <span class="mcard-icon">⚖️</span>
+          <div class="mcard-icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--blue)"><path d="M12 3v18M3 8l4 6M3 8l-1.5-3M7 14H3M21 8l-4 6M21 8l1.5-3M17 14h4M5 8h14"/></svg></div>
           <div class="mcard-label">Ramo 0775</div>
           <div class="mcard-title">Garantia Judicial</div>
         </div>
         <div class="mcard-body">
-          <div class="mcard-desc">Substitui depósitos judiciais em processos cíveis, fiscais e trabalhistas. A apólice tem o mesmo efeito jurídico do depósito em dinheiro. Atenção ao prazo mínimo: 60 dias além do processo.</div>
+          <div class="mcard-desc">Substitui depósitos judiciais em processos cíveis, fiscais e trabalhistas. A apólice tem o mesmo efeito jurídico do depósito em dinheiro. A vigência deve se manter enquanto perdurar o risco — ou seja, enquanto houver exposição decorrente do processo ou da obrigação garantida.</div>
           <div class="tags">
             <span class="tag">Execução fiscal</span><span class="tag">Trabalhista</span><span class="tag">Cível</span><span class="tag">Embargos</span>
           </div>
@@ -976,20 +986,20 @@ footer {
       </div>
       <div class="mcard">
         <div class="mcard-top">
-          <span class="mcard-icon">🏛️</span>
-          <div class="mcard-label">Ramo 0776</div>
+          <div class="mcard-icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--amber)"><path d="M3 21h18M3 10h18M5 10V21M8 10V21M11 10V21M13 10V21M16 10V21M19 10V21M2 10l10-7 10 7"/></svg></div>
+          <div class="mcard-label">Ramo 0775</div>
           <div class="mcard-title">Garantia Administrativa</div>
         </div>
         <div class="mcard-body">
-          <div class="mcard-desc">Para obrigações perante o Poder Público. Inclui a modalidade de Arrolamento de Bens criada pela Portaria RFB nº 315/2023 — uma das mais relevantes novidades recentes do mercado.</div>
+          <div class="mcard-desc">Para obrigações perante o Poder Público. O marco mais relevante é a <strong>Lei nº 15.040/2024</strong>, que consolidou e ampliou as modalidades de garantia administrativa, incluindo a substituição de arrolamento de bens por apólice.</div>
           <div class="tags">
-            <span class="tag">REFIS / PERT</span><span class="tag">Arrolamento RFB 315</span><span class="tag">Fast-track</span>
+            <span class="tag">REFIS / PERT</span><span class="tag">Arrolamento de Bens</span><span class="tag">Lei 15.040/2024</span>
           </div>
         </div>
       </div>
       <div class="mcard">
         <div class="mcard-top">
-          <span class="mcard-icon">🏗️</span>
+          <div class="mcard-icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--sage)"><path d="M2 20a2 2 0 002 2h16a2 2 0 002-2v-1H2v1zM12 2a8 8 0 017.94 7H4.06A8 8 0 0112 2z"/><path d="M12 2v7M4.06 9H2v1a10 10 0 0020 0V9h-2.06"/></svg></div>
           <div class="mcard-label">Ramos 0775/0776</div>
           <div class="mcard-title">Garantia Tradicional</div>
         </div>
@@ -1015,7 +1025,7 @@ footer {
 
     <div style="margin-top:48px">
     <div class="calc-hero">
-      <div class="calc-hero-icon">🧮</div>
+      <div class="calc-hero-icon"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--terra)"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="11" x2="10" y2="11"/><line x1="14" y1="11" x2="16" y2="11"/><line x1="8" y1="15" x2="10" y2="15"/><line x1="14" y1="15" x2="16" y2="15"/><line x1="8" y1="19" x2="10" y2="19"/><line x1="14" y1="19" x2="16" y2="19"/></svg></div>
       <div class="calc-hero-text">
         <h3>Três modos de cálculo</h3>
         <p>Selecione o que você quer descobrir. A calculadora resolve as três variáveis da equação do Seguro Garantia: <strong>Prêmio = IS × Taxa × Prazo</strong></p>
@@ -1023,9 +1033,9 @@ footer {
     </div>
 
     <div class="calc-modes">
-      <button class="mode-btn active" onclick="setMode('premio')">💰 Calcular Prêmio</button>
-      <button class="mode-btn" onclick="setMode('taxa')">📊 Descobrir Taxa Aplicada</button>
-      <button class="mode-btn" onclick="setMode('is')">🔍 Descobrir Importância Segurada</button>
+      <button class="mode-btn active" onclick="setMode('premio')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v2m0 8v2M9.5 9.5a2.5 2.5 0 015 0c0 1.5-2.5 2-2.5 3.5m0 1h.01"/></svg> Calcular Prêmio</button>
+      <button class="mode-btn" onclick="setMode('taxa')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="5" x2="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg> Descobrir Taxa Aplicada</button>
+      <button class="mode-btn" onclick="setMode('is')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg> Descobrir Importância Segurada</button>
     </div>
 
     <div class="calc-box">
@@ -1188,7 +1198,7 @@ footer {
         <div id="breakdown">
           <!-- preenchido por JS -->
         </div>
-        <div class="calc-fine">Cálculos baseados na fórmula padrão de mercado: <strong>Prêmio = IS × Taxa × Prazo</strong>. Seguro Garantia (ramos 0775 e 0776) não está sujeito a IOF. Taxas de referência são estimativas de mercado — valores reais dependem da análise de crédito do tomador, seguradora, contragarantias e clausulado. Esta ferramenta não substitui a análise técnica de subscrição.</div>
+        <div class="calc-fine">Cálculos baseados na fórmula padrão de mercado: <strong>Prêmio = IS × Taxa × Prazo</strong>. Seguro Garantia (ramo 0775 — Judicial e Administrativo; ramo 0776 — Tradicional) não está sujeito a IOF. Taxas de referência são estimativas de mercado — valores reais dependem da análise de crédito do tomador, seguradora, contragarantias e clausulado. Esta ferramenta não substitui a análise técnica de subscrição.</div>
       </div>
     </div><!-- /calc-box -->
     </div>
@@ -1223,8 +1233,8 @@ footer {
       <a href="artigos.html#a3" class="acard">
         <div class="acard-top"><span class="atag atag-a">Administrativo</span><span class="acard-ico">🏛️</span></div>
         <div class="acard-body">
-          <div class="acard-title">Portaria RFB nº 315/2023 na prática</div>
-          <div class="acard-desc">Como substituir o arrolamento de bens por apólice. Uma das novidades mais relevantes do mercado nos últimos anos.</div>
+          <div class="acard-title">Lei nº 15.040/2024 e a Garantia Administrativa</div>
+          <div class="acard-desc">O novo marco regulatório do setor de seguros e seu impacto direto na Garantia Administrativa — da substituição de arrolamento de bens ao reconhecimento legal do produto.</div>
         </div>
         <div class="acard-foot"><span class="acard-read">Ler →</span><span class="acard-time">7 min</span></div>
       </a>
@@ -1269,13 +1279,13 @@ footer {
         <div class="soc-name">LinkedIn</div>
         <div class="soc-head">Para quem quer profundidade técnica</div>
         <div class="soc-desc">Posts longos, análise de regulação, opinião sobre o mercado e conteúdo avançado de subscrição. Toda terça às 8h e quinta ao meio-dia.</div>
-        <a href="https://www.linkedin.com/in/abreusalex/" target="_blank" class="soc-link">Seguir no LinkedIn →</a>
+        <a href="https://www.linkedin.com/in/abreusalex/" target="_blank" class="soc-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-label="LinkedIn"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> Seguir no LinkedIn</a>
       </div>
       <div class="soc-card soc-tt">
         <div class="soc-name">TikTok</div>
         <div class="soc-head">Para aprender em 60 segundos</div>
         <div class="soc-desc">Vídeos diretos que desmontam conceitos complexos em linguagem simples. Para quem nunca trabalhou com o produto e quer começar.</div>
-        <a href="https://www.tiktok.com/@abreusalex" target="_blank" class="soc-link">Seguir no TikTok →</a>
+        <a href="https://www.tiktok.com/@abreusalex" target="_blank" class="soc-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-label="TikTok"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.34 6.34 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.79 1.54V6.79a4.85 4.85 0 01-1.02-.1z"/></svg> Seguir no TikTok</a>
       </div>
     </div>
   </div>
@@ -1291,17 +1301,17 @@ footer {
     <p class="lead-text">Subscrição, estruturação de garantia, clausulados ou aplicação do produto ao seu caso. Respondo todos.</p>
     <div class="cta-cards">
       <a href="https://wa.me/5511943950027" target="_blank" class="cta-card">
-        <span class="cta-ico">📱</span>
+        <span class="cta-ico"><svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" aria-label="WhatsApp"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></span>
         <div class="cta-label">WhatsApp</div>
         <div class="cta-val">011 94395-0027</div>
       </a>
       <a href="mailto:contato@abreusalex.com" class="cta-card">
-        <span class="cta-ico">✉️</span>
+        <span class="cta-ico"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="E-mail"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 01-2.06 0L2 7"/></svg></span>
         <div class="cta-label">E-mail</div>
         <div class="cta-val">contato@abreusalex.com</div>
       </a>
       <a href="https://www.linkedin.com/in/abreusalex/" target="_blank" class="cta-card">
-        <span class="cta-ico">💼</span>
+        <span class="cta-ico"><svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" aria-label="LinkedIn"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></span>
         <div class="cta-label">LinkedIn</div>
         <div class="cta-val">in/abreusalex</div>
       </a>
