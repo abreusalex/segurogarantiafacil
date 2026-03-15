@@ -67,12 +67,36 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(251,248,242,
 .btm a{font-family:var(--ui);font-size:13px;font-weight:600;color:var(--terra);text-decoration:none;display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:99px;border:1.5px solid rgba(192,90,53,.25);transition:all .2s}
 .btm a:hover{background:rgba(192,90,53,.06)}
 @media(max-width:768px){nav,div.anav{padding:0 20px}.hero{padding:96px 20px 52px}.ai{padding:0 20px}}
+  .btn-voltar {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--ui);
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  text-decoration: none;
+  padding: 8px 18px;
+  border-radius: 99px;
+  background: var(--terra);
+  transition: background 0.25s, transform 0.2s;
+}
+
+.btn-voltar:hover {
+  background: var(--terra-lt);
+  transform: translateY(-1px);
+}
 </style>
 </head>
 <body>
 <nav>
   <a href="segurogarantiafacil_v6.html" class="nav-logo">Seguro Garantia <em>Fácil</em></a>
-  <a href="index.html" class="btm">← Voltar para Seguro Garantia Fácil</a>
+  <a href="index.html" class="btn-voltar">
+    <svg width="15" height="15" viewBox="0 0 16 16" fill="none">
+      <path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    Voltar para Seguro Garantia Fácil
+  </a>
 </nav>
   
 <div class="hero">
