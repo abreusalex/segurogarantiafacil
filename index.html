@@ -525,7 +525,7 @@ footer { flex-direction: column; gap: 16px; text-align: center; }
     <li><a href="#comparativo">Comparativo</a></li>
     <li><a href="#modalidades">Modalidades</a></li>
     <li><a href="#glossario">Glossário</a></li>
-    <li><a href="#calcule">Calculadora</a></li>
+    <li><a href="calculadora.html">Calculadora</a></li>
     <li><a href="#conteudo">Conteúdo</a></li>
     <li><a href="#contato" class="nav-cta">Fale comigo</a></li>
   </ul>
@@ -543,7 +543,7 @@ footer { flex-direction: column; gap: 16px; text-align: center; }
   <div class="hero-actions">
     <a href="#sobre" class="btn-terra">Conhecer o projeto →</a>
     <a href="#comparativo" class="btn-terra">Ver comparativo →</a>
-    <a href="#calcule" class="btn-ghost">Calcular prêmio</a>
+    <a href="calculadora.html" class="btn-ghost">Calcular prêmio</a>
   </div>
   <div class="hero-line"></div>
   <div class="hero-stats">
@@ -881,148 +881,6 @@ footer { flex-direction: column; gap: 16px; text-align: center; }
         <div class="glossary-header"><span class="glossary-term">📋 Subscrição</span><span class="glossary-arrow">▼</span></div>
         <div class="glossary-body">Processo de análise e precificação do risco realizado pela seguradora antes de emitir a apólice.<br><span class="glossary-tag">Processo interno</span></div>
       </div>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<section class="section calc" id="calcule">
-  <div class="container">
-    <div class="eyebrow">Ferramenta de Cálculo</div>
-    <h2 class="h2">Calculadora de <em>Seguro Garantia</em></h2>
-    <p class="lead-text">Simule o cálculo de prêmios, descubra a taxa aplicada ou encontre a importância segurada.</p>
-    <div style="margin-top:48px">
-    <div class="calc-hero reveal">
-      <div class="calc-hero-icon">🧮</div>
-      <div class="calc-hero-text">
-        <h3>Modos de cálculo</h3>
-        <p>Selecione o que você quer descobrir. Fórmula base: <strong>Prêmio = IS × Taxa × Prazo</strong> · Seguro Garantia <strong>não tem IOF</strong> (ramos 0775 e 0776).</p>
-      </div>
-    </div>
-    <div class="calc-modes">
-      <button class="mode-btn active" onclick="setMode('premio')">💰 Calcular Prêmio</button>
-      <button class="mode-btn" onclick="setMode('taxa')">📊 Descobrir Taxa Aplicada</button>
-      <button class="mode-btn" onclick="setMode('is')">🔍 Descobrir Importância Segurada</button>
-    </div>
-    <div class="calc-box">
-      <div class="calc-form-side">
-        <div id="form-premio">
-          <label class="f-label" for="is1">Importância Segurada - IS (R$) <span>· valor garantido</span></label>
-          <input class="f-input" type="text" id="is1" placeholder="1.000.000,00" oninput="maskBRL(this)">
-          <label class="f-label">Vigência</label>
-          <div class="f-row-2" style="margin-bottom:6px">
-            <input class="f-input" type="text" id="inicio1" placeholder="01/04/2025" maxlength="10" oninput="maskDate(this)" style="margin-bottom:0">
-            <input class="f-input" type="text" id="fim1" placeholder="01/04/2027" maxlength="10" oninput="maskDate(this)" style="margin-bottom:0">
-          </div>
-          <div class="f-hint" id="dias1-hint">Preencha as datas para calcular o prazo</div>
-          <div class="f-divider"></div>
-          <label class="f-label" for="taxa1">Taxa anual (%)</label>
-          <input class="f-input" type="text" id="taxa1" placeholder="1,50" oninput="maskPct(this)">
-          <label class="f-label" for="mod1">Referências por modalidade</label>
-          <select class="f-select" id="mod1" onchange="preencherTaxa(this.value,'taxa1')">
-            <option value="">— Selecionar modalidade —</option>
-            <option value="1.5">Garantia Judicial · ~1,50% a.a.</option>
-            <option value="1.0">Garantia Administrativa · ~1,00% a.a.</option>
-            <option value="1.2">Bid Bond · ~1,20% a.a.</option>
-            <option value="2.0">Performance Bond · ~2,00% a.a.</option>
-            <option value="2.5">Alto risco · ~2,50% a.a.</option>
-          </select>
-          <div class="cob-section" id="cob-1">
-            <div class="cob-header" onclick="toggleCob('1')">
-              <div class="cob-header-left">
-                <span style="font-size:16px">🛡️</span>
-                <span class="cob-header-title">Coberturas Adicionais</span>
-                <span class="cob-header-badge" id="cob-badge-1"></span>
-              </div>
-              <span class="cob-chevron" id="cob-chev-1">▼</span>
-            </div>
-            <div class="cob-body" id="cob-body-1">
-              <div class="cob-item" id="cob-item-trab-1">
-                <div class="cob-check" id="cob-chk-trab-1" onclick="toggleCobertura('trab','1')"></div>
-                <div class="cob-info"><div class="cob-name">Trabalhista e Previdenciária</div><div class="cob-sub">Inclui obrigações trabalhistas e encargos previdenciários</div></div>
-                <div class="cob-agravo-wrap"><input class="cob-agravo-input" type="text" id="agr-trab-1" value="17"><span class="cob-agravo-label">%</span></div>
-              </div>
-              <div class="cob-item" id="cob-item-mult-1">
-                <div class="cob-check" id="cob-chk-mult-1" onclick="toggleCobertura('mult','1')"></div>
-                <div class="cob-info"><div class="cob-name">Multas</div><div class="cob-sub">Cobertura de multas contratuais e regulatórias</div></div>
-                <div class="cob-agravo-wrap"><input class="cob-agravo-input" type="text" id="agr-mult-1" value="17"><span class="cob-agravo-label">%</span></div>
-              </div>
-              <div class="cob-total-hint" id="cob-hint-1"></div>
-            </div>
-          </div>
-          <button class="f-btn" onclick="calcPremio()">Calcular Prêmio →</button>
-        </div>
-        <div id="form-taxa" style="display:none">
-          <label class="f-label" for="is2">Importância Segurada - IS (R$)</label>
-          <input class="f-input" type="text" id="is2" placeholder="1.000.000,00" oninput="maskBRL(this)">
-          <label class="f-label" for="premio2">Prêmio (R$)</label>
-          <input class="f-input" type="text" id="premio2" placeholder="32.000,00" oninput="maskBRL(this)">
-          <label class="f-label">Vigência</label>
-          <div class="f-row-2" style="margin-bottom:6px">
-            <input class="f-input" type="text" id="inicio2" placeholder="01/04/2025" maxlength="10" oninput="maskDate(this)" style="margin-bottom:0">
-            <input class="f-input" type="text" id="fim2" placeholder="01/04/2027" maxlength="10" oninput="maskDate(this)" style="margin-bottom:0">
-          </div>
-          <div class="f-hint" id="dias2-hint">Preencha as datas para calcular o prazo</div>
-          <button class="f-btn" onclick="calcTaxa()">Descobrir Taxa →</button>
-        </div>
-        <div id="form-is" style="display:none">
-          <label class="f-label" for="premio3">Prêmio (R$)</label>
-          <input class="f-input" type="text" id="premio3" placeholder="32.000,00" oninput="maskBRL(this)">
-          <label class="f-label">Vigência</label>
-          <div class="f-row-2" style="margin-bottom:6px">
-            <input class="f-input" type="text" id="inicio3" placeholder="01/04/2025" maxlength="10" oninput="maskDate(this)" style="margin-bottom:0">
-            <input class="f-input" type="text" id="fim3" placeholder="01/04/2027" maxlength="10" oninput="maskDate(this)" style="margin-bottom:0">
-          </div>
-          <div class="f-hint" id="dias3-hint">Preencha as datas para calcular o prazo</div>
-          <div class="f-divider"></div>
-          <label class="f-label" for="taxa3">Taxa anual (%)</label>
-          <input class="f-input" type="text" id="taxa3" placeholder="1,50" oninput="maskPct(this)">
-          <label class="f-label" for="mod3">Referências por modalidade</label>
-          <select class="f-select" id="mod3" onchange="preencherTaxa(this.value,'taxa3')">
-            <option value="">— Selecionar modalidade —</option>
-            <option value="1.5">Garantia Judicial · ~1,50% a.a.</option>
-            <option value="1.0">Garantia Administrativa · ~1,00% a.a.</option>
-            <option value="1.2">Bid Bond · ~1,20% a.a.</option>
-            <option value="2.0">Performance Bond · ~2,00% a.a.</option>
-            <option value="2.5">Alto risco · ~2,50% a.a.</option>
-          </select>
-          <div class="cob-section" id="cob-3">
-            <div class="cob-header" onclick="toggleCob('3')">
-              <div class="cob-header-left">
-                <span style="font-size:16px">🛡️</span>
-                <span class="cob-header-title">Coberturas Adicionais</span>
-                <span class="cob-header-badge" id="cob-badge-3"></span>
-              </div>
-              <span class="cob-chevron" id="cob-chev-3">▼</span>
-            </div>
-            <div class="cob-body" id="cob-body-3">
-              <div class="cob-item" id="cob-item-trab-3">
-                <div class="cob-check" id="cob-chk-trab-3" onclick="toggleCobertura('trab','3')"></div>
-                <div class="cob-info"><div class="cob-name">Trabalhista e Previdenciária</div><div class="cob-sub">Inclui obrigações trabalhistas</div></div>
-                <div class="cob-agravo-wrap"><input class="cob-agravo-input" type="text" id="agr-trab-3" value="17"><span class="cob-agravo-label">%</span></div>
-              </div>
-              <div class="cob-item" id="cob-item-mult-3">
-                <div class="cob-check" id="cob-chk-mult-3" onclick="toggleCobertura('mult','3')"></div>
-                <div class="cob-info"><div class="cob-name">Multas</div><div class="cob-sub">Cobertura de multas contratuais</div></div>
-                <div class="cob-agravo-wrap"><input class="cob-agravo-input" type="text" id="agr-mult-3" value="17"><span class="cob-agravo-label">%</span></div>
-              </div>
-              <div class="cob-total-hint" id="cob-hint-3"></div>
-            </div>
-          </div>
-          <button class="f-btn" onclick="calcIS()">Descobrir Importância Segurada →</button>
-        </div>
-      </div>
-      <div class="calc-result-side">
-        <div class="calc-main" id="calc-main-box">
-          <div class="calc-lbl" id="res-lbl">Aguardando cálculo</div>
-          <div class="calc-val" id="resultado">—</div>
-          <div class="calc-hint" id="resultado-hint">Preencha os campos e clique em calcular</div>
-        </div>
-        <div id="breakdown"></div>
-        <div class="calc-fine">Cálculos baseados na fórmula: <strong>Prêmio = IS × Taxa × Prazo</strong>. Seguro Garantia (ramos 0775 e 0776) <strong>não está sujeito a IOF</strong>. Taxas são estimativas de mercado.</div>
-      </div>
-    </div>
     </div>
   </div>
 </section>
