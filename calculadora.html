@@ -1,80 +1,1218 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora — SGF</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,700;1,400&family=Outfit:wght@300;400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,700;0,8..60,900;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+:root{--ivory:#FBF8F2;--ivory-2:#F4EFE4;--ivory-3:#EDE6D6;--ink:#1A1612;--ink-mid:#3D342A;--ink-soft:#6B5E52;--ink-mute:#9C9088;--terra:#C05A35;--terra-lt:#D97A52;--amber:#C4900A;--sage:#4A6741;--blue:#1A6199;--line:rgba(90,70,50,0.12);--serif:'Source Serif 4',Georgia,serif;--body:'Lora',Georgia,serif;--ui:'Outfit',system-ui,sans-serif}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--body);background:var(--ivory);color:var(--ink-mid);-webkit-font-smoothing:antialiased}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--ivory-2)}::-webkit-scrollbar-thumb{background:var(--ivory-3);border-radius:99px}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(251,248,242,0.94);backdrop-filter:blur(16px);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 56px;height:64px}
+.nav-logo{font-family:var(--serif);font-size:17px;font-weight:700;color:var(--ink);text-decoration:none}
+.nav-logo em{font-style:italic;color:var(--terra)}
+.nav-back{font-family:var(--ui);font-size:13px;font-weight:500;color:var(--ink-soft);text-decoration:none;display:flex;align-items:center;gap:6px;transition:color .2s}
+.nav-back:hover{color:var(--terra)}
+.hero{padding:110px 56px 64px;text-align:center;border-bottom:1px solid var(--line)}
+.hero-ey{font-family:var(--ui);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--terra);margin-bottom:20px;display:flex;align-items:center;justify-content:center;gap:10px}
+.hero-ey::before,.hero-ey::after{content:'';width:24px;height:1px;background:var(--terra)}
+.hero h1{font-family:var(--serif);font-size:clamp(34px,5vw,58px);font-weight:900;color:var(--ink);letter-spacing:-.03em;line-height:1.08;margin-bottom:18px}
+.hero h1 em{font-style:italic;color:var(--terra)}
+.hero p{font-size:17px;color:var(--ink-soft);line-height:1.75;max-width:540px;margin:0 auto}
+.anav{background:var(--ivory-2);border-bottom:1px solid var(--line);padding:0 56px;display:flex;gap:0;overflow-x:auto;position:sticky;top:64px;z-index:90}
+.anav a{font-family:var(--ui);font-size:13px;font-weight:500;color:var(--ink-mute);text-decoration:none;padding:15px 18px;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s}
+.anav a:hover{color:var(--terra)}
+.anav a.on{color:var(--terra);border-bottom-color:var(--terra)}
+.art{padding:80px 0 96px;border-bottom:1px solid var(--line)}
+.art:nth-child(even){background:var(--ivory-2)}
+.ai{max-width:820px;margin:0 auto;padding:0 56px}
+.tag{display:inline-flex;align-items:center;gap:6px;font-family:var(--ui);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 12px;border-radius:99px;margin-bottom:18px}
+.tj{background:rgba(26,97,153,.1);color:#1a6199}
+.tc{background:rgba(196,144,10,.12);color:#8A6500}
+.ta{background:rgba(74,103,65,.1);color:var(--sage)}
+.tt{background:rgba(192,90,53,.1);color:var(--terra)}
+.tr{background:rgba(100,60,120,.1);color:#64388A}
+.ts{background:rgba(192,90,53,.08);color:var(--terra)}
+.h2{font-family:var(--serif);font-size:clamp(26px,3.5vw,40px);font-weight:900;color:var(--ink);line-height:1.1;letter-spacing:-.025em;margin-bottom:14px}
+.lead{font-size:18px;color:var(--ink-soft);line-height:1.8;margin-bottom:36px;border-left:3px solid var(--terra);padding-left:20px;font-style:italic}
+.body p{font-size:16.5px;line-height:1.9;color:var(--ink-soft);margin-bottom:20px}
+.body p strong{color:var(--ink);font-weight:600}
+.body p em{color:var(--terra);font-style:italic}
+.body h3{font-family:var(--serif);font-size:21px;font-weight:700;color:var(--ink);margin:36px 0 12px;letter-spacing:-.02em}
+.body ul{margin:0 0 20px;padding:0;list-style:none}
+.body ul li{font-size:16px;color:var(--ink-soft);line-height:1.8;padding:5px 0 5px 22px;position:relative}
+.body ul li::before{content:'▸';position:absolute;left:0;color:var(--terra);font-size:12px;top:8px}
+.vis{margin:32px 0;border-radius:14px;overflow:hidden;border:1px solid var(--ivory-3);background:var(--ivory)}
+.vis svg{display:block;width:100%;height:auto}
+.vis figcaption{font-family:var(--ui);font-size:12px;color:var(--ink-mute);text-align:center;padding:11px 16px;background:var(--ivory-2);border-top:1px solid var(--ivory-3)}
+.box{padding:18px 22px;margin:24px 0;border-radius:0 12px 12px 0}
+.box-terra{background:rgba(192,90,53,.06);border-left:3px solid var(--terra);border:1px solid rgba(192,90,53,.2);border-left:3px solid var(--terra)}
+.box-amber{background:rgba(196,144,10,.06);border-left:3px solid var(--amber);border:1px solid rgba(196,144,10,.2);border-left:3px solid var(--amber)}
+.box-title{font-family:var(--ui);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--terra);margin-bottom:8px}
+.box-amber .box-title{color:var(--amber)}
+.box p{font-size:15px;color:var(--ink-mid);line-height:1.75;margin:0}
+.box p strong{color:var(--terra)}
+.box-amber p strong{color:var(--amber)}
+.aft{margin-top:44px;padding-top:28px;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
+.aut{display:flex;align-items:center;gap:12px}
+.av{width:40px;height:40px;border-radius:50%;background:rgba(192,90,53,.12);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:14px;font-weight:700;color:var(--terra);flex-shrink:0}
+.an{font-family:var(--ui);font-size:13px;font-weight:600;color:var(--ink)}
+.ar{font-family:var(--ui);font-size:12px;color:var(--ink-mute)}
+.rt{font-family:var(--ui);font-size:12px;color:var(--ink-mute)}
+.btm{display:block;text-align:center;padding:48px 0}
+.btm a{font-family:var(--ui);font-size:13px;font-weight:600;color:var(--terra);text-decoration:none;display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:99px;border:1.5px solid rgba(192,90,53,.25);transition:all .2s}
+.btm a:hover{background:rgba(192,90,53,.06)}
+@media(max-width:768px){nav,div.anav{padding:0 20px}.hero{padding:96px 20px 52px}.ai{padding:0 20px}}
+  .btn-voltar {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--ui);
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  text-decoration: none;
+  padding: 8px 18px;
+  border-radius: 99px;
+  background: var(--terra);
+  transition: background 0.25s, transform 0.2s;
+}
 
-  <!-- CSP: bloqueia inline scripts não autorizados e recursos externos não listados -->
-  <meta http-equiv="Content-Security-Policy"
-        content="
-          default-src 'self';
-          script-src  'self';
-          style-src   'self' https://fonts.googleapis.com;
-          font-src    https://fonts.gstatic.com;
-          img-src     'self' data:;
-          connect-src 'none';
-        ">
-
-  <title>Calculadora — SGF</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Lora&family=Outfit&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="calculadora-sgf.css">
+.btn-voltar:hover {
+  background: var(--terra-lt);
+  transform: translateY(-1px);
+}
+</style>
 </head>
+<nav>
+  <a href="segurogarantiafacil_v6.html" class="nav-logo">Seguro Garantia <em>Fácil</em></a>
+  <a href="index.html" class="btn-voltar">
+    <svg width="15" height="15" viewBox="0 0 16 16" fill="none">
+      <path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    Voltar para Seguro Garantia Fácil
+  </a>
+</nav>
+<style>
+  :root {
+    --ivory:    #FBF8F2;
+    --ivory-2:  #F4EFE4;
+    --ivory-3:  #EDE6D6;
+    --ink:      #1A1612;
+    --ink-mid:  #3D342A;
+    --ink-soft: #6B5E52;
+    --ink-mute: #9C9088;
+    --terra:    #C05A35;
+    --terra-lt: #D97A52;
+    --amber:    #C4900A;
+    --amber-lt: #E3AD2A;
+    --sage:     #4A6741;
+    --line:     rgba(90,70,50,0.12);
+    --serif:    'Lora', Georgia, serif;
+    --body:     'Lora', Georgia, serif;
+    --ui:       'Outfit', system-ui, sans-serif;
+    --ease:     cubic-bezier(0.4, 0, 0.2, 1);
+    --radius:   16px;
+  }
 
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--body);
+    font-size: 15px;
+    background: var(--ivory);
+    color: var(--ink-mid);
+    overflow-x: hidden;
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.35;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    top: -40%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(ellipse, rgba(196, 144, 10, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page-wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 52px;
+    animation: fadeUp .6s ease both;
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--terra);
+    background: rgba(192, 90, 53, 0.08);
+    border: 1px solid rgba(192, 90, 53, 0.18);
+    padding: 6px 14px;
+    border-radius: 100px;
+    margin-bottom: 20px;
+    font-family: var(--ui);
+  }
+
+  .eyebrow::before { content: '◆'; font-size: 8px; }
+
+  h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 400;
+    line-height: 1.15;
+    color: var(--ink);
+    margin-bottom: 14px;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--terra);
+  }
+
+  .lead {
+    font-size: 16px;
+    color: var(--ink-soft);
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  .formula-banner {
+    background: rgba(196, 144, 10, 0.08);
+    border: 1px solid rgba(196, 144, 10, 0.18);
+    border-radius: var(--radius);
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 32px;
+    animation: fadeUp .6s .1s ease both;
+  }
+
+  .formula-icon { font-size: 20px; flex-shrink: 0; }
+
+  .formula-text {
+    font-size: 13px;
+    color: var(--ink-soft);
+  }
+
+  .formula-text strong {
+    font-family: 'DM Mono', monospace;
+    color: var(--amber);
+    font-size: 14px;
+  }
+
+  .iof-badge {
+    margin-left: auto;
+    flex-shrink: 0;
+    background: rgba(74, 103, 65, 0.08);
+    border: 1px solid rgba(74, 103, 65, 0.2);
+    color: var(--sage);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 5px 11px;
+    border-radius: 100px;
+    letter-spacing: .04em;
+    white-space: nowrap;
+    font-family: var(--ui);
+  }
+
+  .mode-tabs {
+    display: flex;
+    gap: 8px;
+    background: var(--ivory-2);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 6px;
+    margin-bottom: 28px;
+    animation: fadeUp .6s .15s ease both;
+  }
+
+  .mode-btn {
+    flex: 1;
+    background: transparent;
+    border: none;
+    border-radius: 12px;
+    padding: 11px 8px;
+    font-family: var(--ui);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: all .2s var(--ease);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  .mode-btn:hover {
+    color: var(--ink);
+    background: rgba(192, 90, 53, 0.05);
+  }
+
+  .mode-btn.active {
+    background: var(--terra);
+    color: var(--ivory);
+    font-weight: 600;
+    box-shadow: 0 8px 18px rgba(192, 90, 53, 0.18);
+  }
+
+  .mode-icon { font-size: 15px; }
+
+  .calc-card {
+    background: var(--ivory-2);
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    overflow: hidden;
+    box-shadow: 0 18px 40px rgba(26, 22, 18, 0.08);
+    animation: fadeUp .6s .2s ease both;
+  }
+
+  @media (max-width: 680px) {
+    .calc-card { grid-template-columns: 1fr; }
+  }
+
+  .form-side {
+    padding: 32px 28px;
+    border-right: 1px solid var(--line);
+  }
+
+  @media (max-width: 680px) {
+    .form-side { border-right: none; border-bottom: 1px solid var(--line); padding: 24px 20px; }
+  }
+
+  .form-panel { display: none; }
+  .form-panel.active { display: block; }
+
+  .f-label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 8px;
+    font-family: var(--ui);
+  }
+
+  .f-label span {
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
+    opacity: .8;
+  }
+
+  .f-input {
+    width: 100%;
+    background: var(--ivory);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 12px 14px;
+    font-family: 'DM Mono', monospace;
+    font-size: 14px;
+    color: var(--ink);
+    outline: none;
+    transition: border .2s, box-shadow .2s, background .2s;
+    margin-bottom: 18px;
+    -webkit-appearance: none;
+  }
+
+  .f-input::placeholder { color: var(--ink-mute); }
+
+  .f-input:focus {
+    border-color: rgba(192, 90, 53, 0.35);
+    box-shadow: 0 0 0 3px rgba(192, 90, 53, 0.10);
+  }
+
+  .f-row-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+
+  .f-row-2 .f-input { margin-bottom: 0; }
+
+  .f-hint {
+    font-size: 12px;
+    color: var(--terra);
+    margin-top: -10px;
+    margin-bottom: 18px;
+    font-family: 'DM Mono', monospace;
+    min-height: 18px;
+  }
+
+  .f-divider {
+    height: 1px;
+    background: var(--line);
+    margin: 6px 0 18px;
+  }
+
+  .f-select {
+    width: 100%;
+    background: var(--ivory);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 12px 14px;
+    font-family: var(--ui);
+    font-size: 13px;
+    color: var(--ink-mid);
+    outline: none;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: border .2s, box-shadow .2s, background .2s;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236B5E52' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+  }
+
+  .f-select:focus {
+    border-color: rgba(192, 90, 53, 0.35);
+    box-shadow: 0 0 0 3px rgba(192, 90, 53, 0.10);
+  }
+
+  .cob-section {
+    background: var(--ivory-3);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+
+  .cob-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 13px 16px;
+    cursor: pointer;
+    user-select: none;
+    transition: background .15s;
+  }
+
+  .cob-header:hover { background: rgba(192, 90, 53, 0.04); }
+
+  .cob-header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .cob-header-icon { font-size: 15px; }
+
+  .cob-header-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+    font-family: var(--ui);
+  }
+
+  .cob-badge {
+    background: rgba(192, 90, 53, 0.08);
+    color: var(--terra);
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 100px;
+    border: 1px solid rgba(192, 90, 53, 0.18);
+    font-family: var(--ui);
+  }
+
+  .cob-chevron {
+    font-size: 11px;
+    color: var(--ink-mute);
+    transition: transform .2s;
+  }
+
+  .cob-chevron.open { transform: rotate(180deg); }
+
+  .cob-body {
+    display: none;
+    border-top: 1px solid var(--line);
+  }
+
+  .cob-body.open { display: block; }
+
+  .cob-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    transition: background .15s;
+  }
+
+  .cob-item:last-of-type { border-bottom: none; }
+  .cob-item:hover { background: rgba(192, 90, 53, 0.02); }
+
+  .cob-check {
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(90,70,50,0.20);
+    border-radius: 5px;
+    cursor: pointer;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    transition: all .15s;
+    background: var(--ivory);
+  }
+
+  .cob-check.checked {
+    background: var(--terra);
+    border-color: var(--terra);
+    color: var(--ivory);
+  }
+
+  .cob-check.checked::after { content: '✓'; font-weight: 700; }
+
+  .cob-info { flex: 1; }
+
+  .cob-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 2px;
+    font-family: var(--ui);
+  }
+
+  .cob-sub { font-size: 11px; color: var(--ink-mute); }
+
+  .cob-agravo-wrap {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: var(--ivory);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 5px 8px;
+  }
+
+  .cob-agravo-input {
+    width: 36px;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--amber);
+    text-align: right;
+  }
+
+  .cob-agravo-label {
+    font-size: 12px;
+    color: var(--ink-mute);
+  }
+
+  .cob-total-hint {
+    padding: 8px 16px 10px;
+    font-size: 12px;
+    color: var(--terra);
+    font-family: 'DM Mono', monospace;
+    min-height: 0;
+  }
+
+  .f-btn {
+    width: 100%;
+    background: var(--terra);
+    color: var(--ivory);
+    border: none;
+    border-radius: var(--radius);
+    padding: 14px;
+    font-family: var(--ui);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: .02em;
+    cursor: pointer;
+    transition: all .2s var(--ease);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 4px;
+  }
+
+  .f-btn:hover {
+    background: var(--terra-lt);
+    box-shadow: 0 10px 24px rgba(192, 90, 53, 0.18);
+    transform: translateY(-1px);
+  }
+
+  .f-btn:active { transform: translateY(0); }
+
+  .result-side {
+    padding: 32px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  @media (max-width: 680px) {
+    .result-side { padding: 24px 20px; }
+  }
+
+  .result-main {
+    background: var(--ivory-3);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 24px;
+    text-align: center;
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: border-color .3s, background .3s;
+  }
+
+  .result-main.has-result {
+    border-color: rgba(74, 103, 65, 0.24);
+    background: linear-gradient(135deg, rgba(74, 103, 65, 0.05) 0%, var(--ivory-3) 100%);
+  }
+
+  .result-main.has-error {
+    border-color: rgba(192, 90, 53, 0.24);
+    background: linear-gradient(135deg, rgba(192, 90, 53, 0.05) 0%, var(--ivory-3) 100%);
+  }
+
+  .res-lbl {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 10px;
+    font-family: var(--ui);
+  }
+
+  .res-val {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    color: var(--terra);
+    line-height: 1.1;
+  }
+
+  .res-val.error {
+    color: var(--terra);
+    font-size: 1.2rem;
+    font-family: var(--ui);
+  }
+
+  .res-hint {
+    font-size: 12px;
+    color: var(--ink-soft);
+    margin-top: 8px;
+    font-family: 'DM Mono', monospace;
+  }
+
+  .breakdown {
+    background: var(--ivory-3);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+    animation: fadeIn .3s ease;
+  }
+
+  .breakdown-title {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    padding: 12px 16px 10px;
+    border-bottom: 1px solid var(--line);
+    font-family: var(--ui);
+  }
+
+  .breakdown-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--line);
+    font-size: 13px;
+  }
+
+  .breakdown-row:last-child { border-bottom: none; }
+
+  .breakdown-label { color: var(--ink-soft); }
+
+  .breakdown-value {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .breakdown-row.total {
+    background: rgba(192, 90, 53, 0.06);
+    border-top: 1px solid rgba(192, 90, 53, 0.14);
+  }
+
+  .breakdown-row.total .breakdown-label { color: var(--terra); font-weight: 600; }
+  .breakdown-row.total .breakdown-value { color: var(--terra); font-size: 14px; font-weight: 700; }
+
+  .fine-print {
+    font-size: 11px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+    padding: 0 2px;
+  }
+
+  .fine-print strong { color: var(--ink-mid); }
+
+  .footer {
+    margin-top: 40px;
+    text-align: center;
+    font-size: 12px;
+    color: var(--ink-mute);
+    animation: fadeUp .6s .3s ease both;
+    font-family: var(--ui);
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--ivory-2); }
+  ::-webkit-scrollbar-thumb { background: rgba(90,70,50,0.20); border-radius: 3px; }
+
+  @media (max-width: 560px) {
+    .formula-banner {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .iof-badge {
+      margin-left: 0;
+    }
+
+    .mode-tabs {
+      flex-direction: column;
+    }
+  }
+</style>
 <body>
+<div class="page-wrap">
 
-  <h1>Calculadora de Seguro Garantia</h1>
+  <header class="header">
+    <div class="eyebrow"> </div>
+    <h1>Calculadora de <em>Seguro Garantia</em></h1>
+    <p class="lead">Simule prêmios, descubra a taxa aplicada ou encontre a importância segurada.</p>
+  </header>
 
-  <!-- MODOS -->
-  <div class="mode-bar" role="group" aria-label="Modo de cálculo">
-    <button data-mode="premio" class="btn-mode active" type="button">Calcular Prêmio</button>
-    <button data-mode="taxa"   class="btn-mode"        type="button">Descobrir Taxa</button>
-    <button data-mode="is"     class="btn-mode"        type="button">Descobrir IS</button>
+  <div class="formula-banner">
+    <div class="formula-icon">📐</div>
+    <div class="formula-text">
+      Fórmula base: <strong>Prêmio = IS × Taxa × Prazo</strong>
+      <span style="margin-left:8px;color:var(--ink-mute)">— Prazo em anos (dias / 365)</span>
+    </div>
+    <div class="iof-badge">✓ Sem IOF</div>
   </div>
 
-  <hr>
+  <div class="mode-tabs">
+    <button class="mode-btn active" onclick="setMode('premio')">
+      <span class="mode-icon">💰</span> Calcular Prêmio
+    </button>
+    <button class="mode-btn" onclick="setMode('taxa')">
+      <span class="mode-icon">📊</span> Descobrir Taxa
+    </button>
+    <button class="mode-btn" onclick="setMode('is')">
+      <span class="mode-icon">🔍</span> Descobrir IS
+    </button>
+  </div>
 
-  <!-- FORMULÁRIO — campos rotulados para acessibilidade e WAF previsível -->
-  <div class="form-grid" id="form" role="form" aria-label="Parâmetros de cálculo">
+  <div class="calc-card">
 
-    <label for="campo-a" id="label-a">Importância Segurada (R$)</label>
-    <input id="campo-a"
-           type="text"
-           inputmode="decimal"
-           autocomplete="off"
-           aria-labelledby="label-a">
+    <div class="form-side">
 
-    <label for="campo-b" id="label-b">Taxa (%)</label>
-    <input id="campo-b"
-           type="text"
-           inputmode="decimal"
-           autocomplete="off"
-           aria-labelledby="label-b">
+      <div class="form-panel active" id="panel-premio">
+        <label class="f-label" for="is1">Importância Segurada — IS <span>· valor garantido</span></label>
+        <input class="f-input" type="text" id="is1" placeholder="R$ 1.000.000,00" oninput="maskBRL(this)">
 
-    <label for="campo-dias" id="label-dias">Prazo (dias)</label>
-    <input id="campo-dias"
-           type="text"
-           inputmode="numeric"
-           autocomplete="off"
-           aria-labelledby="label-dias">
+        <label class="f-label">Vigência</label>
+        <div class="f-row-2">
+          <input class="f-input" type="text" id="ini1" placeholder="01/04/2025" maxlength="10" oninput="maskDate(this,'dias1')">
+          <input class="f-input" type="text" id="fim1" placeholder="01/04/2027" maxlength="10" oninput="maskDate(this,'dias1')">
+        </div>
+        <div class="f-hint" id="dias1">Preencha as datas para calcular o prazo</div>
 
-    <button id="btn-calcular" type="button">Calcular</button>
+        <div class="f-divider"></div>
+
+        <label class="f-label" for="taxa1">Taxa anual (%)</label>
+        <input class="f-input" type="text" id="taxa1" placeholder="1,50" oninput="maskPct(this)">
+        <label class="f-label" for="mod1">Referência por modalidade</label>
+        <select class="f-select" id="mod1" onchange="preencherTaxa(this.value,'taxa1')">
+          <option value="">— Selecionar modalidade —</option>
+          <option value="1.5">Garantia Judicial · ~1,50% a.a.</option>
+          <option value="1.0">Garantia Administrativa · ~1,00% a.a.</option>
+          <option value="1.2">Bid Bond · ~1,20% a.a.</option>
+          <option value="2.0">Performance Bond · ~2,00% a.a.</option>
+          <option value="2.5">Alto Risco · ~2,50% a.a.</option>
+        </select>
+
+        <div class="cob-section" id="cob1">
+          <div class="cob-header" onclick="toggleCob('cob1')">
+            <div class="cob-header-left">
+              <span class="cob-header-icon">🛡️</span>
+              <span class="cob-header-title">Coberturas Adicionais</span>
+              <span class="cob-badge" id="badge1" style="display:none"></span>
+            </div>
+            <span class="cob-chevron" id="chev1">▼</span>
+          </div>
+          <div class="cob-body" id="body1">
+            <div class="cob-item">
+              <div class="cob-check" id="chk-trab1" onclick="toggleCob2('trab','1')"></div>
+              <div class="cob-info">
+                <div class="cob-name">Trabalhista e Previdenciária</div>
+                <div class="cob-sub">Obrigações trabalhistas e encargos previdenciários</div>
+              </div>
+              <div class="cob-agravo-wrap">
+                <input class="cob-agravo-input" type="text" id="agr-trab1" value="17">
+                <span class="cob-agravo-label">%</span>
+              </div>
+            </div>
+            <div class="cob-item">
+              <div class="cob-check" id="chk-mult1" onclick="toggleCob2('mult','1')"></div>
+              <div class="cob-info">
+                <div class="cob-name">Multas</div>
+                <div class="cob-sub">Multas contratuais e regulatórias</div>
+              </div>
+              <div class="cob-agravo-wrap">
+                <input class="cob-agravo-input" type="text" id="agr-mult1" value="17">
+                <span class="cob-agravo-label">%</span>
+              </div>
+            </div>
+            <div class="cob-total-hint" id="cobhint1"></div>
+          </div>
+        </div>
+
+        <button class="f-btn" onclick="calcPremio()">Calcular Prêmio →</button>
+      </div>
+
+      <div class="form-panel" id="panel-taxa">
+        <label class="f-label" for="is2">Importância Segurada — IS</label>
+        <input class="f-input" type="text" id="is2" placeholder="R$ 1.000.000,00" oninput="maskBRL(this)">
+
+        <label class="f-label" for="prem2">Prêmio Pago</label>
+        <input class="f-input" type="text" id="prem2" placeholder="R$ 32.000,00" oninput="maskBRL(this)">
+
+        <label class="f-label">Vigência</label>
+        <div class="f-row-2">
+          <input class="f-input" type="text" id="ini2" placeholder="01/04/2025" maxlength="10" oninput="maskDate(this,'dias2')">
+          <input class="f-input" type="text" id="fim2" placeholder="01/04/2027" maxlength="10" oninput="maskDate(this,'dias2')">
+        </div>
+        <div class="f-hint" id="dias2">Preencha as datas para calcular o prazo</div>
+
+        <button class="f-btn" onclick="calcTaxa()">Descobrir Taxa →</button>
+      </div>
+
+      <div class="form-panel" id="panel-is">
+        <label class="f-label" for="prem3">Prêmio Pago</label>
+        <input class="f-input" type="text" id="prem3" placeholder="R$ 32.000,00" oninput="maskBRL(this)">
+
+        <label class="f-label">Vigência</label>
+        <div class="f-row-2">
+          <input class="f-input" type="text" id="ini3" placeholder="01/04/2025" maxlength="10" oninput="maskDate(this,'dias3')">
+          <input class="f-input" type="text" id="fim3" placeholder="01/04/2027" maxlength="10" oninput="maskDate(this,'dias3')">
+        </div>
+        <div class="f-hint" id="dias3">Preencha as datas para calcular o prazo</div>
+
+        <div class="f-divider"></div>
+
+        <label class="f-label" for="taxa3">Taxa anual (%)</label>
+        <input class="f-input" type="text" id="taxa3" placeholder="1,50" oninput="maskPct(this)">
+        <label class="f-label" for="mod3">Referência por modalidade</label>
+        <select class="f-select" id="mod3" onchange="preencherTaxa(this.value,'taxa3')">
+          <option value="">— Selecionar modalidade —</option>
+          <option value="1.5">Garantia Judicial · ~1,50% a.a.</option>
+          <option value="1.0">Garantia Administrativa · ~1,00% a.a.</option>
+          <option value="1.2">Bid Bond · ~1,20% a.a.</option>
+          <option value="2.0">Performance Bond · ~2,00% a.a.</option>
+          <option value="2.5">Alto Risco · ~2,50% a.a.</option>
+        </select>
+
+        <div class="cob-section" id="cob3">
+          <div class="cob-header" onclick="toggleCob('cob3')">
+            <div class="cob-header-left">
+              <span class="cob-header-icon">🛡️</span>
+              <span class="cob-header-title">Coberturas Adicionais</span>
+              <span class="cob-badge" id="badge3" style="display:none"></span>
+            </div>
+            <span class="cob-chevron" id="chev3">▼</span>
+          </div>
+          <div class="cob-body" id="body3">
+            <div class="cob-item">
+              <div class="cob-check" id="chk-trab3" onclick="toggleCob2('trab','3')"></div>
+              <div class="cob-info">
+                <div class="cob-name">Trabalhista e Previdenciária</div>
+                <div class="cob-sub">Obrigações trabalhistas e encargos previdenciários</div>
+              </div>
+              <div class="cob-agravo-wrap">
+                <input class="cob-agravo-input" type="text" id="agr-trab3" value="17">
+                <span class="cob-agravo-label">%</span>
+              </div>
+            </div>
+            <div class="cob-item">
+              <div class="cob-check" id="chk-mult3" onclick="toggleCob2('mult','3')"></div>
+              <div class="cob-info">
+                <div class="cob-name">Multas</div>
+                <div class="cob-sub">Multas contratuais e regulatórias</div>
+              </div>
+              <div class="cob-agravo-wrap">
+                <input class="cob-agravo-input" type="text" id="agr-mult3" value="17">
+                <span class="cob-agravo-label">%</span>
+              </div>
+            </div>
+            <div class="cob-total-hint" id="cobhint3"></div>
+          </div>
+        </div>
+
+        <button class="f-btn" onclick="calcIS()">Descobrir Importância Segurada →</button>
+      </div>
+
+    </div>
+
+    <div class="result-side">
+      <div class="result-main" id="result-main">
+        <div class="res-lbl" id="res-lbl">Aguardando cálculo</div>
+        <div class="res-val" id="res-val">—</div>
+        <div class="res-hint" id="res-hint">Preencha os campos e clique em calcular</div>
+      </div>
+
+      <div id="breakdown-wrap"></div>
+
+      <div class="fine-print">
+        Cálculos baseados na fórmula <strong>Prêmio = IS × Taxa × Prazo</strong>, onde o prazo é expresso em anos (dias ÷ 365). Seguro Garantia dos ramos <strong>0775</strong> e <strong>0776</strong> não está sujeito a IOF. Taxas são estimativas de mercado e podem variar conforme perfil do tomador e análise de risco da seguradora.
+      </div>
+    </div>
 
   </div>
 
-  <!-- RESULTADO -->
-  <section class="result" aria-live="polite" aria-atomic="true">
-    <strong id="res-label">Resultado</strong>
-    <div id="res-value">—</div>
-  </section>
+  <footer class="footer">
+    Calculadora de Seguro Garantia · Estimativa tarifária · Não constitui proposta de seguro
+  </footer>
 
-  <!-- BREAKDOWN — preenchido via createElement, nunca innerHTML com dados do usuário -->
-  <div id="breakdown" role="table" aria-label="Detalhamento do cálculo"></div>
+</div>
 
-  <!-- JS externo — carregado após o DOM, sem atributo defer para compatibilidade total -->
-  <script src="calculadora-sgf.js"></script>
+<script>
+// ── State ──────────────────────────────────────────────
+let currentMode = 'premio';
+const cob = {
+  '1': { trab: false, mult: false },
+  '3': { trab: false, mult: false }
+};
 
+// ── Mode switching ──────────────────────────────────────
+function setMode(mode) {
+  currentMode = mode;
+  document.querySelectorAll('.mode-btn').forEach((b, i) => {
+    b.classList.toggle('active', ['premio','taxa','is'][i] === mode);
+  });
+  document.querySelectorAll('.form-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-' + mode).classList.add('active');
+  clearResult();
+}
+
+// ── Masks ──────────────────────────────────────────────
+function maskBRL(el) {
+  let v = el.value.replace(/\D/g, '');
+  if (!v) { el.value = ''; return; }
+  v = (parseInt(v, 10) / 100).toFixed(2);
+  el.value = 'R$ ' + v.replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+}
+
+function maskPct(el) {
+  let v = el.value.replace(/[^0-9,\.]/g, '').replace('.', ',');
+  const parts = v.split(',');
+  if (parts.length > 2) v = parts[0] + ',' + parts.slice(1).join('');
+  el.value = v;
+}
+
+function maskDate(el, diasId) {
+  let v = el.value.replace(/\D/g, '');
+  if (v.length > 2) v = v.slice(0,2) + '/' + v.slice(2);
+  if (v.length > 5) v = v.slice(0,5) + '/' + v.slice(5,9);
+  el.value = v;
+  if (diasId) updateDias(diasId);
+}
+
+// ── Date helpers ────────────────────────────────────────
+function parseDate(s) {
+  const p = s.trim().split('/');
+  if (p.length !== 3 || p[2].length !== 4) return null;
+  const d = new Date(+p[2], +p[1]-1, +p[0]);
+  return isNaN(d) ? null : d;
+}
+
+function updateDias(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const num = id.slice(-1);
+  const ini = parseDate(document.getElementById('ini' + num)?.value || '');
+  const fim = parseDate(document.getElementById('fim' + num)?.value || '');
+  if (ini && fim && fim > ini) {
+    const diff = Math.round((fim - ini) / 86400000);
+    const anos = (diff / 365).toFixed(4);
+    el.textContent = `${diff} dias · ${anos} anos`;
+  } else {
+    el.textContent = 'Preencha as datas para calcular o prazo';
+  }
+}
+
+function getDias(num) {
+  const ini = parseDate(document.getElementById('ini' + num)?.value || '');
+  const fim = parseDate(document.getElementById('fim' + num)?.value || '');
+  if (!ini || !fim || fim <= ini) return null;
+  return Math.round((fim - ini) / 86400000);
+}
+
+// ── Parse inputs ────────────────────────────────────────
+function parseBRL(id) {
+  const v = document.getElementById(id)?.value || '';
+  const n = parseFloat(v.replace('R$','').replace(/\./g,'').replace(',','.').trim());
+  return isNaN(n) ? null : n;
+}
+
+function parsePct(id) {
+  const v = document.getElementById(id)?.value || '';
+  const n = parseFloat(v.replace(',', '.').trim());
+  return isNaN(n) ? null : n;
+}
+
+// ── Coverage ────────────────────────────────────────────
+function preencherTaxa(val, taxaId) {
+  if (val) document.getElementById(taxaId).value = val.replace('.',',');
+}
+
+function toggleCob(sectionId) {
+  const body = document.getElementById(sectionId.replace('cob','body'));
+  const chev = document.getElementById(sectionId.replace('cob','chev'));
+  if (!body || !chev) return;
+  body.classList.toggle('open');
+  chev.classList.toggle('open');
+}
+
+function toggleCob2(tipo, num) {
+  cob[num][tipo] = !cob[num][tipo];
+  const chk = document.getElementById('chk-' + tipo + num);
+  if (chk) chk.classList.toggle('checked', cob[num][tipo]);
+  updateBadge(num);
+  updateCobHint(num);
+}
+
+function updateBadge(num) {
+  const badge = document.getElementById('badge' + num);
+  if (!badge) return;
+  const count = (cob[num].trab ? 1 : 0) + (cob[num].mult ? 1 : 0);
+  if (count > 0) {
+    badge.style.display = 'inline-flex';
+    badge.textContent = count + ' ativa' + (count > 1 ? 's' : '');
+  } else {
+    badge.style.display = 'none';
+  }
+}
+
+function updateCobHint(num) {
+  const hint = document.getElementById('cobhint' + num);
+  if (!hint) return;
+  const agravo = calcAgravo(num);
+  if (agravo > 0) {
+    hint.textContent = `Agravo total: +${agravo.toFixed(0)}% sobre a taxa base`;
+  } else {
+    hint.textContent = '';
+  }
+}
+
+function calcAgravo(num) {
+  let total = 0;
+  if (cob[num].trab) {
+    const v = parseFloat((document.getElementById('agr-trab' + num)?.value || '17').replace(',','.'));
+    if (!isNaN(v)) total += v;
+  }
+  if (cob[num].mult) {
+    const v = parseFloat((document.getElementById('agr-mult' + num)?.value || '17').replace(',','.'));
+    if (!isNaN(v)) total += v;
+  }
+  return total;
+}
+
+// ── Calcs ───────────────────────────────────────────────
+function calcPremio() {
+  const is = parseBRL('is1');
+  const taxa = parsePct('taxa1');
+  const dias = getDias('1');
+
+  if (!is) return showError('Informe a Importância Segurada.');
+  if (!taxa) return showError('Informe a Taxa anual.');
+  if (!dias) return showError('Informe datas de início e fim válidas.');
+
+  const agravo = calcAgravo('1');
+  const taxaEfetiva = taxa * (1 + agravo / 100);
+  const prazo = dias / 365;
+  const premio = is * (taxaEfetiva / 100) * prazo;
+
+  const rows = [
+    { label: 'Importância Segurada', value: fmtBRL(is) },
+    { label: 'Taxa base', value: fmtPct(taxa) + ' a.a.' },
+    agravo > 0 ? { label: 'Agravo coberturas', value: '+' + agravo.toFixed(0) + '%' } : null,
+    agravo > 0 ? { label: 'Taxa efetiva', value: fmtPct(taxaEfetiva) + ' a.a.' } : null,
+    { label: 'Vigência', value: dias + ' dias (' + prazo.toFixed(4) + ' anos)' },
+    { label: 'Prêmio Total', value: fmtBRL(premio), total: true },
+  ].filter(Boolean);
+
+  showResult('Prêmio', fmtBRL(premio), 'IS × Taxa efetiva × Prazo', rows);
+}
+
+function calcTaxa() {
+  const is = parseBRL('is2');
+  const prem = parseBRL('prem2');
+  const dias = getDias('2');
+
+  if (!is) return showError('Informe a Importância Segurada.');
+  if (!prem) return showError('Informe o Prêmio.');
+  if (!dias) return showError('Informe datas de início e fim válidas.');
+
+  const prazo = dias / 365;
+  const taxa = (prem / is / prazo) * 100;
+
+  const rows = [
+    { label: 'Importância Segurada', value: fmtBRL(is) },
+    { label: 'Prêmio', value: fmtBRL(prem) },
+    { label: 'Vigência', value: dias + ' dias (' + prazo.toFixed(4) + ' anos)' },
+    { label: 'Taxa Anual Aplicada', value: fmtPct(taxa) + ' a.a.', total: true },
+  ];
+
+  showResult('Taxa Aplicada', fmtPct(taxa) + ' a.a.', 'Prêmio ÷ (IS × Prazo)', rows);
+}
+
+function calcIS() {
+  const prem = parseBRL('prem3');
+  const taxa = parsePct('taxa3');
+  const dias = getDias('3');
+
+  if (!prem) return showError('Informe o Prêmio.');
+  if (!taxa) return showError('Informe a Taxa anual.');
+  if (!dias) return showError('Informe datas de início e fim válidas.');
+
+  const agravo = calcAgravo('3');
+  const taxaEfetiva = taxa * (1 + agravo / 100);
+  const prazo = dias / 365;
+  const is = prem / ((taxaEfetiva / 100) * prazo);
+
+  const rows = [
+    { label: 'Prêmio', value: fmtBRL(prem) },
+    { label: 'Taxa base', value: fmtPct(taxa) + ' a.a.' },
+    agravo > 0 ? { label: 'Agravo coberturas', value: '+' + agravo.toFixed(0) + '%' } : null,
+    agravo > 0 ? { label: 'Taxa efetiva', value: fmtPct(taxaEfetiva) + ' a.a.' } : null,
+    { label: 'Vigência', value: dias + ' dias (' + prazo.toFixed(4) + ' anos)' },
+    { label: 'Importância Segurada', value: fmtBRL(is), total: true },
+  ].filter(Boolean);
+
+  showResult('Importância Segurada', fmtBRL(is), 'Prêmio ÷ (Taxa efetiva × Prazo)', rows);
+}
+
+// ── Display ─────────────────────────────────────────────
+function showResult(lbl, val, hint, rows) {
+  const box = document.getElementById('result-main');
+  box.className = 'result-main has-result';
+  document.getElementById('res-lbl').textContent = lbl;
+  const valEl = document.getElementById('res-val');
+  valEl.className = 'res-val';
+  valEl.textContent = val;
+  document.getElementById('res-hint').textContent = hint;
+
+  const wrap = document.getElementById('breakdown-wrap');
+  let html = '<div class="breakdown"><div class="breakdown-title">Detalhamento</div>';
+  rows.forEach(r => {
+    html += `<div class="breakdown-row${r.total ? ' total' : ''}">
+      <span class="breakdown-label">${r.label}</span>
+      <span class="breakdown-value">${r.value}</span>
+    </div>`;
+  });
+  html += '</div>';
+  wrap.innerHTML = html;
+}
+
+function showError(msg) {
+  const box = document.getElementById('result-main');
+  box.className = 'result-main has-error';
+  document.getElementById('res-lbl').textContent = 'Campo inválido';
+  const valEl = document.getElementById('res-val');
+  valEl.className = 'res-val error';
+  valEl.textContent = msg;
+  document.getElementById('res-hint').textContent = '';
+  document.getElementById('breakdown-wrap').innerHTML = '';
+}
+
+function clearResult() {
+  const box = document.getElementById('result-main');
+  box.className = 'result-main';
+  document.getElementById('res-lbl').textContent = 'Aguardando cálculo';
+  const valEl = document.getElementById('res-val');
+  valEl.className = 'res-val';
+  valEl.textContent = '—';
+  document.getElementById('res-hint').textContent = 'Preencha os campos e clique em calcular';
+  document.getElementById('breakdown-wrap').innerHTML = '';
+}
+
+// ── Formatters ──────────────────────────────────────────
+function fmtBRL(n) {
+  return 'R$ ' + n.toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+}
+
+function fmtPct(n) {
+  return n.toFixed(4).replace('.', ',') + '%';
+}
+</script>
 </body>
 </html>
