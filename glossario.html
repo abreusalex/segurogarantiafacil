@@ -1,0 +1,1616 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Glossário — Seguro Garantia Fácil</title>
+  <meta name="description" content="Série Glossário: 11 conceitos essenciais do Seguro Garantia explicados com precisão regulatória e linguagem direta.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    /* ═══════════════════════════════════════════════
+       SGF · DESIGN SYSTEM
+    ═══════════════════════════════════════════════ */
+    :root {
+      --ivory:      #FAF7F2;
+      --ivory2:     #EDE5D8;
+      --ivory3:     #D6C9B8;
+      --ink:        #1C1712;
+      --ink-mid:    #3D342A;
+      --ink-soft:   #6B5C50;
+      --terra:      #C05A35;
+      --terra-dark: #9A3E20;
+      --terra-pale: #F3E6DF;
+      --amber:      #C4900A;
+      --amber-pale: #FBF3E0;
+      --serif:      'Playfair Display', Georgia, serif;
+      --sans:       'DM Sans', system-ui, sans-serif;
+      --mono:       'Courier New', Courier, monospace;
+
+      --sidebar-w:  280px;
+      --content-max: 740px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--ivory);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-weight: 300;
+      line-height: 1.7;
+    }
+
+    /* ─── TOP BAR ─── */
+    .top-bar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--terra) 0%, var(--amber) 100%);
+      z-index: 1000;
+    }
+
+    /* ─── SITE HEADER ─── */
+    .site-header {
+      position: fixed;
+      top: 4px; left: 0; right: 0;
+      height: 56px;
+      background: var(--ivory);
+      border-bottom: 1px solid var(--ivory3);
+      display: flex;
+      align-items: center;
+      padding: 0 32px;
+      gap: 16px;
+      z-index: 999;
+    }
+
+    .site-header a {
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .site-header .sep {
+      color: var(--ivory3);
+      font-size: 14px;
+    }
+
+    .site-header .current {
+      color: var(--terra);
+    }
+
+    /* ─── LAYOUT ─── */
+    .layout {
+      display: flex;
+      min-height: 100vh;
+      padding-top: 60px;
+    }
+
+    /* ─── SIDEBAR ─── */
+    .sidebar {
+      width: var(--sidebar-w);
+      flex-shrink: 0;
+      position: sticky;
+      top: 60px;
+      height: calc(100vh - 60px);
+      overflow-y: auto;
+      border-right: 1px solid var(--ivory3);
+      padding: 40px 0;
+      scrollbar-width: thin;
+      scrollbar-color: var(--ivory3) transparent;
+    }
+
+    .sidebar-label {
+      font-family: var(--mono);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      padding: 0 28px;
+      margin-bottom: 16px;
+    }
+
+    .sidebar nav {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar nav a {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      padding: 10px 28px;
+      text-decoration: none;
+      color: var(--ink-soft);
+      font-size: 13px;
+      font-weight: 400;
+      border-left: 2px solid transparent;
+      transition: all 0.2s;
+      line-height: 1.3;
+    }
+
+    .sidebar nav a:hover {
+      color: var(--terra);
+      border-left-color: var(--terra);
+      background: var(--terra-pale);
+    }
+
+    .sidebar nav a.active {
+      color: var(--terra);
+      border-left-color: var(--terra);
+      background: var(--terra-pale);
+      font-weight: 500;
+    }
+
+    .sidebar nav a .num {
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--ivory3);
+      flex-shrink: 0;
+      width: 18px;
+    }
+
+    .sidebar nav a.active .num {
+      color: var(--terra);
+    }
+
+    /* ─── MAIN CONTENT ─── */
+    .main {
+      flex: 1;
+      min-width: 0;
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      background: var(--ink);
+      color: var(--ivory);
+      padding: 80px 64px 72px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 400px; height: 400px;
+      border-radius: 50%;
+      border: 80px solid rgba(192,90,53,0.12);
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -120px; left: 40%;
+      width: 280px; height: 280px;
+      border-radius: 50%;
+      border: 60px solid rgba(196,144,10,0.08);
+      pointer-events: none;
+    }
+
+    .hero-chip {
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.20em;
+      text-transform: uppercase;
+      color: var(--terra);
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 600;
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      margin-bottom: 20px;
+      max-width: 560px;
+    }
+
+    .hero p {
+      font-size: 16px;
+      font-weight: 300;
+      color: rgba(250,247,242,0.65);
+      max-width: 480px;
+      line-height: 1.7;
+    }
+
+    .hero-meta {
+      margin-top: 36px;
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+
+    .hero-meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .hero-meta-item .label {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(250,247,242,0.35);
+    }
+
+    .hero-meta-item .value {
+      font-size: 13px;
+      color: rgba(250,247,242,0.70);
+    }
+
+    /* ─── ARTICLES ─── */
+    .articles {
+      padding: 0;
+    }
+
+    .article {
+      padding: 72px 64px;
+      border-bottom: 1px solid var(--ivory3);
+      max-width: calc(var(--content-max) + 128px);
+      position: relative;
+    }
+
+    .article:nth-child(even) {
+      background: #FDFBF8;
+    }
+
+    /* ─── ARTICLE HEADER ─── */
+    .article-header {
+      margin-bottom: 48px;
+    }
+
+    .article-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .article-num {
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      color: var(--terra);
+      background: var(--terra-pale);
+      padding: 4px 10px;
+      border-radius: 2px;
+    }
+
+    .article-category {
+      font-family: var(--mono);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+
+    .article h2 {
+      font-family: var(--serif);
+      font-size: clamp(26px, 3vw, 38px);
+      font-weight: 600;
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      margin-bottom: 10px;
+    }
+
+    .article-lead {
+      font-size: 16px;
+      font-weight: 300;
+      color: var(--ink-soft);
+      line-height: 1.65;
+      border-left: 3px solid var(--terra);
+      padding-left: 20px;
+      margin-top: 16px;
+    }
+
+    /* ─── ARTICLE BODY ─── */
+    .article-body {
+      max-width: var(--content-max);
+    }
+
+    .article-body p {
+      font-size: 15.5px;
+      line-height: 1.8;
+      color: var(--ink-mid);
+      margin-bottom: 20px;
+    }
+
+    .article-body h3 {
+      font-family: var(--serif);
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--ink);
+      margin: 40px 0 14px;
+      letter-spacing: -0.005em;
+    }
+
+    .article-body h4 {
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      margin: 32px 0 10px;
+    }
+
+    /* ─── DEFINITION BOX ─── */
+    .def-box {
+      background: var(--ink);
+      color: var(--ivory);
+      border-radius: 4px;
+      padding: 32px 36px;
+      margin: 36px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .def-box::before {
+      content: '§';
+      position: absolute;
+      top: -10px; right: 20px;
+      font-family: var(--serif);
+      font-size: 100px;
+      color: rgba(250,247,242,0.04);
+      pointer-events: none;
+      line-height: 1;
+    }
+
+    .def-box .def-label {
+      font-family: var(--mono);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.20em;
+      text-transform: uppercase;
+      color: var(--terra);
+      margin-bottom: 12px;
+    }
+
+    .def-box .def-text {
+      font-family: var(--serif);
+      font-size: 17px;
+      font-style: italic;
+      line-height: 1.6;
+      color: var(--ivory);
+    }
+
+    .def-box .def-source {
+      margin-top: 16px;
+      font-family: var(--mono);
+      font-size: 10px;
+      color: rgba(250,247,242,0.35);
+      letter-spacing: 0.06em;
+    }
+
+    /* ─── CALLOUT ─── */
+    .callout {
+      background: var(--amber-pale);
+      border-left: 3px solid var(--amber);
+      border-radius: 0 4px 4px 0;
+      padding: 20px 24px;
+      margin: 28px 0;
+    }
+
+    .callout.alert {
+      background: var(--terra-pale);
+      border-left-color: var(--terra);
+    }
+
+    .callout .callout-icon {
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 8px;
+    }
+
+    .callout.alert .callout-icon {
+      color: var(--terra);
+    }
+
+    .callout p {
+      font-size: 14px !important;
+      line-height: 1.65 !important;
+      margin-bottom: 0 !important;
+      color: var(--ink-mid) !important;
+    }
+
+    /* ─── FLOW DIAGRAM ─── */
+    .flow {
+      display: flex;
+      align-items: stretch;
+      gap: 0;
+      margin: 36px 0;
+      border: 1px solid var(--ivory3);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .flow-node {
+      flex: 1;
+      padding: 24px 20px;
+      background: var(--ivory);
+      position: relative;
+    }
+
+    .flow-node:not(:last-child)::after {
+      content: '→';
+      position: absolute;
+      right: -10px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 16px;
+      color: var(--terra);
+      z-index: 2;
+      background: var(--ivory);
+      width: 20px;
+      text-align: center;
+    }
+
+    .flow-node:nth-child(even) {
+      background: var(--ivory2);
+    }
+
+    .flow-node:nth-child(even)::after {
+      background: var(--ivory2);
+    }
+
+    .flow-node .fn-label {
+      font-family: var(--mono);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--terra);
+      margin-bottom: 6px;
+    }
+
+    .flow-node .fn-title {
+      font-family: var(--serif);
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+
+    .flow-node .fn-desc {
+      font-size: 12.5px;
+      color: var(--ink-soft);
+      line-height: 1.55;
+    }
+
+    /* ─── SUMMARY TABLE ─── */
+    .summary-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 32px 0;
+      font-size: 14px;
+    }
+
+    .summary-table th {
+      background: var(--ink);
+      color: var(--ivory);
+      font-family: var(--mono);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 12px 16px;
+      text-align: left;
+    }
+
+    .summary-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--ivory3);
+      color: var(--ink-mid);
+      vertical-align: top;
+    }
+
+    .summary-table tr:nth-child(even) td {
+      background: var(--ivory2);
+    }
+
+    .summary-table td:first-child {
+      font-weight: 500;
+      color: var(--ink);
+      white-space: nowrap;
+    }
+
+    /* ─── CHECKLIST ─── */
+    .checklist {
+      list-style: none;
+      margin: 24px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 14.5px;
+      color: var(--ink-mid);
+      line-height: 1.55;
+    }
+
+    .checklist li::before {
+      content: '▸';
+      color: var(--terra);
+      font-size: 12px;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+
+    /* ─── CITATION ─── */
+    .citation {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      color: var(--ink-soft);
+      border-top: 1px solid var(--ivory3);
+      padding-top: 20px;
+      margin-top: 48px;
+    }
+
+    .citation strong {
+      color: var(--ink);
+    }
+
+    /* ─── ARTICLE NAV ─── */
+    .article-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 48px;
+      padding-top: 28px;
+      border-top: 1px solid var(--ivory3);
+      gap: 16px;
+    }
+
+    .article-nav a {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--terra);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: gap 0.2s;
+    }
+
+    .article-nav a:hover {
+      gap: 10px;
+    }
+
+    .article-nav .nav-label {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    /* ─── FOOTER ─── */
+    .site-footer {
+      background: var(--ink);
+      color: var(--ivory);
+      padding: 48px 64px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .site-footer .footer-brand {
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .site-footer .footer-copy {
+      font-size: 12px;
+      color: rgba(250,247,242,0.35);
+    }
+
+    /* ─── MOBILE ─── */
+    @media (max-width: 900px) {
+      .layout { flex-direction: column; }
+
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: static;
+        border-right: none;
+        border-bottom: 1px solid var(--ivory3);
+        padding: 24px 0;
+        overflow-x: auto;
+      }
+
+      .sidebar nav {
+        flex-direction: row;
+        padding: 0 16px;
+        gap: 4px;
+        white-space: nowrap;
+        flex-wrap: nowrap;
+      }
+
+      .sidebar nav a {
+        border-left: none;
+        border-bottom: 2px solid transparent;
+        padding: 8px 14px;
+        font-size: 12px;
+        flex-shrink: 0;
+      }
+
+      .sidebar nav a:hover,
+      .sidebar nav a.active {
+        border-left: none;
+        border-bottom-color: var(--terra);
+      }
+
+      .hero { padding: 48px 28px; }
+      .article { padding: 48px 28px; }
+      .site-footer { padding: 36px 28px; }
+
+      .flow { flex-direction: column; }
+      .flow-node:not(:last-child)::after {
+        content: '↓';
+        right: auto;
+        left: 50%;
+        top: auto;
+        bottom: -10px;
+        transform: translateX(-50%);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar"></div>
+
+  <!-- SITE HEADER -->
+  <header class="site-header">
+    <a href="/">SGF</a>
+    <span class="sep">·</span>
+    <span class="current" style="font-family:var(--mono);font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:var(--terra)">Série Glossário</span>
+  </header>
+
+  <div class="layout">
+
+    <!-- SIDEBAR NAV -->
+    <aside class="sidebar">
+      <div class="sidebar-label">11 Conceitos</div>
+      <nav id="sidebar-nav">
+        <a href="#seguro-garantia"><span class="num">01</span> Seguro Garantia</a>
+        <a href="#tomador"><span class="num">02</span> Tomador</a>
+        <a href="#segurado"><span class="num">03</span> Segurado</a>
+        <a href="#seguradora"><span class="num">04</span> Seguradora</a>
+        <a href="#objeto-segurado"><span class="num">05</span> Objeto Segurado</a>
+        <a href="#importancia-segurada"><span class="num">06</span> Importância Segurada</a>
+        <a href="#vigencia"><span class="num">07</span> Vigência</a>
+        <a href="#premio"><span class="num">08</span> Prêmio</a>
+        <a href="#frontispicio"><span class="num">09</span> Frontispício</a>
+        <a href="#condicoes-contratuais"><span class="num">10</span> Condições Contratuais</a>
+        <a href="#contragarantia"><span class="num">11</span> Contragarantia</a>
+      </nav>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main">
+
+      <!-- HERO -->
+      <section class="hero">
+        <div class="hero-chip">Série Glossário · 11 Conceitos Essenciais</div>
+        <h1>Aprenda Seguro Garantia do jeito certo.</h1>
+        <p>Uma série completa com os termos fundamentais do Seguro Garantia, em linguagem direta, com fundamento regulatório preciso.</p>
+        <div class="hero-meta">
+          <div class="hero-meta-item">
+            <span class="label">Fonte principal</span>
+            <span class="value">Circular SUSEP nº 662/2022</span>
+          </div>
+          <div class="hero-meta-item">
+            <span class="label">Público</span>
+            <span class="value">Advogados · Corretores · Gestores</span>
+          </div>
+          <div class="hero-meta-item">
+            <span class="label">Artigos</span>
+            <span class="value">11 conceitos</span>
+          </div>
+        </div>
+      </section>
+
+      <div class="articles">
+
+        <!-- ══════════════════════════════════════════
+             01 · SEGURO GARANTIA
+        ══════════════════════════════════════════ -->
+        <article class="article" id="seguro-garantia">
+          <div class="article-header">
+            <div class="article-eyebrow">
+              <span class="article-num">01 / 11</span>
+              <span class="article-category">O produto</span>
+            </div>
+            <h2>Seguro Garantia</h2>
+            <p class="article-lead">O que é, para que serve e como funciona — em linguagem direta.</p>
+          </div>
+
+          <div class="article-body">
+
+            <div class="def-box">
+              <div class="def-label">Definição regulatória</div>
+              <div class="def-text">O Seguro Garantia é o contrato pelo qual a Seguradora garante ao Segurado o cumprimento de obrigação assumida pelo Tomador. Se o Tomador não cumprir, a Seguradora paga — até o limite da Importância Segurada.</div>
+              <div class="def-source">Fonte: Circular SUSEP nº 662/2022</div>
+            </div>
+
+            <p>O Seguro Garantia não é fiança. Não é caução. É um <strong>contrato de seguro regulado pela SUSEP</strong>, com apólice, prêmio e vigência definidos — e isso tem consequências jurídicas relevantes que frequentemente passam despercebidas por profissionais que lidam com ele pela primeira vez.</p>
+
+            <p>Pense no Seguro Garantia como um <em>triângulo de obrigações</em>: há sempre três partes, cada uma com papel específico. O Tomador assumiu uma obrigação perante o Segurado. A Seguradora garante que essa obrigação será cumprida — ou, caso não seja, paga a indenização.</p>
+
+            <h3>As três partes e a lógica do produto</h3>
+
+            <div class="flow">
+              <div class="flow-node">
+                <div class="fn-label">Tomador</div>
+                <div class="fn-title">Empreiteira</div>
+                <div class="fn-desc">Venceu a licitação. Deve executar a obra. Contrata o seguro e paga o prêmio à Seguradora.</div>
+              </div>
+              <div class="flow-node">
+                <div class="fn-label">Seguradora</div>
+                <div class="fn-title">Infinite / Allianz</div>
+                <div class="fn-desc">Analisa o risco, subscreve e emite a apólice. Em caso de sinistro, paga o Segurado e cobra regressivamente o Tomador.</div>
+              </div>
+              <div class="flow-node">
+                <div class="fn-label">Segurado</div>
+                <div class="fn-title">Município</div>
+                <div class="fn-desc">Beneficiário da garantia. Exige a apólice como condição do contrato. Em caso de inadimplemento, aciona o seguro.</div>
+              </div>
+            </div>
+
+            <h3>Por que não é fiança nem caução?</h3>
+
+            <p>A diferença não é meramente terminológica. A fiança envolve um fiador pessoal — pessoa física ou jurídica que garante com seu patrimônio, e que pode opor o benefício de ordem (exigindo que o devedor principal seja executado primeiro). A caução é uma garantia real, como um depósito em dinheiro ou penhor de bens.</p>
+
+            <p>O Seguro Garantia é diferente: é um <strong>contrato autônomo de seguro</strong>, regulado pela SUSEP, emitido por uma seguradora autorizada, com base atuarial e capacidade de distribuição de risco via resseguro. O Segurado não precisa esgotar o patrimônio do Tomador antes de acionar a apólice — basta demonstrar o inadimplemento da obrigação garantida.</p>
+
+            <div class="callout">
+              <div class="callout-icon">⚑ Ponto de atenção</div>
+              <p>O Tomador que contrata o Seguro Garantia não extingue sua responsabilidade — ele apenas transfere o risco imediato ao Segurado. Após o sinistro, a Seguradora busca regresso integral contra o Tomador. Mais detalhes no artigo sobre Contragarantia (nº 11).</p>
+            </div>
+
+            <h3>Principais modalidades</h3>
+
+            <p>O produto se divide em ramos com regulamentação e dinâmicas distintas. As principais são: Seguro Garantia para o Setor Público (licitações e contratos administrativos), Seguro Garantia para o Setor Privado (contratos entre particulares), Seguro Garantia Judicial (substituição de depósitos em juízo) e Fiança Locatícia (locações residenciais e comerciais).</p>
+
+            <ul class="checklist">
+              <li>É um contrato de seguro — não se confunde com fiança ou caução</li>
+              <li>Envolve sempre três partes: Tomador, Seguradora e Segurado</li>
+              <li>Em caso de sinistro: a Seguradora paga o Segurado e cobra o Tomador</li>
+              <li>A SUSEP regula o produto por meio da Circular nº 662/2022</li>
+            </ul>
+
+            <div class="citation">
+              <strong>Fundamento normativo:</strong> Circular SUSEP nº 662/2022 · Lei nº 15.040/2024 (Marco Legal do Seguro) · CC/2002, arts. 757–802
+            </div>
+          </div>
+
+          <div class="article-nav">
+            <span></span>
+            <div style="text-align:right">
+              <span class="nav-label">Próximo</span>
+              <a href="#tomador">O Tomador →</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- ══════════════════════════════════════════
+             02 · TOMADOR
+        ══════════════════════════════════════════ -->
+        <article class="article" id="tomador">
+          <div class="article-header">
+            <div class="article-eyebrow">
+              <span class="article-num">02 / 11</span>
+              <span class="article-category">As partes</span>
+            </div>
+            <h2>O Tomador</h2>
+            <p class="article-lead">Quem contrata, quem paga — e por que não escapa quando o sinistro acontece.</p>
+          </div>
+
+          <div class="article-body">
+
+            <div class="def-box">
+              <div class="def-label">Definição regulatória</div>
+              <div class="def-text">O Tomador é a empresa ou pessoa que contrata o Seguro Garantia, paga o prêmio à Seguradora e é o devedor da obrigação principal perante o Segurado.</div>
+              <div class="def-source">Fonte: Circular SUSEP nº 662/2022</div>
+            </div>
+
+            <p>O Tomador ocupa uma posição dupla e muitas vezes mal compreendida: é simultaneamente o <strong>contratante do seguro</strong> (relação com a Seguradora) e o <strong>devedor principal da obrigação garantida</strong> (relação com o Segurado). Isso gera consequências práticas importantes.</p>
+
+            <h3>A dupla posição do Tomador</h3>
+
+            <p>Imagine que uma empreiteira vence uma licitação para construção de uma escola. O contrato exige garantia de 10% do valor. A empreiteira — o Tomador — vai até uma seguradora, passa pela análise de crédito, paga o prêmio e obtém a apólice. Ela é quem contrata e quem paga.</p>
+
+            <p>Mas ao mesmo tempo, é ela quem deve entregar a obra ao Município. Se ela não entregar, o Município aciona a apólice e a Seguradora paga. Após pagar, a Seguradora vai cobrar a empreiteira de volta. O <em>credor muda</em> — de Município para Seguradora — mas a <em>dívida permanece</em>.</p>
+
+            <div class="callout alert">
+              <div class="callout-icon">✕ Equívoco comum</div>
+              <p>Contratar o Seguro Garantia não extingue a responsabilidade do Tomador. É um erro frequente imaginar que, havendo apólice, o Tomador está "coberto". Ele está protegido apenas no primeiro momento — o pagamento ao Segurado. Depois disso, responde por regresso integral perante a Seguradora, acrescido de juros, correção monetária e custas processuais.</p>
+            </div>
+
+            <h3>Quem pode ser Tomador?</h3>
+
+            <p>Qualquer pessoa jurídica — ou, em alguns casos, pessoa física — que assuma obrigação contratual perante terceiro e precise garantir esse compromisso. Na prática, os tomadores mais frequentes são: construtoras e empreiteiras (contratos públicos e privados), empresas em processos licitatórios, fornecedores de bens e serviços, devedores em execuções judiciais (seguro garantia judicial) e locatários (fiança locatícia).</p>
+
+            <h3>Análise de crédito: o Tomador sob escrutínio</h3>
+
+            <p>Antes de emitir qualquer apólice, a Seguradora realiza análise de crédito do Tomador. Essa análise considera capacidade financeira, histórico de inadimplemento, exposição setorial e eventuais restrições cadastrais. O resultado da análise define se o risco é aceitável, qual a taxa aplicável e quais contragarantias serão exigidas.</p>
+
+            <ul class="checklist">
+              <li>Contrata o seguro e paga o prêmio à Seguradora</li>
+              <li>É o devedor da obrigação principal perante o Segurado</li>
+              <li>Após sinistro: o credor muda (passa a ser a Seguradora), a dívida não</li>
+              <li>Passa por análise de crédito antes da emissão da apólice</li>
+            </ul>
+
+            <div class="citation">
+              <strong>Fundamento normativo:</strong> Circular SUSEP nº 662/2022 · CC/2002, arts. 346–351 (sub-rogação legal)
+            </div>
+          </div>
+
+          <div class="article-nav">
+            <div>
+              <span class="nav-label">Anterior</span>
+              <a href="#seguro-garantia">← Seguro Garantia</a>
+            </div>
+            <div style="text-align:right">
+              <span class="nav-label">Próximo</span>
+              <a href="#segurado">O Segurado →</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- ══════════════════════════════════════════
+             03 · SEGURADO
+        ══════════════════════════════════════════ -->
+        <article class="article" id="segurado">
+          <div class="article-header">
+            <div class="article-eyebrow">
+              <span class="article-num">03 / 11</span>
+              <span class="article-category">As partes</span>
+            </div>
+            <h2>O Segurado</h2>
+            <p class="article-lead">O beneficiário da garantia — quem aciona o seguro e recebe a indenização.</p>
+          </div>
+
+          <div class="article-body">
+
+            <div class="def-box">
+              <div class="def-label">Definição regulatória</div>
+              <div class="def-text">O Segurado é o credor da obrigação assumida pelo Tomador. Em caso de inadimplemento, é quem notifica a Seguradora e tem direito ao recebimento da indenização prevista na apólice.</div>
+              <div class="def-source">Fonte: Circular SUSEP nº 662/2022</div>
+            </div>
+
+            <p>O Segurado ocupa a posição mais cômoda no triângulo do Seguro Garantia: <strong>não paga prêmio</strong>, mas é o <strong>primeiro a receber</strong> quando algo dá errado. Esse custo assimétrico — quem paga não é quem recebe — é uma das características mais distintivas do produto em relação a outras garantias.</p>
+
+            <h3>O Segurado não prova culpa — prova inadimplemento</h3>
+
+            <p>Um ponto frequentemente mal compreendido: para acionar o Seguro Garantia, o Segurado não precisa demonstrar que houve dolo ou culpa do Tomador. Basta demonstrar o <strong>inadimplemento da obrigação garantida</strong> — que a obra não foi entregue, que o serviço não foi prestado, que o pagamento não ocorreu, conforme descrito no objeto da apólice.</p>
+
+            <p>Isso aproxima o Seguro Garantia da lógica do seguro puro e o afasta da lógica fiduciária. A Seguradora analisa fatos, não intenções.</p>
+
+            <div class="callout">
+              <div class="callout-icon">⚑ Atenção ao prazo de notificação</div>
+              <p>As condições contratuais estabelecem prazo para o Segurado notificar a Seguradora após a ocorrência do sinistro. A inobservância desse prazo pode comprometer o direito à indenização. Leia sempre as Condições Particulares da apólice (artigo 10 desta série).</p>
+            </div>
+
+            <h3>Quem pode ser Segurado?</h3>
+
+            <p>Em contratos públicos: a Administração Pública (União, Estados, Municípios, autarquias, empresas públicas). Em contratos privados: pessoas jurídicas de direito privado que figurem como credores da obrigação garantida. No seguro judicial: o exequente ou a parte adversa na demanda. Na fiança locatícia: o locador.</p>
+
+            <h3>O fluxo de acionamento</h3>
+
+            <p>Quando a obrigação garantida não é cumprida, o Segurado deve: (1) identificar e documentar o inadimplemento; (2) notificar formalmente a Seguradora dentro do prazo contratual; (3) apresentar os documentos exigidos para regulação do sinistro; (4) aguardar o prazo de regulação e receber a indenização. Após o pagamento, a relação entre Segurado e Seguradora se encerra — a cobrança regressiva do Tomador é assunto exclusivo entre Seguradora e Tomador.</p>
+
+            <ul class="checklist">
+              <li>Credor da obrigação garantida na apólice</li>
+              <li>Não paga o prêmio — esse custo é exclusivo do Tomador</li>
+              <li>Aciona o seguro demonstrando o inadimplemento (não precisa provar culpa)</li>
+              <li>Deve observar o prazo de notificação previsto nas condições contratuais</li>
+            </ul>
+
+            <div class="citation">
+              <strong>Fundamento normativo:</strong> Circular SUSEP nº 662/2022 · Lei nº 8.666/1993 (contratos públicos) · Lei nº 14.133/2021 (Nova Lei de Licitações)
+            </div>
+          </div>
+
+          <div class="article-nav">
+            <div>
+              <span class="nav-label">Anterior</span>
+              <a href="#tomador">← O Tomador</a>
+            </div>
+            <div style="text-align:right">
+              <span class="nav-label">Próximo</span>
+              <a href="#seguradora">A Seguradora →</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- ══════════════════════════════════════════
+             04 · SEGURADORA
+        ══════════════════════════════════════════ -->
+        <article class="article" id="seguradora">
+          <div class="article-header">
+            <div class="article-eyebrow">
+              <span class="article-num">04 / 11</span>
+              <span class="article-category">As partes</span>
+            </div>
+            <h2>A Seguradora</h2>
+            <p class="article-lead">Quem analisa o risco, emite a apólice e garante o cumprimento da obrigação.</p>
+          </div>
+
+          <div class="article-body">
+
+            <div class="def-box">
+              <div class="def-label">Definição regulatória</div>
+              <div class="def-text">A Seguradora é a empresa autorizada pela SUSEP a emitir apólices de Seguro Garantia. Analisa o risco de crédito do Tomador, define as condições contratuais e, em caso de sinistro, paga a indenização ao Segurado, buscando ressarcimento posterior do Tomador via sub-rogação.</div>
+              <div class="def-source">Fonte: Circular SUSEP nº 662/2022 · Lei nº 15.040/2024</div>
+            </div>
+
+            <p>A Seguradora não é um intermediário passivo. Ela é o <strong>elo central e ativo</strong> do produto: analisa, decide, precifica, emite e, em caso de sinistro, regula e paga. Esse protagonismo é o que diferencia o Seguro Garantia de outras formas de garantia — e é o que justifica a exigência de autorização regulatória da SUSEP.</p>
+
+            <h3>Autorização e regulação</h3>
+
+            <p>Apenas empresas expressamente autorizadas pela Superintendência de Seguros Privados (SUSEP) podem operar Seguro Garantia no Brasil. A autorização é específica por ramo — uma seguradora autorizada para seguros de vida, por exemplo, não pode emitir apólices de Seguro Garantia sem autorização específica. A Circular SUSEP nº 662/2022 é o principal normativo que disciplina as condições de operação.</p>
+
+            <h3>O processo de subscrição</h3>
+
+            <p>A subscrição é o coração do negócio de Seguro Garantia. O underwriter analisa o risco de crédito do Tomador (capacidade financeira de cumprir a obrigação garantida), o risco técnico da obrigação (natureza, prazo, complexidade) e a adequação das contragarantias propostas. Com base nessa análise, define taxa, importância segurada máxima e condições da apólice — ou nega a cobertura.</p>
+
+            <div class="callout">
+              <div class="callout-icon">⚑ Sub-rogação legal</div>
+              <p>Após pagar o sinistro, a Seguradora sub-roga-se automaticamente nos direitos do Segurado contra o Tomador (CC/2002, art. 349). Isso significa que ela pode cobrar do Tomador tudo que pagou, com juros e correção — independentemente de previsão expressa na apólice.</p>
+            </div>
+
+            <h3>Resseguro: distribuindo o risco</h3>
+
+            <p>Grandes apólices envolvem volumes que excedem a capacidade de retenção de uma única seguradora. Por isso, parte do risco é cedida a resseguradores (empresas que seguram as seguradoras). O resseguro permite que o mercado de Seguro Garantia funcione em escala — garantindo contratos de centenas de milhões de reais com solidez financeira.</p>
+
+            <ul class="checklist">
+              <li>Autorizada pela SUSEP — a operação sem autorização é ilícita</li>
+              <li>Analisa o risco do Tomador antes de emitir qualquer apólice</li>
+              <li>Paga o sinistro ao Segurado e busca ressarcimento do Tomador por sub-rogação</li>
+              <li>Pode ceder risco a resseguradores para garantias de maior vulto</li>
+            </ul>
+
+            <div class="citation">
+              <strong>Fundamento normativo:</strong> Circular SUSEP nº 662/2022 · Lei nº 15.040/2024 · CC/2002, art. 349 · Resolução CNSP nº 432/2021
+            </div>
+          </div>
+
+          <div class="article-nav">
+            <div>
+              <span class="nav-label">Anterior</span>
+              <a href="#segurado">← O Segurado</a>
+            </div>
+            <div style="text-align:right">
+              <span class="nav-label">Próximo</span>
+              <a href="#objeto-segurado">O Objeto Segurado →</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- ══════════════════════════════════════════
+             05 · OBJETO SEGURADO
+        ══════════════════════════════════════════ -->
+        <article class="article" id="objeto-segurado">
+          <div class="article-header">
+            <div class="article-eyebrow">
+              <span class="article-num">05 / 11</span>
+              <span class="article-category">A apólice</span>
+            </div>
+            <h2>O Objeto Segurado</h2>
+            <p class="article-lead">O que exatamente está coberto pela apólice — e por que isso importa.</p>
+          </div>
+
+          <div class="article-body">
+
+            <div class="def-box">
+              <div class="def-label">Definição regulatória</div>
+              <div class="def-text">O Objeto Segurado é a obrigação específica que o Tomador assumiu e que a Seguradora garante. Define o perímetro exato da cobertura: o que, quanto, como e até quando deve ser cumprido.</div>
+              <div class="def-source">Fonte: Circular SUSEP nº 662/2022</div>
+            </div>
+
+            <p>O Objeto Segurado é a <strong>espinha dorsal técnica da apólice</strong>. É ele que determina o que está coberto — e, por exclusão, o que não está. Um objeto mal descrito é a principal causa de disputas na liquidação de sinistros: a Seguradora alega que o inadimplemento não está dentro do escopo garantido; o Segurado alega que está.</p>
+
+            <p>Pense no Objeto Segurado como a planta de uma construção: delimita exatamente o que foi construído e o que está dentro dos limites do projeto. Qualquer coisa fora do perímetro não está coberta.</p>
+
+            <h3>O que deve constar no Objeto</h3>
+
+            <p>Para que o Objeto Segurado cumpra sua função, ele deve ser suficientemente específico. Os elementos mínimos recomendados são: identificação do contrato base (número, data, partes); descrição precisa da obrigação garantida (execução de obra, prestação de serviço, pagamento de verba etc.); valor da obrigação ou critério de apuração; prazo de execução ou data limite.</p>
+
+            <div class="callout alert">
+              <div class="callout-icon">✕ Risco de objeto genérico</div>
+              <p>Apólices que descrevem o objeto de forma vaga — como "garantir as obrigações do Tomador perante o Segurado" — geram insegurança jurídica. Em caso de sinistro, a ausência de precisão favorece impugnações. Sempre exija (e verifique) descrição detalhada do objeto.</p>
+            </div>
+
+            <h3>Objeto e sinistro: a relação de cobertura</h3>
+
+            <p>Somente o inadimplemento de uma obrigação descrita no Objeto Segurado gera direito à indenização. Se a apólice garante "a execução da pavimentação conforme contrato nº X" e o Tomador atrasa a entrega sem abandonar a obra, pode não haver enquadramento de sinistro — dependendo de como o inadimplemento for caracterizado e do que as condições contratuais estabelecerem.</p>
+
+            <p>Por isso, tanto o Segurado (ao exigir a apólice) quanto o Tomador (ao contratá-la) devem ler o Objeto com atenção antes de qualquer assinatura.</p>
+
+            <ul class="checklist">
+              <li>É a obrigação específica que a apólice garante — perímetro exato da cobertura</li>
+              <li>Deve identificar: contrato, obrigação, valor e prazo</li>
+              <li>Sinistros fora do objeto descrito não têm cobertura</li>
+              <li>Objeto impreciso é a principal causa de disputas na regulação de sinistros</li>
+            </ul>
+
+            <div class="citation">
+              <strong>Fundamento normativo:</strong> Circular SUSEP nº 662/2022 · CC/2002, arts. 757 e 760
+            </div>
+          </div>
+
+          <div class="article-nav">
+            <div>
+              <span class="nav-label">Anterior</span>
+              <a href="#seguradora">← A Seguradora</a>
+            </div>
+            <div style="text-align:right">
+              <span class="nav-label">Próximo</span>
+              <a href="#importancia-segurada">A Importância Segurada →</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- ══════════════════════════════════════════
+             06 · IMPORTÂNCIA SEGURADA
+        ══════════════════════════════════════════ -->
+        <article class="article" id="importancia-segurada">
+          <div class="article-header">
+            <div class="article-eyebrow">
+              <span class="article-num">06 / 11</span>
+              <span class="article-category">A apólice</span>
+            </div>
+            <h2>Importância Segurada</h2>
+            <p class="article-lead">O teto da garantia — o valor máximo que a Seguradora pagará.</p>
+          </div>
+
+          <div class="article-body">
+
+            <div class="def-box">
+              <div class="def-label">Definição regulatória</div>
+              <div class="def-text">A Importância Segurada (IS) é o valor máximo de indenização que a Seguradora pode pagar ao Segurado em caso de sinistro. Pode corresponder a 100% do valor do contrato base ou a um percentual menor, conforme acordado entre as partes.</div>
+              <div class="def-source">Fonte: Circular SUSEP nº 662/2022</div>
+            </div>
+
+            <p>A Importância Segurada é o <strong>teto financeiro da garantia</strong>. Não é o prêmio (que é o custo do seguro), não é o valor do contrato base (que pode ser muito maior) — é o limite máximo que a Seguradora se obriga a pagar em caso de inadimplemento do Tomador.</p>
+
+            <h3>Como a IS é definida</h3>
+
+            <p>A IS pode ser fixada em qualquer percentual do valor do contrato base, dependendo do que for negociado entre Tomador, Segurado e Seguradora. Na prática, contratos públicos frequentemente exigem IS equivalente a 5%, 10% ou 30% do valor do ajuste. Contratos privados e instrumentos financeiros podem demandar IS de até 100%.</p>
+
+            <table class="summary-table">
+              <thead>
+                <tr>
+                  <th>Cenário</th>
+                  <th>Valor do contrato</th>
+                  <th>IS (30%)</th>
+                  <th>Sinistro real</th>
+                  <th>Pago pela Seguradora</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>IS cobre o sinistro</td>
+                  <td>R$ 10M</td>
+                  <td>R$ 3M</td>
+                  <td>R$ 2M</td>
+                  <td>R$ 2M (total)</td>
+                </tr>
+                <tr>
+                  <td>Sinistro excede a IS</td>
+                  <td>R$ 10M</td>
+                  <td>R$ 3M</td>
+                  <td>R$ 5M</td>
+                  <td>R$ 3M (saldo: Tomador)</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3>IS alta ou IS baixa?</h3>
+
+            <p>Não há resposta única. IS mais alta oferece mais proteção ao Segurado — mas gera prêmio mais elevado para o Tomador, pois o cálculo é: <code>Taxa × IS × Prazo = Prêmio</code>. IS mais baixa reduz o custo do seguro, mas limita a cobertura. O equilíbrio é negociado caso a caso, considerando o perfil do contrato e a exigência do Segurado.</p>
+
+            <div class="callout">
+              <div class="callout-icon">⚑ Atenção ao saldo descoberto</div>
+              <p>Se o prejuízo real superar a IS, o saldo não coberto pelo seguro não desaparece — ele é cobrado do Tomador diretamente pelo Segurado (ou, em ação regressiva, pela Seguradora). A IS limita o que a Seguradora paga, não o que o Tomador deve.</p>
+            </div>
+
+            <ul class="checklist">
+              <li>Valor máximo que a Seguradora pagará em caso de sinistro</li>
+              <li>Pode ser 100% do contrato ou percentual menor, conforme negociação</li>
+              <li>Base de cálculo do prêmio: Taxa × IS × Prazo</li>
+              <li>Prejuízo acima da IS não é coberto pelo seguro — é cobrado do Tomador</li>
+            </ul>
+
+            <div class="citation">
+              <strong>Fundamento normativo:</strong> Circular SUSEP nº 662/2022 · Lei nº 14.133/2021, art. 96 (garantias em contratos públicos)
+            </div>
+          </div>
+
+          <div class="article-nav">
+            <div>
+              <span class="nav-label">Anterior</span>
+              <a href="#objeto-segurado">← O Objeto Segurado</a>
+            </div>
+            <div style="text-align:right">
+              <span class="nav-label">Próximo</span>
+              <a href="#vigencia">A Vigência →</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- ══════════════════════════════════════════
+             07 · VIGÊNCIA
+        ══════════════════════════════════════════ -->
+        <article class="article" id="vigencia">
+          <div class="article-header">
+            <div class="article-eyebrow">
+              <span class="article-num">07 / 11</span>
+              <span class="article-category">A apólice</span>
+            </div>
+            <h2>Vigência</h2>
+            <p class="article-lead">O período de validade da apólice — fora dele, não há cobertura.</p>
+          </div>
+
+          <div class="article-body">
+
+            <div class="def-box">
+              <div class="def-label">Definição regulatória</div>
+              <div class="def-text">A Vigência é o período de validade da apólice de Seguro Garantia, compreendido entre a data de início e a data de término da cobertura. Fora desse intervalo, o seguro não produz efeitos.</div>
+              <div class="def-source">Fonte: Circular SUSEP nº 662/2022</div>
+            </div>
+
+            <p>A vigência é o <strong>relógio da apólice</strong>. Antes do início: não há cobertura. Após o vencimento: não há cobertura. Dentro do período: o sinistro notificado tempestivamente gera direito à indenização. Simples — mas com consequências graves quando mal gerenciada.</p>
+
+            <h3>Vigência deve espelhar a obrigação garantida</h3>
+
+            <p>A regra fundamental é que a vigência da apólice deve ser suficiente para cobrir toda a duração da obrigação garantida. Se o contrato de obra prevê 18 meses de execução mais 6 meses de garantia pós-entrega, a apólice deve ter pelo menos 24 meses de vigência.</p>
+
+            <p>O problema ocorre quando o contrato base é prorrogado mas a apólice não acompanha. O resultado é um hiato de cobertura: o Tomador continua devedor da obrigação, mas o Segurado está desprotegido.</p>
+
+            <div class="callout alert">
+              <div class="callout-icon">✕ Armadilha frequente</div>
+              <p>Sinistro notificado após o vencimento da apólice <strong>não tem cobertura</strong> — mesmo que o inadimplemento tenha ocorrido durante a vigência. A Circular SUSEP nº 662/2022 é expressa: o acionamento deve ocorrer dentro do período de cobertura ou no prazo estabelecido nas condições contratuais. Sempre verifique a data de vencimento antes de notificar.</p>
+            </div>
+
+            <h3>Prorrogação de vigência</h3>
+
+            <p>Em contratos públicos sujeitos à Lei nº 14.133/2021, a prorrogação do contrato administrativo exige a correspondente prorrogação das garantias. A omissão do gestor público nesse ponto pode gerar responsabilidade funcional. Para o Tomador, a prorrogação da apólice significa negociação com a Seguradora — que pode exigir novo prêmio e reavaliação das condições.</p>
+
+            <ul class="checklist">
+              <li>Período de validade da apólice: do início ao fim da cobertura</li>
+              <li>Deve acompanhar a duração real da obrigação garantida</li>
+              <li>Prorrogação do contrato base exige prorrogação da apólice</li>
+              <li>Sinistro notificado após o vencimento não tem cobertura</li>
+            </ul>
+
+            <div class="citation">
+              <strong>Fundamento normativo:</strong> Circular SUSEP nº 662/2022 · Lei nº 14.133/2021, arts. 106–107
+            </div>
+          </div>
+
+          <div class="article-nav">
+            <div>
+              <span class="nav-label">Anterior</span>
+              <a href="#importancia-segurada">← Importância Segurada</a>
+            </div>
+            <div style="text-align:right">
+              <span class="nav-label">Próximo</span>
+              <a href="#premio">O Prêmio →</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- ══════════════════════════════════════════
+             08 · PRÊMIO
+        ══════════════════════════════════════════ -->
+        <article class="article" id="premio">
+          <div class="article-header">
+            <div class="article-eyebrow">
+              <span class="article-num">08 / 11</span>
+              <span class="article-category">A apólice</span>
+            </div>
+            <h2>O Prêmio</h2>
+            <p class="article-lead">O custo do seguro para o Tomador — e como ele é calculado.</p>
+          </div>
+
+          <div class="article-body">
+
+            <div class="def-box">
+              <div class="def-label">Definição regulatória</div>
+              <div class="def-text">O Prêmio é o valor pago pelo Tomador à Seguradora como contraprestação pela emissão da apólice de Seguro Garantia. É calculado com base na taxa de subscrição, na Importância Segurada e no prazo de vigência.</div>
+              <div class="def-source">Fonte: Circular SUSEP nº 662/2022</div>
+            </div>
+
+            <p>O prêmio é o <strong>preço da garantia</strong> — e apenas o Tomador o paga. O Segurado recebe a proteção sem desembolsar nada; a Seguradora recebe o prêmio em troca de assumir o risco. Essa assimetria de custo é uma das características mais valorizadas do produto em negociações contratuais.</p>
+
+            <h3>A fórmula do prêmio</h3>
+
+            <p>O cálculo básico é direto:</p>
+
+            <div class="def-box">
+              <div class="def-label">Fórmula de cálculo</div>
+              <div class="def-text" style="font-style:normal;font-family:var(--mono);letter-spacing:0.06em">Prêmio = Taxa (% a.a.) × IS × (Prazo em meses / 12) + IOF</div>
+              <div class="def-source">Exemplo: Taxa 1,5% a.a. · IS R$ 1.000.000 · 12 meses → Prêmio = R$ 15.000 + IOF</div>
+            </div>
+
+            <p>A taxa é o elemento mais variável da equação — e reflete diretamente o resultado da análise de crédito do Tomador. Um tomador com excelente histórico, balanços sólidos e setor de baixo risco pagará taxa menor que um tomador com restrições ou em setor mais volátil.</p>
+
+            <h3>O que compõe a taxa</h3>
+
+            <p>A taxa de subscrição considera: probabilidade de inadimplemento do Tomador (risco de crédito), natureza e complexidade da obrigação garantida (risco técnico), prazo da vigência (risco temporal), histórico do Tomador com a Seguradora, e presença e qualidade das contragarantias. O resultado é uma taxa anualizada, aplicada sobre a IS pelo período de cobertura.</p>
+
+            <h3>IOF sobre o prêmio</h3>
+
+            <p>Além do prêmio comercial, incide o Imposto sobre Operações Financeiras (IOF). A alíquota para Seguro Garantia é definida pela legislação tributária vigente e incide sobre o prêmio total. O IOF é cobrado junto com o prêmio no ato da emissão da apólice.</p>
+
+            <div class="callout">
+              <div class="callout-icon">⚑ Prêmio não é restituível</div>
+              <p>O prêmio pago não é devolvido em caso de sinistro. Ele é a remuneração da Seguradora pelo risco assumido durante toda a vigência — independentemente de haver ou não sinistro. A ocorrência do sinistro não dá direito ao Tomador de receber o prêmio de volta.</p>
+            </div>
+
+            <ul class="checklist">
+              <li>Pago exclusivamente pelo Tomador — o Segurado não arca com nenhum custo</li>
+              <li>Calculado: Taxa × IS × (Prazo / 12) + IOF</li>
+              <li>A taxa reflete o resultado da análise de crédito do Tomador</li>
+              <li>Não é restituível em caso de sinistro</li>
+            </ul>
+
+            <div class="citation">
+              <strong>Fundamento normativo:</strong> Circular SUSEP nº 662/2022 · Lei nº 8.383/1991 (IOF) · Decreto nº 6.306/2007 (Regulamento do IOF)
+            </div>
+          </div>
+
+          <div class="article-nav">
+            <div>
+              <span class="nav-label">Anterior</span>
+              <a href="#vigencia">← A Vigência</a>
+            </div>
+            <div style="text-align:right">
+              <span class="nav-label">Próximo</span>
+              <a href="#frontispicio">O Frontispício →</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- ══════════════════════════════════════════
+             09 · FRONTISPÍCIO
+        ══════════════════════════════════════════ -->
+        <article class="article" id="frontispicio">
+          <div class="article-header">
+            <div class="article-eyebrow">
+              <span class="article-num">09 / 11</span>
+              <span class="article-category">A apólice</span>
+            </div>
+            <h2>O Frontispício</h2>
+            <p class="article-lead">A página de rosto da apólice — onde estão todos os dados essenciais do seguro.</p>
+          </div>
+
+          <div class="article-body">
+
+            <div class="def-box">
+              <div class="def-label">Definição técnica</div>
+              <div class="def-text">O Frontispício é a página de rosto da apólice de Seguro Garantia. Concentra, de forma sintética, todos os dados essenciais do contrato: partes, objeto, Importância Segurada, prêmio e vigência.</div>
+              <div class="def-source">Fonte: Circular SUSEP nº 662/2022</div>
+            </div>
+
+            <p>O Frontispício é o <strong>sumário executivo da apólice</strong>. Em uma única página — às vezes menos — ele concentra tudo que qualquer profissional precisa saber antes de aprofundar a análise: quem é quem, o que está garantido, quanto, e até quando.</p>
+
+            <p>Se a apólice fosse um processo judicial, o Frontispício seria a folha de rosto do processo — com as partes, o número, a natureza da ação e o juízo. Ele não substitui os demais documentos, mas é o ponto de partida obrigatório de qualquer análise.</p>
+
+            <h3>O que consta no Frontispício</h3>
+
+            <table class="summary-table">
+              <thead>
+                <tr>
+                  <th>Campo</th>
+                  <th>O que deve conter</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Tomador</td>
+                  <td>Razão social, CNPJ e endereço</td>
+                </tr>
+                <tr>
+                  <td>Segurado</td>
+                  <td>Razão social, CNPJ e endereço</td>
+                </tr>
+                <tr>
+                  <td>Objeto Segurado</td>
+                  <td>Descrição da obrigação garantida e referência ao contrato base</td>
+                </tr>
+                <tr>
+                  <td>Importância Segurada</td>
+                  <td>Valor máximo da indenização (em R$)</td>
+                </tr>
+                <tr>
+                  <td>Prêmio</td>
+                  <td>Valor pago pelo Tomador, com discriminação do IOF</td>
+                </tr>
+                <tr>
+                  <td>Vigência</td>
+                  <td>Data de início e data de término da cobertura</td>
+                </tr>
+                <tr>
+                  <td>Número da apólice</td>
+                  <td>Identificador único emitido pela Seguradora</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3>Frontispício errado: consequências</h3>
+
+            <p>Se os dados do Frontispício contiverem erros — CNPJ incorreto, vigência equivocada, IS divergente do contratado — toda a apólice pode ser questionada. Em ação judicial, o advogado que analisa a apólice começa pelo Frontispício. Em sinistro, o regulador da seguradora também.</p>
+
+            <div class="callout alert">
+              <div class="callout-icon">✕ Não assine sem conferir</div>
+              <p>Tanto o Tomador quanto o Segurado devem conferir o Frontispício antes de aceitar a apólice. Erros tipográficos em CNPJ, datas de vigência incorretas ou IS divergente do contratado são mais comuns do que parecem — e podem inviabilizar o acionamento do seguro.</p>
+            </div>
+
+            <ul class="checklist">
+              <li>Página de rosto da apólice com todos os dados essenciais</li>
+              <li>Identifica partes, objeto, IS, prêmio e vigência em um único lugar</li>
+              <li>Primeiro documento a conferir em qualquer análise, sinistro ou ação judicial</li>
+              <li>Erros no Frontispício comprometem a validade e o acionamento da apólice</li>
+            </ul>
+
+            <div class="citation">
+              <strong>Fundamento normativo:</strong> Circular SUSEP nº 662/2022 · CNSP Resolução nº 432/2021
+            </div>
+          </div>
+
+          <div class="article-nav">
+            <div>
+              <span class="nav-label">Anterior</span>
+              <a href="#premio">← O Prêmio</a>
+            </div>
+            <div style="text-align:right">
+              <span class="nav-label">Próximo</span>
+              <a href="#condicoes-contratuais">Condições Contratuais →</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- ══════════════════════════════════════════
+             10 · CONDIÇÕES CONTRATUAIS
+        ══════════════════════════════════════════ -->
+        <article class="article" id="condicoes-contratuais">
+          <div class="article-header">
+            <div class="article-eyebrow">
+              <span class="article-num">10 / 11</span>
+              <span class="article-category">A apólice</span>
+            </div>
+            <h2>Condições Contratuais</h2>
+            <p class="article-lead">As regras do jogo — Gerais, Especiais e Particulares.</p>
+          </div>
+
+          <div class="article-body">
+
+            <div class="def-box">
+              <div class="def-label">Definição técnica</div>
+              <div class="def-text">As Condições Contratuais são as cláusulas que regem direitos e obrigações das partes na apólice de Seguro Garantia. Dividem-se em três camadas hierárquicas: Gerais, Especiais e Particulares.</div>
+              <div class="def-source">Fonte: Circular SUSEP nº 662/2022</div>
+            </div>
+
+            <p>Se o Frontispício é o sumário executivo da apólice, as Condições Contratuais são o <strong>contrato em si</strong>. É nelas que estão as regras reais: o que a Seguradora garante, o que está excluído, como acionar o sinistro, em que prazo, com quais documentos, e o que acontece em caso de divergência.</p>
+
+            <h3>As três camadas e sua hierarquia</h3>
+
+            <div class="flow">
+              <div class="flow-node">
+                <div class="fn-label">Mais genérico</div>
+                <div class="fn-title">Condições Gerais</div>
+                <div class="fn-desc">Regras aplicáveis a todos os contratos de Seguro Garantia. Aprovadas pela SUSEP. Base do produto.</div>
+              </div>
+              <div class="flow-node">
+                <div class="fn-label">Adaptadas ao ramo</div>
+                <div class="fn-title">Condições Especiais</div>
+                <div class="fn-desc">Adaptam as regras gerais ao tipo específico de garantia: setor público, privado, judicial ou fiança locatícia.</div>
+              </div>
+              <div class="flow-node">
+                <div class="fn-label">Mais específico</div>
+                <div class="fn-title">Condições Particulares</div>
+                <div class="fn-desc">Cláusulas negociadas para aquela apólice específica. Prevalecem sobre as demais em caso de conflito.</div>
+              </div>
+            </div>
+
+            <h3>A regra de prevalência</h3>
+
+            <p>Em caso de conflito entre as camadas, a regra é clara: <strong>Particulares prevalecem sobre Especiais, que prevalecem sobre Gerais</strong>. Leia sempre na ordem inversa — do mais específico para o mais genérico — para entender quais regras efetivamente se aplicam àquela apólice.</p>
+
+            <p>Exemplo prático: se as Condições Gerais estabelecem prazo de 30 dias para notificação de sinistro, mas uma Condição Particular amplia esse prazo para 60 dias, prevalece o prazo de 60 dias.</p>
+
+            <div class="callout">
+              <div class="callout-icon">⚑ Cláusulas de exclusão</div>
+              <p>As exclusões de cobertura constam principalmente nas Condições Gerais e Especiais. São situações nas quais a Seguradora está desobrigada de pagar — mesmo que haja inadimplemento. Leia as exclusões antes de acionar o sinistro.</p>
+            </div>
+
+            <h3>Condições Gerais e a aprovação da SUSEP</h3>
+
+            <p>As Condições Gerais de cada seguradora precisam ser aprovadas pela SUSEP antes de entrar em vigor. Isso garante conformidade regulatória mínima e protege os segurados de cláusulas abusivas. As Condições Especiais e Particulares têm maior flexibilidade, mas não podem contrariar disposições regulatórias cogentes.</p>
+
+            <ul class="checklist">
+              <li>Três camadas: Gerais (base), Especiais (ramo) e Particulares (apólice específica)</li>
+              <li>Particulares prevalecem sobre Especiais, que prevalecem sobre Gerais</li>
+              <li>Leia sempre do específico para o geral antes de qualquer acionamento</li>
+              <li>As exclusões de cobertura costumam estar nas Condições Gerais e Especiais</li>
+            </ul>
+
+            <div class="citation">
+              <strong>Fundamento normativo:</strong> Circular SUSEP nº 662/2022 · Resolução CNSP nº 432/2021 · CDC, art. 54 (contratos de adesão)
+            </div>
+          </div>
+
+          <div class="article-nav">
+            <div>
+              <span class="nav-label">Anterior</span>
+              <a href="#frontispicio">← O Frontispício</a>
+            </div>
+            <div style="text-align:right">
+              <span class="nav-label">Próximo</span>
+              <a href="#contragarantia">A Contragarantia →</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- ══════════════════════════════════════════
+             11 · CONTRAGARANTIA
+        ══════════════════════════════════════════ -->
+        <article class="article" id="contragarantia">
+          <div class="article-header">
+            <div class="article-eyebrow">
+              <span class="article-num">11 / 11</span>
+              <span class="article-category">Além da apólice</span>
+            </div>
+            <h2>Contrato de Contragarantia</h2>
+            <p class="article-lead">O instrumento que assegura o regresso — e por que o Tomador nunca sai impune.</p>
+          </div>
+
+          <div class="article-body">
+
+            <div class="def-box">
+              <div class="def-label">Definição técnica</div>
+              <div class="def-text">A Contragarantia (ou CCG — Contrato de Contragarantia) é o instrumento firmado entre a Seguradora e o Tomador pelo qual este oferece garantias reais ou pessoais para assegurar o ressarcimento da Seguradora em caso de sinistro. Ela instrumentaliza o direito de regresso da Seguradora após o pagamento da indenização ao Segurado.</div>
+              <div class="def-source">Fonte: Circular SUSEP nº 662/2022 · CC/2002</div>
+            </div>
+
+            <p>A Contragarantia é o <strong>documento que fecha o ciclo de responsabilidades</strong> do Seguro Garantia. Quando a Seguradora paga o sinistro ao Segurado, ela precisa ter meios concretos de recuperar esse valor junto ao Tomador. É para isso que existe o CCG — ele é o "seguro da Seguradora".</p>
+
+            <p>Pense assim: o Tomador tem uma dívida com o Segurado (a obrigação garantida). A Seguradora paga essa dívida por ele. Agora o Tomador tem uma dívida com a Seguradora. A Contragarantia é o instrumento que garante que essa segunda dívida será paga — mesmo que o Tomador não queira.</p>
+
+            <h3>Formas de contragarantia</h3>
+
+            <table class="summary-table">
+              <thead>
+                <tr>
+                  <th>Tipo</th>
+                  <th>Exemplos</th>
+                  <th>Natureza</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Garantia real</td>
+                  <td>Hipoteca de imóvel, alienação fiduciária de bem, penhor de créditos</td>
+                  <td>Recai sobre bem específico; preferência na execução</td>
+                </tr>
+                <tr>
+                  <td>Garantia pessoal</td>
+                  <td>Aval dos sócios, fiança de terceiros, nota promissória</td>
+                  <td>Compromete o patrimônio pessoal do avalista/fiador</td>
+                </tr>
+                <tr>
+                  <td>Mista</td>
+                  <td>Combinação de real e pessoal</td>
+                  <td>Maior robustez; preferida em exposições maiores</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3>CCG e sub-rogação: a mecânica do regresso</h3>
+
+            <p>Após pagar o sinistro, a Seguradora sub-roga-se legalmente nos direitos do Segurado contra o Tomador (CC/2002, art. 349). Isso ocorre de pleno direito, sem necessidade de cessão expressa. Mas a sub-rogação legal apenas concede o direito de cobrar — o CCG é que fornece os instrumentos concretos de execução (hipoteca registrada, aval com força de título executivo, etc.).</p>
+
+            <div class="callout alert">
+              <div class="callout-icon">✕ CCG mal estruturado = risco não mitigado</div>
+              <p>Contragarantias insuficientes, mal formalizadas ou constituídas sobre bens de baixo valor de mercado comprometem a capacidade de a Seguradora recuperar o sinistro pago. A análise do CCG é parte integrante do processo de subscrição — não é formalidade.</p>
+            </div>
+
+            <h3>O CCG na prática da subscrição</h3>
+
+            <p>Para a Seguradora, o CCG é tão importante quanto a análise financeira do Tomador. Uma empresa com boa capacidade econômica mas sem bens disponíveis para oferecer em contragarantia pode ter sua proposta negada — ou aceita apenas com aval pessoal dos sócios. A qualidade do CCG influencia diretamente a taxa de prêmio e os limites de crédito disponíveis ao Tomador.</p>
+
+            <ul class="checklist">
+              <li>Contrato separado da apólice, firmado entre Seguradora e Tomador</li>
+              <li>Pode envolver garantias reais (imóvel, veículo) e/ou pessoais (aval, fiança)</li>
+              <li>Instrumentaliza o regresso após o pagamento do sinistro</li>
+              <li>Sua qualidade influencia a taxa de prêmio e os limites de crédito do Tomador</li>
+              <li>Analisado como parte integrante do processo de subscrição</li>
+            </ul>
+
+            <div class="citation">
+              <strong>Fundamento normativo:</strong> Circular SUSEP nº 662/2022 · CC/2002, arts. 346–351 (sub-rogação) · CC/2002, arts. 1.419–1.510 (direitos reais de garantia) · CC/2002, art. 818 (fiança)
+            </div>
+          </div>
+
+          <div class="article-nav">
+            <div>
+              <span class="nav-label">Anterior</span>
+              <a href="#condicoes-contratuais">← Condições Contratuais</a>
+            </div>
+            <div style="text-align:right">
+              <span class="nav-label" style="color:var(--ink-soft)">Série completa</span>
+              <a href="#seguro-garantia">↑ Voltar ao início</a>
+            </div>
+          </div>
+        </article>
+
+      </div><!-- /articles -->
+
+      <!-- FOOTER -->
+      <footer class="site-footer">
+        <div class="footer-brand">SGF · Seguro Garantia Fácil</div>
+        <div class="footer-copy">segurogarantiafacil.com · Série Glossário · Todos os direitos reservados</div>
+      </footer>
+
+    </main>
+  </div><!-- /layout -->
+
+  <script>
+    // ─── Active sidebar link on scroll ───────────────────
+    const articles = document.querySelectorAll('.article[id]');
+    const navLinks  = document.querySelectorAll('#sidebar-nav a');
+
+    function setActive() {
+      let current = '';
+      articles.forEach(a => {
+        if (window.scrollY >= a.offsetTop - 100) current = a.id;
+      });
+      navLinks.forEach(l => {
+        l.classList.toggle('active', l.getAttribute('href') === '#' + current);
+      });
+    }
+
+    window.addEventListener('scroll', setActive, { passive: true });
+    setActive();
+  </script>
+</body>
+</html>
