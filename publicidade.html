@@ -3,215 +3,688 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>SGF · Post Divulgação · Série Glossário</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <title>SGF · Calculadoras · Carrossel 4 slides</title>
   <style>
+    :root {
+      --ivory:      #FAF7F2;
+      --ivory2:     #EDE5D8;
+      --ivory3:     #D6C9B8;
+      --ink:        #1C1712;
+      --ink-mid:    #3D342A;
+      --ink-soft:   #6B5C50;
+      --terra:      #C05A35;
+      --terra-dark: #9A3E20;
+      --amber:      #C4900A;
+      --serif:      Georgia, "Times New Roman", serif;
+      --mono:       "Courier New", Courier, monospace;
+    }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      background: #2a2118;
+      background: #111;
+      font-family: var(--serif);
+      padding: 48px 32px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      padding: 48px 24px;
-      gap: 16px;
+      gap: 6px;
     }
-    .hint {
-      font-family: 'Courier New', monospace;
-      font-size: 10px;
-      letter-spacing: 0.2em;
+    .deck-label {
+      color: rgba(250,247,242,0.25);
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.20em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.2);
+      margin-bottom: 36px;
     }
-    .post-wrap {
-      width: min(1080px, 92vw);
-      aspect-ratio: 1;
+    .deck {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      align-items: center;
     }
+    .slide {
+      width: 1080px;
+      height: 1080px;
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+      border-radius: 6px;
+    }
+
+```
+/* ── SHARED ── */
+.top-bar {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 6px;
+  background: linear-gradient(90deg, var(--terra) 0%, var(--amber) 100%);
+  z-index: 10;
+}
+.sgf-logo {
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.slide-counter {
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  opacity: 0.30;
+}
+.nav-dots {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.dot {
+  height: 5px;
+  border-radius: 999px;
+  background: rgba(192,90,53,0.25);
+  width: 28px;
+}
+.dot.active {
+  background: var(--terra);
+  width: 52px;
+}
+.series-chip {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 7px 18px;
+  border-radius: 999px;
+}
+
+/* ══════════════════════════════════════
+   SLIDE 1 — CAPA / ANÚNCIO
+══════════════════════════════════════ */
+.s1 { background: var(--ink); }
+
+.s1 .nav-row {
+  position: absolute;
+  top: 36px;
+  left: 64px; right: 64px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.s1 .sgf-logo { color: var(--ivory); }
+.s1 .slide-counter { color: var(--ivory); }
+
+/* Background rings */
+.s1 .bg-rings {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -60%);
+  pointer-events: none;
+}
+
+/* Shield logo */
+.s1 .logo-wrap {
+  position: absolute;
+  top: 160px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.s1 .chip {
+  background: rgba(192,90,53,0.18);
+  border: 1px solid rgba(192,90,53,0.45);
+  color: var(--terra);
+}
+
+/* Main text */
+.s1 .main-text {
+  position: absolute;
+  top: 490px;
+  left: 0; right: 0;
+  text-align: center;
+}
+.s1 .headline {
+  font-size: 80px;
+  font-weight: 700;
+  color: var(--ivory);
+  line-height: 1.0;
+  letter-spacing: -1px;
+}
+.s1 .headline em {
+  font-style: italic;
+  color: var(--terra);
+}
+.s1 .subline {
+  margin-top: 28px;
+  font-family: var(--mono);
+  font-size: 15px;
+  color: rgba(250,247,242,0.45);
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+}
+
+/* Formula strip */
+.s1 .formula-strip {
+  position: absolute;
+  bottom: 180px;
+  left: 64px; right: 64px;
+  background: rgba(250,247,242,0.04);
+  border: 1px solid rgba(250,247,242,0.08);
+  border-radius: 6px;
+  padding: 28px 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0;
+}
+
+/* Bottom nav */
+.s1 .bottom-row {
+  position: absolute;
+  bottom: 56px;
+  left: 64px; right: 64px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.s1 .follow-cta {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: rgba(250,247,242,0.30);
+  letter-spacing: 0.12em;
+}
+
+/* ══════════════════════════════════════
+   SLIDES 2, 3, 4 — MODO (light)
+══════════════════════════════════════ */
+.s-mode { background: var(--ivory); }
+
+.s-mode .top-section {
+  position: absolute;
+  top: 36px;
+  left: 64px; right: 64px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.s-mode .sgf-logo { color: var(--ink); }
+.s-mode .slide-counter { color: var(--ink); }
+
+.s-mode .mode-num {
+  position: absolute;
+  top: 112px;
+  left: 64px;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.20em;
+  text-transform: uppercase;
+  color: var(--terra);
+}
+
+.s-mode .mode-title {
+  position: absolute;
+  top: 142px;
+  left: 64px; right: 64px;
+}
+
+.s-mode .chip-light {
+  background: rgba(192,90,53,0.10);
+  border: 1px solid rgba(192,90,53,0.30);
+  color: var(--terra);
+}
+
+.s-mode .divider-line {
+  position: absolute;
+  left: 64px; right: 64px;
+  height: 1px;
+  background: var(--ivory3);
+}
+
+.s-mode .bottom-row {
+  position: absolute;
+  bottom: 56px;
+  left: 64px; right: 64px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.s-mode .follow-cta {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink-soft);
+  letter-spacing: 0.12em;
+}
+```
+
   </style>
 </head>
 <body>
 
-<p class="hint">1080 × 1080 · Instagram / LinkedIn</p>
+<div class="deck-label">SGF · Calculadoras · Carrossel 4 Slides · 1080 × 1080 px</div>
 
-<div class="post-wrap">
-<svg viewBox="0 0 1080 1080" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <linearGradient id="terra-amber" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#C05A35"/>
-      <stop offset="100%" stop-color="#C4900A"/>
-    </linearGradient>
-    <linearGradient id="bg-warm" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#FAF7F2"/>
-      <stop offset="100%" stop-color="#F4EEE5"/>
-    </linearGradient>
-    <!-- Subtle shadow for shield -->
-    <filter id="shield-shadow" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="8" stdDeviation="18" flood-color="#C05A35" flood-opacity="0.18"/>
-    </filter>
-    <!-- Soft shadow for text area -->
-    <filter id="text-glow">
-      <feGaussianBlur stdDeviation="30" result="blur"/>
-      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
-    </filter>
-  </defs>
+<div class="deck">
 
-  <!-- ── BACKGROUND ── -->
+<!-- ════════════════════════════════════════════════
+     SLIDE 1 — CAPA / ANÚNCIO
+════════════════════════════════════════════════ -->
 
-  <rect width="1080" height="1080" fill="url(#bg-warm)"/>
+<div class="slide s1">
+  <div class="top-bar"></div>
 
-  <!-- Very subtle grain texture via pattern -->
+  <!-- Nav row -->
 
-  <pattern id="grain" x="0" y="0" width="4" height="4" patternUnits="userSpaceOnUse">
-    <rect width="1" height="1" x="0" y="0" fill="rgba(28,23,18,0.02)"/>
-    <rect width="1" height="1" x="2" y="2" fill="rgba(28,23,18,0.015)"/>
-  </pattern>
-  <rect width="1080" height="1080" fill="url(#grain)"/>
+  <div class="nav-row">
+    <span class="sgf-logo">SGF</span>
+    <div class="nav-dots">
+      <div class="dot active"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+    <span class="slide-counter">01 / 04</span>
+  </div>
 
-  <!-- ── THIN TOP BAR ── -->
+  <!-- BG concentric rings -->
 
-  <rect x="0" y="0" width="1080" height="5" fill="url(#terra-amber)"/>
-
-  <!-- ── CONCENTRIC CIRCLES (decorative, centered, faint) ── -->
-
-  <circle cx="540" cy="410" r="370" fill="none" stroke="rgba(192,90,53,0.055)" stroke-width="1"/>
-  <circle cx="540" cy="410" r="300" fill="none" stroke="rgba(192,90,53,0.045)" stroke-width="1"/>
-  <circle cx="540" cy="410" r="230" fill="none" stroke="rgba(192,90,53,0.035)" stroke-width="1"/>
-  <circle cx="540" cy="410" r="160" fill="none" stroke="rgba(192,90,53,0.025)" stroke-width="1"/>
-
-  <!-- ── LOGO: SHIELD ── -->
-
-  <!-- Shield shadow/glow plate -->
-
-  <ellipse cx="540" cy="388" rx="100" ry="20" fill="rgba(192,90,53,0.10)"/>
-
-  <!-- Shield body — terra fill -->
-
-  <g transform="translate(540,270) scale(2.6)" filter="url(#shield-shadow)">
-    <path d="M0,-45 L38,-29 L38,14 C38,36 20,51 0,59 C-20,51 -38,36 -38,14 L-38,-29 Z"
-          fill="#C05A35"/>
-    <!-- Inner shield highlight -->
-    <path d="M0,-38 L30,-24 L30,14 C30,30 16,44 0,52 C-16,44 -30,30 -30,14 L-30,-24 Z"
-          fill="rgba(255,255,255,0.07)"/>
-    <!-- Checkmark -->
-    <path d="M-18,10 L-4,26 L22,-10"
-          stroke="#FAF7F2" stroke-width="7.5" stroke-linecap="round"
-          stroke-linejoin="round" fill="none"/>
-  </g>
-
-  <!-- ── SÉRIE CHIP ── -->
-
-<rect x="420" y="492" width="240" height="26" rx="13"
-fill="rgba(192,90,53,0.10)" stroke="rgba(192,90,53,0.30)" stroke-width="1"/>
-<text x="540" y="510" text-anchor="middle"
-font-family="'Courier New', monospace"
-font-size="10" font-weight="700" letter-spacing="3"
-fill="#C05A35">SÉRIE GLOSSÁRIO</text>
-
-  <!-- ── MAIN HEADLINE ── -->
-
-<text x="540" y="594" text-anchor="middle"
-font-family="'Playfair Display', Georgia, serif"
-font-size="72" font-weight="700"
-fill="#1C1712" letter-spacing="-1">11 conceitos</text>
-
-<text x="540" y="658" text-anchor="middle"
-font-family="'Playfair Display', Georgia, serif"
-font-size="52" font-weight="500" font-style="italic"
-fill="#C05A35">que todo profissional</text>
-
-<text x="540" y="718" text-anchor="middle"
-font-family="'Playfair Display', Georgia, serif"
-font-size="52" font-weight="500" font-style="italic"
-fill="#C05A35">deveria conhecer.</text>
-
-  <!-- ── DIVIDER ── -->
-
-  <rect x="440" y="748" width="200" height="2" rx="1" fill="url(#terra-amber)" opacity="0.6"/>
-
-  <!-- ── SUPPORTING TEXT ── -->
-
-<text x="540" y="792" text-anchor="middle"
-font-family="'DM Sans', system-ui, sans-serif"
-font-size="22" font-weight="300"
-fill="#6B5C50">Seguro Garantia em linguagem direta,</text>
-
-<text x="540" y="820" text-anchor="middle"
-font-family="'DM Sans', system-ui, sans-serif"
-font-size="22" font-weight="300"
-fill="#6B5C50">com base na Circular SUSEP nº 662/2022 e na Lei 15.040/2024.</text>
-
-  <!-- ── CTA BUTTON ── -->
-
-  <!-- Button background -->
-
-<rect x="298" y="870" width="484" height="72" rx="36"
-fill="#C05A35"/>
-
-  <!-- Button inner highlight -->
-
-<rect x="299" y="871" width="482" height="35" rx="35"
-fill="rgba(255,255,255,0.07)"/>
-
-<text x="490" y="914" text-anchor="middle"
-font-family="'DM Sans', system-ui, sans-serif"
-font-size="19" font-weight="500"
-fill="#FAF7F2" letter-spacing="0.5">segurogarantiafacil.com</text>
-
-<text x="490" y="934" text-anchor="middle"
-font-family="'Courier New', monospace"
-font-size="12" font-weight="700" letter-spacing="2"
-fill="rgba(250,247,242,0.65)">/glossario</text>
-
-  <!-- Arrow circle -->
-
-  <circle cx="748" cy="906" r="26" fill="rgba(255,255,255,0.15)"/>
-  <text x="748" y="914" text-anchor="middle"
-        font-family="'Courier New', monospace"
-        font-size="20" fill="#FAF7F2">→</text>
-
-  <!-- ── BOTTOM STRIP ── -->
-
-  <rect x="0" y="1010" width="1080" height="70" fill="rgba(28,23,18,0.04)"/>
-  <line x1="0" y1="1010" x2="1080" y2="1010" stroke="rgba(28,23,18,0.08)" stroke-width="1"/>
-
-  <!-- Logo mini + handle -->
-
-  <!-- Mini shield -->
-
-  <g transform="translate(64,1045) scale(0.38)">
-    <path d="M0,-45 L38,-29 L38,14 C38,36 20,51 0,59 C-20,51 -38,36 -38,14 L-38,-29 Z"
-          fill="#C05A35"/>
-    <path d="M-18,10 L-4,26 L22,-10"
-          stroke="#FAF7F2" stroke-width="9" stroke-linecap="round"
-          stroke-linejoin="round" fill="none"/>
-  </g>
-
-<text x="88" y="1048"
-font-family="'Courier New', monospace"
-font-size="11" font-weight="700" letter-spacing="2.5"
-fill="#3D342A">SEGURO GARANTIA FÁCIL</text>
-
-<text x="88" y="1064"
-font-family="'Courier New', monospace"
-font-size="10" letter-spacing="1.5"
-fill="#9A8070">@segurogarantiafaciloficial</text>
-
-  <!-- Acesso gratuito badge -->
-
-<rect x="830" y="1025" width="210" height="34" rx="17"
-fill="rgba(196,144,10,0.12)" stroke="rgba(196,144,10,0.30)" stroke-width="1"/>
-<text x="935" y="1047" text-anchor="middle"
-font-family="'Courier New', monospace"
-font-size="9" font-weight="700" letter-spacing="2"
-fill="#C4900A">ACESSO GRATUITO</text>
-
+<svg class="bg-rings" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-62%);pointer-events:none;"
+width="820" height="820" viewBox="0 0 820 820" fill="none">
+<circle cx="410" cy="410" r="400" stroke="rgba(250,247,242,0.04)" stroke-width="1"/>
+<circle cx="410" cy="410" r="310" stroke="rgba(250,247,242,0.035)" stroke-width="1"/>
+<circle cx="410" cy="410" r="220" stroke="rgba(192,90,53,0.07)" stroke-width="1"/>
+<circle cx="410" cy="410" r="130" stroke="rgba(192,90,53,0.06)" stroke-width="1"/>
 </svg>
+
+  <!-- Shield logo -->
+
+  <div style="position:absolute;top:160px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:20px;">
+    <svg width="130" height="148" viewBox="0 0 100 115" fill="none">
+      <filter id="sh-glow">
+        <feDropShadow dx="0" dy="6" stdDeviation="14" flood-color="#C05A35" flood-opacity="0.35"/>
+      </filter>
+      <path d="M50 5 L90 22 L90 60 C90 82 70 100 50 108 C30 100 10 82 10 60 L10 22 Z"
+            fill="#C05A35" filter="url(#sh-glow)"/>
+      <path d="M50 12 L84 27 L84 60 C84 78 66 94 50 101 C34 94 16 78 16 60 L16 27 Z"
+            fill="rgba(255,255,255,0.07)"/>
+      <path d="M27 60 L43 77 L74 40"
+            stroke="#FAF7F2" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    </svg>
+
+```
+<span class="series-chip chip" style="font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;padding:8px 22px;border-radius:999px;background:rgba(192,90,53,0.18);border:1px solid rgba(192,90,53,0.45);color:#C05A35;">
+  NOVA FERRAMENTA
+</span>
+```
+
+  </div>
+
+  <!-- Main headline -->
+
+  <div class="main-text">
+    <div class="headline">Calculadoras<br><em>SGF</em></div>
+    <div class="subline">três modos · uma equação · acesso gratuito</div>
+  </div>
+
+  <!-- Formula strip -->
+
+  <svg style="position:absolute;bottom:180px;left:64px;right:64px;width:952px;" viewBox="0 0 952 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="952" height="100" rx="6" fill="rgba(250,247,242,0.04)" stroke="rgba(250,247,242,0.08)" stroke-width="1"/>
+
+```
+<!-- Formula tokens -->
+<text x="92" y="38" text-anchor="middle" font-family="'Courier New',monospace" font-size="10" fill="rgba(250,247,242,0.30)" letter-spacing="2" font-weight="700">PRÊMIO</text>
+<text x="92" y="66" text-anchor="middle" font-family="Georgia,serif" font-size="28" font-weight="700" fill="#FAF7F2">P</text>
+
+<text x="178" y="58" text-anchor="middle" font-family="Georgia,serif" font-size="32" fill="rgba(250,247,242,0.20)">=</text>
+
+<text x="268" y="38" text-anchor="middle" font-family="'Courier New',monospace" font-size="10" fill="#C05A35" letter-spacing="2" font-weight="700">IMPORTÂNCIA</text>
+<text x="268" y="66" text-anchor="middle" font-family="Georgia,serif" font-size="28" font-weight="700" fill="#C05A35">IS</text>
+
+<text x="354" y="58" text-anchor="middle" font-family="Georgia,serif" font-size="28" fill="rgba(250,247,242,0.15)">×</text>
+
+<text x="440" y="38" text-anchor="middle" font-family="'Courier New',monospace" font-size="10" fill="#C4900A" letter-spacing="2" font-weight="700">TAXA</text>
+<text x="440" y="66" text-anchor="middle" font-family="Georgia,serif" font-size="28" font-weight="700" fill="#C4900A">τ</text>
+
+<text x="526" y="58" text-anchor="middle" font-family="Georgia,serif" font-size="28" fill="rgba(250,247,242,0.15)">×</text>
+
+<text x="620" y="38" text-anchor="middle" font-family="'Courier New',monospace" font-size="10" fill="rgba(250,247,242,0.50)" letter-spacing="2" font-weight="700">PRAZO</text>
+<text x="620" y="66" text-anchor="middle" font-family="Georgia,serif" font-size="28" font-weight="700" fill="rgba(250,247,242,0.70)">t</text>
+
+<!-- Divider vertical -->
+<line x1="730" y1="16" x2="730" y2="84" stroke="rgba(250,247,242,0.08)" stroke-width="1"/>
+
+<!-- Note: sem IOF -->
+<text x="840" y="46" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="rgba(250,247,242,0.25)" letter-spacing="1.5">RAMOS 0775/0776</text>
+<text x="840" y="64" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="rgba(192,90,53,0.60)" letter-spacing="1.5" font-weight="700">SEM IOF</text>
+```
+
+  </svg>
+
+  <!-- Bottom row -->
+
+  <div class="bottom-row">
+    <span style="font-family:var(--mono);font-size:11px;color:rgba(250,247,242,0.30);letter-spacing:0.12em;">segurogarantiafacil.com/calculadora</span>
+    <span style="font-family:var(--mono);font-size:11px;color:rgba(250,247,242,0.20);letter-spacing:0.12em;">Siga @segurogarantiafaciloficial →</span>
+  </div>
 </div>
 
-<p class="hint">abra no browser · screenshot em escala 1:1</p>
+<!-- ════════════════════════════════════════════════
+     SLIDE 2 — MODO 1: CALCULAR PRÊMIO
+════════════════════════════════════════════════ -->
 
+<div class="slide s-mode">
+  <div class="top-bar"></div>
+
+  <!-- Nav -->
+
+  <div class="top-section">
+    <span class="sgf-logo">SGF</span>
+    <div class="nav-dots">
+      <div class="dot"></div>
+      <div class="dot active"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+    <span class="slide-counter">02 / 04</span>
+  </div>
+
+  <!-- Mode label -->
+
+  <div style="position:absolute;top:112px;left:64px;">
+    <span style="font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:0.20em;text-transform:uppercase;color:var(--terra);">MODO 01 DE 03</span>
+  </div>
+
+  <!-- Title -->
+
+  <div style="position:absolute;top:148px;left:64px;right:64px;">
+    <div style="font-size:62px;font-weight:700;color:var(--ink);line-height:1.05;letter-spacing:-0.5px;">Calcular<br><em style="color:var(--terra);">Prêmio</em></div>
+    <div style="margin-top:16px;font-family:var(--mono);font-size:14px;color:var(--ink-soft);letter-spacing:0.08em;line-height:1.6;">
+      Qual será o custo do seguro para o Tomador?
+    </div>
+  </div>
+
+  <!-- Divider -->
+
+  <div style="position:absolute;top:376px;left:64px;right:64px;height:1px;background:var(--ivory3);"></div>
+
+  <!-- Main illustration: input→output -->
+
+  <svg style="position:absolute;top:400px;left:64px;" width="952" height="480" viewBox="0 0 952 480" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+```
+<!-- YOU ENTER label -->
+<text x="0" y="22" font-family="'Courier New',monospace" font-size="10" fill="#6B5C50" letter-spacing="2.5" font-weight="700">VOCÊ INFORMA</text>
+
+<!-- Input fields -->
+<!-- IS field -->
+<rect x="0" y="36" width="278" height="72" rx="4" fill="white" stroke="#D6C9B8" stroke-width="1.5"/>
+<rect x="0" y="36" width="278" height="4" rx="2" fill="#C05A35"/>
+<text x="18" y="65" font-family="'Courier New',monospace" font-size="9" fill="#C05A35" letter-spacing="2" font-weight="700">IMPORTÂNCIA SEGURADA</text>
+<text x="18" y="93" font-family="Georgia,serif" font-size="22" font-weight="700" fill="#1C1712">R$ 500.000,00</text>
+
+<!-- Taxa field -->
+<rect x="298" y="36" width="192" height="72" rx="4" fill="white" stroke="#D6C9B8" stroke-width="1.5"/>
+<rect x="298" y="36" width="192" height="4" rx="2" fill="#C4900A"/>
+<text x="316" y="65" font-family="'Courier New',monospace" font-size="9" fill="#C4900A" letter-spacing="2" font-weight="700">TAXA ANUAL</text>
+<text x="316" y="93" font-family="Georgia,serif" font-size="22" font-weight="700" fill="#1C1712">1,50% a.a.</text>
+
+<!-- Prazo field -->
+<rect x="510" y="36" width="192" height="72" rx="4" fill="white" stroke="#D6C9B8" stroke-width="1.5"/>
+<rect x="510" y="36" width="192" height="4" rx="2" fill="#3D342A"/>
+<text x="528" y="65" font-family="'Courier New',monospace" font-size="9" fill="#3D342A" letter-spacing="2" font-weight="700">PRAZO (DIAS)</text>
+<text x="528" y="93" font-family="Georgia,serif" font-size="22" font-weight="700" fill="#1C1712">365 dias</text>
+
+<!-- Arrow down -->
+<text x="476" y="162" text-anchor="middle" font-family="Georgia,serif" font-size="36" fill="#C05A35">↓</text>
+<text x="476" y="192" text-anchor="middle" font-family="'Courier New',monospace" font-size="10" fill="#6B5C50" letter-spacing="2">A CALCULADORA RESOLVE</text>
+
+<!-- Result box -->
+<rect x="160" y="208" width="632" height="140" rx="6" fill="#1C1712"/>
+<rect x="160" y="208" width="632" height="5" rx="2" fill="url(#bar2)"/>
+<defs>
+  <linearGradient id="bar2" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0%" stop-color="#C05A35"/>
+    <stop offset="100%" stop-color="#C4900A"/>
+  </linearGradient>
+</defs>
+
+<text x="476" y="263" text-anchor="middle" font-family="'Courier New',monospace" font-size="11" fill="rgba(250,247,242,0.40)" letter-spacing="3">PRÊMIO TOTAL</text>
+<text x="476" y="315" text-anchor="middle" font-family="Georgia,serif" font-size="52" font-weight="700" fill="#FAF7F2">R$ 7.500,00</text>
+<text x="476" y="340" text-anchor="middle" font-family="'Courier New',monospace" font-size="10" fill="rgba(250,247,242,0.30)" letter-spacing="1.5">= 500.000 × 1,50% × (365÷365)</text>
+
+<!-- Helper chips -->
+<text x="0" y="390" font-family="'Courier New',monospace" font-size="10" fill="#6B5C50" letter-spacing="2" font-weight="700">INCLUI TAMBÉM</text>
+
+<rect x="0" y="406" width="204" height="34" rx="17" fill="rgba(192,90,53,0.08)" stroke="rgba(192,90,53,0.25)" stroke-width="1"/>
+<text x="102" y="427" text-anchor="middle" font-family="'Courier New',monospace" font-size="10" fill="#C05A35" font-weight="700">Cobertura trabalhista</text>
+
+<rect x="218" y="406" width="180" height="34" rx="17" fill="rgba(192,90,53,0.08)" stroke="rgba(192,90,53,0.25)" stroke-width="1"/>
+<text x="308" y="427" text-anchor="middle" font-family="'Courier New',monospace" font-size="10" fill="#C05A35" font-weight="700">Cobertura de multas</text>
+
+<rect x="412" y="406" width="232" height="34" rx="17" fill="rgba(192,90,53,0.08)" stroke="rgba(192,90,53,0.25)" stroke-width="1"/>
+<text x="528" y="427" text-anchor="middle" font-family="'Courier New',monospace" font-size="10" fill="#C05A35" font-weight="700">Referências por modalidade</text>
+```
+
+  </svg>
+
+  <!-- Bottom row -->
+
+  <div class="bottom-row">
+    <span style="font-family:var(--mono);font-size:11px;color:var(--ink-soft);letter-spacing:0.12em;">segurogarantiafacil.com/calculadora</span>
+    <span style="font-family:var(--mono);font-size:11px;color:var(--ink-soft);opacity:0.5;letter-spacing:0.12em;">Siga @segurogarantiafaciloficial →</span>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════
+     SLIDE 3 — MODO 2: DESCOBRIR TAXA APLICADA
+════════════════════════════════════════════════ -->
+
+<div class="slide s-mode" style="background:#F4EEE5;">
+  <div class="top-bar"></div>
+
+  <!-- Nav -->
+
+  <div class="top-section">
+    <span class="sgf-logo">SGF</span>
+    <div class="nav-dots">
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot active"></div>
+      <div class="dot"></div>
+    </div>
+    <span class="slide-counter">03 / 04</span>
+  </div>
+
+  <!-- Mode label -->
+
+  <div style="position:absolute;top:112px;left:64px;">
+    <span style="font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:0.20em;text-transform:uppercase;color:var(--amber);">MODO 02 DE 03</span>
+  </div>
+
+  <!-- Title -->
+
+  <div style="position:absolute;top:148px;left:64px;right:64px;">
+    <div style="font-size:62px;font-weight:700;color:var(--ink);line-height:1.05;letter-spacing:-0.5px;">Descobrir<br><em style="color:var(--amber);">Taxa Aplicada</em></div>
+    <div style="margin-top:16px;font-family:var(--mono);font-size:14px;color:var(--ink-soft);letter-spacing:0.08em;line-height:1.6;">
+      Qual foi a taxa cobrada nessa apólice?
+    </div>
+  </div>
+
+  <!-- Divider -->
+
+  <div style="position:absolute;top:376px;left:64px;right:64px;height:1px;background:var(--ivory3);"></div>
+
+  <!-- Illustration -->
+
+  <svg style="position:absolute;top:400px;left:64px;" width="952" height="480" viewBox="0 0 952 480" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="bar3" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#C05A35"/>
+        <stop offset="100%" stop-color="#C4900A"/>
+      </linearGradient>
+    </defs>
+
+```
+<text x="0" y="22" font-family="'Courier New',monospace" font-size="10" fill="#6B5C50" letter-spacing="2.5" font-weight="700">VOCÊ INFORMA</text>
+
+<!-- Input: Prêmio -->
+<rect x="0" y="36" width="278" height="72" rx="4" fill="white" stroke="#D6C9B8" stroke-width="1.5"/>
+<rect x="0" y="36" width="278" height="4" rx="2" fill="#C4900A"/>
+<text x="18" y="65" font-family="'Courier New',monospace" font-size="9" fill="#C4900A" letter-spacing="2" font-weight="700">PRÊMIO PAGO</text>
+<text x="18" y="93" font-family="Georgia,serif" font-size="22" font-weight="700" fill="#1C1712">R$ 12.000,00</text>
+
+<!-- Input: IS -->
+<rect x="298" y="36" width="240" height="72" rx="4" fill="white" stroke="#D6C9B8" stroke-width="1.5"/>
+<rect x="298" y="36" width="240" height="4" rx="2" fill="#C05A35"/>
+<text x="316" y="65" font-family="'Courier New',monospace" font-size="9" fill="#C05A35" letter-spacing="2" font-weight="700">IMPORTÂNCIA SEGURADA</text>
+<text x="316" y="93" font-family="Georgia,serif" font-size="22" font-weight="700" fill="#1C1712">R$ 800.000,00</text>
+
+<!-- Input: Prazo -->
+<rect x="558" y="36" width="196" height="72" rx="4" fill="white" stroke="#D6C9B8" stroke-width="1.5"/>
+<rect x="558" y="36" width="196" height="4" rx="2" fill="#3D342A"/>
+<text x="576" y="65" font-family="'Courier New',monospace" font-size="9" fill="#3D342A" letter-spacing="2" font-weight="700">PRAZO (DIAS)</text>
+<text x="576" y="93" font-family="Georgia,serif" font-size="22" font-weight="700" fill="#1C1712">547 dias</text>
+
+<!-- Arrow + label -->
+<text x="476" y="162" text-anchor="middle" font-family="Georgia,serif" font-size="36" fill="#C4900A">↓</text>
+<text x="476" y="192" text-anchor="middle" font-family="'Courier New',monospace" font-size="10" fill="#6B5C50" letter-spacing="2">A CALCULADORA RESOLVE</text>
+
+<!-- Result: taxa found -->
+<rect x="160" y="208" width="632" height="140" rx="6" fill="#1C1712"/>
+<rect x="160" y="208" width="632" height="5" rx="2" fill="url(#bar3)"/>
+
+<text x="476" y="263" text-anchor="middle" font-family="'Courier New',monospace" font-size="11" fill="rgba(250,247,242,0.40)" letter-spacing="3">TAXA ANUAL APLICADA</text>
+<text x="476" y="315" text-anchor="middle" font-family="Georgia,serif" font-size="52" font-weight="700" fill="#C4900A">1,00% a.a.</text>
+<text x="476" y="340" text-anchor="middle" font-family="'Courier New',monospace" font-size="10" fill="rgba(250,247,242,0.30)" letter-spacing="1.5">= 12.000 ÷ (800.000 × 547÷365)</text>
+
+<!-- Use case -->
+<rect x="0" y="396" width="952" height="60" rx="4" fill="rgba(196,144,10,0.08)" stroke="rgba(196,144,10,0.20)" stroke-width="1"/>
+<text x="32" y="420" font-family="'Courier New',monospace" font-size="9" fill="#C4900A" letter-spacing="2" font-weight="700">QUANDO USAR</text>
+<text x="32" y="441" font-family="Georgia,serif" font-size="16" fill="#3D342A">Auditar apólices recebidas · Comparar propostas de corretores · Contestar precificações</text>
+```
+
+  </svg>
+
+  <!-- Bottom row -->
+
+  <div class="bottom-row">
+    <span style="font-family:var(--mono);font-size:11px;color:var(--ink-soft);letter-spacing:0.12em;">segurogarantiafacil.com/calculadora</span>
+    <span style="font-family:var(--mono);font-size:11px;color:var(--ink-soft);opacity:0.5;letter-spacing:0.12em;">Siga @segurogarantiafaciloficial →</span>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════
+     SLIDE 4 — MODO 3: DESCOBRIR IS
+════════════════════════════════════════════════ -->
+
+<div class="slide s-mode" style="background:var(--ivory);">
+  <div class="top-bar"></div>
+
+  <!-- Nav -->
+
+  <div class="top-section">
+    <span class="sgf-logo">SGF</span>
+    <div class="nav-dots">
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot active"></div>
+    </div>
+    <span class="slide-counter">04 / 04</span>
+  </div>
+
+  <!-- Mode label -->
+
+  <div style="position:absolute;top:112px;left:64px;">
+    <span style="font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:0.20em;text-transform:uppercase;color:var(--ink-soft);">MODO 03 DE 03</span>
+  </div>
+
+  <!-- Title -->
+
+  <div style="position:absolute;top:148px;left:64px;right:64px;">
+    <div style="font-size:54px;font-weight:700;color:var(--ink);line-height:1.05;letter-spacing:-0.5px;">Descobrir a<br><em style="color:var(--terra);">Importância Segurada</em></div>
+    <div style="margin-top:16px;font-family:var(--mono);font-size:14px;color:var(--ink-soft);letter-spacing:0.08em;line-height:1.6;">
+      Qual IS posso garantir com este prêmio disponível?
+    </div>
+  </div>
+
+  <!-- Divider -->
+
+  <div style="position:absolute;top:380px;left:64px;right:64px;height:1px;background:var(--ivory3);"></div>
+
+  <!-- Illustration -->
+
+  <svg style="position:absolute;top:404px;left:64px;" width="952" height="520" viewBox="0 0 952 520" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="bar4" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#C05A35"/>
+        <stop offset="100%" stop-color="#C4900A"/>
+      </linearGradient>
+    </defs>
+
+```
+<text x="0" y="22" font-family="'Courier New',monospace" font-size="10" fill="#6B5C50" letter-spacing="2.5" font-weight="700">VOCÊ INFORMA</text>
+
+<!-- Input: Prêmio disponível -->
+<rect x="0" y="36" width="248" height="72" rx="4" fill="white" stroke="#D6C9B8" stroke-width="1.5"/>
+<rect x="0" y="36" width="248" height="4" rx="2" fill="#C05A35"/>
+<text x="18" y="65" font-family="'Courier New',monospace" font-size="9" fill="#C05A35" letter-spacing="2" font-weight="700">PRÊMIO DISPONÍVEL</text>
+<text x="18" y="93" font-family="Georgia,serif" font-size="22" font-weight="700" fill="#1C1712">R$ 9.000,00</text>
+
+<!-- Input: Taxa esperada -->
+<rect x="268" y="36" width="220" height="72" rx="4" fill="white" stroke="#D6C9B8" stroke-width="1.5"/>
+<rect x="268" y="36" width="220" height="4" rx="2" fill="#C4900A"/>
+<text x="286" y="65" font-family="'Courier New',monospace" font-size="9" fill="#C4900A" letter-spacing="2" font-weight="700">TAXA ESPERADA</text>
+<text x="286" y="93" font-family="Georgia,serif" font-size="22" font-weight="700" fill="#1C1712">1,20% a.a.</text>
+
+<!-- Input: Prazo -->
+<rect x="508" y="36" width="196" height="72" rx="4" fill="white" stroke="#D6C9B8" stroke-width="1.5"/>
+<rect x="508" y="36" width="196" height="4" rx="2" fill="#3D342A"/>
+<text x="526" y="65" font-family="'Courier New',monospace" font-size="9" fill="#3D342A" letter-spacing="2" font-weight="700">PRAZO (DIAS)</text>
+<text x="526" y="93" font-family="Georgia,serif" font-size="22" font-weight="700" fill="#1C1712">730 dias</text>
+
+<!-- Arrow -->
+<text x="476" y="162" text-anchor="middle" font-family="Georgia,serif" font-size="36" fill="#C05A35">↓</text>
+<text x="476" y="192" text-anchor="middle" font-family="'Courier New',monospace" font-size="10" fill="#6B5C50" letter-spacing="2">A CALCULADORA RESOLVE</text>
+
+<!-- Result -->
+<rect x="120" y="208" width="712" height="140" rx="6" fill="#1C1712"/>
+<rect x="120" y="208" width="712" height="5" rx="2" fill="url(#bar4)"/>
+
+<text x="476" y="263" text-anchor="middle" font-family="'Courier New',monospace" font-size="11" fill="rgba(250,247,242,0.40)" letter-spacing="3">IMPORTÂNCIA SEGURADA MÁXIMA</text>
+<text x="476" y="315" text-anchor="middle" font-family="Georgia,serif" font-size="52" font-weight="700" fill="#FAF7F2">R$ 375.000,00</text>
+<text x="476" y="340" text-anchor="middle" font-family="'Courier New',monospace" font-size="10" fill="rgba(250,247,242,0.30)" letter-spacing="1.5">= 9.000 ÷ (1,20% × 730÷365)</text>
+
+<!-- Closing CTA -->
+<rect x="0" y="386" width="952" height="108" rx="6" fill="rgba(192,90,53,0.07)" stroke="rgba(192,90,53,0.20)" stroke-width="1"/>
+<rect x="0" y="386" width="952" height="4" rx="2" fill="url(#bar4)"/>
+
+<text x="476" y="432" text-anchor="middle" font-family="Georgia,serif" font-size="20" font-style="italic" fill="#3D342A">Acesse gratuitamente em</text>
+<text x="476" y="466" text-anchor="middle" font-family="Georgia,serif" font-size="26" font-weight="700" fill="#C05A35">segurogarantiafacil.com/calculadora</text>
+
+<!-- Mini shield -->
+<g transform="translate(884,410) scale(0.55)">
+  <path d="M0,-45 L38,-29 L38,14 C38,36 20,51 0,59 C-20,51 -38,36 -38,14 L-38,-29 Z" fill="#C05A35" opacity="0.20"/>
+  <path d="M-18,10 L-4,26 L22,-10" stroke="#C05A35" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.40"/>
+</g>
+```
+
+  </svg>
+
+  <!-- Bottom row -->
+
+  <div class="bottom-row">
+    <span style="font-family:var(--mono);font-size:11px;color:var(--ink-soft);letter-spacing:0.12em;">segurogarantiafacil.com/calculadora</span>
+    <span style="font-family:var(--mono);font-size:11px;color:var(--ink-soft);opacity:0.5;letter-spacing:0.12em;">Siga @segurogarantiafaciloficial →</span>
+  </div>
+</div>
+
+</div><!-- /deck -->
 </body>
 </html>
