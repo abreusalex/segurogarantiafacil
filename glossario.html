@@ -30,20 +30,12 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body { background: var(--ivory); color: var(--ink); font-family: var(--sans); font-weight: 300; line-height: 1.75; }
-
-    /* TOP BAR */
     .top-bar { position: fixed; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--terra), var(--amber)); z-index: 1000; }
-
-    /* SITE HEADER */
     .site-header { position: fixed; top: 4px; left: 0; right: 0; height: 54px; background: var(--ivory); border-bottom: 1px solid var(--ivory3); display: flex; align-items: center; padding: 0 28px; gap: 12px; z-index: 999; }
     .site-header a { font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink); text-decoration: none; }
     .site-header .sep { color: var(--ivory3); }
     .site-header .current { font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--terra); }
-
-    /* LAYOUT */
     .layout { display: flex; min-height: 100vh; padding-top: 58px; }
-
-    /* SIDEBAR */
     .sidebar { width: var(--sidebar-w); flex-shrink: 0; position: sticky; top: 58px; height: calc(100vh - 58px); overflow-y: auto; border-right: 1px solid var(--ivory3); padding: 36px 0; scrollbar-width: thin; scrollbar-color: var(--ivory3) transparent; }
     .sidebar-label { font-family: var(--mono); font-size: 9px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-soft); padding: 0 24px; margin-bottom: 14px; }
     .sidebar nav { display: flex; flex-direction: column; }
@@ -52,11 +44,7 @@
     .sidebar nav a.active { color: var(--terra); border-left-color: var(--terra); background: var(--terra-pale); font-weight: 500; }
     .sidebar nav a .num { font-family: var(--mono); font-size: 9px; font-weight: 700; color: var(--ivory3); flex-shrink: 0; width: 16px; }
     .sidebar nav a.active .num { color: var(--terra); }
-
-    /* MAIN */
     .main { flex: 1; min-width: 0; }
-
-    /* HERO */
     .hero { background: var(--ink); color: var(--ivory); padding: 72px 60px 64px; position: relative; overflow: hidden; }
     .hero::before { content: ''; position: absolute; top: -100px; right: -100px; width: 420px; height: 420px; border-radius: 50%; border: 90px solid rgba(192,90,53,0.10); pointer-events: none; }
     .hero-chip { font-family: var(--mono); font-size: 10px; font-weight: 700; letter-spacing: 0.20em; text-transform: uppercase; color: var(--terra); margin-bottom: 18px; }
@@ -65,74 +53,48 @@
     .hero-meta { margin-top: 36px; display: flex; gap: 36px; flex-wrap: wrap; }
     .hero-meta-item .label { font-family: var(--mono); font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(250,247,242,0.30); margin-bottom: 3px; }
     .hero-meta-item .value { font-size: 12.5px; color: rgba(250,247,242,0.65); }
-
-    /* ARTICLES */
     .article { padding: 64px 60px; border-bottom: 1px solid var(--ivory3); position: relative; }
     .article:nth-child(even) { background: #FDFBF8; }
-
-    /* ARTICLE HEADER */
     .article-eyebrow { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; }
     .article-num { font-family: var(--mono); font-size: 9px; font-weight: 700; letter-spacing: 0.18em; color: var(--terra); background: var(--terra-pale); padding: 4px 9px; border-radius: 2px; }
     .article-category { font-family: var(--mono); font-size: 9px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-soft); }
     .article h2 { font-family: var(--serif); font-size: clamp(24px, 2.8vw, 36px); font-weight: 600; line-height: 1.15; color: var(--ink); margin-bottom: 10px; }
     .article-lead { font-size: 15.5px; font-weight: 300; color: var(--ink-soft); border-left: 3px solid var(--terra); padding-left: 18px; margin-bottom: 0; line-height: 1.65; }
-
-    /* BODY */
     .article-body { max-width: var(--content-max); margin-top: 44px; }
     .article-body p { font-size: 15px; line-height: 1.82; color: var(--ink-mid); margin-bottom: 20px; }
     .article-body h3 { font-family: var(--serif); font-size: 19px; font-weight: 600; color: var(--ink); margin: 40px 0 12px; }
     .article-body h4 { font-family: var(--mono); font-size: 9px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-soft); margin: 28px 0 10px; }
-
-    /* ILLUSTRATION WRAPPER */
     .illus { margin: 36px 0; background: var(--ivory2); border-radius: 6px; overflow: hidden; border: 1px solid var(--ivory3); }
     .illus svg { display: block; width: 100%; height: auto; }
     .illus-caption { font-family: var(--mono); font-size: 10px; letter-spacing: 0.10em; color: var(--ink-soft); padding: 10px 20px; border-top: 1px solid var(--ivory3); background: var(--ivory); }
-
-    /* DEF BOX */
     .def-box { background: var(--ink); color: var(--ivory); border-radius: 4px; padding: 28px 32px; margin: 32px 0; position: relative; overflow: hidden; }
     .def-box::before { content: '§'; position: absolute; top: -8px; right: 18px; font-family: var(--serif); font-size: 90px; color: rgba(250,247,242,0.04); pointer-events: none; line-height: 1; }
     .def-box .def-label { font-family: var(--mono); font-size: 9px; font-weight: 700; letter-spacing: 0.20em; text-transform: uppercase; color: var(--terra); margin-bottom: 10px; }
     .def-box .def-text { font-family: var(--serif); font-size: 16px; font-style: italic; line-height: 1.6; }
     .def-box .def-source { margin-top: 14px; font-family: var(--mono); font-size: 10px; color: rgba(250,247,242,0.30); letter-spacing: 0.06em; }
-
-    /* CALLOUT */
     .callout { border-left: 3px solid var(--amber); border-radius: 0 4px 4px 0; padding: 18px 22px; margin: 24px 0; background: var(--amber-pale); }
     .callout.alert { background: var(--terra-pale); border-left-color: var(--terra); }
     .callout .callout-icon { font-family: var(--mono); font-size: 9px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--amber); margin-bottom: 7px; }
     .callout.alert .callout-icon { color: var(--terra); }
     .callout p { font-size: 13.5px !important; line-height: 1.65 !important; margin-bottom: 0 !important; color: var(--ink-mid) !important; }
-
-    /* CHECKLIST */
     .checklist { list-style: none; margin: 20px 0; display: flex; flex-direction: column; gap: 9px; }
     .checklist li { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--ink-mid); line-height: 1.55; }
     .checklist li::before { content: '▸'; color: var(--terra); font-size: 11px; margin-top: 3px; flex-shrink: 0; }
-
-    /* TABLE */
     .sgf-table { width: 100%; border-collapse: collapse; margin: 28px 0; font-size: 13.5px; }
     .sgf-table th { background: var(--ink); color: var(--ivory); font-family: var(--mono); font-size: 9px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; padding: 11px 14px; text-align: left; }
     .sgf-table td { padding: 11px 14px; border-bottom: 1px solid var(--ivory3); color: var(--ink-mid); vertical-align: top; }
     .sgf-table tr:nth-child(even) td { background: var(--ivory2); }
     .sgf-table td:first-child { font-weight: 500; color: var(--ink); }
-
-    /* CITATION */
     .citation { font-family: var(--mono); font-size: 10px; letter-spacing: 0.06em; color: var(--ink-soft); border-top: 1px solid var(--ivory3); padding-top: 18px; margin-top: 44px; }
     .citation strong { color: var(--ink); }
-
-    /* ARTICLE NAV */
     .article-nav { display: flex; justify-content: space-between; align-items: flex-end; margin-top: 44px; padding-top: 24px; border-top: 1px solid var(--ivory3); gap: 16px; }
     .article-nav a { font-size: 12.5px; font-weight: 500; color: var(--terra); text-decoration: none; display: flex; align-items: center; gap: 5px; }
     .nav-label { font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-soft); display: block; margin-bottom: 4px; }
-
-    /* FORMULA */
     .formula { background: var(--ink); color: var(--ivory); font-family: var(--mono); font-size: 14px; letter-spacing: 0.06em; padding: 20px 28px; border-radius: 4px; margin: 24px 0; line-height: 1.7; }
     .formula .f-comment { color: rgba(250,247,242,0.35); font-size: 11px; }
-
-    /* FOOTER */
     .site-footer { background: var(--ink); color: var(--ivory); padding: 44px 60px; display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; }
     .site-footer .footer-brand { font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; }
     .site-footer .footer-copy { font-size: 12px; color: rgba(250,247,242,0.30); }
-
-    /* MOBILE */
     @media (max-width: 860px) {
       .layout { flex-direction: column; }
       .sidebar { width: 100%; height: auto; position: static; border-right: none; border-bottom: 1px solid var(--ivory3); padding: 20px 0; overflow-x: auto; }
@@ -173,13 +135,12 @@
 
   <main class="main">
 
-    <!-- HERO -->
     <section class="hero">
       <div class="hero-chip">Série Glossário · 11 Conceitos Essenciais</div>
       <h1>Aprenda Seguro Garantia do jeito certo.</h1>
       <p>Uma série completa com os termos fundamentais do Seguro Garantia, em linguagem direta, com fundamento regulatório preciso.</p>
       <div class="hero-meta">
-        <div class="hero-meta-item"><div class="label">Fonte principal</div><div class="value">Circular SUSEP nº 662/2022</div></div>
+        <div class="hero-meta-item"><div class="label">Fonte principal</div><div class="value">Lei nº 15.040/2024 · Circular SUSEP nº 662/2022</div></div>
         <div class="hero-meta-item"><div class="label">Público</div><div class="value">Advogados · Corretores · Gestores</div></div>
         <div class="hero-meta-item"><div class="label">Artigos</div><div class="value">11 conceitos</div></div>
       </div>
@@ -187,49 +148,29 @@
 
     <div class="articles">
 
-<!-- ═══════════════════════════════════════════════════════
-     01 · SEGURO GARANTIA
-     Ilustração: triângulo de partes com setas e papéis
-════════════════════════════════════════════════════════ -->
+<!-- 01 SEGURO GARANTIA -->
 <article class="article" id="seguro-garantia">
   <div class="article-eyebrow"><span class="article-num">01 / 11</span><span class="article-category">O produto</span></div>
   <h2>Seguro Garantia</h2>
   <p class="article-lead">O que é, para que serve e como funciona, em linguagem direta.</p>
-
   <div class="article-body">
     <div class="def-box">
       <div class="def-label">Definição regulatória</div>
-      <div class="def-text">O Seguro Garantia é o contrato pelo qual a Seguradora garante ao Segurado o cumprimento de obrigação assumida pelo Tomador. Se o Tomador não cumprir, a Seguradora paga, até o limite da Importância Segurada.</div>
-      <div class="def-source">Fonte: Circular SUSEP nº 662/2022</div>
+      <div class="def-text">O Seguro Garantia é o contrato pelo qual a Seguradora garante ao Segurado o cumprimento de obrigação assumida pelo Tomador. Se o Tomador não cumprir a obrigação, a Seguradora paga, até o limite da Importância Segurada.</div>
+      <div class="def-source">Fonte: Lei nº 15.040/2024, art. 1º · Circular SUSEP nº 662/2022</div>
     </div>
-
-    <p>O Seguro Garantia não é fiança. Não é caução. É um <strong>contrato de seguro regulado pela SUSEP</strong>, com apólice, prêmio e vigência definidos, e isso tem consequências jurídicas relevantes que frequentemente passam despercebidas por profissionais que lidam com ele pela primeira vez.</p>
-
-    <!-- ILUSTRAÇÃO 01: Triângulo de partes -->
+    <p>O Seguro Garantia não é fiança. Não é caução. É um <strong>contrato de seguro regulado pela SUSEP</strong>, com apólice, prêmio e vigência definidos, e isso faz uma diferença importante na prática que frequentemente passam despercebidas por quem está tendo contato com o produto pela primeira vez.</p>
     <div class="illus">
       <svg viewBox="0 0 720 380" xmlns="http://www.w3.org/2000/svg" font-family="'Courier New', monospace">
         <defs>
-          <marker id="arr1" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-            <path d="M0,0 L0,6 L8,3 z" fill="#C05A35"/>
-          </marker>
-          <marker id="arr2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-            <path d="M0,0 L0,6 L8,3 z" fill="#C4900A"/>
-          </marker>
-          <marker id="arr3" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-            <path d="M0,0 L0,6 L8,3 z" fill="#6B5C50"/>
-          </marker>
+          <marker id="arr1" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#C05A35"/></marker>
+          <marker id="arr2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#C4900A"/></marker>
+          <marker id="arr3" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#6B5C50"/></marker>
         </defs>
-
         <rect width="720" height="380" fill="#EDE5D8"/>
-
-        <!-- grid lines subtle -->
         <line x1="0" y1="190" x2="720" y2="190" stroke="#D6C9B8" stroke-width="1"/>
         <line x1="360" y1="0" x2="360" y2="380" stroke="#D6C9B8" stroke-width="1"/>
-
-        <!-- Central label -->
         <text x="360" y="26" text-anchor="middle" font-size="9" fill="#6B5C50" letter-spacing="3" font-weight="700">ESTRUTURA DO SEGURO GARANTIA</text>
-
-        <!-- === TOMADOR node (top-left) === -->
         <rect x="52" y="48" width="180" height="110" rx="4" fill="#1C1712"/>
         <rect x="52" y="48" width="180" height="4" rx="2" fill="#C05A35"/>
         <text x="142" y="78" text-anchor="middle" font-size="9" fill="#C05A35" letter-spacing="2.5" font-weight="700">TOMADOR</text>
@@ -237,8 +178,6 @@
         <text x="142" y="115" text-anchor="middle" font-size="10" fill="rgba(250,247,242,0.55)" xml:space="preserve">Contrata o seguro</text>
         <text x="142" y="130" text-anchor="middle" font-size="10" fill="rgba(250,247,242,0.55)">Paga o prêmio</text>
         <text x="142" y="145" text-anchor="middle" font-size="10" fill="rgba(250,247,242,0.55)">Devedor da obrigação</text>
-
-        <!-- === SEGURADORA node (top-right) === -->
         <rect x="488" y="48" width="180" height="110" rx="4" fill="#1C1712"/>
         <rect x="488" y="48" width="180" height="4" rx="2" fill="#C4900A"/>
         <text x="578" y="78" text-anchor="middle" font-size="9" fill="#C4900A" letter-spacing="2.5" font-weight="700">SEGURADORA</text>
@@ -246,8 +185,6 @@
         <text x="578" y="115" text-anchor="middle" font-size="10" fill="rgba(250,247,242,0.55)">Analisa o risco</text>
         <text x="578" y="130" text-anchor="middle" font-size="10" fill="rgba(250,247,242,0.55)">Emite a apólice</text>
         <text x="578" y="145" text-anchor="middle" font-size="10" fill="rgba(250,247,242,0.55)">Garante a obrigação</text>
-
-        <!-- === SEGURADO node (bottom-center) === -->
         <rect x="270" y="248" width="180" height="110" rx="4" fill="#1C1712"/>
         <rect x="270" y="248" width="180" height="4" rx="2" fill="#6B5C50"/>
         <text x="360" y="278" text-anchor="middle" font-size="9" fill="#D6C9B8" letter-spacing="2.5" font-weight="700">SEGURADO</text>
@@ -255,590 +192,405 @@
         <text x="360" y="315" text-anchor="middle" font-size="10" fill="rgba(250,247,242,0.55)">Beneficiário da garantia</text>
         <text x="360" y="330" text-anchor="middle" font-size="10" fill="rgba(250,247,242,0.55)">Não paga o prêmio</text>
         <text x="360" y="345" text-anchor="middle" font-size="10" fill="rgba(250,247,242,0.55)">Aciona e recebe a indenização</text>
-
-        <!-- ARROW: Tomador → Seguradora (prêmio) -->
         <line x1="235" y1="96" x2="484" y2="96" stroke="#C05A35" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arr1)"/>
         <rect x="298" y="76" width="126" height="18" rx="3" fill="#FAF7F2"/>
         <text x="361" y="89" text-anchor="middle" font-size="9" fill="#C05A35" letter-spacing="1" font-weight="700">paga o prêmio →</text>
-
-        <!-- ARROW: Seguradora → Segurado (garante ao) -->
         <line x1="560" y1="161" x2="430" y2="244" stroke="#C4900A" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arr2)"/>
         <rect x="456" y="187" width="98" height="18" rx="3" fill="#FAF7F2"/>
         <text x="505" y="200" text-anchor="middle" font-size="9" fill="#C4900A" letter-spacing="1" font-weight="700">garante ao ↓</text>
-
-        <!-- ARROW: Segurado ←→ Tomador (obrigação) -->
         <line x1="286" y1="252" x2="170" y2="162" stroke="#6B5C50" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arr3)"/>
         <rect x="178" y="192" width="118" height="18" rx="3" fill="#FAF7F2"/>
         <text x="237" y="205" text-anchor="middle" font-size="9" fill="#6B5C50" letter-spacing="1" font-weight="700">← obrigação base</text>
-
-        <!-- Central diamond -->
         <polygon points="360,168 380,190 360,212 340,190" fill="#C05A35" opacity="0.12"/>
         <polygon points="360,172 376,190 360,208 344,190" fill="none" stroke="#C05A35" stroke-width="1.5"/>
         <text x="360" y="195" text-anchor="middle" font-size="9" fill="#C05A35" letter-spacing="1" font-weight="700">SGF</text>
       </svg>
       <div class="illus-caption">Fig. 1, O triângulo do Seguro Garantia: três partes, uma obrigação, um contrato de seguro</div>
     </div>
-
     <h3>Por que não é fiança nem caução?</h3>
-    <p>A fiança envolve um fiador pessoal que pode opor o benefício de ordem, exigindo que o devedor principal seja executado antes. A caução é uma garantia, como depósito em dinheiro. O Seguro Garantia é diferente: é um <strong>contrato autônomo de seguro</strong>, e o Segurado não precisa esgotar o patrimônio do Tomador antes de acionar a apólice, basta demonstrar o inadimplemento da obrigação garantida.</p>
-
+    <p>A fiança envolve um fiador pessoal que pode opor o benefício de ordem, exigindo que o devedor principal seja executado antes. A caução é uma garantia, como depósito em dinheiro. O Seguro Garantia é diferente: é um <strong>contrato autônomo de seguro</strong>, e o Segurado não precisa esgotar o patrimônio do Tomador antes de acionar a apólice, basta demonstrar que a obrigação não foi cumprida.</p>
     <div class="callout">
       <div class="callout-icon">⚑ Ponto de atenção</div>
-      <p>O Tomador que contrata o Seguro Garantia não extingue sua responsabilidade, ele apenas transfere o risco imediato ao Segurado. Após o sinistro, a Seguradora busca regresso integral contra o Tomador. Mais detalhes no artigo sobre Contragarantia (nº 11).</p>
+      <p>Contratar o Seguro Garantia não livra o Tomador da responsabilidade. Após o sinistro, a Seguradora cobra tudo de volta. Mais sobre isso no artigo sobre Contragarantia (nº 11).</p>
     </div>
-
     <ul class="checklist">
       <li>É um contrato de seguro, não se confunde com fiança ou caução</li>
       <li>Envolve sempre três partes: Tomador, Seguradora e Segurado</li>
       <li>Em caso de sinistro: a Seguradora paga o Segurado e cobra o Tomador</li>
       <li>Regulado pela SUSEP por meio da Circular nº 662/2022</li>
     </ul>
-    <div class="citation"><strong>Fundamento normativo:</strong> Circular SUSEP nº 662/2022 · Lei nº 15.040/2024 · Código Civil Brasileiro/2002, arts. 757–802</div>
+    <div class="citation"><strong>Fundamento normativo:</strong> Lei nº 15.040/2024, arts. 1º, 4º e 94 · Circular SUSEP nº 662/2022 · CC/2002, arts. 757–802</div>
   </div>
   <div class="article-nav"><span></span><div style="text-align:right"><span class="nav-label">Próximo</span><a href="#tomador">O Tomador →</a></div></div>
 </article>
 
-
-<!-- ═══════════════════════════════════════════════════════
-     02 · TOMADOR
-     Ilustração: dupla posição, contratante + devedor
-════════════════════════════════════════════════════════ -->
+<!-- 02 TOMADOR -->
 <article class="article" id="tomador">
   <div class="article-eyebrow"><span class="article-num">02 / 11</span><span class="article-category">As partes</span></div>
   <h2>O Tomador</h2>
   <p class="article-lead">Quem contrata, quem paga, e por que não escapa quando o sinistro acontece.</p>
-
   <div class="article-body">
     <div class="def-box">
       <div class="def-label">Definição regulatória</div>
       <div class="def-text">O Tomador é a empresa ou pessoa que contrata o Seguro Garantia, paga o prêmio à Seguradora e é o devedor da obrigação principal perante o Segurado.</div>
-      <div class="def-source">Fonte: Circular SUSEP nº 662/2022</div>
+      <div class="def-source">Fonte: Lei nº 15.040/2024 · Circular SUSEP nº 662/2022</div>
     </div>
-
     <p>O Tomador ocupa uma posição dupla e muitas vezes mal compreendida: é simultaneamente o <strong>contratante do seguro</strong> (relação com a Seguradora) e o <strong>devedor principal da obrigação garantida</strong> (relação com o Segurado).</p>
-
-    <!-- ILUSTRAÇÃO 02: Dupla posição + fluxo pós-sinistro -->
     <div class="illus">
       <svg viewBox="0 0 720 320" xmlns="http://www.w3.org/2000/svg" font-family="'Courier New', monospace">
         <rect width="720" height="320" fill="#EDE5D8"/>
         <text x="360" y="26" text-anchor="middle" font-size="9" fill="#6B5C50" letter-spacing="3" font-weight="700">A DUPLA POSIÇÃO DO TOMADOR</text>
-
-        <!-- Left panel: ANTES DO SINISTRO -->
         <rect x="30" y="40" width="310" height="260" rx="4" fill="rgba(250,247,242,0.7)" stroke="#D6C9B8" stroke-width="1"/>
         <text x="185" y="62" text-anchor="middle" font-size="9" fill="#6B5C50" letter-spacing="2" font-weight="700">ANTES DO SINISTRO</text>
-
-        <!-- Tomador central -->
         <circle cx="185" cy="148" r="38" fill="#1C1712"/>
         <text x="185" y="144" text-anchor="middle" font-size="9" fill="#C05A35" letter-spacing="1.5" font-weight="700">TOMADOR</text>
         <text x="185" y="159" text-anchor="middle" font-size="10" fill="rgba(250,247,242,0.7)" font-family="'Playfair Display',serif" font-style="italic">Empreiteira</text>
-
-        <!-- Arrow up: paga prêmio à Seguradora -->
         <line x1="185" y1="108" x2="185" y2="78" stroke="#C05A35" stroke-width="1.5" marker-end="url(#arr1)"/>
         <text x="185" y="95" text-anchor="middle" font-size="9" fill="#C05A35" letter-spacing="1">↑ paga prêmio</text>
         <rect x="103" y="75" width="88" height="16" rx="2" fill="#F3E6DF"/>
         <text x="147" y="87" text-anchor="middle" font-size="9" fill="#9A3E20" letter-spacing="1" font-weight="700">SEGURADORA</text>
-
-        <!-- Arrow down: deve obrigação ao Segurado -->
         <line x1="185" y1="188" x2="185" y2="218" stroke="#6B5C50" stroke-width="1.5" marker-end="url(#arr3)"/>
         <text x="185" y="207" text-anchor="middle" font-size="9" fill="#6B5C50" letter-spacing="1">↓ deve obrigação</text>
         <rect x="115" y="218" width="72" height="16" rx="2" fill="#EDE5D8"/>
         <text x="151" y="230" text-anchor="middle" font-size="9" fill="#3D342A" letter-spacing="1" font-weight="700">SEGURADO</text>
-
-        <!-- Labels -->
         <text x="80" y="152" text-anchor="middle" font-size="9" fill="#6B5C50">Posição 1:</text>
         <text x="80" y="163" text-anchor="middle" font-size="9" fill="#3D342A" font-weight="700">contratante</text>
         <text x="286" y="152" text-anchor="middle" font-size="9" fill="#6B5C50">Posição 2:</text>
         <text x="286" y="163" text-anchor="middle" font-size="9" fill="#3D342A" font-weight="700">devedor</text>
-
-        <!-- Badge -->
         <rect x="93" y="262" width="184" height="24" rx="3" fill="#C05A35" opacity="0.12"/>
         <text x="185" y="278" text-anchor="middle" font-size="9" fill="#9A3E20" letter-spacing="1" font-weight="700">CONTRATA · PAGA · DEVE</text>
-
-        <!-- Right panel: APÓS O SINISTRO -->
         <rect x="380" y="40" width="310" height="260" rx="4" fill="rgba(250,247,242,0.7)" stroke="#D6C9B8" stroke-width="1"/>
         <text x="535" y="62" text-anchor="middle" font-size="9" fill="#6B5C50" letter-spacing="2" font-weight="700">APÓS O SINISTRO</text>
-
-        <!-- Sequence: Tomador → (não cumpre) → Segurado aciona → Seguradora paga → cobra Tomador -->
-        <!-- Step 1 -->
         <rect x="403" y="76" width="120" height="36" rx="3" fill="#1C1712"/>
         <text x="463" y="93" text-anchor="middle" font-size="9" fill="#C05A35" letter-spacing="1" font-weight="700">TOMADOR</text>
         <text x="463" y="105" text-anchor="middle" font-size="9" fill="rgba(250,247,242,0.5)">não cumpre obra</text>
-
         <line x1="463" y1="114" x2="463" y2="130" stroke="#C05A35" stroke-width="1.5" marker-end="url(#arr1)"/>
-
-        <!-- Step 2 -->
         <rect x="403" y="132" width="120" height="36" rx="3" fill="#FAF7F2" stroke="#D6C9B8" stroke-width="1"/>
         <text x="463" y="149" text-anchor="middle" font-size="9" fill="#3D342A" letter-spacing="1" font-weight="700">SEGURADO</text>
         <text x="463" y="161" text-anchor="middle" font-size="9" fill="#6B5C50">aciona a apólice</text>
-
         <line x1="463" y1="170" x2="463" y2="186" stroke="#C4900A" stroke-width="1.5" marker-end="url(#arr2)"/>
-
-        <!-- Step 3 -->
         <rect x="403" y="188" width="120" height="36" rx="3" fill="#FAF7F2" stroke="#D6C9B8" stroke-width="1"/>
         <text x="463" y="205" text-anchor="middle" font-size="9" fill="#3D342A" letter-spacing="1" font-weight="700">SEGURADORA</text>
         <text x="463" y="217" text-anchor="middle" font-size="9" fill="#6B5C50">paga indenização</text>
-
-        <!-- Regresso arrow (curved back to Tomador) -->
         <path d="M 560 206 Q 620 150 560 112" stroke="#C05A35" stroke-width="1.5" fill="none" stroke-dasharray="4,3" marker-end="url(#arr1)"/>
         <rect x="578" y="144" width="80" height="28" rx="3" fill="#F3E6DF"/>
         <text x="618" y="157" text-anchor="middle" font-size="8" fill="#9A3E20" font-weight="700">cobra por</text>
         <text x="618" y="167" text-anchor="middle" font-size="8" fill="#9A3E20" font-weight="700">REGRESSO</text>
-
-        <!-- Key insight -->
         <rect x="393" y="246" width="284" height="40" rx="3" fill="#1C1712"/>
         <text x="535" y="262" text-anchor="middle" font-size="9" fill="rgba(250,247,242,0.5)">o credor muda de Segurado → Seguradora</text>
         <text x="535" y="277" text-anchor="middle" font-size="9" fill="#C4900A" letter-spacing="1" font-weight="700">a dívida do Tomador permanece</text>
       </svg>
       <div class="illus-caption">Fig. 2, A dupla posição do Tomador e o fluxo de responsabilidades após o sinistro</div>
     </div>
-
     <h3>Quem pode ser Tomador?</h3>
-    <p>Qualquer pessoa jurídica, ou, em alguns casos, pessoa física, que assuma obrigação contratual perante terceiro. Na prática: construtoras e empreiteiras (contratos públicos e privados), fornecedores de bens e serviços, devedores em execuções judiciais (seguro garantia judicial) e locatários (fiança locatícia).</p>
-
+    <p>Qualquer pessoa jurídica, ou, em alguns casos, pessoa física, que assuma obrigação assumida perante terceiros. Na prática: construtoras e empreiteiras (contratos públicos e privados), fornecedores de bens e serviços, devedores em execuções judiciais (seguro garantia judicial) e locatários (fiança locatícia).</p>
     <div class="callout alert">
       <div class="callout-icon">✕ Equívoco comum</div>
-      <p>Contratar o Seguro Garantia não extingue a responsabilidade do Tomador. Após o sinistro, ele responde por regresso integral perante a Seguradora, acrescido de juros, correção monetária e custas processuais.</p>
+      <p>Contratar o Seguro Garantia não extingue a responsabilidade do Tomador. Após o sinistro, ele responde por regresso integral perante a Seguradora, mais juros, correção e custas.</p>
     </div>
-
     <ul class="checklist">
       <li>Contrata o seguro e paga o prêmio à Seguradora</li>
       <li>É o devedor da obrigação principal perante o Segurado</li>
       <li>Após sinistro: o credor muda (passa a ser a Seguradora), a dívida não</li>
       <li>Passa por análise de crédito antes da emissão da apólice</li>
     </ul>
-    <div class="citation"><strong>Fundamento normativo:</strong> Circular SUSEP nº 662/2022 · Código Civil Brasileiro/2002, arts. 346–351 (sub-rogação)</div>
+    <div class="citation"><strong>Fundamento normativo:</strong> Lei nº 15.040/2024, arts. 24–29 e 94 · Circular SUSEP nº 662/2022 · CC/2002, arts. 346–351 (sub-rogação — direito da Seguradora de cobrar o Tomador após pagar)</div>
   </div>
   <div class="article-nav"><div><span class="nav-label">Anterior</span><a href="#seguro-garantia">← Seguro Garantia</a></div><div style="text-align:right"><span class="nav-label">Próximo</span><a href="#segurado">O Segurado →</a></div></div>
 </article>
 
-
-<!-- ═══════════════════════════════════════════════════════
-     03 · SEGURADO
-     Ilustração: posição do Segurado na cadeia + acionamento
-════════════════════════════════════════════════════════ -->
+<!-- 03 SEGURADO -->
 <article class="article" id="segurado">
   <div class="article-eyebrow"><span class="article-num">03 / 11</span><span class="article-category">As partes</span></div>
   <h2>O Segurado</h2>
   <p class="article-lead">O beneficiário da garantia, quem aciona o seguro e recebe a indenização.</p>
-
   <div class="article-body">
     <div class="def-box">
       <div class="def-label">Definição regulatória</div>
-      <div class="def-text">O Segurado é o credor da obrigação assumida pelo Tomador. Em caso de inadimplemento, é quem notifica a Seguradora e tem direito ao recebimento da indenização prevista na apólice.</div>
-      <div class="def-source">Fonte: Circular SUSEP nº 662/2022</div>
+      <div class="def-text">O Segurado é o credor da obrigação assumida pelo Tomador. Quando a obrigação não for cumprida, é quem notifica a Seguradora e tem direito ao recebimento da indenização prevista na apólice.</div>
+      <div class="def-source">Fonte: Lei nº 15.040/2024 · Circular SUSEP nº 662/2022</div>
     </div>
-
-    <p>O Segurado <strong>não paga prêmio</strong>, mas é o <strong>primeiro a receber</strong> quando algo dá errado. Esse custo assimétrico é uma das características mais distintivas do produto em relação a outras garantias.</p>
-
-    <!-- ILUSTRAÇÃO 03: Assimetria de custos + fluxo de acionamento -->
+    <p>O Segurado não paga o prêmio, mas é o <strong>primeiro a receber</strong> quando algo dá errado. Esse custo assimétrico é uma das características mais distintivas do produto em relação a outras garantias.</p>
     <div class="illus">
       <svg viewBox="0 0 720 300" xmlns="http://www.w3.org/2000/svg" font-family="'Courier New', monospace">
         <rect width="720" height="300" fill="#EDE5D8"/>
         <text x="360" y="26" text-anchor="middle" font-size="9" fill="#6B5C50" letter-spacing="3" font-weight="700">ASSIMETRIA DE CUSTO E BENEFÍCIO</text>
-
-        <!-- Left: quem PAGA -->
         <rect x="30" y="42" width="200" height="230" rx="4" fill="#1C1712"/>
         <rect x="30" y="42" width="200" height="4" rx="2" fill="#C05A35"/>
         <text x="130" y="68" text-anchor="middle" font-size="9" fill="#C05A35" letter-spacing="2" font-weight="700">TOMADOR</text>
         <text x="130" y="88" text-anchor="middle" font-size="11" fill="rgba(250,247,242,0.9)">Paga o prêmio</text>
-
-        <!-- Coin stack SVG icon area -->
         <ellipse cx="130" cy="140" rx="40" ry="12" fill="#C4900A" opacity="0.3"/>
         <ellipse cx="130" cy="130" rx="40" ry="12" fill="#C4900A" opacity="0.5"/>
         <ellipse cx="130" cy="120" rx="40" ry="12" fill="#C4900A" opacity="0.7"/>
         <ellipse cx="130" cy="110" rx="40" ry="12" fill="#C4900A"/>
         <text x="130" y="115" text-anchor="middle" font-size="10" fill="#1C1712" font-weight="700">R$</text>
-
         <text x="130" y="178" text-anchor="middle" font-size="10" fill="rgba(250,247,242,0.50)">Taxa × IS × Prazo</text>
-        <text x="130" y="193" text-anchor="middle" font-size="10" fill="rgba(250,247,242,0.50)">Arca com o IOF</text>
+        <text x="130" y="193" text-anchor="middle" font-size="10" fill="rgba(250,247,242,0.50)"></text>
         <text x="130" y="210" text-anchor="middle" font-size="10" fill="rgba(250,247,242,0.50)">Não recebe de volta</text>
-
         <rect x="50" y="246" width="160" height="18" rx="3" fill="rgba(192,90,53,0.3)"/>
         <text x="130" y="259" text-anchor="middle" font-size="9" fill="#C05A35" letter-spacing="1" font-weight="700">CUSTO TOTAL</text>
-
-        <!-- Center: seta -->
         <text x="268" y="158" text-anchor="middle" font-size="28" fill="#D6C9B8">⇄</text>
         <text x="268" y="178" text-anchor="middle" font-size="8" fill="#6B5C50" letter-spacing="1">APÓLICE</text>
-
-        <!-- Right: quem RECEBE -->
         <rect x="310" y="42" width="200" height="230" rx="4" fill="#FAF7F2" stroke="#D6C9B8" stroke-width="1"/>
         <rect x="310" y="42" width="200" height="4" rx="2" fill="#6B5C50"/>
         <text x="410" y="68" text-anchor="middle" font-size="9" fill="#3D342A" letter-spacing="2" font-weight="700">SEGURADO</text>
         <text x="410" y="88" text-anchor="middle" font-size="11" fill="#3D342A">Não paga nada</text>
-
-        <!-- Shield icon -->
         <path d="M410,105 L445,118 L445,148 Q445,170 410,180 Q375,170 375,148 L375,118 Z" fill="none" stroke="#6B5C50" stroke-width="2"/>
         <path d="M410,115 L435,125 L435,148 Q435,163 410,172 Q385,163 385,148 L385,125 Z" fill="rgba(107,92,80,0.12)"/>
         <text x="410" y="147" text-anchor="middle" font-size="14" fill="#6B5C50">✓</text>
-
         <text x="410" y="205" text-anchor="middle" font-size="10" fill="#6B5C50">Exige a apólice</text>
         <text x="410" y="220" text-anchor="middle" font-size="10" fill="#6B5C50">Notifica o sinistro</text>
         <text x="410" y="235" text-anchor="middle" font-size="10" fill="#6B5C50">Recebe a indenização</text>
-
         <rect x="330" y="246" width="160" height="18" rx="3" fill="rgba(107,92,80,0.12)"/>
         <text x="410" y="259" text-anchor="middle" font-size="9" fill="#6B5C50" letter-spacing="1" font-weight="700">BENEFÍCIO INTEGRAL</text>
-
-        <!-- Right side: acionamento steps -->
         <rect x="540" y="42" width="148" height="230" rx="4" fill="rgba(250,247,242,0.6)" stroke="#D6C9B8" stroke-width="1"/>
         <text x="614" y="64" text-anchor="middle" font-size="9" fill="#6B5C50" letter-spacing="2" font-weight="700">ACIONAMENTO</text>
-
-        <!-- Steps -->
         <circle cx="565" cy="90" r="10" fill="#1C1712"/>
         <text x="565" y="94" text-anchor="middle" font-size="9" fill="#FAF7F2" font-weight="700">1</text>
-        <text x="580" y="87" font-size="9" fill="#3D342A" font-weight="700">Inadimplemento</text>
+        <text x="580" y="87" font-size="9" fill="#3D342A" font-weight="700">Descumprimento</text>
         <text x="580" y="99" font-size="9" fill="#6B5C50">documentado</text>
-
         <line x1="565" y1="102" x2="565" y2="118" stroke="#D6C9B8" stroke-width="1" stroke-dasharray="3,2"/>
-
         <circle cx="565" cy="128" r="10" fill="#1C1712"/>
         <text x="565" y="132" text-anchor="middle" font-size="9" fill="#FAF7F2" font-weight="700">2</text>
         <text x="580" y="125" font-size="9" fill="#3D342A" font-weight="700">Notificação</text>
         <text x="580" y="137" font-size="9" fill="#6B5C50">à Seguradora</text>
-
         <line x1="565" y1="140" x2="565" y2="156" stroke="#D6C9B8" stroke-width="1" stroke-dasharray="3,2"/>
-
         <circle cx="565" cy="166" r="10" fill="#1C1712"/>
         <text x="565" y="170" text-anchor="middle" font-size="9" fill="#FAF7F2" font-weight="700">3</text>
-        <text x="580" y="163" font-size="9" fill="#3D342A" font-weight="700">Regulação</text>
+        <text x="580" y="163" font-size="9" fill="#3D342A" font-weight="700">Análise</text>
         <text x="580" y="175" font-size="9" fill="#6B5C50">do sinistro</text>
-
         <line x1="565" y1="178" x2="565" y2="194" stroke="#D6C9B8" stroke-width="1" stroke-dasharray="3,2"/>
-
         <circle cx="565" cy="204" r="10" fill="#C05A35"/>
         <text x="565" y="208" text-anchor="middle" font-size="9" fill="#FAF7F2" font-weight="700">4</text>
         <text x="580" y="201" font-size="9" fill="#C05A35" font-weight="700">Indenização</text>
         <text x="580" y="213" font-size="9" fill="#6B5C50">paga ao Segurado</text>
-
         <rect x="553" y="234" width="124" height="28" rx="3" fill="#C05A35" opacity="0.12"/>
         <text x="615" y="247" text-anchor="middle" font-size="9" fill="#9A3E20">sem provar culpa</text>
-        <text x="615" y="258" text-anchor="middle" font-size="9" fill="#9A3E20" font-weight="700">só o inadimplemento</text>
+        <text x="615" y="258" text-anchor="middle" font-size="9" fill="#9A3E20" font-weight="700">só o descumprimento</text>
       </svg>
-      <div class="illus-caption">Fig. 3, Assimetria de custo entre Tomador e Segurado, e o fluxo de acionamento do sinistro</div>
+      <div class="illus-caption">Fig. 3, Assimetria de custo entre Tomador e Segurado, e as etapas para acionar o sinistro</div>
     </div>
-
     <div class="callout">
       <div class="callout-icon">⚑ Atenção ao prazo de notificação</div>
-      <p>As condições contratuais estabelecem prazo para o Segurado notificar a Seguradora após a ocorrência do sinistro. A inobservância desse prazo pode comprometer o direito à indenização.</p>
+      <p>As condições contratuais definem um prazo para o Segurado avisar a Seguradora quando a obrigação não for cumprida. Não avisar dentro do prazo pode colocar em risco o direito de receber a indenização.</p>
     </div>
-
     <ul class="checklist">
       <li>Credor da obrigação garantida na apólice</li>
-      <li>Não paga o prêmio, esse custo é exclusivo do Tomador</li>
-      <li>Aciona o seguro demonstrando o inadimplemento (não precisa provar culpa)</li>
+      <li>Não paga o prêmio — esse custo é exclusivo do Tomador</li>
+      <li>Aciona o seguro mostrando que a obrigação não foi cumprida (não precisa provar culpa)</li>
       <li>Deve observar o prazo de notificação previsto nas condições contratuais</li>
     </ul>
-    <div class="citation"><strong>Fundamento normativo:</strong> Circular SUSEP nº 662/2022 · Lei nº 14.133/2021 (Lei de Licitações)</div>
+    <div class="citation"><strong>Fundamento normativo:</strong> Lei nº 15.040/2024, arts. 66–88 · Circular SUSEP nº 662/2022 · Lei nº 14.133/2021 (Lei de Licitações)</div>
   </div>
   <div class="article-nav"><div><span class="nav-label">Anterior</span><a href="#tomador">← O Tomador</a></div><div style="text-align:right"><span class="nav-label">Próximo</span><a href="#seguradora">A Seguradora →</a></div></div>
 </article>
 
-
-<!-- ═══════════════════════════════════════════════════════
-     04 · SEGURADORA
-     Ilustração: hub central, subscrição, emissão, sinistro, regresso
-════════════════════════════════════════════════════════ -->
+<!-- 04 SEGURADORA -->
 <article class="article" id="seguradora">
   <div class="article-eyebrow"><span class="article-num">04 / 11</span><span class="article-category">As partes</span></div>
   <h2>A Seguradora</h2>
   <p class="article-lead">Quem analisa o risco, emite a apólice e garante o cumprimento da obrigação.</p>
-
   <div class="article-body">
     <div class="def-box">
       <div class="def-label">Definição regulatória</div>
-      <div class="def-text">A Seguradora é a empresa autorizada pela SUSEP a emitir apólices de Seguro Garantia. Analisa o risco de crédito do Tomador, define as condições contratuais e, em caso de sinistro, paga a indenização ao Segurado, buscando ressarcimento posterior do Tomador via sub-rogação.</div>
-      <div class="def-source">Fonte: Circular SUSEP nº 662/2022 · Lei nº 15.040/2024</div>
+      <div class="def-text">A Seguradora é a empresa autorizada pela SUSEP a emitir apólices de Seguro Garantia. Analisa o risco de crédito do Tomador, define as condições contratuais e, quando a obrigação não for cumprida, paga a indenização ao Segurado e depois cobra de volta o valor pago do Tomador.</div>
+      <div class="def-source">Fonte: Lei nº 15.040/2024 · Circular SUSEP nº 662/2022</div>
     </div>
-
-    <!-- ILUSTRAÇÃO 04: Seguradora como hub, ciclo de vida -->
     <div class="illus">
       <svg viewBox="0 0 720 340" xmlns="http://www.w3.org/2000/svg" font-family="'Courier New', monospace">
         <rect width="720" height="340" fill="#1C1712"/>
         <text x="360" y="26" text-anchor="middle" font-size="9" fill="rgba(250,247,242,0.30)" letter-spacing="3" font-weight="700">O PAPEL CENTRAL DA SEGURADORA</text>
-
-        <!-- Central hub: SEGURADORA -->
         <circle cx="360" cy="175" r="62" fill="#C05A35" opacity="0.15"/>
         <circle cx="360" cy="175" r="50" fill="rgba(192,90,53,0.2)"/>
         <circle cx="360" cy="175" r="38" fill="#C05A35"/>
         <text x="360" y="170" text-anchor="middle" font-size="9" fill="#FAF7F2" letter-spacing="1.5" font-weight="700">SEGURADORA</text>
         <text x="360" y="184" text-anchor="middle" font-size="9" fill="rgba(250,247,242,0.6)">SUSEP aut.</text>
-
-        <!-- Node 1: SUBSCRIÇÃO (top) -->
         <rect x="288" y="42" width="144" height="56" rx="4" fill="rgba(250,247,242,0.06)" stroke="rgba(250,247,242,0.12)" stroke-width="1"/>
         <text x="360" y="64" text-anchor="middle" font-size="9" fill="#C4900A" letter-spacing="2" font-weight="700">SUBSCRIÇÃO</text>
         <text x="360" y="78" text-anchor="middle" font-size="9" fill="rgba(250,247,242,0.5)">Análise de crédito</text>
         <text x="360" y="90" text-anchor="middle" font-size="9" fill="rgba(250,247,242,0.5)">Precificação do risco</text>
         <line x1="360" y1="100" x2="360" y2="135" stroke="#C4900A" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arr2)"/>
-
-        <!-- Node 2: EMISSÃO (right) -->
         <rect x="570" y="148" width="124" height="56" rx="4" fill="rgba(250,247,242,0.06)" stroke="rgba(250,247,242,0.12)" stroke-width="1"/>
         <text x="632" y="170" text-anchor="middle" font-size="9" fill="#FAF7F2" letter-spacing="2" font-weight="700">EMISSÃO</text>
         <text x="632" y="184" text-anchor="middle" font-size="9" fill="rgba(250,247,242,0.5)">Apólice + condições</text>
         <text x="632" y="197" text-anchor="middle" font-size="9" fill="rgba(250,247,242,0.5)">Cobertura ativa</text>
         <line x1="570" y1="176" x2="412" y2="176" stroke="rgba(250,247,242,0.3)" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arr1)"/>
-
-        <!-- Node 3: SINISTRO (bottom) -->
         <rect x="288" y="256" width="144" height="56" rx="4" fill="rgba(250,247,242,0.06)" stroke="rgba(250,247,242,0.12)" stroke-width="1"/>
         <text x="360" y="278" text-anchor="middle" font-size="9" fill="#C05A35" letter-spacing="2" font-weight="700">SINISTRO</text>
-        <text x="360" y="292" text-anchor="middle" font-size="9" fill="rgba(250,247,242,0.5)">Regulação</text>
+        <text x="360" y="292" text-anchor="middle" font-size="9" fill="rgba(250,247,242,0.5)">Análise do sinistro</text>
         <text x="360" y="304" text-anchor="middle" font-size="9" fill="rgba(250,247,242,0.5)">Pagamento ao Segurado</text>
         <line x1="360" y1="256" x2="360" y2="217" stroke="#C05A35" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arr1)"/>
-
-        <!-- Node 4: REGRESSO (left) -->
         <rect x="26" y="148" width="124" height="56" rx="4" fill="rgba(250,247,242,0.06)" stroke="rgba(250,247,242,0.12)" stroke-width="1"/>
         <text x="88" y="170" text-anchor="middle" font-size="9" fill="#C4900A" letter-spacing="2" font-weight="700">REGRESSO</text>
-        <text x="88" y="184" text-anchor="middle" font-size="9" fill="rgba(250,247,242,0.5)">Sub-rogação legal</text>
+        <text x="88" y="184" text-anchor="middle" font-size="9" fill="rgba(250,247,242,0.5)">Cobrança do Tomador</text>
         <text x="88" y="197" text-anchor="middle" font-size="9" fill="rgba(250,247,242,0.5)">Cobra o Tomador</text>
         <line x1="150" y1="176" x2="310" y2="176" stroke="#C4900A" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arr2)"/>
-
-        <!-- SUSEP badge -->
         <rect x="470" y="42" width="90" height="44" rx="4" fill="rgba(196,144,10,0.15)" stroke="rgba(196,144,10,0.3)" stroke-width="1"/>
         <text x="515" y="60" text-anchor="middle" font-size="8" fill="#C4900A" letter-spacing="1.5" font-weight="700">SUSEP</text>
         <text x="515" y="73" text-anchor="middle" font-size="8" fill="rgba(250,247,242,0.5)">autorização</text>
         <text x="515" y="83" text-anchor="middle" font-size="8" fill="rgba(250,247,242,0.5)">obrigatória</text>
-
-        <!-- Resseguro badge -->
         <rect x="160" y="42" width="90" height="44" rx="4" fill="rgba(107,92,80,0.3)" stroke="rgba(107,92,80,0.4)" stroke-width="1"/>
         <text x="205" y="60" text-anchor="middle" font-size="8" fill="#D6C9B8" letter-spacing="1.5" font-weight="700">RESSEGURO</text>
         <text x="205" y="73" text-anchor="middle" font-size="8" fill="rgba(250,247,242,0.4)">distribuição</text>
         <text x="205" y="83" text-anchor="middle" font-size="8" fill="rgba(250,247,242,0.4)">do risco</text>
       </svg>
-      <div class="illus-caption" style="background:var(--ink);color:rgba(250,247,242,0.45);border-color:rgba(250,247,242,0.08)">Fig. 4, A Seguradora como hub central: do risco à subscrição, da emissão ao regresso</div>
+      <div class="illus-caption" style="background:var(--ink);color:rgba(250,247,242,0.45);border-color:rgba(250,247,242,0.08)">Fig. 4, A Seguradora como centro: da análise do risco à aprovação, do pagamento à cobrança</div>
     </div>
-
     <h3>Subscrição: a análise que precede tudo</h3>
     <p>O underwriter analisa o risco de crédito do Tomador, o risco técnico da obrigação e a adequação das contragarantias. Com base nessa análise, define taxa, IS máxima e condições, ou nega a cobertura. O prêmio reflete essa avaliação: não é um custo fixo, é o preço do risco.</p>
-
     <div class="callout">
-      <div class="callout-icon">⚑ Sub-rogação legal</div>
-      <p>Após pagar o sinistro, a Seguradora sub-roga-se automaticamente nos direitos do Segurado contra o Tomador (Código Civil Brasileiro/2002, art. 349), podendo cobrar tudo que pagou com juros e correção.</p>
+      <div class="callout-icon">⚑ A Seguradora assume os direitos do Segurado</div>
+      <p>Após pagar o sinistro, a Seguradora assume automaticamente os direitos do Segurado para cobrar o Tomador (Código Civil Brasileiro/2002, art. 349) — incluindo tudo que pagou, mais juros e correção.</p>
     </div>
-
     <ul class="checklist">
-      <li>Autorizada pela SUSEP, a operação sem autorização é ilícita</li>
+      <li>Autorizada pela SUSEP — operar sem autorização é ilícito</li>
       <li>Analisa o risco do Tomador antes de emitir qualquer apólice</li>
-      <li>Paga o sinistro ao Segurado e busca ressarcimento do Tomador por sub-rogação</li>
-      <li>Pode ceder risco a resseguradores para garantias de maior vulto</li>
+      <li>Paga o sinistro ao Segurado e depois cobra o Tomador pelo valor pago</li>
+      <li>Pode ceder parte do risco a resseguradores para garantias de maior vulto</li>
     </ul>
-    <div class="citation"><strong>Fundamento normativo:</strong> Circular SUSEP nº 662/2022 · Lei nº 15.040/2024 · Código Civil Brasileiro/2002, art. 349 · Resolução CNSP nº 432/2021</div>
+    <div class="citation"><strong>Fundamento normativo:</strong> Lei nº 15.040/2024, arts. 1º, 2º e 94 · Circular SUSEP nº 662/2022 · CC/2002, art. 349 · Resolução CNSP nº 432/2021</div>
   </div>
   <div class="article-nav"><div><span class="nav-label">Anterior</span><a href="#segurado">← O Segurado</a></div><div style="text-align:right"><span class="nav-label">Próximo</span><a href="#objeto-segurado">O Objeto Segurado →</a></div></div>
 </article>
 
-
-<!-- ═══════════════════════════════════════════════════════
-     05 · OBJETO SEGURADO
-     Ilustração: perímetro de cobertura, dentro/fora do escopo
-════════════════════════════════════════════════════════ -->
+<!-- 05 OBJETO SEGURADO -->
 <article class="article" id="objeto-segurado">
   <div class="article-eyebrow"><span class="article-num">05 / 11</span><span class="article-category">A apólice</span></div>
   <h2>O Objeto Segurado</h2>
   <p class="article-lead">O que exatamente está coberto pela apólice, e por que isso importa.</p>
-
   <div class="article-body">
     <div class="def-box">
       <div class="def-label">Definição regulatória</div>
       <div class="def-text">O Objeto Segurado é a obrigação específica que o Tomador assumiu e que a Seguradora garante. Define o perímetro exato da cobertura: o que, quanto, como e até quando deve ser cumprido.</div>
-      <div class="def-source">Fonte: Circular SUSEP nº 662/2022</div>
+      <div class="def-source">Fonte: Lei nº 15.040/2024 · Circular SUSEP nº 662/2022</div>
     </div>
-
-    <!-- ILUSTRAÇÃO 05: Perímetro de cobertura -->
     <div class="illus">
       <svg viewBox="0 0 720 300" xmlns="http://www.w3.org/2000/svg" font-family="'Courier New', monospace">
         <rect width="720" height="300" fill="#EDE5D8"/>
         <text x="360" y="26" text-anchor="middle" font-size="9" fill="#6B5C50" letter-spacing="3" font-weight="700">O PERÍMETRO DO OBJETO SEGURADO</text>
-
-        <!-- Large outer area: tudo que pode existir no contrato -->
         <rect x="30" y="42" width="660" height="240" rx="6" fill="rgba(250,247,242,0.5)" stroke="#D6C9B8" stroke-width="1.5" stroke-dasharray="8,4"/>
         <text x="46" y="62" font-size="9" fill="#6B5C50" letter-spacing="1">CONTRATO BASE (universo de obrigações)</text>
-
-        <!-- Inner covered area -->
         <rect x="190" y="72" width="340" height="180" rx="4" fill="rgba(192,90,53,0.08)" stroke="#C05A35" stroke-width="2"/>
         <text x="360" y="94" text-anchor="middle" font-size="9" fill="#C05A35" letter-spacing="2" font-weight="700">OBJETO SEGURADO</text>
         <text x="360" y="108" text-anchor="middle" font-size="9" fill="#9A3E20">(perímetro de cobertura)</text>
-
-        <!-- Inside items (covered) -->
         <rect x="220" y="120" width="280" height="22" rx="3" fill="rgba(192,90,53,0.12)"/>
         <text x="230" y="135" font-size="10" fill="#3D342A">✓  Execução da pavimentação, Contrato xx/xx</text>
-
         <rect x="220" y="148" width="280" height="22" rx="3" fill="rgba(192,90,53,0.12)"/>
         <text x="230" y="163" font-size="10" fill="#3D342A">✓  Prazo: 18 meses a partir de Jan/2024</text>
-
         <rect x="220" y="176" width="280" height="22" rx="3" fill="rgba(192,90,53,0.12)"/>
         <text x="230" y="191" font-size="10" fill="#3D342A">✓  Valor: R$ 5.000.000 conforme edital</text>
-
         <rect x="220" y="204" width="280" height="22" rx="3" fill="rgba(192,90,53,0.12)"/>
         <text x="230" y="219" font-size="10" fill="#3D342A">✓  Partes: Construtora XYZ × Município ABC</text>
-
-        <!-- Outside items (not covered) -->
         <rect x="42" y="120" width="136" height="22" rx="3" fill="rgba(107,92,80,0.08)"/>
         <text x="52" y="135" font-size="9" fill="#6B5C50">✗  Multas contratuais</text>
-
         <rect x="42" y="148" width="136" height="22" rx="3" fill="rgba(107,92,80,0.08)"/>
         <text x="52" y="163" font-size="9" fill="#6B5C50">✗  Danos emergentes</text>
-
         <rect x="42" y="176" width="136" height="22" rx="3" fill="rgba(107,92,80,0.08)"/>
         <text x="52" y="191" font-size="9" fill="#6B5C50">✗  Lucros cessantes</text>
-
         <rect x="42" y="204" width="136" height="22" rx="3" fill="rgba(107,92,80,0.08)"/>
         <text x="52" y="219" font-size="9" fill="#6B5C50">✗  Outras obrigações</text>
-
         <text x="110" y="245" text-anchor="middle" font-size="9" fill="#6B5C50" letter-spacing="1">FORA DO ESCOPO</text>
-
-        <!-- Right outside items -->
         <rect x="542" y="120" width="136" height="22" rx="3" fill="rgba(107,92,80,0.08)"/>
         <text x="552" y="135" font-size="9" fill="#6B5C50">✗  Aditivos futuros</text>
-
         <rect x="542" y="148" width="136" height="22" rx="3" fill="rgba(107,92,80,0.08)"/>
         <text x="552" y="163" font-size="9" fill="#6B5C50">✗  Reprecificação</text>
-
         <rect x="542" y="176" width="136" height="22" rx="3" fill="rgba(107,92,80,0.08)"/>
         <text x="552" y="191" font-size="9" fill="#6B5C50">✗  Obras acessórias</text>
-
         <rect x="542" y="204" width="136" height="22" rx="3" fill="rgba(107,92,80,0.08)"/>
         <text x="552" y="219" font-size="9" fill="#6B5C50">✗  Serviços extras</text>
-
         <text x="610" y="245" text-anchor="middle" font-size="9" fill="#6B5C50" letter-spacing="1">FORA DO ESCOPO</text>
-
-        <!-- Bottom note -->
         <rect x="190" y="256" width="340" height="18" rx="3" fill="#C05A35" opacity="0.15"/>
         <text x="360" y="269" text-anchor="middle" font-size="9" fill="#9A3E20" letter-spacing="1" font-weight="700">Obrigações Garantidas</text>
       </svg>
       <div class="illus-caption">Fig. 5, O Objeto Segurado como perímetro de cobertura: dentro e fora do escopo da apólice</div>
     </div>
-
     <div class="callout alert">
       <div class="callout-icon">✕ Objeto genérico = risco de não-cobertura</div>
-      <p>Apólices que descrevem o objeto de forma vaga, como "garantir as obrigações do Tomador perante o Segurado", geram insegurança jurídica. Em caso de sinistro, a ausência de precisão favorece impugnações. Exija sempre a descrição detalhada: identificação do contrato, prazo, valor, obrigação.</p>
+      <p>Apólices com objeto descrito de forma vaga geram insegurança jurídica. Se a obrigação descumprida não estiver descrita com precisão, o sinistro pode ser contestado. Exija sempre: identificação do contrato, prazo, valor e obrigação.</p>
     </div>
-
     <ul class="checklist">
-      <li>É a obrigação específica que a apólice garante, perímetro exato da cobertura</li>
+      <li>É a obrigação específica que a apólice garante — o perímetro exato da cobertura</li>
       <li>Deve identificar: contrato, obrigação, valor e prazo</li>
-      <li>Objeto impreciso é a principal causa de disputas na regulação de sinistros</li>
+      <li>Objeto impreciso é a principal causa de disputas na análise do sinistro</li>
     </ul>
-    <div class="citation"><strong>Fundamento normativo:</strong> Circular SUSEP nº 662/2022 · Código Civil Brasileiro/2002, arts. 757 e 760</div>
+    <div class="citation"><strong>Fundamento normativo:</strong> Lei nº 15.040/2024, arts. 9º e 55 · Circular SUSEP nº 662/2022</div>
   </div>
   <div class="article-nav"><div><span class="nav-label">Anterior</span><a href="#seguradora">← A Seguradora</a></div><div style="text-align:right"><span class="nav-label">Próximo</span><a href="#importancia-segurada">A Importância Segurada →</a></div></div>
 </article>
 
-
-<!-- ═══════════════════════════════════════════════════════
-     06 · IMPORTÂNCIA SEGURADA
-     Ilustração: barra de cobertura, IS vs contrato vs sinistro
-════════════════════════════════════════════════════════ -->
+<!-- 06 IMPORTÂNCIA SEGURADA -->
 <article class="article" id="importancia-segurada">
   <div class="article-eyebrow"><span class="article-num">06 / 11</span><span class="article-category">A apólice</span></div>
   <h2>Importância Segurada</h2>
-  <p class="article-lead">O teto da garantia, o valor máximo que a Seguradora pagará.</p>
-
+  <p class="article-lead">O teto da garantia — o valor máximo que a Seguradora pagará.</p>
   <div class="article-body">
     <div class="def-box">
       <div class="def-label">Definição regulatória</div>
-      <div class="def-text">A Importância Segurada (IS) é o valor máximo de indenização que a Seguradora pode pagar ao Segurado em caso de sinistro. Pode corresponder a 100% do valor do contrato base ou a um percentual menor, conforme acordado entre as partes.</div>
-      <div class="def-source">Fonte: Circular SUSEP nº 662/2022</div>
+      <div class="def-text">A Importância Segurada (IS) é o valor máximo de indenização que a Seguradora pode pagar ao Segurado quando a obrigação não for cumprida. Pode corresponder a 100% do valor do contrato base ou a um percentual menor, conforme acordado entre as partes.</div>
+      <div class="def-source">Fonte: Lei nº 15.040/2024 · Circular SUSEP nº 662/2022</div>
     </div>
-
-    <!-- ILUSTRAÇÃO 06: Barra de cobertura -->
     <div class="illus">
       <svg viewBox="0 0 720 280" xmlns="http://www.w3.org/2000/svg" font-family="'Courier New', monospace">
         <rect width="720" height="280" fill="#EDE5D8"/>
         <text x="360" y="26" text-anchor="middle" font-size="9" fill="#6B5C50" letter-spacing="3" font-weight="700">IMPORTÂNCIA SEGURADA, DOIS CENÁRIOS</text>
-
-        <!-- SCENARIO A: IS cobre o sinistro -->
         <text x="60" y="52" font-size="9" fill="#6B5C50" letter-spacing="1.5" font-weight="700">CENÁRIO A, sinistro dentro da IS</text>
-
-        <!-- Contract bar (full width = 100%) -->
         <rect x="40" y="62" width="620" height="28" rx="3" fill="#D6C9B8"/>
         <text x="350" y="80" text-anchor="middle" font-size="9" fill="#6B5C50">CONTRATO BASE  R$ 10.000.000  (100%)</text>
-
-        <!-- IS bar (30%) -->
         <rect x="40" y="96" width="186" height="22" rx="2" fill="#C05A35" opacity="0.7"/>
         <text x="133" y="111" text-anchor="middle" font-size="9" fill="#FAF7F2" font-weight="700">IS 30%, R$ 3M</text>
-
-        <!-- Sinistro bar (20%) - fits within IS -->
         <rect x="40" y="124" width="124" height="22" rx="2" fill="#1C1712"/>
         <text x="102" y="139" text-anchor="middle" font-size="9" fill="#FAF7F2" font-weight="700">Sinistro R$ 2M</text>
-
         <line x1="164" y1="110" x2="164" y2="190" stroke="#C05A35" stroke-width="1" stroke-dasharray="3,2"/>
         <rect x="168" y="140" width="90" height="16" rx="2" fill="#C05A35" opacity="0.15"/>
         <text x="213" y="152" text-anchor="middle" font-size="9" fill="#9A3E20" font-weight="700">IS cobre ✓</text>
-
-        <!-- SCENARIO B: sinistro excede IS -->
         <text x="60" y="190" font-size="9" fill="#6B5C50" letter-spacing="1.5" font-weight="700">CENÁRIO B, sinistro supera a IS</text>
-
         <rect x="40" y="200" width="620" height="22" rx="3" fill="#D6C9B8"/>
         <text x="350" y="215" text-anchor="middle" font-size="9" fill="#6B5C50">CONTRATO BASE  R$ 10.000.000  (100%)</text>
-
-        <!-- IS 30% -->
         <rect x="40" y="226" width="186" height="22" rx="2" fill="#C05A35" opacity="0.7"/>
-
-        <!-- Sinistro 50% - exceeds IS -->
-        <rect x="40" y="226" width="186" height="22" rx="2" fill="#1C1712" opacity="0.0"/>
         <rect x="40" y="226" width="310" height="22" rx="2" fill="none" stroke="#1C1712" stroke-width="1.5" stroke-dasharray="5,3"/>
-        <text x="225" y="241" text-anchor="middle" font-size="9" fill="#1C1712" font-weight="700"></text>
-
-        <!-- Covered portion label -->
         <text x="133" y="241" text-anchor="middle" font-size="9" fill="#FAF7F2" font-weight="700">R$ 3M  ✓</text>
-
-        <!-- Uncovered portion -->
         <rect x="226" y="226" width="124" height="22" rx="0" fill="rgba(28,23,18,0.08)"/>
         <text x="300" y="241" text-anchor="middle" font-size="9" fill="#6B5C50">Descoberto: R$2M</text>
-
-        <!-- Annotations -->
         <line x1="226" y1="248" x2="226" y2="265" stroke="#D6C9B8" stroke-width="1"/>
         <text x="288" y="270" text-anchor="middle" font-size="9" fill="#6B5C50">Sinistro de R$ 5M</text>
-
         <text x="133" y="270" text-anchor="middle" font-size="9" fill="#C05A35" font-weight="700">Inden. Seguradora</text>
         <line x1="133" y1="248" x2="133" y2="265" stroke="#C05A35" stroke-width="1" stroke-dasharray="3,2"/>
       </svg>
-      <div class="illus-caption">Fig. 6, Dois cenários: IS que cobre o sinistro integralmente vs. sinistro que excede o teto da IS</div>
+      <div class="illus-caption">Fig. 6, Dois cenários: IS que cobre o sinistro integralmente vs. sinistro que vai além do teto da IS</div>
     </div>
-
     <h3>Como a IS é definida</h3>
-    <p>A IS pode ser fixada em qualquer percentual do valor do contrato base. Em contratos públicos, a Lei nº 14.133/2021 (art. 96) admite garantia entre 5% e 10% do valor do ajuste, podendo chegar a 30% para contratos de maior complexidade (art. 99, com Clausula de Retomada). Contratos privados (ou entre particulares, PJ x PJ) podem demandar IS diferentes, mas fique atento aos termos e condições. </p>
-
+    <p>A IS pode ser fixada em qualquer percentual do valor do contrato base. Em contratos públicos, a Lei nº 14.133/2021 (art. 96) admite garantia entre 5% e 10% do valor do ajuste, podendo chegar a 30% para contratos de maior complexidade (art. 99, com Cláusula de Retomada). Contratos privados podem ter IS diferentes — fique atento aos termos e condições.</p>
     <div class="callout">
       <div class="callout-icon">⚑ IS alta ou baixa?</div>
-      <p>IS mais alta oferece mais proteção ao Segurado, mas gera prêmio mais elevado para o Tomador. IS mais baixa reduz o custo do seguro, mas limita a cobertura. O equilíbrio é negociado caso a caso, considerando o perfil do contrato e a exigência do Segurado.</p>
+      <p>IS mais alta protege melhor o Segurado, mas gera prêmio mais elevado para o Tomador. IS mais baixa reduz o custo do seguro, mas limita a cobertura. O equilíbrio é negociado caso a caso, considerando o perfil do contrato e a exigência do Segurado.</p>
     </div>
-
     <ul class="checklist">
-      <li>Valor máximo que a Seguradora pagará em caso de sinistro</li>
-      <li>Pode variar, conforme negociação</li>
+      <li>Valor máximo que a Seguradora pagará quando a obrigação não for cumprida</li>
+      <li>Pode variar conforme negociação</li>
       <li>Base de cálculo do prêmio: Taxa × IS × Prazo</li>
       <li>Prejuízo acima da IS não é coberto pelo seguro</li>
     </ul>
-    <div class="citation"><strong>Fundamento normativo:</strong> Circular SUSEP nº 662/2022 · Lei nº 14.133/2021, art. 96</div>
+    <div class="citation"><strong>Fundamento normativo:</strong> Lei nº 15.040/2024, arts. 89–90 · Circular SUSEP nº 662/2022 · Lei nº 14.133/2021, art. 96</div>
   </div>
   <div class="article-nav"><div><span class="nav-label">Anterior</span><a href="#objeto-segurado">← O Objeto Segurado</a></div><div style="text-align:right"><span class="nav-label">Próximo</span><a href="#vigencia">A Vigência →</a></div></div>
 </article>
 
-
-<!-- ═══════════════════════════════════════════════════════
-     07 · VIGÊNCIA
-     Ilustração: timeline com janelas de cobertura
-════════════════════════════════════════════════════════ -->
+<!-- 07 VIGÊNCIA — versão revisada Lei 15.040/2024 -->
 <article class="article" id="vigencia">
   <div class="article-eyebrow"><span class="article-num">07 / 11</span><span class="article-category">A apólice</span></div>
   <h2>Vigência</h2>
-  <p class="article-lead">O período de validade da apólice, e o que a Lei 15.040/2024 mudou sobre notificação fora do prazo.</p>
-
+  <p class="article-lead">O período de validade da apólice — e o que a Lei 15.040/2024 mudou sobre aviso fora do prazo.</p>
   <div class="article-body">
     <div class="def-box">
       <div class="def-label">Definição regulatória</div>
       <div class="def-text">A Vigência é o período de validade da apólice de Seguro Garantia, compreendido entre a data de início e a data de término da cobertura, dentro do qual o risco está garantido pela Seguradora.</div>
-      <div class="def-source">Fonte: Circular SUSEP nº 662/2022 · Lei nº 15.040/2024, arts. 58–59 e 70</div>
+      <div class="def-source">Fonte: Lei nº 15.040/2024, arts. 58–59 e 70 · Circular SUSEP nº 662/2022</div>
     </div>
-
-    <p>A vigência é o <strong>relógio da apólice</strong>. Ela delimita o período em que o risco está coberto e, por isso, precisa ser gerenciada com precisão, especialmente em contratos longos ou sujeitos a prorrogação. Mas a entrada em vigor da <strong>Lei nº 15.040/2024</strong> alterou uma premissa que era tratada como absoluta nas condições contratuais: a de que a notificação do sinistro após o vencimento da apólice extingue automaticamente a cobertura.</p>
-
-    <!-- ILUSTRAÇÃO 07: Timeline com três cenários incluindo nova regra da Lei 15.040 -->
+    <p>A vigência é o <strong>relógio da apólice</strong>. Ela delimita o período em que o risco está coberto e, por isso, precisa ser acompanhada de perto — especialmente em contratos longos ou sujeitos a prorrogação. A entrada em vigor da <strong>Lei nº 15.040/2024</strong>, porém, mudou uma premissa que era tratada como absoluta nas condições contratuais: a de que avisar o sinistro após o vencimento da apólice encerra automaticamente a cobertura.</p>
     <div class="illus">
       <svg viewBox="0 0 720 380" xmlns="http://www.w3.org/2000/svg" font-family="'Courier New', monospace">
         <rect width="720" height="380" fill="#EDE5D8"/>
         <text x="360" y="26" text-anchor="middle" font-size="9" fill="#6B5C50" letter-spacing="3" font-weight="700">VIGÊNCIA, TRÊS CENÁRIOS · LEI 15.040/2024</text>
-
-        <!-- Timeline base -->
         <line x1="40" y1="70" x2="680" y2="70" stroke="#D6C9B8" stroke-width="1.5"/>
         <text x="40"  y="60" text-anchor="middle" font-size="7" fill="#6B5C50">Jan/24</text>
         <text x="200" y="60" text-anchor="middle" font-size="7" fill="#6B5C50">Jul/24</text>
@@ -850,8 +602,6 @@
         <line x1="360" y1="66" x2="360" y2="74" stroke="#D6C9B8" stroke-width="1"/>
         <line x1="520" y1="66" x2="520" y2="74" stroke="#D6C9B8" stroke-width="1"/>
         <line x1="680" y1="66" x2="680" y2="74" stroke="#D6C9B8" stroke-width="1"/>
-
-        <!-- ── CENÁRIO A: Alinhada ── -->
         <text x="40" y="98" font-size="8" fill="#6B5C50" letter-spacing="1" font-weight="700">A) VIGÊNCIA ALINHADA AO CONTRATO</text>
         <rect x="40" y="106" width="480" height="13" rx="2" fill="#D6C9B8"/>
         <text x="280" y="116" text-anchor="middle" font-size="7" fill="#6B5C50">CONTRATO (24 meses)</text>
@@ -859,8 +609,6 @@
         <text x="280" y="135" text-anchor="middle" font-size="8" fill="#FAF7F2" font-weight="700">APÓLICE, alinhada ✓</text>
         <rect x="528" y="120" width="78" height="20" rx="3" fill="rgba(192,90,53,0.15)" stroke="#C05A35" stroke-width="1"/>
         <text x="567" y="134" text-anchor="middle" font-size="8" fill="#C05A35" font-weight="700">COBERTO ✓</text>
-
-        <!-- ── CENÁRIO B: Hiato por prorrogação ── -->
         <text x="40" y="164" font-size="8" fill="#6B5C50" letter-spacing="1" font-weight="700">B) CONTRATO PRORROGADO SEM RENOVAR APÓLICE</text>
         <rect x="40" y="172" width="620" height="13" rx="2" fill="#D6C9B8"/>
         <text x="350" y="182" text-anchor="middle" font-size="7" fill="#6B5C50">CONTRATO PRORROGADO (30 meses)</text>
@@ -868,125 +616,83 @@
         <text x="260" y="201" text-anchor="middle" font-size="8" fill="#FAF7F2" font-weight="700">APÓLICE vence Jan/26</text>
         <rect x="520" y="189" width="140" height="16" rx="0" fill="rgba(28,23,18,0.08)" stroke="#1C1712" stroke-width="1" stroke-dasharray="4,3"/>
         <text x="590" y="201" text-anchor="middle" font-size="8" fill="#1C1712" font-weight="700">SEM COBERTURA</text>
-        <text x="590" y="218" text-anchor="middle" font-size="7" fill="#C05A35" font-weight="700">Vácuo = risco descoberto</text>
-
-        <!-- ── CENÁRIO C: Notificação após vencimento, nova regra ── -->
-        <text x="40" y="244" font-size="8" fill="#6B5C50" letter-spacing="1" font-weight="700">C) INADIMPLEMENTO NA VIGÊNCIA · NOTIFICAÇÃO APÓS VENC. · LEI 15.040/2024</text>
-
-        <!-- Apólice bar -->
+        <text x="590" y="218" text-anchor="middle" font-size="7" fill="#C05A35" font-weight="700">Vácuo = sem proteção</text>
+        <text x="40" y="244" font-size="8" fill="#6B5C50" letter-spacing="1" font-weight="700">C) DESCUMPRIMENTO NA VIGÊNCIA · AVISO APÓS VENC. · LEI 15.040/2024</text>
         <rect x="40" y="252" width="480" height="16" rx="2" fill="#C05A35" opacity="0.70"/>
         <text x="280" y="264" text-anchor="middle" font-size="8" fill="#FAF7F2" font-weight="700">APÓLICE vigente (Jan/24–Jan/26)</text>
-
-        <!-- Inadimplemento marker dentro da vigência -->
         <line x1="300" y1="250" x2="300" y2="275" stroke="#1C1712" stroke-width="1.5"/>
         <circle cx="300" cy="278" r="5" fill="#1C1712"/>
-        <text x="300" y="294" text-anchor="middle" font-size="7" fill="#1C1712" font-weight="700">Inadimplemento</text>
+        <text x="300" y="294" text-anchor="middle" font-size="7" fill="#1C1712" font-weight="700">Descumprimento</text>
         <text x="300" y="304" text-anchor="middle" font-size="7" fill="#1C1712">(dentro da vigência)</text>
-
-        <!-- Vencimento marker -->
         <line x1="520" y1="252" x2="520" y2="340" stroke="#D6C9B8" stroke-width="1" stroke-dasharray="3,2"/>
         <text x="520" y="350" text-anchor="middle" font-size="7" fill="#6B5C50">Vencimento</text>
-
-        <!-- Notificação marker fora da vigência -->
         <line x1="590" y1="268" x2="590" y2="318" stroke="#C4900A" stroke-width="1.5"/>
         <circle cx="590" cy="322" r="5" fill="#C4900A"/>
-        <text x="590" y="338" text-anchor="middle" font-size="7" fill="#C4900A" font-weight="700">Notificação</text>
+        <text x="590" y="338" text-anchor="middle" font-size="7" fill="#C4900A" font-weight="700">Aviso do sinistro</text>
         <text x="590" y="348" text-anchor="middle" font-size="7" fill="#C4900A">(após vencimento)</text>
-
-        <!-- Result badge -->
         <rect x="614" y="252" width="98" height="24" rx="3" fill="rgba(196,144,10,0.15)" stroke="#C4900A" stroke-width="1"/>
         <text x="663" y="263" text-anchor="middle" font-size="7" fill="#C4900A" font-weight="700">COBERTURA</text>
         <text x="663" y="272" text-anchor="middle" font-size="7" fill="#C4900A" font-weight="700">PRESERVADA ✓</text>
-
-        <!-- Arrow from inadimplemento -->
-        <path d="M310 278 Q450 260 580 322" stroke="#C4900A" stroke-width="1" fill="none" stroke-dasharray="4,3" marker-end="none"/>
-
-        <!-- Law note -->
+        <path d="M310 278 Q450 260 580 322" stroke="#C4900A" stroke-width="1" fill="none" stroke-dasharray="4,3"/>
         <rect x="40" y="360" width="640" height="14" rx="3" fill="rgba(196,144,10,0.10)"/>
-        <text x="360" y="371" text-anchor="middle" font-size="8" fill="#C4900A" letter-spacing="1">A Seguradora responde pelo sinistro caracterizado na vigência, ainda que notificado após o término</text>
+        <text x="360" y="371" text-anchor="middle" font-size="8" fill="#C4900A" letter-spacing="1">A Seguradora responde pelo sinistro que aconteceu durante a vigência, ainda que avisado depois do término</text>
       </svg>
-      <div class="illus-caption">Fig. 7, Três cenários: vigência alinhada, vácuo por prorrogação, e o novo regime da Lei 15.040/2024 para notificação tardia, mas fique atendo ao prazo da prescrição para não perder o direito da indenização</div>
+      <div class="illus-caption">Fig. 7, Três cenários: vigência alinhada, vácuo por prorrogação, e o novo regime da Lei 15.040/2024</div>
     </div>
-
-    <h3>Vigência deve espelhar a obrigação garantida</h3>
-
-    <p>A regra fundamental permanece: a vigência da apólice deve ser suficiente para cobrir toda a duração da obrigação garantida. Se o contrato de obra prevê 18 meses de execução mais 6 meses de garantia pós-entrega, a apólice deve ter pelo menos 24 meses de vigência.</p>
-
-    <p>O problema clássico ocorre quando o contrato base é prorrogado mas a apólice não acompanha gerando um vácuo de cobertura, ou seja, o Segurado está desprotegido. Em contratos públicos regidos pela Lei nº 14.133/2021, a omissão do gestor nesse ponto pode gerar responsabilidade funcional.</p>
-
+    <h3>Vigência deve cobrir toda a obrigação</h3>
+    <p>A regra fundamental permanece: a vigência da apólice deve ser suficiente para cobrir toda a duração da obrigação garantida. Se o contrato prevê 18 meses de execução mais 6 meses de garantia pós-entrega, a apólice deve ter pelo menos 24 meses.</p>
+    <p>O problema mais comum é o contrato ser prorrogado sem que a apólice acompanhe — criando um vácuo de cobertura — o Segurado fica sem proteção. Em contratos públicos regidos pela Lei nº 14.133/2021, a omissão do gestor nesse ponto pode gerar responsabilidade funcional.</p>
     <h3>O que mudou com a Lei 15.040/2024</h3>
-
-    <p>O <strong>art. 70</strong> da Lei nº 15.040/2024 introduziu uma distinção relevante entre a <em>data de caracterização do sinistro</em> e a <em>data de sua notificação</em>. Isso significa que, se o inadimplemento do Tomador ocorreu <strong>dentro da vigência</strong> da apólice, o fato gerador da cobertura está preservado, mesmo que a notificação à Seguradora seja feita após o vencimento da apólice, desde que dentro do prazo prescricional.</p>
-
+    <p>O <strong>art. 70</strong> da Lei nº 15.040/2024 separou duas coisas que antes eram tratadas como uma só: a <em>data em que o Tomador deixou de cumprir a obrigação</em> e a <em>data em que o Segurado avisou a Seguradora</em>. Se o descumprimento ocorreu <strong>durante a vigência</strong>, o direito à cobertura existe — mesmo que o aviso venha depois do vencimento da apólice, desde que dentro do prazo de prescrição.</p>
     <div class="def-box">
       <div class="def-label">Art. 70 · Lei nº 15.040/2024</div>
-      <div class="def-text">"A seguradora responde pelos efeitos do sinistro caracterizado na vigência do contrato, ainda que se manifestem ou perdurem após o seu término."</div>
+      <div class="def-text">"A seguradora responde pelos efeitos do sinistro que aconteceu durante a vigência do contrato, ainda que se manifestem ou perdurem após o seu término."</div>
     </div>
-
-    <p>O art. 59 da Lei 15.040/2024 estabelece que cláusulas que excluem ou limitam direitos do Segurado são de interpretação restritiva, a dúvida resolve-se em favor do Segurado. Isso tem impacto direto sobre as cláusulas de notificação. Muitas condições gerais preveem que o sinistro deve ser comunicado "durante a vigência da apólice, sob pena de perda do direito à indenização." Essa redação tenta transformar o prazo de notificação, que é um procedimento simples, em uma condição de cobertura: se não notificou no prazo, o direito não existe. Se o inadimplemento (fato gerador ou descumprimento das obrigações pelo Tomador) ocorreu dentro da vigência, o direito à cobertura nasceu.</p>
-
+    <p>O art. 59 da mesma lei reforça: cláusulas que limitam direitos do Segurado devem ser interpretadas de forma restritiva, e a dúvida se resolve a favor do Segurado. Isso afeta diretamente as cláusulas de aviso que tentam transformar o prazo de notificação em condição de cobertura. Se o descumprimento ocorreu dentro da vigência, o direito à cobertura nasceu — e não desaparece por aviso tardio.</p>
     <div class="callout alert">
       <div class="callout-icon">⚠ Distinção essencial</div>
-      <p>O que determina a cobertura é a <strong>data do inadimplemento</strong> (fato gerador), não a data da notificação. Notificação após o vencimento da apólice, quando o inadimplemento ocorreu dentro da vigência, <strong>não extingue automaticamente a cobertura</strong> sob a Lei 15.040/2024, desde que a pretensão seja exercida dentro do prazo prescricional (art. 126).</p>
-      <p style="margin-top:12px;">Condições contratuais que exijam notificação durante a vigência como condição de cobertura estão sujeitas à interpretação restritiva do art. 59 e podem ser afastadas judicialmente.</p>
+      <p>O que determina a cobertura é a <strong>data em que o Tomador deixou de cumprir a obrigação</strong>, não a data do aviso. Avisar a Seguradora após o vencimento da apólice, quando o descumprimento ocorreu durante a vigência, <strong>não extingue automaticamente a cobertura</strong> sob a Lei 15.040/2024 — desde que dentro do prazo de prescrição (art. 126).</p>
+      <p style="margin-top:12px;">Cláusulas que exijam aviso durante a vigência como condição de cobertura estão sujeitas à interpretação restritiva do art. 59 e podem ser afastadas na Justiça.</p>
     </div>
-
-    <h3>Prazo prescricional: o limite real</h3>
-
-    <p>O verdadeiro limite temporal para o exercício da cobertura não é mais apenas o vencimento da apólice, é o prazo prescricional da pretensão, conforme o <strong>art. 126</strong> da Lei nº 15.040/2024:</p>
-
+    <h3>Prazo de prescrição: o limite real</h3>
+    <p>O verdadeiro limite para exercer a cobertura não é mais apenas o vencimento da apólice — é o prazo de prescrição, conforme o <strong>art. 126</strong> da Lei nº 15.040/2024:</p>
     <ul class="checklist">
-      <li><strong>Segurado (inciso II):</strong> 1 ano, contado da ciência da recusa expressa e motivada da Seguradora</li>
-      <li><strong>Terceiros prejudicados (inciso III):</strong> 3 anos, contados da ciência do fato gerador</li>
+      <li><strong>Segurado (inciso II):</strong> 1 ano, contado de quando a Seguradora recusou formalmente o sinistro</li>
+      <li><strong>Terceiros prejudicados (inciso III):</strong> 3 anos, contados de quando tomaram conhecimento do descumprimento</li>
     </ul>
-
-    <p>A recusa da Seguradora deve ser <strong>expressa e motivada</strong> (art. 86, §6º), e ela não pode inovar posteriormente no fundamento da recusa, salvo se tomar conhecimento de fatos novos. Recusa genérica ou silêncio prolongado pela Seguradora pode levar à perda do direito de recusar o sinistro, ou seja, a cobertura pode subsistir mesmo após o vencimento da apólice, mas dentro do prazo prescricional.</p>
-
+    <p>A recusa da Seguradora deve ser <strong>expressa e com motivo claro</strong> (art. 86, §6º). Recusa vaga ou silêncio prolongado pode fazer com que a Seguradora perca o direito de recusar — e a cobertura passe a ser devida.</p>
     <div class="callout">
       <div class="callout-icon">✓ Boa prática</div>
-      <p>Ao constatar que o Tomador não cumpriu suas obrigações, documente imediatamente a ocorrência com data certa: notificação extrajudicial, registros contratuais, correspondências formais. Essa documentação é o que ancora a cobertura ao fato gerador. Essa informação é crucial.</p>
+      <p>Ao perceber que o Tomador não cumpriu a obrigação, documente imediatamente com data certa: notificação extrajudicial, registros contratuais, correspondências formais. Essa documentação é o que prova que o descumprimento ocorreu durante a vigência — e é essa prova que ancora a cobertura.</p>
     </div>
-
     <ul class="checklist">
       <li>Período de validade da apólice: do início ao fim da cobertura contratada</li>
-      <li>Deve acompanhar a duração real da obrigação garantida</li>
+      <li>Deve cobrir toda a duração real da obrigação garantida</li>
       <li>Prorrogação do contrato base exige prorrogação da apólice</li>
-      <li>Fato gerador (tomador não cumpriu suas obrigações) dentro da vigência preserva a cobertura, art. 70, Lei 15.040/2024</li>
-      <li>Notificação após o vencimento não extingue automaticamente a cobertura se o sinistro se ocorrer dentro do prazo</li>
+      <li>Descumprimento dentro da vigência preserva a cobertura — art. 70, Lei 15.040/2024</li>
+      <li>Aviso tardio não extingue a cobertura se o descumprimento ocorreu dentro do prazo</li>
     </ul>
     <div class="citation"><strong>Fundamento normativo:</strong> Circular SUSEP nº 662/2022 · Lei nº 15.040/2024, arts. 58, 59, 70, 86 e 126 · Lei nº 14.133/2021, arts. 106–107</div>
   </div>
   <div class="article-nav"><div><span class="nav-label">Anterior</span><a href="#importancia-segurada">← Importância Segurada</a></div><div style="text-align:right"><span class="nav-label">Próximo</span><a href="#premio">O Prêmio →</a></div></div>
 </article>
 
-
-<!-- ═══════════════════════════════════════════════════════
-     08 · PRÊMIO
-     Ilustração: fórmula decomposta + gráfico de variáveis
-════════════════════════════════════════════════════════ -->
+<!-- 08 PRÊMIO -->
 <article class="article" id="premio">
   <div class="article-eyebrow"><span class="article-num">08 / 11</span><span class="article-category">A apólice</span></div>
   <h2>O Prêmio</h2>
-  <p class="article-lead">O custo do seguro para o Tomador, e como ele é calculado.</p>
-
+  <p class="article-lead">O custo do seguro para o Tomador — e como ele é calculado.</p>
   <div class="article-body">
     <div class="def-box">
       <div class="def-label">Definição regulatória</div>
-      <div class="def-text">O Prêmio é o valor pago pelo Tomador à Seguradora como contraprestação pela emissão da apólice de Seguro Garantia. É calculado com base na taxa de subscrição, na Importância Segurada e no prazo de vigência.</div>
-      <div class="def-source">Fonte: Circular SUSEP nº 662/2022</div>
+      <div class="def-text">O Prêmio é o valor pago pelo Tomador à Seguradora pela emissão da apólice de Seguro Garantia. É calculado com base na taxa de subscrição, na Importância Segurada e no prazo de vigência.</div>
+      <div class="def-source">Fonte: Lei nº 15.040/2024 · Circular SUSEP nº 662/2022</div>
     </div>
-
-    <!-- ILUSTRAÇÃO 08: Fórmula decomposta -->
     <div class="illus">
       <svg viewBox="0 0 720 300" xmlns="http://www.w3.org/2000/svg" font-family="'Courier New', monospace">
         <rect width="720" height="300" fill="#1C1712"/>
         <text x="360" y="26" text-anchor="middle" font-size="9" fill="rgba(250,247,242,0.30)" letter-spacing="3" font-weight="700">COMPOSIÇÃO DO PRÊMIO</text>
-
-        <!-- Formula display -->
         <text x="360" y="65" text-anchor="middle" font-size="22" fill="#FAF7F2" font-family="'Playfair Display',serif" letter-spacing="4">Taxa × IS × Prazo</text>
-
-        <!-- Component boxes -->
-        <!-- TAXA -->
         <rect x="40" y="90" width="138" height="140" rx="4" fill="rgba(192,90,53,0.15)" stroke="#C05A35" stroke-width="1.5"/>
         <text x="109" y="114" text-anchor="middle" font-size="9" fill="#C05A35" letter-spacing="2" font-weight="700">TAXA</text>
         <text x="109" y="136" text-anchor="middle" font-size="28" fill="#C05A35" font-family="'Playfair Display',serif">%</text>
@@ -994,396 +700,276 @@
         <text x="109" y="179" text-anchor="middle" font-size="9" fill="rgba(250,247,242,0.5)">Risco técnico</text>
         <text x="109" y="193" text-anchor="middle" font-size="9" fill="rgba(250,247,242,0.5)">Histórico Tomador</text>
         <text x="109" y="213" text-anchor="middle" font-size="9" fill="#C05A35">definida na subscrição</text>
-
-        <!-- × -->
         <text x="194" y="168" text-anchor="middle" font-size="24" fill="rgba(250,247,242,0.25)">×</text>
-
-        <!-- IS -->
         <rect x="210" y="90" width="138" height="140" rx="4" fill="rgba(196,144,10,0.12)" stroke="#C4900A" stroke-width="1.5"/>
         <text x="279" y="114" text-anchor="middle" font-size="9" fill="#C4900A" letter-spacing="2" font-weight="700">IS</text>
         <text x="279" y="136" text-anchor="middle" font-size="18" fill="#C4900A" font-family="'Playfair Display',serif">R$</text>
         <text x="279" y="165" text-anchor="middle" font-size="9" fill="rgba(250,247,242,0.5)">Teto da indenização</text>
         <text x="279" y="179" text-anchor="middle" font-size="9" fill="rgba(250,247,242,0.5)">Negociado</text>
         <text x="279" y="193" text-anchor="middle" font-size="9" fill="rgba(250,247,242,0.5)">entre as partes</text>
-        <text x="279" y="213" text-anchor="middle" font-size="9" fill="#C4900A">quanto mais alta<br>mais prêmio</text>
-
-        <!-- × -->
-        <text x="194" y="168" text-anchor="middle" font-size="24" fill="rgba(250,247,242,0.25)">×</text>
-
-        <!-- Prazo -->
-
-        <rect x="210" y="90" width="138" height="140" rx="4" fill="rgba(196,144,10,0.12)" stroke="#C4900A" stroke-width="1.5"/>
-        <text x="279" y="114" text-anchor="middle" font-size="9" fill="#C4900A" letter-spacing="2" font-weight="700">IS</text>
-        <text x="279" y="136" text-anchor="middle" font-size="18" fill="#C4900A" font-family="'Playfair Display',serif">R$</text>
+        <text x="279" y="213" text-anchor="middle" font-size="9" fill="#C4900A">quanto mais alta, mais prêmio</text>
+        <text x="364" y="168" text-anchor="middle" font-size="24" fill="rgba(250,247,242,0.25)">×</text>
+        <rect x="380" y="90" width="138" height="140" rx="4" fill="rgba(107,92,80,0.20)" stroke="rgba(107,92,80,0.40)" stroke-width="1.5"/>
+        <text x="449" y="114" text-anchor="middle" font-size="9" fill="#D6C9B8" letter-spacing="2" font-weight="700">PRAZO</text>
+        <text x="449" y="136" text-anchor="middle" font-size="18" fill="#D6C9B8" font-family="'Playfair Display',serif">⏱</text>
         <text x="449" y="165" text-anchor="middle" font-size="9" fill="rgba(250,247,242,0.5)">Duração da vigência</text>
         <text x="449" y="179" text-anchor="middle" font-size="9" fill="rgba(250,247,242,0.5)">Taxa é anualizada</text>
         <text x="449" y="193" text-anchor="middle" font-size="9" fill="rgba(250,247,242,0.5)">Prazo na fórmula</text>
         <text x="449" y="213" text-anchor="middle" font-size="9" fill="rgba(250,247,242,0.5)">proporcional ao risco</text>
-
-        <!-- Example -->
         <rect x="40" y="248" width="640" height="36" rx="4" fill="rgba(192,90,53,0.12)" stroke="rgba(192,90,53,0.25)" stroke-width="1"/>
         <text x="90" y="262" font-size="9" fill="rgba(250,247,242,0.4)" letter-spacing="1">EXEMPLO</text>
         <text x="360" y="262" text-anchor="middle" font-size="10" fill="rgba(250,247,242,0.7)">Taxa 1,5% a.a.  ×  IS R$ 2.000.000  ×  18 meses</text>
-        <text x="360" y="278" text-anchor="middle" font-size="10" fill="#C05A35" font-weight="700">Prêmio = R$ 45.000 + IOF</text>
+        <text x="360" y="278" text-anchor="middle" font-size="10" fill="#C05A35" font-weight="700">Prêmio = R$ 45.000</text>
       </svg>
-      <div class="illus-caption" style="background:var(--ink);color:rgba(250,247,242,0.45);border-color:rgba(250,247,242,0.08)">Fig. 8, Decomposição do prêmio: as quatro variáveis e como cada uma influencia o custo final</div>
+      <div class="illus-caption" style="background:var(--ink);color:rgba(250,247,242,0.45);border-color:rgba(250,247,242,0.08)">Fig. 8, Como o prêmio é composto: taxa, IS e prazo</div>
     </div>
-
     <h3>O que determina a taxa?</h3>
-    <p>A taxa é o elemento mais variável da equação, e reflete o resultado da análise de crédito do Tomador e subscrição do risco. Considera: probabilidade de inadimplemento, natureza e complexidade da obrigação garantida, prazo da vigência, histórico do Tomador com a Seguradora, e presença e qualidade das contragarantias.</p>
-
+    <p>A taxa é o elemento mais variável da equação e reflete a análise de crédito do Tomador feita pela Seguradora. Considera: chance de não cumprimento da obrigação, natureza e complexidade do contrato garantido, prazo da vigência, histórico do Tomador com a Seguradora, e qualidade das contragarantias oferecidas.</p>
     <div class="callout">
-      <div class="callout-icon">⚑ Prêmio não é restituível</div>
+      <div class="callout-icon">⚑ Prêmio não é devolvido</div>
       <p>O prêmio pago não é devolvido em caso de sinistro. Ele é a remuneração da Seguradora pelo risco assumido durante toda a vigência, independentemente de haver ou não sinistro.</p>
     </div>
-
     <ul class="checklist">
-      <li>Pago exclusivamente pelo Tomador, o Segurado não arca com nenhum custo</li>
+      <li>Pago exclusivamente pelo Tomador — o Segurado não arca com nenhum custo</li>
       <li>Calculado: Taxa × IS × Prazo</li>
       <li>A taxa reflete o resultado da análise de crédito do Tomador</li>
-      <li>Não é restituível em caso de sinistro</li>
+      <li>Não é devolvido em caso de sinistro</li>
     </ul>
-    <div class="citation"><strong>Fundamento normativo:</strong> Circular SUSEP nº 662/2022 · Lei nº 8.383/1991 (IOF) · Decreto nº 6.306/2007</div>
+    <div class="citation"><strong>Fundamento normativo:</strong> Lei nº 15.040/2024 · Circular SUSEP nº 662/2022</div>
   </div>
   <div class="article-nav"><div><span class="nav-label">Anterior</span><a href="#vigencia">← A Vigência</a></div><div style="text-align:right"><span class="nav-label">Próximo</span><a href="#frontispicio">O Frontispício →</a></div></div>
 </article>
 
-
-<!-- ═══════════════════════════════════════════════════════
-     09 · FRONTISPÍCIO
-     Ilustração: mockup da página de rosto da apólice
-════════════════════════════════════════════════════════ -->
+<!-- 09 FRONTISPÍCIO -->
 <article class="article" id="frontispicio">
   <div class="article-eyebrow"><span class="article-num">09 / 11</span><span class="article-category">A apólice</span></div>
   <h2>O Frontispício</h2>
-  <p class="article-lead">A página de rosto da apólice, onde estão todos os dados essenciais do seguro.</p>
-
+  <p class="article-lead">A página de rosto da apólice — onde estão todos os dados essenciais do seguro.</p>
   <div class="article-body">
     <div class="def-box">
       <div class="def-label">Definição técnica</div>
-      <div class="def-text">O Frontispício é a página de rosto da apólice de Seguro Garantia. Concentra, de forma sintética, todos os dados essenciais do contrato: partes, objeto, Importância Segurada, prêmio e vigência.</div>
-      <div class="def-source">Fonte: Circular SUSEP nº 662/2022</div>
+      <div class="def-text">O Frontispício é a página de rosto da apólice de Seguro Garantia. Concentra, de forma resumida, todos os dados essenciais do contrato: partes, objeto, Importância Segurada, prêmio e vigência.</div>
+      <div class="def-source">Fonte: Lei nº 15.040/2024 · Circular SUSEP nº 662/2022</div>
     </div>
-
-    <!-- ILUSTRAÇÃO 09: Mockup de apólice com anotações -->
     <div class="illus">
       <svg viewBox="0 0 720 420" xmlns="http://www.w3.org/2000/svg" font-family="'Courier New', monospace">
         <rect width="720" height="420" fill="#EDE5D8"/>
         <text x="360" y="26" text-anchor="middle" font-size="9" fill="#6B5C50" letter-spacing="3" font-weight="700">ANATOMIA DO FRONTISPÍCIO</text>
-
-        <!-- Document shadow -->
         <rect x="168" y="52" width="346" height="352" rx="4" fill="rgba(28,23,18,0.12)"/>
-        <!-- Document body -->
         <rect x="162" y="46" width="346" height="352" rx="4" fill="#FAF7F2" stroke="#D6C9B8" stroke-width="1"/>
-
-        <!-- Document header bar -->
         <rect x="162" y="46" width="346" height="5" rx="2" fill="#C05A35"/>
-
-        <!-- Insurer name + logo area -->
         <rect x="178" y="64" width="80" height="26" rx="2" fill="#EDE5D8"/>
         <text x="218" y="81" text-anchor="middle" font-size="8" fill="#6B5C50">LOGOTIPO</text>
         <text x="400" y="74" text-anchor="end" font-size="8" fill="#6B5C50" font-weight="700">APÓLICE DE SEGURO GARANTIA</text>
         <text x="400" y="85" text-anchor="end" font-size="7" fill="#6B5C50">Processo SUSEP nº 15414.900123/2024-01</text>
-
         <line x1="178" y1="98" x2="492" y2="98" stroke="#D6C9B8" stroke-width="1"/>
-
-        <!-- Section: Número da apólice -->
         <text x="178" y="114" font-size="7" fill="#C05A35" font-weight="700" letter-spacing="1.5">NÚMERO DA APÓLICE</text>
         <text x="178" y="126" font-size="9" fill="#1C1712" font-weight="700">SGF-2024-00847</text>
-
         <line x1="178" y1="136" x2="492" y2="136" stroke="#EDE5D8" stroke-width="1"/>
-
-        <!-- Section: TOMADOR -->
         <text x="178" y="150" font-size="7" fill="#C05A35" font-weight="700" letter-spacing="1.5">TOMADOR</text>
         <text x="178" y="162" font-size="9" fill="#1C1712">Construtora Horizonte Ltda.</text>
         <text x="178" y="173" font-size="8" fill="#6B5C50">CNPJ 12.345.678/0001-90 · São Paulo/SP</text>
-
         <line x1="178" y1="182" x2="492" y2="182" stroke="#EDE5D8" stroke-width="1"/>
-
-        <!-- Section: SEGURADO -->
         <text x="178" y="196" font-size="7" fill="#C05A35" font-weight="700" letter-spacing="1.5">SEGURADO</text>
         <text x="178" y="208" font-size="9" fill="#1C1712">Município de Campinas, Secretaria de Obras</text>
         <text x="178" y="219" font-size="8" fill="#6B5C50">CNPJ 51.885.242/0001-40 · Campinas/SP</text>
-
         <line x1="178" y1="228" x2="492" y2="228" stroke="#EDE5D8" stroke-width="1"/>
-
-        <!-- Section: OBJETO -->
         <text x="178" y="242" font-size="7" fill="#C05A35" font-weight="700" letter-spacing="1.5">OBJETO SEGURADO</text>
         <text x="178" y="254" font-size="8" fill="#1C1712">Execução de pavimentação asfáltica conforme</text>
         <text x="178" y="264" font-size="8" fill="#1C1712">Contrato nº 47/2024, Edital Pregão 012/2024</text>
-
         <line x1="178" y1="274" x2="492" y2="274" stroke="#EDE5D8" stroke-width="1"/>
-
-        <!-- Three columns: IS, Prêmio, Vigência -->
         <text x="178" y="288" font-size="7" fill="#C05A35" font-weight="700" letter-spacing="1.5">IMPORTÂNCIA SEGURADA</text>
         <text x="308" y="288" font-size="7" fill="#C05A35" font-weight="700" letter-spacing="1.5">PRÊMIO TOTAL</text>
         <text x="420" y="288" font-size="7" fill="#C05A35" font-weight="700" letter-spacing="1.5">VIGÊNCIA</text>
-
         <text x="178" y="302" font-size="10" fill="#1C1712" font-weight="700">R$ 1.500.000</text>
         <text x="308" y="302" font-size="10" fill="#1C1712" font-weight="700">R$ 33.750</text>
         <text x="420" y="302" font-size="9" fill="#1C1712" font-weight="700">Jan/24–Jul/25</text>
         <text x="178" y="313" font-size="7" fill="#6B5C50">30% do contrato</text>
-        <text x="308" y="313" font-size="7" fill="#6B5C50">+ IOF R$ 236,25</text>
+        <text x="308" y="313" font-size="7" fill="#6B5C50"></text>
         <text x="420" y="313" font-size="7" fill="#6B5C50">18 meses</text>
-
         <line x1="178" y1="322" x2="492" y2="322" stroke="#D6C9B8" stroke-width="1"/>
-
-        <!-- Signatures area -->
         <text x="178" y="340" font-size="7" fill="#6B5C50">Local e Data: São Paulo, 15 de janeiro de 2024</text>
         <line x1="178" y1="370" x2="310" y2="370" stroke="#D6C9B8" stroke-width="1"/>
         <line x1="342" y1="370" x2="492" y2="370" stroke="#D6C9B8" stroke-width="1"/>
         <text x="244" y="380" text-anchor="middle" font-size="7" fill="#6B5C50">Seguradora (assinatura)</text>
         <text x="417" y="380" text-anchor="middle" font-size="7" fill="#6B5C50">Tomador (assinatura)</text>
-
-        <!-- Annotation callouts (left side) -->
         <line x1="100" y1="122" x2="160" y2="122" stroke="#C05A35" stroke-width="1" stroke-dasharray="3,2"/>
         <text x="96" y="126" text-anchor="end" font-size="8" fill="#C05A35" font-weight="700">nº apólice</text>
-
         <line x1="100" y1="162" x2="160" y2="162" stroke="#C05A35" stroke-width="1" stroke-dasharray="3,2"/>
         <text x="96" y="166" text-anchor="end" font-size="8" fill="#C05A35" font-weight="700">tomador</text>
-
         <line x1="100" y1="208" x2="160" y2="208" stroke="#C05A35" stroke-width="1" stroke-dasharray="3,2"/>
         <text x="96" y="212" text-anchor="end" font-size="8" fill="#C05A35" font-weight="700">segurado</text>
-
         <line x1="100" y1="254" x2="160" y2="254" stroke="#C05A35" stroke-width="1" stroke-dasharray="3,2"/>
         <text x="96" y="258" text-anchor="end" font-size="8" fill="#C05A35" font-weight="700">objeto</text>
-
-        <!-- Annotation callouts (right side) -->
         <line x1="510" y1="298" x2="560" y2="298" stroke="#C4900A" stroke-width="1" stroke-dasharray="3,2"/>
         <text x="564" y="302" font-size="8" fill="#C4900A" font-weight="700">IS · prêmio · vigência</text>
-
         <text x="96" y="36" text-anchor="end" font-size="8" fill="#6B5C50">Conferir antes</text>
         <text x="96" y="47" text-anchor="end" font-size="8" fill="#6B5C50">de assinar ↓</text>
       </svg>
       <div class="illus-caption">Fig. 9, Mockup do Frontispício: os campos essenciais e onde erros costumam aparecer</div>
     </div>
-
-    <h3>Frontispício errado: consequências</h3>
-    <p>Se os dados do Frontispício contiverem erros, CNPJ incorreto, vigência equivocada, IS divergente do contratado, toda a apólice pode ser questionada. Em sinistro, o regulador da seguradora começa pelo Frontispício. Em ação judicial, o advogado também. Erros tipográficos em datas de vigência são mais comuns do que parecem.</p>
-
+    <h3>Frontispício com erro: o que pode acontecer</h3>
+    <p>Se os dados do Frontispício contiverem erros — CNPJ incorreto, vigência errada, IS diferente do contratado — toda a apólice pode ser questionada. Na análise do sinistro, o regulador começa pelo Frontispício. Numa ação judicial, o advogado também. Erros em datas de vigência são mais comuns do que parecem.</p>
     <div class="callout alert">
       <div class="callout-icon">✕ Não assine sem conferir</div>
-      <p>Tanto o Tomador quanto o Segurado devem conferir o Frontispício antes de aceitar a apólice. CNPJ, datas de vigência e IS são os campos mais sujeitos a erro e os mais relevantes para o acionamento.</p>
+      <p>Tanto o Tomador quanto o Segurado devem conferir o Frontispício antes de aceitar a apólice. CNPJ, datas de vigência e IS são os campos mais sujeitos a erro e os mais importantes para o acionamento.</p>
     </div>
-
     <ul class="checklist">
       <li>Página de rosto da apólice com todos os dados essenciais</li>
       <li>Identifica partes, objeto, IS, prêmio e vigência em um único lugar</li>
       <li>Primeiro documento a conferir em qualquer análise, sinistro ou ação judicial</li>
-      <li>Erros no Frontispício comprometem a validade e o acionamento da apólice</li>
+      <li>Erros no Frontispício podem comprometer a validade e o acionamento da apólice</li>
     </ul>
-    <div class="citation"><strong>Fundamento normativo:</strong> Circular SUSEP nº 662/2022 · Resolução CNSP nº 432/2021</div>
+    <div class="citation"><strong>Fundamento normativo:</strong> Lei nº 15.040/2024, art. 55 · Circular SUSEP nº 662/2022 · Resolução CNSP nº 432/2021</div>
   </div>
   <div class="article-nav"><div><span class="nav-label">Anterior</span><a href="#premio">← O Prêmio</a></div><div style="text-align:right"><span class="nav-label">Próximo</span><a href="#condicoes-contratuais">Condições Contratuais →</a></div></div>
 </article>
 
-
-<!-- ═══════════════════════════════════════════════════════
-     10 · CONDIÇÕES CONTRATUAIS
-     Ilustração: pirâmide hierárquica das três camadas
-════════════════════════════════════════════════════════ -->
+<!-- 10 CONDIÇÕES CONTRATUAIS -->
 <article class="article" id="condicoes-contratuais">
   <div class="article-eyebrow"><span class="article-num">10 / 11</span><span class="article-category">A apólice</span></div>
   <h2>Condições Contratuais</h2>
-  <p class="article-lead">As regras do jogo, Gerais, Especiais e Particulares.</p>
-
+  <p class="article-lead">As regras do jogo — Gerais, Especiais e Particulares.</p>
   <div class="article-body">
     <div class="def-box">
       <div class="def-label">Definição técnica</div>
-      <div class="def-text">As Condições Contratuais são as cláusulas que regem direitos e obrigações das partes na apólice de Seguro Garantia. Dividem-se em três camadas hierárquicas: Gerais, Especiais e Particulares, onde as Particulares prevalecem em caso de conflito.</div>
-      <div class="def-source">Fonte: Circular SUSEP nº 662/2022</div>
+      <div class="def-text">As Condições Contratuais são as cláusulas que regem direitos e obrigações das partes na apólice de Seguro Garantia. Dividem-se em três camadas: Gerais, Especiais e Particulares, onde as Particulares prevalecem em caso de conflito.</div>
+      <div class="def-source">Fonte: Lei nº 15.040/2024 · Circular SUSEP nº 662/2022</div>
     </div>
-
-    <!-- ILUSTRAÇÃO 10: Pirâmide de camadas -->
     <div class="illus">
       <svg viewBox="0 0 720 340" xmlns="http://www.w3.org/2000/svg" font-family="'Courier New', monospace">
         <rect width="720" height="340" fill="#EDE5D8"/>
         <text x="360" y="26" text-anchor="middle" font-size="9" fill="#6B5C50" letter-spacing="3" font-weight="700">HIERARQUIA DAS CONDIÇÕES CONTRATUAIS</text>
-
-        <!-- Left: PIRÂMIDE (leitura de análise: de baixo para cima) -->
-        <!-- Layer 3 - Gerais (base) -->
         <polygon points="60,308 400,308 360,240 100,240" fill="#D6C9B8" stroke="#B8A890" stroke-width="1"/>
         <text x="230" y="280" text-anchor="middle" font-size="11" fill="#6B5C50" font-weight="700">CONDIÇÕES GERAIS</text>
         <text x="230" y="296" text-anchor="middle" font-size="9" fill="#6B5C50">base comum · aprovadas pela SUSEP · mais genérico</text>
-
-        <!-- Layer 2 - Especiais -->
         <polygon points="100,238 360,238 320,170 140,170" fill="#C05A35" opacity="0.4" stroke="#C05A35" stroke-width="1" stroke-opacity="0.6"/>
         <text x="230" y="205" text-anchor="middle" font-size="11" fill="#3D342A" font-weight="700">CONDIÇÕES ESPECIAIS</text>
         <text x="230" y="219" text-anchor="middle" font-size="9" fill="#6B5C50">adaptadas ao ramo: público · privado · judicial · fiança</text>
-
-        <!-- Layer 1 - Particulares (apex / topo) -->
         <polygon points="140,168 320,168 280,100 180,100" fill="#C05A35" stroke="#9A3E20" stroke-width="1.5"/>
         <text x="230" y="135" text-anchor="middle" font-size="11" fill="#FAF7F2" font-weight="700">CONDIÇÕES PARTICULARES</text>
         <text x="230" y="152" text-anchor="middle" font-size="9" fill="rgba(250,247,242,0.7)">específicas da apólice · PREVALECEM sobre as demais</text>
-
-        <!-- Arrow: leia de cima para baixo na análise -->
         <text x="430" y="50" font-size="9" fill="#6B5C50" font-weight="700" letter-spacing="1.5">LEIA NESTA ORDEM:</text>
-
-        <!-- Step-by-step analysis -->
         <rect x="428" y="62" width="260" height="72" rx="4" fill="#C05A35" opacity="0.15" stroke="#C05A35" stroke-width="1"/>
         <text x="448" y="82" font-size="9" fill="#C05A35" font-weight="700">① Particulares</text>
         <text x="448" y="95" font-size="9" fill="#6B5C50">cláusulas negociadas para esta apólice</text>
         <text x="448" y="110" font-size="9" fill="#6B5C50">se não tratar do tema → Especiais</text>
         <text x="448" y="124" font-size="9" fill="#6B5C50">se não tratar do tema → Gerais</text>
-
         <line x1="558" y1="136" x2="558" y2="148" stroke="#D6C9B8" stroke-width="1" stroke-dasharray="3,2"/>
-
         <rect x="428" y="150" width="260" height="52" rx="4" fill="rgba(192,90,53,0.08)" stroke="rgba(192,90,53,0.25)" stroke-width="1"/>
         <text x="448" y="170" font-size="9" fill="#9A3E20" font-weight="700">② Especiais</text>
-        <text x="448" y="184" font-size="9" fill="#6B5C50">ajustadas ao ramo de garantia</text>
+        <text x="448" y="184" font-size="9" fill="#6B5C50">ajustadas ao tipo de garantia</text>
         <text x="448" y="196" font-size="9" fill="#6B5C50">se não tratar do tema → Gerais</text>
-
         <line x1="558" y1="204" x2="558" y2="216" stroke="#D6C9B8" stroke-width="1" stroke-dasharray="3,2"/>
-
         <rect x="428" y="218" width="260" height="40" rx="4" fill="rgba(107,92,80,0.08)" stroke="#D6C9B8" stroke-width="1"/>
         <text x="448" y="236" font-size="9" fill="#6B5C50" font-weight="700">③ Gerais</text>
         <text x="448" y="250" font-size="9" fill="#6B5C50">regras mínimas do produto</text>
-
-        <!-- Conflict resolution rule -->
         <rect x="428" y="274" width="260" height="50" rx="4" fill="#1C1712"/>
         <text x="558" y="293" text-anchor="middle" font-size="9" fill="rgba(250,247,242,0.5)" letter-spacing="1">EM CONFLITO, PREVALECE:</text>
         <text x="558" y="310" text-anchor="middle" font-size="9" fill="#C05A35" letter-spacing="1" font-weight="700">PARTICULAR &gt; ESPECIAL &gt; GERAL</text>
-
-        <!-- Bottom label -->
         <text x="230" y="328" text-anchor="middle" font-size="9" fill="#6B5C50">do mais específico para o mais genérico</text>
       </svg>
-      <div class="illus-caption">Fig. 10, Pirâmide hierárquica: as três camadas de condições e a regra de prevalência em caso de conflito</div>
+      <div class="illus-caption">Fig. 10, As três camadas de condições e a regra de prevalência em caso de conflito</div>
     </div>
-
     <h3>A regra de prevalência</h3>
-    <p>Em caso de conflito entre as camadas, a regra é clara: <strong>Particulares prevalecem sobre Especiais, que prevalecem sobre Gerais</strong>. Se as Condições Gerais estabelecem prazo de 30 dias para notificação de sinistro, mas uma Condição Particular amplia esse prazo para 60 dias, prevalece o prazo de 60 dias. Leia sempre do mais específico para o mais genérico.</p>
-
+    <p>Em caso de conflito entre as camadas, a regra é clara: <strong>Particulares prevalecem sobre Especiais, que prevalecem sobre Gerais</strong>. Se as Condições Gerais definem prazo de 30 dias para avisar o sinistro, mas uma Condição Particular amplia esse prazo para 60 dias, vale o prazo de 60 dias. Leia sempre do mais específico para o mais genérico.</p>
     <div class="callout">
       <div class="callout-icon">⚑ Exclusões de cobertura</div>
-      <p>As exclusões de cobertura constam principalmente nas Condições Gerais e Especiais. São situações nas quais a Seguradora está desobrigada de pagar, mesmo que haja inadimplemento. Leia as exclusões antes de acionar o sinistro.</p>
+      <p>As exclusões de cobertura ficam principalmente nas Condições Gerais e Especiais. São as situações em que a Seguradora não é obrigada a pagar, mesmo que a obrigação não tenha sido cumprida. Leia as exclusões antes de acionar o sinistro.</p>
     </div>
-
     <ul class="checklist">
-      <li>Três camadas: Gerais (base), Especiais (ramo) e Particulares (apólice específica)</li>
+      <li>Três camadas: Gerais (base), Especiais (tipo de garantia) e Particulares (apólice específica)</li>
       <li>Particulares prevalecem sobre Especiais, que prevalecem sobre Gerais</li>
       <li>Leia sempre do específico para o geral antes de qualquer acionamento</li>
       <li>As exclusões de cobertura costumam estar nas Condições Gerais e Especiais</li>
     </ul>
-    <div class="citation"><strong>Fundamento normativo:</strong> Circular SUSEP nº 662/2022 · Resolução CNSP nº 432/2021 · CDC, art. 54</div>
+    <div class="citation"><strong>Fundamento normativo:</strong> Lei nº 15.040/2024, arts. 56–59 · Circular SUSEP nº 662/2022 · Resolução CNSP nº 432/2021</div>
   </div>
   <div class="article-nav"><div><span class="nav-label">Anterior</span><a href="#frontispicio">← O Frontispício</a></div><div style="text-align:right"><span class="nav-label">Próximo</span><a href="#contragarantia">A Contragarantia →</a></div></div>
 </article>
 
-
-<!-- ═══════════════════════════════════════════════════════
-     11 · CONTRAGARANTIA
-     Ilustração: ciclo de regresso, sinistro → execução
-════════════════════════════════════════════════════════ -->
+<!-- 11 CONTRAGARANTIA -->
 <article class="article" id="contragarantia">
   <div class="article-eyebrow"><span class="article-num">11 / 11</span><span class="article-category">Além da apólice</span></div>
   <h2>Contrato de Contragarantia</h2>
-  <p class="article-lead">O instrumento que assegura o regresso, e por que o Tomador nunca sai impune.</p>
-
+  <p class="article-lead">O instrumento que garante a cobrança — e por que o Tomador nunca sai impune.</p>
   <div class="article-body">
     <div class="def-box">
       <div class="def-label">Definição técnica</div>
-      <div class="def-text">A Contragarantia (CCG) é o instrumento firmado entre a Seguradora e o Tomador pelo qual este oferece garantias reais ou pessoais para assegurar o ressarcimento da Seguradora em caso de sinistro. Instrumentaliza o direito de regresso da Seguradora após o pagamento da indenização.</div>
-      <div class="def-source">Fonte: Circular SUSEP nº 662/2022 · Código Civil Brasileiro/2002</div>
+      <div class="def-text">A Contragarantia (CCG) é o contrato firmado entre a Seguradora e o Tomador pelo qual o Tomador oferece bens ou outras garantias para assegurar o reembolso à Seguradora em caso de sinistro. Na prática, garante o direito de a Seguradora cobrar o Tomador após pagar o sinistro.</div>
+      <div class="def-source">Fonte: Lei nº 15.040/2024 · Circular SUSEP nº 662/2022 · CC/2002</div>
     </div>
-
-    <!-- ILUSTRAÇÃO 11: Ciclo completo do sinistro ao regresso -->
     <div class="illus">
       <svg viewBox="0 0 720 360" xmlns="http://www.w3.org/2000/svg" font-family="'Courier New', monospace">
         <rect width="720" height="360" fill="#1C1712"/>
         <text x="360" y="26" text-anchor="middle" font-size="9" fill="rgba(250,247,242,0.30)" letter-spacing="3" font-weight="700">CICLO DA CONTRAGARANTIA</text>
-
-        <!-- TOMADOR -->
         <rect x="40" y="50" width="160" height="80" rx="4" fill="rgba(192,90,53,0.15)" stroke="#C05A35" stroke-width="1.5"/>
         <text x="120" y="80" text-anchor="middle" font-size="9" fill="#C05A35" letter-spacing="2" font-weight="700">TOMADOR</text>
         <text x="120" y="96" text-anchor="middle" font-size="9" fill="rgba(250,247,242,0.5)">não cumpre a obra</text>
-        <text x="120" y="110" text-anchor="middle" font-size="9" fill="rgba(250,247,242,0.5)">fica inadimplente</text>
-
-        <!-- SEGURADO -->
+        <text x="120" y="110" text-anchor="middle" font-size="9" fill="rgba(250,247,242,0.5)">fica devedor</text>
         <rect x="280" y="50" width="160" height="80" rx="4" fill="rgba(250,247,242,0.06)" stroke="rgba(250,247,242,0.15)" stroke-width="1"/>
         <text x="360" y="80" text-anchor="middle" font-size="9" fill="rgba(250,247,242,0.7)" letter-spacing="2" font-weight="700">SEGURADO</text>
         <text x="360" y="96" text-anchor="middle" font-size="9" fill="rgba(250,247,242,0.4)">aciona a apólice</text>
-        <text x="360" y="110" text-anchor="middle" font-size="9" fill="rgba(250,247,242,0.4)">notifica a Seguradora</text>
-
-        <!-- SEGURADORA -->
+        <text x="360" y="110" text-anchor="middle" font-size="9" fill="rgba(250,247,242,0.4)">avisa a Seguradora</text>
         <rect x="520" y="50" width="160" height="80" rx="4" fill="rgba(196,144,10,0.15)" stroke="#C4900A" stroke-width="1.5"/>
         <text x="600" y="80" text-anchor="middle" font-size="9" fill="#C4900A" letter-spacing="2" font-weight="700">SEGURADORA</text>
-        <text x="600" y="96" text-anchor="middle" font-size="9" fill="rgba(250,247,242,0.5)">regula o sinistro</text>
+        <text x="600" y="96" text-anchor="middle" font-size="9" fill="rgba(250,247,242,0.5)">analisa o sinistro</text>
         <text x="600" y="110" text-anchor="middle" font-size="9" fill="rgba(250,247,242,0.5)">paga indenização</text>
-
-        <!-- Arrows top row -->
         <line x1="200" y1="90" x2="276" y2="90" stroke="rgba(250,247,242,0.2)" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arr3)"/>
-        <text x="238" y="82" text-anchor="middle" font-size="8" fill="rgba(250,247,242,0.3)">inadimplemento</text>
-
+        <text x="238" y="82" text-anchor="middle" font-size="8" fill="rgba(250,247,242,0.3)">descumprimento</text>
         <line x1="440" y1="90" x2="516" y2="90" stroke="#C4900A" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arr2)"/>
         <text x="478" y="82" text-anchor="middle" font-size="8" fill="#C4900A">acionamento</text>
-
-        <!-- CCG Section: middle row -->
-        <rect x="40" y="184" width="240" height="100" rx="4" fill="rgba(192,90,53,0.08)" stroke="rgba(192,90,53,0.3)" stroke-width="1.5" stroke-dasharray="0"/>
+        <rect x="40" y="184" width="240" height="100" rx="4" fill="rgba(192,90,53,0.08)" stroke="rgba(192,90,53,0.3)" stroke-width="1.5"/>
         <text x="160" y="208" text-anchor="middle" font-size="9" fill="#C05A35" letter-spacing="2" font-weight="700">CONTRAGARANTIA (CCG)</text>
-        <text x="160" y="226" text-anchor="middle" font-size="9" fill="rgba(250,247,242,0.5)">Instrumentos disponíveis:</text>
-
-        <!-- CCG types -->
+        <text x="160" y="226" text-anchor="middle" font-size="9" fill="rgba(250,247,242,0.5)">Tipos de garantia:</text>
         <rect x="56" y="236" width="100" height="18" rx="2" fill="rgba(192,90,53,0.15)"/>
         <text x="106" y="249" text-anchor="middle" font-size="8" fill="#C05A35" font-weight="700">aval dos sócios</text>
-
         <rect x="168" y="236" width="100" height="18" rx="2" fill="rgba(192,90,53,0.15)"/>
         <text x="218" y="249" text-anchor="middle" font-size="8" fill="#C05A35" font-weight="700">hipoteca imóvel</text>
-
         <rect x="56" y="260" width="100" height="18" rx="2" fill="rgba(192,90,53,0.15)"/>
-        <text x="106" y="273" text-anchor="middle" font-size="8" fill="#C05A35" font-weight="700">penhor créditos</text>
-
+        <text x="106" y="273" text-anchor="middle" font-size="8" fill="#C05A35" font-weight="700">bloqueio de créditos</text>
         <rect x="168" y="260" width="100" height="18" rx="2" fill="rgba(192,90,53,0.15)"/>
         <text x="218" y="273" text-anchor="middle" font-size="8" fill="#C05A35" font-weight="700">nota promissória</text>
-
-        <!-- Sub-rogação box -->
         <rect x="340" y="184" width="340" height="100" rx="4" fill="rgba(196,144,10,0.10)" stroke="rgba(196,144,10,0.3)" stroke-width="1"/>
-        <text x="510" y="208" text-anchor="middle" font-size="9" fill="#C4900A" letter-spacing="2" font-weight="700">SUB-ROGAÇÃO LEGAL</text>
-        <text x="510" y="226" text-anchor="middle" font-size="9" fill="rgba(250,247,242,0.5)">Após pagar o sinistro, a Seguradora se</text>
-        <text x="510" y="240" text-anchor="middle" font-size="9" fill="rgba(250,247,242,0.5)">sub-roga nos direitos do Segurado</text>
-        <text x="510" y="254" text-anchor="middle" font-size="9" fill="rgba(250,247,242,0.5)">contra o Tomador (Código Civil Brasileiro/2002, art. 349)</text>
-        <text x="510" y="272" text-anchor="middle" font-size="9" fill="#C4900A" font-weight="700">de pleno direito, sem cessão expressa</text>
-
-        <!-- Arrow: Seguradora aciona CCG vs. Tomador -->
+        <text x="510" y="208" text-anchor="middle" font-size="9" fill="#C4900A" letter-spacing="2" font-weight="700">A SEGURADORA ASSUME O LUGAR DO SEGURADO</text>
+        <text x="510" y="226" text-anchor="middle" font-size="9" fill="rgba(250,247,242,0.5)">Após pagar o sinistro, a Seguradora</text>
+        <text x="510" y="240" text-anchor="middle" font-size="9" fill="rgba(250,247,242,0.5)">assume os direitos do Segurado</text>
+        <text x="510" y="254" text-anchor="middle" font-size="9" fill="rgba(250,247,242,0.5)">para cobrar o Tomador (CC, art. 349)</text>
+        <text x="510" y="272" text-anchor="middle" font-size="9" fill="#C4900A" font-weight="700">automaticamente, sem precisar de documento adicional</text>
         <path d="M600 132 Q600 310 282 284" stroke="#C05A35" stroke-width="1.5" fill="none" stroke-dasharray="5,3" marker-end="url(#arr1)"/>
         <rect x="610" y="200" width="90" height="40" rx="3" fill="rgba(192,90,53,0.2)" stroke="rgba(192,90,53,0.4)" stroke-width="1"/>
-        <text x="655" y="218" text-anchor="middle" font-size="8" fill="#C05A35" font-weight="700">executa a</text>
+        <text x="655" y="218" text-anchor="middle" font-size="8" fill="#C05A35" font-weight="700">usa a</text>
         <text x="655" y="230" text-anchor="middle" font-size="8" fill="#C05A35" font-weight="700">contragarantia</text>
         <text x="655" y="242" text-anchor="middle" font-size="8" fill="rgba(250,247,242,0.4)">+ juros + correção</text>
-
-        <!-- Bottom: resultado final -->
         <rect x="40" y="306" width="640" height="36" rx="4" fill="rgba(192,90,53,0.08)" stroke="rgba(192,90,53,0.2)" stroke-width="1"/>
         <text x="360" y="322" text-anchor="middle" font-size="9" fill="rgba(250,247,242,0.4)">O sinistro não encerra a responsabilidade do Tomador, apenas</text>
         <text x="360" y="336" text-anchor="middle" font-size="9" fill="#C05A35" font-weight="700">muda o credor: de Segurado para Seguradora.</text>
       </svg>
-      <div class="illus-caption" style="background:var(--ink);color:rgba(250,247,242,0.45);border-color:rgba(250,247,242,0.08)">Fig. 11, Ciclo completo da Contragarantia: do sinistro à execução dos bens do Tomador</div>
+      <div class="illus-caption" style="background:var(--ink);color:rgba(250,247,242,0.45);border-color:rgba(250,247,242,0.08)">Fig. 11, Ciclo completo da Contragarantia: do sinistro à cobrança do Tomador</div>
     </div>
-
-    <h3>CCG na subscrição: não é formalidade</h3>
-    <p>Para a Seguradora, o CCG é tão importante quanto a análise financeira do Tomador. Uma empresa com boa capacidade econômica mas sem bens disponíveis para oferecer em contragarantia pode ter sua proposta negada, ou aceita apenas com aval pessoal dos sócios. A qualidade do CCG influencia diretamente a taxa de prêmio e os limites de crédito disponíveis ao Tomador.</p>
-
+    <h3>CCG na aprovação do seguro: não é formalidade</h3>
+    <p>Para a Seguradora, o CCG é tão importante quanto a análise financeira do Tomador. Uma empresa com boa situação financeira mas sem bens disponíveis para oferecer pode ter a proposta negada — ou aprovada apenas com aval pessoal dos sócios. Quanto melhor a contragarantia, mais favoráveis tendem a ser a taxa de prêmio e os limites disponíveis ao Tomador.</p>
     <table class="sgf-table">
       <thead>
-        <tr><th>Tipo</th><th>Exemplos</th><th>Natureza</th></tr>
+        <tr><th>Tipo</th><th>Exemplos</th><th>Como funciona</th></tr>
       </thead>
       <tbody>
-        <tr><td>Real</td><td>Hipoteca de imóvel, alienação fiduciária, penhor de créditos</td><td>Preferência na execução; vinculado a bem específico</td></tr>
-        <tr><td>Pessoal</td><td>Aval dos sócios, fiança de terceiros, nota promissória</td><td>Compromete o patrimônio pessoal do avalista</td></tr>
-        <tr><td>Mista</td><td>Combinação de real e pessoal</td><td>Maior robustez; preferida em exposições maiores</td></tr>
+        <tr><td>Real</td><td>Hipoteca de imóvel, alienação fiduciária, bloqueio de créditos</td><td>Tem prioridade no recebimento; vinculado a um bem específico</td></tr>
+        <tr><td>Pessoal</td><td>Aval dos sócios, fiança de terceiros, nota promissória</td><td>O avalista responde com seus próprios bens</td></tr>
+        <tr><td>Mista</td><td>Combinação de real e pessoal</td><td>Mais segurança; preferida em exposições maiores</td></tr>
       </tbody>
     </table>
-
     <div class="callout alert">
-      <div class="callout-icon">✕ CCG mal estruturado = risco não mitigado</div>
-      <p>Contragarantias insuficientes, mal formalizadas ou constituídas sobre bens de baixo valor de mercado comprometem a capacidade de recuperação da Seguradora. A análise do CCG é parte integrante do processo de subscrição.</p>
+      <div class="callout-icon">✕ CCG fraco = risco não coberto</div>
+      <p>Contragarantias fracas ou mal formalizadas dificultam que a Seguradora recupere o que pagou. A análise do CCG faz parte da aprovação do seguro.</p>
     </div>
-
     <ul class="checklist">
       <li>Contrato separado da apólice, firmado entre Seguradora e Tomador</li>
       <li>Pode envolver garantias reais (imóvel, veículo) e/ou pessoais (aval, fiança)</li>
-      <li>Instrumentaliza o regresso após o pagamento do sinistro</li>
+      <li>Na prática, garante a cobrança após o pagamento do sinistro</li>
       <li>Sua qualidade influencia a taxa de prêmio e os limites de crédito do Tomador</li>
     </ul>
-    <div class="citation"><strong>Fundamento normativo:</strong> Circular SUSEP nº 662/2022 · Código Civil Brasileiro/2002, arts. 346–351 · Código Civil Brasileiro/2002, arts. 1.419–1.510 · Código Civil Brasileiro/2002, art. 818</div>
+    <div class="citation"><strong>Fundamento normativo:</strong> Lei nº 15.040/2024, arts. 94 e 60–65 · Circular SUSEP nº 662/2022 · CC/2002, arts. 346–351, 818 e 1.419–1.510</div>
   </div>
   <div class="article-nav">
     <div><span class="nav-label">Anterior</span><a href="#condicoes-contratuais">← Condições Contratuais</a></div>
@@ -1391,7 +977,7 @@
   </div>
 </article>
 
-    </div><!-- /articles -->
+    </div>
 
     <footer class="site-footer">
       <div class="footer-brand">SGF · Seguro Garantia Fácil</div>
