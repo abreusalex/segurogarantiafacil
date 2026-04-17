@@ -682,8 +682,9 @@ transition: color 0.2s;
       <thead>
         <tr>
           <th>Período de cobertura</th>
-          <th>% Retido (prazo curto)</th>
-          <th>% Retido (pro-rata)</th>
+          <th>% Retido — prazo curto</th>
+          <th>% Retido — pro-rata</th>
+          <th>Diferença ao tomador</th>
           <th>Diferença ao tomador</th>
         </tr>
       </thead>
@@ -1065,21 +1066,31 @@ function updateCalc() {
 updateCalc();
 
 /* ─── TABELA INTERATIVA (23 faixas) ─── */
+/* Lookup idêntico ao da calculadora standalone (doc 50):
+   avança enquanto timePct >= maxPct, para na primeira faixa maior */
+function getPrazoRetPct_tabela(timePct) {
+  let selected = PRAZO[0];
+  for (let i = 0; i < PRAZO.length; i++) {
+    if (timePct >= PRAZO[i].maxPct) { selected = PRAZO[i]; } else { break; }
+  }
+  return selected.pct;
+}
+
 const tbody = document.getElementById('prazoTbody');
 
 PRAZO.forEach((r) => {
-  /* dia representativo = maxPct% da vigência padrão de 365 dias */
+  /* dia representativo = limite superior da faixa em vigência de 365d */
   const diasRef = Math.ceil(365 * r.maxPct / 100);
-  const timePct = r.maxPct;
-  const curPct  = r.pct;
-  const proPct  = +timePct.toFixed(1);
-  const diff    = +(curPct - proPct).toFixed(1);
+  const timePct = r.maxPct;                         // % do tempo no limite da faixa
+  const curPct  = getPrazoRetPct_tabela(timePct);   // retenção tabela prazo curto
+  const proPct  = +timePct.toFixed(2);              // retenção pro-rata = % tempo
+  const diff    = +(curPct - proPct).toFixed(2);
   const tr = document.createElement('tr');
   tr.innerHTML = `
     <td>${r.label}</td>
     <td class="num-cur">${curPct}%</td>
     <td class="num-pro">${proPct}%</td>
-    <td class="diff"><span class="diff-pill neg">+${diff}% retido a mais</span></td>
+    <td class="diff"><span class="diff-pill neg">+${diff > 0 ? diff : 0}% retido a mais</span></td>
   `;
   tr.addEventListener('click', () => {
     document.querySelectorAll('#prazoTable tr').forEach(x => x.classList.remove('selected'));
