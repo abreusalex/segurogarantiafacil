@@ -1,1 +1,1324 @@
 
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora de Cancelamento de Prêmio | SGF</title>
+<meta name="description" content="Calcule a devolução de prêmio no cancelamento de seguro garantia pelos critérios pro-rata temporis e tabela de prazo curto. Sem IOF.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+
+<style>
+/* ═══════════════════════════════════════
+   TOKENS
+═══════════════════════════════════════ */
+:root {
+  --terra:        #7A3E10;
+  --terra-deep:   #5C2D08;
+  --amber:        #B8711E;
+  --amber-light:  #F5E8D0;
+  --amber-mid:    #DEB87A;
+  --amber-glow:   rgba(184,113,30,0.18);
+  --ivory:        #FAF6EE;
+  --ivory-dark:   #F0E9DC;
+  --ink:          #1C1410;
+  --ink-mid:      #3A2A1C;
+  --ink-light:    #6B5540;
+  --ink-muted:    #9A8470;
+  --page-bg:      #F4EFE6;
+  --border:       rgba(122,62,16,0.14);
+  --border-mid:   rgba(122,62,16,0.28);
+  --pro:          #1E6E50;
+  --pro-light:    rgba(30,110,80,0.10);
+  --pro-mid:      rgba(30,110,80,0.22);
+  --cur:          #8B3A10;
+  --cur-light:    rgba(139,58,16,0.10);
+  --cur-mid:      rgba(139,58,16,0.22);
+  --serif: 'EB Garamond', Georgia, serif;
+  --mono:  'Courier Prime', 'Courier New', monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--page-bg);
+  color: var(--ink);
+  font-family: var(--serif);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ═══════════════════════════════════════
+   READING BAR
+═══════════════════════════════════════ */
+.reading-bar {
+  position: fixed; top: 0; left: 0; height: 2px; width: 0;
+  background: linear-gradient(90deg, var(--amber), var(--terra));
+  z-index: 999; transition: width 0.1s linear;
+}
+
+/* ═══════════════════════════════════════
+   HEADER
+═══════════════════════════════════════ */
+.site-header {
+  background: var(--ink);
+  border-bottom: 2px solid var(--amber);
+  height: 52px;
+  display: flex; align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  position: sticky; top: 0; z-index: 100;
+}
+.site-logo {
+  font-family: var(--mono); font-size: 13px; font-weight: 700;
+  color: var(--amber-light); letter-spacing: 0.13em;
+  text-decoration: none; text-transform: uppercase;
+}
+.site-logo em { color: var(--amber); font-style: normal; }
+.header-pill {
+  font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--amber);
+  border: 1px solid rgba(184,113,30,0.35);
+  padding: 3px 10px; border-radius: 2px;
+}
+
+/* ═══════════════════════════════════════
+   HERO / BANNER
+═══════════════════════════════════════ */
+.hero {
+  background: var(--ink);
+  padding: 3.5rem 2rem 3rem;
+  position: relative; overflow: hidden;
+}
+.hero-grid {
+  position: absolute; inset: 0; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(184,113,30,0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(184,113,30,0.055) 1px, transparent 1px);
+  background-size: 44px 44px;
+  animation: gridDrift 24s linear infinite;
+}
+@keyframes gridDrift {
+  from { transform: translate(0,0); }
+  to   { transform: translate(44px,44px); }
+}
+.hero-inner { max-width: 860px; margin: 0 auto; position: relative; z-index: 2; }
+
+.hero-eyebrow {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--amber);
+  display: flex; align-items: center; gap: 10px; margin-bottom: 1.1rem;
+  opacity: 0; animation: fadeUp 0.6s 0.1s ease forwards;
+}
+.hero-eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--amber); }
+
+.hero h1 {
+  font-family: var(--serif); font-weight: 400;
+  font-size: clamp(22px, 3.5vw, 34px); line-height: 1.25;
+  color: var(--ivory); margin-bottom: 0.6rem;
+  opacity: 0; animation: fadeUp 0.6s 0.2s ease forwards;
+}
+.hero-sub {
+  font-family: var(--serif); font-style: italic;
+  font-size: 15px; color: rgba(250,246,238,0.55);
+  line-height: 1.6; max-width: 580px;
+  opacity: 0; animation: fadeUp 0.6s 0.3s ease forwards;
+}
+
+.hero-badges {
+  display: flex; flex-wrap: wrap; gap: 6px; margin-top: 1.5rem;
+  opacity: 0; animation: fadeUp 0.6s 0.4s ease forwards;
+}
+.badge {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.09em;
+  text-transform: uppercase; padding: 3px 10px; border-radius: 2px;
+  border: 1px solid rgba(184,113,30,0.28);
+  background: rgba(184,113,30,0.1); color: var(--amber-mid);
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ═══════════════════════════════════════
+   MAIN LAYOUT
+═══════════════════════════════════════ */
+.main { max-width: 860px; margin: 0 auto; padding: 2.5rem 2rem 5rem; }
+
+/* ═══════════════════════════════════════
+   FORM CARD
+═══════════════════════════════════════ */
+.form-card {
+  background: var(--ivory);
+  border: 1px solid var(--border-mid);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 16px rgba(28,20,16,0.06);
+}
+.form-card-header {
+  background: var(--terra);
+  padding: 1rem 1.5rem;
+  display: flex; align-items: center; gap: 10px;
+}
+.form-card-header .fc-icon {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: rgba(255,255,255,0.12);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px;
+}
+.form-card-header h2 {
+  font-family: var(--mono); font-size: 11px; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--ivory); margin: 0;
+}
+.form-card-body { padding: 1.5rem; }
+
+/* ═══════════════════════════════════════
+   INPUT GRID
+═══════════════════════════════════════ */
+.input-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.1rem;
+  margin-bottom: 1.25rem;
+}
+.field { display: flex; flex-direction: column; gap: 6px; }
+
+.field label {
+  font-family: var(--mono); font-size: 9.5px; font-weight: 700;
+  letter-spacing: 0.11em; text-transform: uppercase;
+  color: var(--ink-light);
+}
+.field label span {
+  font-weight: 400; color: var(--ink-muted); text-transform: none;
+  letter-spacing: 0; font-size: 9px;
+}
+
+.input-wrap { position: relative; }
+.input-prefix {
+  position: absolute; left: 11px; top: 50%; transform: translateY(-50%);
+  font-family: var(--mono); font-size: 12px; color: var(--ink-muted);
+  pointer-events: none; z-index: 1;
+}
+
+input[type="date"],
+input[type="number"],
+input[type="text"] {
+  width: 100%;
+  background: var(--ivory-dark);
+  border: 1px solid var(--border-mid);
+  border-radius: 6px;
+  font-family: var(--mono); font-size: 13.5px;
+  color: var(--ink);
+  padding: 9px 12px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  -webkit-appearance: none;
+}
+input.has-prefix { padding-left: 28px; }
+
+input:focus {
+  border-color: var(--amber);
+  box-shadow: 0 0 0 3px rgba(184,113,30,0.12);
+}
+input:invalid:not(:placeholder-shown) {
+  border-color: var(--cur);
+}
+
+/* date picker icon color (webkit) */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: opacity(0.4); cursor: pointer;
+}
+
+/* ── CANCELAMENTO DATE ── */
+.cancel-section {
+  border-top: 1px dashed var(--border-mid);
+  padding-top: 1.25rem; margin-top: 0.25rem;
+}
+.cancel-label-row {
+  display: flex; align-items: center; gap: 8px; margin-bottom: 0.9rem;
+}
+.cancel-label-row .cl-tag {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--amber);
+  border: 1px solid rgba(184,113,30,0.3);
+  background: rgba(184,113,30,0.08);
+  padding: 2px 8px; border-radius: 2px;
+}
+.cancel-label-row p {
+  font-family: var(--mono); font-size: 10.5px; color: var(--ink-muted);
+}
+
+/* ── SLIDER ── */
+.slider-block { margin-top: 1rem; }
+.slider-block label {
+  font-family: var(--mono); font-size: 9.5px; font-weight: 700;
+  letter-spacing: 0.11em; text-transform: uppercase;
+  color: var(--ink-light); display: block; margin-bottom: 8px;
+}
+.slider-row { display: flex; align-items: center; gap: 14px; }
+input[type="range"] {
+  flex: 1; -webkit-appearance: none; height: 4px;
+  background: var(--border-mid); border-radius: 2px; outline: none;
+  cursor: pointer;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 20px; height: 20px;
+  border-radius: 50%; background: var(--amber);
+  border: 2.5px solid var(--ivory); cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+  box-shadow: 0 1px 6px rgba(184,113,30,0.3);
+}
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+  box-shadow: 0 2px 12px rgba(184,113,30,0.45);
+}
+.slider-readout {
+  font-family: var(--mono); font-size: 13px; font-weight: 700;
+  color: var(--terra); min-width: 90px; text-align: right;
+}
+
+/* ── QUICK MARKS ── */
+.quick-marks {
+  display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px;
+}
+.qm-btn {
+  font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.06em;
+  padding: 4px 10px; border-radius: 3px;
+  border: 1px solid var(--border-mid);
+  background: transparent; color: var(--ink-muted);
+  cursor: pointer; transition: all 0.18s;
+}
+.qm-btn:hover { border-color: var(--amber); color: var(--amber); }
+.qm-btn.active { background: var(--terra); color: var(--ivory); border-color: var(--terra); }
+
+/* ─── TIMELINE VISUAL ─── */
+.timeline-visual {
+  margin-top: 1.5rem;
+  background: var(--ivory-dark);
+  border-radius: 8px; padding: 1rem 1.25rem;
+  border: 1px solid var(--border);
+}
+.tv-label {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--ink-muted); margin-bottom: 10px;
+}
+.tv-track {
+  position: relative; height: 8px;
+  background: rgba(122,62,16,0.1); border-radius: 4px; overflow: visible;
+}
+.tv-fill {
+  position: absolute; top: 0; left: 0; height: 100%;
+  background: linear-gradient(90deg, var(--amber), var(--terra));
+  border-radius: 4px; transition: width 0.5s cubic-bezier(.22,1,.36,1);
+  min-width: 4px;
+}
+.tv-dot {
+  position: absolute; top: 50%; transform: translate(-50%, -50%);
+  width: 16px; height: 16px; border-radius: 50%;
+  background: var(--terra); border: 2.5px solid var(--ivory);
+  box-shadow: 0 1px 6px rgba(122,62,16,0.3);
+  transition: left 0.5s cubic-bezier(.22,1,.36,1);
+}
+.tv-dates {
+  display: flex; justify-content: space-between;
+  margin-top: 8px; font-family: var(--mono); font-size: 9.5px;
+  color: var(--ink-muted);
+}
+.tv-days-info {
+  text-align: center; margin-top: 6px;
+  font-family: var(--mono); font-size: 10.5px; color: var(--terra);
+  font-weight: 700;
+}
+
+/* ══════════════════════════════════════
+   RESULTS SECTION
+═══════════════════════════════════════ */
+.results-section { margin-top: 0.5rem; }
+
+/* ── STATUS EMPTY ── */
+.state-empty {
+  border: 2px dashed var(--border-mid);
+  border-radius: 12px; padding: 3rem 2rem;
+  text-align: center;
+}
+.state-empty .se-icon { font-size: 32px; margin-bottom: 0.75rem; }
+.state-empty p {
+  font-family: var(--mono); font-size: 11px; color: var(--ink-muted);
+  letter-spacing: 0.06em;
+}
+
+/* ── RESULTS GRID ── */
+.results-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+@media (max-width: 600px) { .results-grid { grid-template-columns: 1fr; } }
+
+.res-card {
+  border-radius: 10px; padding: 1.25rem 1.4rem;
+  position: relative; overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.res-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(28,20,16,0.1); }
+
+.res-card.pro {
+  background: var(--ivory);
+  border: 1px solid rgba(30,110,80,0.25);
+}
+.res-card.pro::before {
+  content: ''; position: absolute; top: 0; left: 0;
+  width: 4px; height: 100%;
+  background: var(--pro);
+}
+.res-card.cur {
+  background: var(--ivory);
+  border: 1px solid rgba(139,58,16,0.25);
+}
+.res-card.cur::before {
+  content: ''; position: absolute; top: 0; left: 0;
+  width: 4px; height: 100%;
+  background: var(--cur);
+}
+
+.res-card-head {
+  font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.12em;
+  text-transform: uppercase; margin-bottom: 4px; padding-left: 10px;
+}
+.res-card.pro .res-card-head { color: var(--pro); }
+.res-card.cur .res-card-head { color: var(--cur); }
+
+.res-card-name {
+  font-family: var(--serif); font-size: 15px; color: var(--terra);
+  margin-bottom: 1rem; padding-left: 10px;
+}
+
+.res-row {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding: 7px 10px; border-radius: 5px; margin-bottom: 4px;
+}
+.res-row.highlight-dev { background: var(--pro-light); }
+.res-row.highlight-ret { background: var(--cur-light); }
+.res-row .rl { font-family: var(--mono); font-size: 10px; color: var(--ink-muted); text-transform: uppercase; letter-spacing: 0.07em; }
+.res-row .rv { font-family: var(--mono); font-size: 14px; font-weight: 700; }
+.res-card.pro .res-row.highlight-dev .rv { color: var(--pro); }
+.res-card.cur .res-row.highlight-ret .rv { color: var(--cur); }
+
+.res-pct-bar { margin: 8px 10px 4px; }
+.rpb-label { font-family: var(--mono); font-size: 9px; color: var(--ink-muted); margin-bottom: 4px; display: flex; justify-content: space-between; }
+.rpb-track { height: 6px; background: rgba(122,62,16,0.1); border-radius: 3px; overflow: hidden; }
+.rpb-fill { height: 100%; border-radius: 3px; transition: width 0.7s cubic-bezier(.22,1,.36,1); }
+.res-card.pro .rpb-fill { background: var(--pro); }
+.res-card.cur .rpb-fill { background: var(--cur); }
+
+/* ── DIVIDER CARD ── */
+.diff-card {
+  border-radius: 10px; padding: 1.25rem 1.5rem;
+  background: var(--ink);
+  display: grid; grid-template-columns: 1fr auto 1fr;
+  align-items: center; gap: 1rem; margin-bottom: 16px;
+}
+@media (max-width: 560px) {
+  .diff-card { grid-template-columns: 1fr; text-align: center; }
+  .diff-divider { display: none; }
+}
+.diff-side .ds-label {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em;
+  text-transform: uppercase; margin-bottom: 4px;
+}
+.diff-side.pro-side .ds-label { color: #6BBFA0; }
+.diff-side.cur-side .ds-label { color: #D49070; }
+.diff-side .ds-val {
+  font-family: var(--mono); font-size: 20px; font-weight: 700;
+}
+.diff-side.pro-side .ds-val { color: #8DDFC0; }
+.diff-side.cur-side .ds-val { color: #F0A870; }
+.diff-center { text-align: center; }
+.diff-center .dc-label {
+  font-family: var(--mono); font-size: 9px; color: rgba(250,246,238,0.35);
+  text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px;
+}
+.diff-center .dc-val {
+  font-family: var(--mono); font-size: 22px; font-weight: 700;
+  color: var(--amber);
+}
+.diff-center .dc-sub {
+  font-family: var(--mono); font-size: 9.5px; color: rgba(250,246,238,0.4);
+  margin-top: 4px;
+}
+.diff-divider { width: 1px; background: rgba(255,255,255,0.08); align-self: stretch; }
+
+/* ── PRAZO CURTO FAIXA ── */
+.faixa-card {
+  border-radius: 10px; padding: 1rem 1.4rem;
+  background: var(--ivory); border: 1px solid var(--border);
+  margin-bottom: 16px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+}
+.faixa-icon {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: rgba(139,58,16,0.1); flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+.faixa-text .ft-label { font-family: var(--mono); font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-muted); margin-bottom: 4px; }
+.faixa-text .ft-val { font-family: var(--serif); font-size: 15px; color: var(--terra); }
+
+/* ── CHART ── */
+.chart-card {
+  border-radius: 10px; padding: 1.25rem 1.5rem;
+  background: var(--ivory); border: 1px solid var(--border);
+  margin-bottom: 16px;
+}
+.chart-card-head {
+  font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--amber); margin-bottom: 1.1rem;
+}
+.chart-tabs { display: flex; gap: 6px; margin-bottom: 1rem; flex-wrap: wrap; }
+.ct-btn {
+  font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.07em;
+  text-transform: uppercase; padding: 4px 12px; border-radius: 3px;
+  border: 1px solid var(--border-mid); background: transparent;
+  color: var(--ink-muted); cursor: pointer; transition: all 0.18s;
+}
+.ct-btn.active { background: var(--terra); color: var(--ivory); border-color: var(--terra); }
+.ct-btn:hover:not(.active) { border-color: var(--amber); color: var(--amber); }
+.canvas-wrap { position: relative; height: 220px; }
+
+/* ── NOTA IOF ── */
+.nota-iof {
+  border-radius: 8px; padding: 0.85rem 1.1rem;
+  background: rgba(184,113,30,0.07);
+  border: 1px solid rgba(184,113,30,0.2);
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 16px;
+}
+.nota-iof svg { flex-shrink: 0; }
+.nota-iof p { font-family: var(--mono); font-size: 10.5px; color: var(--ink-muted); line-height: 1.6; }
+.nota-iof strong { color: var(--amber); }
+
+/* ── EXPORT ── */
+.export-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; }
+.exp-btn {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em;
+  text-transform: uppercase; padding: 8px 18px; border-radius: 5px;
+  cursor: pointer; transition: all 0.18s; border: 1px solid var(--border-mid);
+  background: var(--ivory); color: var(--ink-light);
+  display: flex; align-items: center; gap: 6px;
+}
+.exp-btn:hover { border-color: var(--amber); color: var(--terra); }
+.exp-btn.primary { background: var(--terra); color: var(--ivory); border-color: var(--terra); }
+.exp-btn.primary:hover { background: var(--terra-deep); }
+
+/* ── FOOTER ── */
+.site-footer {
+  background: var(--ink); border-top: 2px solid var(--amber);
+  padding: 1.75rem 2rem; text-align: center;
+}
+.footer-logo {
+  font-family: var(--mono); font-size: 12px; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--amber); margin-bottom: 6px;
+}
+.footer-sub { font-family: var(--mono); font-size: 10px; color: var(--ink-muted); line-height: 1.8; }
+.footer-sub a { color: var(--amber-mid); text-decoration: none; }
+
+.print-header, .print-footer {
+  display: none;
+}
+
+/* ── PRINT ── */
+@page { size: A4 portrait; margin: 12mm; }
+@media print {
+  html, body { width: auto; min-height: auto; background: #fff; color: #000; }
+  body { margin: 0; padding: 0; }
+  .site-header, .hero, .qm-btn, .export-row, .chart-tabs, .site-footer, .reading-bar, .footer-sub, .header-pill, .export-row button, .ct-btn { display: none !important; }
+  .main { max-width: none; margin: 0; padding: 0; }
+  .form-card, .res-card, .diff-card, .chart-card, .faixa-card, .nota-iof, .timeline-visual, .field, .cancel-section { page-break-inside: avoid; break-inside: avoid; }
+  .form-card, .res-card, .diff-card, .chart-card, .faixa-card, .nota-iof { border-color: #ccc !important; box-shadow: none !important; }
+  .form-card-body, .chart-card, .res-card, .diff-card, .faixa-card, .nota-iof { padding: 1rem !important; }
+  .results-grid { display: block !important; }
+  .res-card { width: auto !important; margin-bottom: 1rem !important; }
+  .chart-card { page-break-after: avoid; }
+  .faixa-card { margin-bottom: 1rem !important; }
+  .diff-card { grid-template-columns: 1fr; }
+  .diff-divider { display: none !important; }
+  .footer-logo { display: none !important; }
+  .site-header, .hero, .export-row, .site-footer { display: none !important; }
+  .print-header, .print-footer {
+    width: 100%;
+    margin: 0 auto;
+    padding: 10px 0;
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: #333;
+    border-color: #ccc;
+  }
+  .print-header {
+    display: flex !important;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    border-bottom: 1px solid #ccc;
+  }
+  .print-footer {
+    display: block !important;
+    border-top: 1px solid #ccc;
+    margin-top: 10px;
+  }
+  .print-header-text {
+    flex: 1;
+    text-align: center;
+  }
+  .print-qr-link {
+    display: inline-flex;
+    width: 50px;
+    height: 50px;
+    text-decoration: none;
+  }
+  .print-qr-img {
+    width: 50px;
+    height: 50px;
+    display: block;
+    object-fit: contain;
+  }
+  .print-footer {
+    border-top: 1px solid #ccc;
+    margin-top: 10px;
+  }
+  * { -webkit-print-color-adjust: exact; color-adjust: exact; }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 640px) {
+  .site-header { padding: 0 1rem; }
+  .hero { padding: 2.5rem 1rem 2.5rem; }
+  .main { padding: 1.75rem 1rem 4rem; }
+  .form-card-body { padding: 1.1rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="reading-bar" id="readingBar"></div>
+<div class="print-header">
+  <a class="print-qr-link" href="https://segurogarantiafacil.com" target="_blank" rel="noreferrer">
+    <img class="print-qr-img" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXIAAAFyAQAAAADAX2ykAAAC8UlEQVR4nO1abY6jMAx9NkjzE6Q9wBwFbtAj7Zn2BuQoc4CR4GclkFd2Mm2X7ga6UhFM/X5kMvipsmL5Kw4JHkHgh+iA8/PgBfkczs+DF+RzOD8PXpDP4fw8eEE+h/Nf4XwooQQClaB2KAEMRLZEtBvqsx78APeF+Y0oet3pgmoEtSjEFsO2+qwGr6e+JL9Mf4caaH5phXw6k+i/EuoCggEgoBg30oed/xT7XjG8CcJJQE1f01335OefB+/evtUnWZAWDBev3U4fdv5T7Fupp2osbvoJAkwlmk4jNdTS///77Pw9nE+wErnW7fAm1GqQhu0wxfJ5W31Wg9dTX5JPf7ufJFSf6tjFXXz2+8lj9r8tJrq2viIfb4JGzoRQT7S9PuvBD3BfkY/Y3XbVGHfpa6WeW4mg6QuV6s54e9Ofnb/6fILeXzUyQjp14s7ur6ozUTsQSXfHXwN2/g76I2p6iGZdvZDUKqvqrf+FBLJOqd5KH3b+E+IzgCKGZovUsf/tKg3I128enw+cf3FJs2ZalTSSkvANPP8e0r5Q54ym1SFDMjeSzb/M7fY9rH1noVmsyEJxqZ9Tde3+e1j7FjoftOWSeisVxPjs9j00Xzprg3Shd826QxroizVJobZJ8Hb6rAc/wMWr90fDD/XkSYO0joO7xNGZQ7lT/dn5WZS2pg5X82849RauR4S616rqT76fZx680/q5L27K5NgaNX3qiaPU66sj+y/sBsPe4kxlfJ8DnMmCtH6Lu/3pz85fk38RUYwSk3AlOiTsLSePGrjL5Mp+nnnwzt9PUmtPJ7Vqbr5eUiKQTfo31Gc1eD31tfMvUpq1WytteON80GAzJc+/34FPP9WJqb6UW70NDt1/v8n7SQnvZ5JwUtN+lKNo7UU71p+d/9D7yYShHPVVuxVZetMxfb3T8vPMg3fGx+2rnDgETvn3ev/s+febvZ/8N8Le9GfnZ8F58R2cnwcvyOdwfh68IJ/D+XnwgnwO5+fx7PrqN+/quddzF42MAAAAAElFTkSuQmCC" alt="QR code Seguro Garantia Fácil" />
+  </a>
+  <div class="print-header-text">Calculadora de Devolução de Prêmio - Seguro Garantia Fácil</div>
+</div>
+
+<!-- ═══ HEADER ═══ -->
+<header class="site-header">
+  <a class="site-logo" href="https://segurogarantiafacil.com">SGF <em>·</em> Seguro Garantia Fácil</a>
+  <span class="header-pill">Calculadora</span>
+</header>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Ferramenta · Cancelamento de Prêmio</div>
+    <h1>Calculadora de Devolução de Prêmio</h1>
+    <p class="hero-sub">Compare os critérios <em>pro-rata temporis</em> e tabela de prazo curto em tempo real. Sem incidência de IOF.</p>
+    <div class="hero-badges">
+      <span class="badge">Pro-rata temporis</span>
+      <span class="badge">Tabela de prazo curto</span>
+      <span class="badge">Sem IOF — Decreto 6.306/2007, art. 22 §1º I, "g"</span>
+      <span class="badge">Circular SUSEP 662/2022</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ MAIN ═══ -->
+<main class="main">
+
+  <!-- FORM CARD -->
+  <div class="form-card">
+    <div class="form-card-header">
+      <div class="fc-icon">📋</div>
+      <h2>Dados da apólice</h2>
+    </div>
+    <div class="form-card-body">
+
+      <!-- Vigência -->
+      <div class="input-grid">
+        <div class="field">
+          <label>Data de início <span>início de vigência</span></label>
+          <input type="date" id="dtInicio" />
+        </div>
+        <div class="field">
+          <label>Data final <span>término de vigência</span></label>
+          <input type="date" id="dtFinal" />
+        </div>
+        <div class="field">
+          <label>Prêmio devido <span>valor total da apólice (R$)</span></label>
+          <div class="input-wrap">
+            <span class="input-prefix">R$</span>
+            <input type="number" id="premioDue" class="has-prefix" placeholder="0,00" min="0" step="0.01" />
+          </div>
+        </div>
+        <div class="field">
+          <label>Prêmio pago <span>valor efetivamente pago (R$)</span></label>
+          <div class="input-wrap">
+            <span class="input-prefix">R$</span>
+            <input type="number" id="premioPaid" class="has-prefix" placeholder="0,00" min="0" step="0.01" />
+          </div>
+        </div>
+      </div>
+
+      <!-- TIMELINE VISUAL -->
+      <div class="timeline-visual" id="timelineVisual" style="display:none;">
+        <div class="tv-label">Linha do tempo da apólice</div>
+        <div class="tv-track">
+          <div class="tv-fill" id="tvFill" style="width:0%"></div>
+          <div class="tv-dot" id="tvDot" style="left:0%"></div>
+        </div>
+        <div class="tv-dates">
+          <span id="tvStart">—</span>
+          <span id="tvCancel" style="color:var(--terra);font-weight:700;"></span>
+          <span id="tvEnd">—</span>
+        </div>
+        <div class="tv-days-info" id="tvInfo"></div>
+      </div>
+
+      <!-- Cancelamento -->
+      <div class="cancel-section">
+        <div class="cancel-label-row">
+          <span class="cl-tag">Data do cancelamento</span>
+          <p>Selecione ou use o controle de dias decorridos</p>
+        </div>
+        <div class="input-grid" style="margin-bottom:0.5rem;">
+          <div class="field">
+            <label>Data de cancelamento</label>
+            <input type="date" id="dtCancelamento" />
+          </div>
+        </div>
+
+        <div class="slider-block" id="sliderBlock" style="display:none;">
+          <label>Dias decorridos na vigência</label>
+          <div class="slider-row">
+            <input type="range" id="diasSlider" min="1" max="365" value="1" />
+            <div class="slider-readout" id="sliderReadout">1 dia</div>
+          </div>
+          <div class="quick-marks" id="quickMarks"></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- RESULTS -->
+  <section class="results-section" id="resultsSection">
+    <div class="state-empty" id="stateEmpty">
+      <div class="se-icon">⚖️</div>
+      <p id="stateMessage">Preencha os campos acima para calcular</p>
+    </div>
+
+    <div id="resultsContent" style="display:none;">
+
+      <!-- FAIXA PRAZO CURTO -->
+      <div class="faixa-card" id="faixaCard">
+        <div class="faixa-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <rect x="2" y="9" width="16" height="2" rx="1" fill="#8B3A10"/>
+            <rect x="9" y="2" width="2" height="16" rx="1" fill="#8B3A10" opacity="0.4"/>
+          </svg>
+        </div>
+        <div class="faixa-text">
+          <div class="ft-label">Faixa da tabela de prazo curto aplicável</div>
+          <div class="ft-val" id="faixaVal">—</div>
+        </div>
+      </div>
+
+      <!-- CARDS LADO A LADO -->
+      <div class="results-grid">
+
+        <!-- PRO-RATA -->
+        <div class="res-card pro">
+          <div class="res-card-head">Critério 1</div>
+          <div class="res-card-name">Pro-rata temporis</div>
+          <div class="res-row highlight-dev">
+            <span class="rl">Devolução</span>
+            <span class="rv" id="proDevol">—</span>
+          </div>
+          <div class="res-row">
+            <span class="rl">Retenção</span>
+            <span class="rv" style="color:var(--ink-light);font-size:13px;" id="proRet">—</span>
+          </div>
+          <div class="res-row">
+            <span class="rl">% retido</span>
+            <span class="rv" style="color:var(--ink-light);font-size:13px;" id="proRetPct">—</span>
+          </div>
+          <div class="res-pct-bar">
+            <div class="rpb-label">
+              <span>0%</span><span>Prêmio retido</span><span>100%</span>
+            </div>
+            <div class="rpb-track"><div class="rpb-fill" id="proBar" style="width:0%"></div></div>
+          </div>
+        </div>
+
+        <!-- PRAZO CURTO -->
+        <div class="res-card cur">
+          <div class="res-card-head">Critério 2</div>
+          <div class="res-card-name">Tabela de prazo curto</div>
+          <div class="res-row">
+            <span class="rl">Devolução</span>
+            <span class="rv" style="color:var(--ink-light);font-size:13px;" id="curDevol">—</span>
+          </div>
+          <div class="res-row highlight-ret">
+            <span class="rl">Retenção</span>
+            <span class="rv" id="curRet">—</span>
+          </div>
+          <div class="res-row">
+            <span class="rl">% retido</span>
+            <span class="rv" style="color:var(--ink-light);font-size:13px;" id="curRetPct">—</span>
+          </div>
+          <div class="res-pct-bar">
+            <div class="rpb-label">
+              <span>0%</span><span>Prêmio retido</span><span>100%</span>
+            </div>
+            <div class="rpb-track"><div class="rpb-fill" id="curBar" style="width:0%"></div></div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- DIFFERENTIAL CARD -->
+      <div class="diff-card">
+        <div class="diff-side pro-side">
+          <div class="ds-label">Pro-rata — devolve ao tomador</div>
+          <div class="ds-val" id="diffPro">—</div>
+        </div>
+        <div class="diff-divider"></div>
+        <div class="diff-center">
+          <div class="dc-label">Diferencial entre critérios</div>
+          <div class="dc-val" id="diffVal">—</div>
+          <div class="dc-sub" id="diffSub">—</div>
+        </div>
+        <div class="diff-divider"></div>
+        <div class="diff-side cur-side" style="text-align:right;">
+          <div class="ds-label">Prazo curto — devolve ao tomador</div>
+          <div class="ds-val" id="diffCur">—</div>
+        </div>
+      </div>
+
+      <!-- CHART -->
+      <div class="chart-card">
+        <div class="chart-card-head">Simulação ao longo da vigência</div>
+        <div class="chart-tabs">
+          <button class="ct-btn active" onclick="setChart('dev',this)">Devolução (R$)</button>
+          <button class="ct-btn" onclick="setChart('ret',this)">Retenção (%)</button>
+          <button class="ct-btn" onclick="setChart('dif',this)">Diferencial (R$)</button>
+        </div>
+        <div class="canvas-wrap">
+          <canvas id="mainChart"></canvas>
+        </div>
+      </div>
+
+      <!-- NOTA IOF -->
+      <div class="nota-iof">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M12 2 L21 7 L21 17 C21 20 17 22.5 12 22 C7 22.5 3 20 3 17 L3 7 Z"
+                fill="rgba(184,113,30,0.15)" stroke="var(--amber)" stroke-width="1.2"/>
+          <text x="12" y="16" text-anchor="middle" font-family="'Courier Prime',monospace"
+                font-size="7" fill="var(--amber)" font-weight="700">IOF</text>
+        </svg>
+        <p>
+          <strong>Sem incidência de IOF</strong> — O prêmio do seguro garantia é isento do Imposto sobre Operações Financeiras,
+          por força do <strong>Decreto nº 6.306/2007, art. 22, § 1.º, inciso I, alínea "g"</strong>.
+          Ao contrário de outros ramos (ex.: seguro auto, onde o IOF de ~7,38% é deduzido na devolução),
+          no seguro garantia o valor restituído é calculado sobre o prêmio integral, sem qualquer retenção tributária.
+        </p>
+      </div>
+
+      <!-- EXPORT -->
+      <div class="export-row">
+        <button class="exp-btn primary" onclick="exportPDF()">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="2" y="1" width="10" height="12" rx="1.5" stroke="currentColor" stroke-width="1.2"/><line x1="4" y1="5" x2="10" y2="5" stroke="currentColor" stroke-width="1"/><line x1="4" y1="7.5" x2="10" y2="7.5" stroke="currentColor" stroke-width="1"/><line x1="4" y1="10" x2="8" y2="10" stroke="currentColor" stroke-width="1"/></svg>
+          Imprimir / Salvar PDF
+        </button>
+        <button class="exp-btn" onclick="copyResult()">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="3" width="9" height="10" rx="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M4 3V2a1 1 0 011-1h6a1 1 0 011 1v8a1 1 0 01-1 1h-1" stroke="currentColor" stroke-width="1.2"/></svg>
+          Copiar resumo
+        </button>
+        <button class="exp-btn" onclick="resetForm()">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7a5 5 0 005 5 5 5 0 004.8-3.6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><path d="M12 7a5 5 0 00-5-5 5 5 0 00-4.8 3.6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><polyline points="10,4 12,7 9,7" fill="currentColor"/></svg>
+          Limpar
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="site-footer">
+  <div class="footer-logo">SGF · Seguro Garantia Fácil</div>
+  <div class="footer-sub">
+    Ferramenta educativa · Sem incidência de IOF (Decreto 6.306/2007) · Circular SUSEP 662/2022<br>
+    <a href="https://segurogarantiafacil.com">segurogarantiafacil.com</a> · Não constitui aconselhamento jurídico individual
+  </div>
+</footer>
+<div class="print-footer">Calculadora de Devolução de Prêmio - Seguro Garantia Fácil</div>
+
+<script>
+/* ══════════════════════════════════════
+   DADOS — TABELA DE PRAZO CURTO
+   Fonte: Circular SUSEP 256/2004 (padrão de mercado),
+   aplicável como critério contratual conforme Circular 662/2022
+══════════════════════════════════════ */
+const PRAZO_TABLE = [
+  { maxPct: 4.11,  pct: 13, label: 'Até 15 dias' },
+  { maxPct: 8.22,  pct: 20, label: 'Até 30 dias' },
+  { maxPct: 12.33, pct: 27, label: 'Até 45 dias' },
+  { maxPct: 16.44, pct: 30, label: 'Até 60 dias' },
+  { maxPct: 20.55, pct: 37, label: 'Até 75 dias' },
+  { maxPct: 24.66, pct: 40, label: 'Até 90 dias' },
+  { maxPct: 28.77, pct: 46, label: 'Até 105 dias' },
+  { maxPct: 32.88, pct: 50, label: 'Até 120 dias' },
+  { maxPct: 36.99, pct: 56, label: 'Até 135 dias' },
+  { maxPct: 41.10, pct: 60, label: 'Até 150 dias' },
+  { maxPct: 45.21, pct: 66, label: 'Até 165 dias' },
+  { maxPct: 53.42, pct: 73, label: 'Até 195 dias' },
+  { maxPct: 57.53, pct: 75, label: 'Até 210 dias' },
+  { maxPct: 61.64, pct: 78, label: 'Até 225 dias' },
+  { maxPct: 65.75, pct: 80, label: 'Até 240 dias' },
+  { maxPct: 69.86, pct: 83, label: 'Até 255 dias' },
+  { maxPct: 73.97, pct: 85, label: 'Até 270 dias' },
+  { maxPct: 78.08, pct: 88, label: 'Até 285 dias' },
+  { maxPct: 82.19, pct: 90, label: 'Até 300 dias' },
+  { maxPct: 86.30, pct: 93, label: 'Até 315 dias' },
+  { maxPct: 90.41, pct: 95, label: 'Até 330 dias' },
+  { maxPct: 94.52, pct: 98, label: 'Até 345 dias' },
+  { maxPct: 100.00, pct: 100, label: 'Até 365 dias' },
+];
+
+function getPrazoRetPct(timePct) {
+  let selected = PRAZO_TABLE[0];
+  for (let i = 0; i < PRAZO_TABLE.length; i++) {
+    if (timePct >= PRAZO_TABLE[i].maxPct) {
+      selected = PRAZO_TABLE[i];
+    } else {
+      break;
+    }
+  }
+  return selected.pct;
+}
+
+function getPrazoFaixaLabel(timePct) {
+  let selected = PRAZO_TABLE[0];
+  for (let i = 0; i < PRAZO_TABLE.length; i++) {
+    if (timePct >= PRAZO_TABLE[i].maxPct) {
+      selected = PRAZO_TABLE[i];
+    } else {
+      break;
+    }
+  }
+  return timePct.toFixed(2).replace('.', ',') + '% do tempo → ' + selected.pct + '% de retenção';
+}
+
+/* ══════════════════════════════════════
+   UTILS
+══════════════════════════════════════ */
+function parseDateLocal(str) {
+  if (!str) return null;
+  const [y, m, d] = str.split('-').map(Number);
+  return new Date(y, m - 1, d);
+}
+
+function diffDays(a, b) {
+  return Math.round((b - a) / 86400000);
+}
+
+function fmtDate(d) {
+  if (!d) return '—';
+  return d.toLocaleDateString('pt-BR');
+}
+
+function fmtBRL(v) {
+  if (v == null || isNaN(v)) return '—';
+  return 'R$ ' + Math.abs(v).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
+function fmtPct(v) { return v.toFixed(2).replace('.', ',') + '%'; }
+
+function getValidationMessage() {
+  if (!state.dtInicio) return 'Informe a data de início da vigência.';
+  if (!state.dtFinal) return 'Informe a data final da vigência.';
+  if (state.dtFinal <= state.dtInicio) return 'A data final deve ser posterior à data de início.';
+  if (state.premioDue == null) return 'Informe o valor do prêmio devido.';
+  if (!state.dtCancelamento) return 'Informe a data de cancelamento para calcular a tabela de prazo curto.';
+  if (state.dtCancelamento < state.dtInicio || state.dtCancelamento > state.dtFinal) {
+    return 'A data de cancelamento deve estar dentro do período da apólice.';
+  }
+  return 'Preencha os campos acima para calcular.';
+}
+
+/* ══════════════════════════════════════
+   READING BAR
+══════════════════════════════════════ */
+window.addEventListener('scroll', () => {
+  const d = document.documentElement;
+  const p = (d.scrollTop / (d.scrollHeight - d.clientHeight)) * 100;
+  document.getElementById('readingBar').style.width = p + '%';
+});
+
+/* ══════════════════════════════════════
+   STATE
+══════════════════════════════════════ */
+let state = {
+  dtInicio: null,
+  dtFinal: null,
+  dtCancelamento: null,
+  premioDue: null,
+  premioPaid: null,
+  diasVigTotal: 0,
+  diasDecorridos: 0,
+};
+
+let chart = null;
+let currentChartMode = 'dev';
+
+/* ══════════════════════════════════════
+   INPUTS
+══════════════════════════════════════ */
+const inputs = ['dtInicio','dtFinal','dtCancelamento','premioDue','premioPaid'];
+inputs.forEach(id => document.getElementById(id).addEventListener('input', onInput));
+
+function onInput() {
+  state.dtInicio       = parseDateLocal(document.getElementById('dtInicio').value);
+  state.dtFinal        = parseDateLocal(document.getElementById('dtFinal').value);
+  state.dtCancelamento = parseDateLocal(document.getElementById('dtCancelamento').value);
+  state.premioDue      = parseFloat(document.getElementById('premioDue').value) || null;
+  state.premioPaid     = parseFloat(document.getElementById('premioPaid').value) || null;
+
+  updateSlider();
+  updateTimeline();
+  compute();
+}
+
+/* ══════════════════════════════════════
+   SLIDER SYNC
+══════════════════════════════════════ */
+function updateSlider() {
+  const sb = document.getElementById('sliderBlock');
+  const sl = document.getElementById('diasSlider');
+  const qm = document.getElementById('quickMarks');
+
+  if (state.dtInicio && state.dtFinal && state.dtInicio < state.dtFinal) {
+    const total = diffDays(state.dtInicio, state.dtFinal);
+    state.diasVigTotal = total;
+    sl.min = 1;
+    sl.max = total;
+    sb.style.display = 'block';
+
+    // quick marks
+    qm.innerHTML = '';
+    const marks = [
+      Math.round(total * 0.08),
+      Math.round(total * 0.25),
+      Math.round(total * 0.50),
+      Math.round(total * 0.75),
+      Math.round(total * 0.92),
+    ].filter((v,i,a) => v > 0 && a.indexOf(v) === i);
+
+    marks.forEach(d => {
+      const btn = document.createElement('button');
+      btn.className = 'qm-btn';
+      btn.textContent = d + 'd';
+      btn.onclick = () => {
+        const cancelDate = new Date(state.dtInicio.getTime() + d * 86400000);
+        const y = cancelDate.getFullYear();
+        const m = String(cancelDate.getMonth()+1).padStart(2,'0');
+        const dd = String(cancelDate.getDate()).padStart(2,'0');
+        document.getElementById('dtCancelamento').value = `${y}-${m}-${dd}`;
+        sl.value = d;
+        document.getElementById('sliderReadout').textContent = d + (d === 1 ? ' dia' : ' dias');
+        qm.querySelectorAll('.qm-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        onInput();
+      };
+      qm.appendChild(btn);
+    });
+  } else {
+    sb.style.display = 'none';
+  }
+
+  if (state.dtInicio && state.dtCancelamento && state.dtCancelamento > state.dtInicio) {
+    const d = diffDays(state.dtInicio, state.dtCancelamento);
+    sl.value = Math.min(d, sl.max);
+    document.getElementById('sliderReadout').textContent = d + (d === 1 ? ' dia' : ' dias');
+  }
+}
+
+document.getElementById('diasSlider').addEventListener('input', function() {
+  const d = +this.value;
+  document.getElementById('sliderReadout').textContent = d + (d === 1 ? ' dia' : ' dias');
+  if (state.dtInicio) {
+    const cancelDate = new Date(state.dtInicio.getTime() + d * 86400000);
+    const y = cancelDate.getFullYear();
+    const m = String(cancelDate.getMonth()+1).padStart(2,'0');
+    const dd = String(cancelDate.getDate()).padStart(2,'0');
+    document.getElementById('dtCancelamento').value = `${y}-${m}-${dd}`;
+    state.dtCancelamento = cancelDate;
+    updateTimeline();
+    compute();
+  }
+});
+
+/* ══════════════════════════════════════
+   TIMELINE VISUAL
+══════════════════════════════════════ */
+function updateTimeline() {
+  const tv = document.getElementById('timelineVisual');
+  if (!state.dtInicio || !state.dtFinal || state.dtInicio >= state.dtFinal) {
+    tv.style.display = 'none'; return;
+  }
+  tv.style.display = 'block';
+  const total = diffDays(state.dtInicio, state.dtFinal);
+  document.getElementById('tvStart').textContent = fmtDate(state.dtInicio);
+  document.getElementById('tvEnd').textContent   = fmtDate(state.dtFinal);
+
+  if (state.dtCancelamento && state.dtCancelamento > state.dtInicio && state.dtCancelamento <= state.dtFinal) {
+    const dec = diffDays(state.dtInicio, state.dtCancelamento);
+    const pct = Math.min(100, (dec / total) * 100);
+    document.getElementById('tvFill').style.width = pct + '%';
+    document.getElementById('tvDot').style.left = pct + '%';
+    document.getElementById('tvCancel').textContent = fmtDate(state.dtCancelamento);
+    document.getElementById('tvInfo').textContent =
+      dec + ' dias decorridos de ' + total + ' (' + (dec/total*100).toFixed(1) + '% da vigência)';
+  } else {
+    document.getElementById('tvFill').style.width = '0%';
+    document.getElementById('tvDot').style.left = '0%';
+    document.getElementById('tvCancel').textContent = '';
+    document.getElementById('tvInfo').textContent = total + ' dias de vigência total';
+  }
+}
+
+/* ══════════════════════════════════════
+   COMPUTE
+══════════════════════════════════════ */
+function compute() {
+  const ok = state.dtInicio && state.dtFinal &&
+             state.dtCancelamento && state.premioDue != null &&
+             state.dtFinal > state.dtInicio &&
+             state.dtCancelamento >= state.dtInicio &&
+             state.dtCancelamento <= state.dtFinal;
+
+  document.getElementById('stateMessage').textContent = getValidationMessage();
+  document.getElementById('stateEmpty').style.display  = ok ? 'none' : 'flex';
+  document.getElementById('resultsContent').style.display = ok ? 'block' : 'none';
+  if (!ok) return;
+
+  const vigTotal    = diffDays(state.dtInicio, state.dtFinal);
+  const diasDec     = diffDays(state.dtInicio, state.dtCancelamento);
+  const diasRest    = vigTotal - diasDec;
+  const premDue     = state.premioDue;
+  const premPaid    = state.premioPaid != null ? state.premioPaid : premDue;
+  const usedTimePct = (diasDec / vigTotal) * 100;
+
+  /* — pro-rata — */
+  const proRetPct  = usedTimePct;
+  const proRetBase = (proRetPct / 100) * premDue;
+  const proRet     = Math.min(premPaid, proRetBase);
+  const proDevol   = Math.max(0, premPaid - proRet);
+
+  /* — prazo curto — */
+  const curRetPct  = getPrazoRetPct(usedTimePct);
+  const curRetBase = (curRetPct / 100) * premDue;
+  const curRet     = Math.min(premPaid, curRetBase);
+  const curDevol   = Math.max(0, premPaid - curRet);
+
+  /* — diferencial — */
+  const diff       = proDevol - curDevol;
+  const faixaLabel = getPrazoFaixaLabel(usedTimePct);
+
+  /* — render — */
+  document.getElementById('faixaVal').textContent = faixaLabel;
+
+  set('proDevol',  fmtBRL(proDevol));
+  set('proRet',    fmtBRL(proRet));
+  set('proRetPct', fmtPct(proRetPct));
+  set('curDevol',  fmtBRL(curDevol));
+  set('curRet',    fmtBRL(curRet));
+  set('curRetPct', fmtPct(curRetPct));
+
+  animBar('proBar', proRetPct);
+  animBar('curBar', curRetPct);
+
+  set('diffPro', fmtBRL(proDevol));
+  set('diffCur', fmtBRL(curDevol));
+  set('diffVal', diff >= 0 ? '+' + fmtBRL(diff) : fmtBRL(diff));
+  set('diffSub', diff >= 0
+    ? 'Pro-rata devolve mais ao tomador'
+    : 'Prazo curto devolve mais ao tomador');
+
+  buildChart(premPaid, vigTotal, currentChartMode);
+}
+
+function set(id, v) { document.getElementById(id).textContent = v; }
+
+function animBar(id, pct) {
+  const el = document.getElementById(id);
+  el.style.width = '0%';
+  requestAnimationFrame(() => { setTimeout(() => { el.style.width = Math.min(100, pct) + '%'; }, 50); });
+}
+
+/* ══════════════════════════════════════
+   CHART
+══════════════════════════════════════ */
+function buildChart(premAmount, vigTotal, mode) {
+  if (!premAmount || !vigTotal) return;
+
+  const points = Array.from(new Set(PRAZO_TABLE
+    .map(b => Math.ceil(vigTotal * b.maxPct / 100))
+    .filter(d => d > 0 && d <= vigTotal)))
+    .sort((a, b) => a - b);
+  if (!points.includes(vigTotal)) points.push(vigTotal);
+
+  const labels = points.map(d => d + 'd');
+
+  let datasets;
+  if (mode === 'dev') {
+    datasets = [
+      { label: 'Pro-rata — devolução', data: points.map(d => Math.round(premAmount * (1 - d / vigTotal))),
+        borderColor:'#1E6E50', backgroundColor:'rgba(30,110,80,0.08)', tension:0.35, pointRadius:4, pointHoverRadius:7 },
+      { label: 'Prazo curto — devolução', data: points.map(d => {
+          const timePct = (d / vigTotal) * 100;
+          return Math.round(premAmount * (1 - getPrazoRetPct(timePct) / 100));
+        }),
+        borderColor:'#8B3A10', backgroundColor:'rgba(139,58,16,0.08)', tension:0.35, pointRadius:4, pointHoverRadius:7 },
+    ];
+  } else if (mode === 'ret') {
+    datasets = [
+      { label: 'Pro-rata — % retido', data: points.map(d => +(d / vigTotal * 100).toFixed(2)),
+        borderColor:'#1E6E50', backgroundColor:'rgba(30,110,80,0.08)', tension:0.35, pointRadius:4, pointHoverRadius:7 },
+      { label: 'Prazo curto — % retido', data: points.map(d => getPrazoRetPct((d / vigTotal) * 100)),
+        borderColor:'#8B3A10', backgroundColor:'rgba(139,58,16,0.08)', tension:0.35, pointRadius:4, pointHoverRadius:7 },
+    ];
+  } else {
+    datasets = [
+      { label: 'Diferencial em favor do tomador (pro-rata)',
+        data: points.map(d => {
+          const timePct = (d / vigTotal) * 100;
+          return Math.round(premAmount * (1 - d / vigTotal)) - Math.round(premAmount * (1 - getPrazoRetPct(timePct) / 100));
+        }),
+        borderColor:'#B8711E', backgroundColor:'rgba(184,113,30,0.12)',
+        fill:true, tension:0.35, pointRadius:4, pointHoverRadius:7 },
+    ];
+  }
+
+  if (chart) chart.destroy();
+  const ctx = document.getElementById('mainChart').getContext('2d');
+  chart = new Chart(ctx, {
+    type: 'line',
+    data: { labels, datasets },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      interaction: { mode:'index', intersect:false },
+      plugins: {
+        legend: { labels: { font:{ family:"'Courier Prime',monospace", size:11 }, color:'#6B5540', padding:16 } },
+        tooltip: {
+          backgroundColor:'#1C1410', borderColor:'#B8711E', borderWidth:1,
+          titleFont:{ family:"'Courier Prime',monospace", size:11 },
+          bodyFont:{ family:"'Courier Prime',monospace", size:11 },
+          padding:10,
+          callbacks: {
+            label: ctx => {
+              const v = ctx.raw;
+              if (mode === 'ret') return '  ' + ctx.dataset.label + ': ' + v + '%';
+              return '  ' + ctx.dataset.label + ': R$ ' + v.toLocaleString('pt-BR');
+            }
+          }
+        }
+      },
+      scales: {
+        x:{ ticks:{ font:{ family:"'Courier Prime',monospace", size:10 }, color:'#9A8470' }, grid:{ color:'rgba(122,62,16,0.07)' } },
+        y:{ ticks:{ font:{ family:"'Courier Prime',monospace", size:10 }, color:'#9A8470' }, grid:{ color:'rgba(122,62,16,0.07)' } }
+      }
+    }
+  });
+}
+
+function setChart(mode, btn) {
+  currentChartMode = mode;
+  document.querySelectorAll('.ct-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  const premPaid = state.premioPaid != null ? state.premioPaid : state.premioDue;
+  if (premPaid && state.diasVigTotal) buildChart(premPaid, state.diasVigTotal, mode);
+}
+
+/* ══════════════════════════════════════
+   EXPORT / UTILS
+══════════════════════════════════════ */
+function exportPDF() { window.print(); }
+
+function copyResult() {
+  const lines = [
+    '─── Calculadora SGF — Devolução de Prêmio ───',
+    'Vigência: ' + fmtDate(state.dtInicio) + ' a ' + fmtDate(state.dtFinal),
+    'Cancelamento: ' + fmtDate(state.dtCancelamento),
+    'Prêmio devido: ' + fmtBRL(state.premioDue),
+    'Prêmio pago: ' + fmtBRL(state.premioPaid),
+    '',
+    'PRO-RATA TEMPORIS',
+    '  Devolução: ' + document.getElementById('proDevol').textContent,
+    '  Retenção: '  + document.getElementById('proRet').textContent,
+    '  % retido: '  + document.getElementById('proRetPct').textContent,
+    '',
+    'TABELA DE PRAZO CURTO',
+    '  Devolução: ' + document.getElementById('curDevol').textContent,
+    '  Retenção: '  + document.getElementById('curRet').textContent,
+    '  % retido: '  + document.getElementById('curRetPct').textContent,
+    '  Faixa: '     + document.getElementById('faixaVal').textContent,
+    '',
+    'DIFERENCIAL: ' + document.getElementById('diffVal').textContent,
+    '─────────────────────────────────────────────',
+    'Sem IOF (Decreto 6.306/2007, art. 22 §1º I, "g")',
+    'segurogarantiafacil.com',
+  ];
+  navigator.clipboard.writeText(lines.join('\n'))
+    .then(() => alert('Resumo copiado para a área de transferência!'))
+    .catch(() => alert('Não foi possível copiar automaticamente. Use Ctrl+A para selecionar.'));
+}
+
+function resetForm() {
+  ['dtInicio','dtFinal','dtCancelamento','premioDue','premioPaid'].forEach(id => {
+    document.getElementById(id).value = '';
+  });
+  state = { dtInicio:null, dtFinal:null, dtCancelamento:null, premioDue:null, premioPaid:null, diasVigTotal:0, diasDecorridos:0 };
+  document.getElementById('sliderBlock').style.display = 'none';
+  document.getElementById('timelineVisual').style.display = 'none';
+  document.getElementById('stateEmpty').style.display = 'flex';
+  document.getElementById('resultsContent').style.display = 'none';
+  if (chart) { chart.destroy(); chart = null; }
+}
+
+/* ══════════════════════════════════════
+   INIT — prefill com datas de exemplo
+══════════════════════════════════════ */
+(function init() {
+  const today = new Date();
+  const y = today.getFullYear(), m = today.getMonth(), d = today.getDate();
+  const fmt = dt => {
+    const yy = dt.getFullYear();
+    const mm = String(dt.getMonth()+1).padStart(2,'0');
+    const dd = String(dt.getDate()).padStart(2,'0');
+    return `${yy}-${mm}-${dd}`;
+  };
+  document.getElementById('dtInicio').value = fmt(new Date(y, m-6, d));
+  document.getElementById('dtFinal').value  = fmt(new Date(y, m+6, d));
+  // não pré-preenche cancelamento para o usuário ver o estado vazio
+  onInput();
+})();
+</script>
+</body>
+</html>
