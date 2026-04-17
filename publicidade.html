@@ -1,927 +1,210 @@
 <!DOCTYPE html>
-
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>SGF · Calculadoras · Carrossel</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-
-  <style>
-    /* ─── SHELL ─── */
-    :root {
-      --ivory:    #FAF7F2;
-      --ivory-2:  #F0E9DF;
-      --ivory-3:  #D9CEBD;
-      --ink:      #1C1712;
-      --ink-mid:  #3D342A;
-      --ink-mute: #7A6A5A;
-      --terra:    #C05A35;
-      --terra-lt: #D4703F;
-      --amber:    #C4900A;
-      --sgf-mono: 'Courier New', monospace;
-      --sgf-serif:'Playfair Display', Georgia, serif;
-      --calc-bg:  #0F1117;
-      --calc-surface: #1A1D26;
-      --calc-border: rgba(255,255,255,0.08);
-      --calc-teal: #63CAB7;
-    }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      background: #0C0C0C;
-      font-family: 'DM Sans', sans-serif;
-      padding: 40px 24px 64px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 5px;
-    }
-    .deck-label {
-      font-family: var(--sgf-mono);
-      font-size: 10px;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.18);
-      margin-bottom: 32px;
-    }
-    .deck { display: flex; flex-direction: column; gap: 20px; align-items: center; }
-
-    /* ─── SLIDE SHELL ─── */
-    .slide {
-      width: 1080px;
-      height: 1080px;
-      position: relative;
-      overflow: hidden;
-      border-radius: 8px;
-      flex-shrink: 0;
-    }
-
-    /* ─── SHARED CHROME ─── */
-    .s-topbar {
-      position: absolute; top: 0; left: 0; right: 0; height: 5px;
-      background: linear-gradient(90deg, #C05A35, #C4900A);
-      z-index: 20;
-    }
-    .s-nav {
-      position: absolute; top: 28px; left: 56px; right: 56px;
-      display: flex; justify-content: space-between; align-items: center;
-      z-index: 10;
-    }
-    .s-logo {
-      font-family: var(--sgf-mono); font-size: 13px; font-weight: 700;
-      letter-spacing: 0.18em; text-transform: uppercase;
-    }
-    .s-counter {
-      font-family: var(--sgf-mono); font-size: 12px; font-weight: 700;
-      letter-spacing: 0.12em; opacity: 0.28;
-    }
-    .s-dots { display: flex; gap: 7px; align-items: center; }
-    .s-dot {
-      height: 4px; border-radius: 99px; width: 24px;
-      background: rgba(192,90,53,0.25);
-    }
-    .s-dot.on { background: #C05A35; width: 48px; }
-    .s-foot {
-      position: absolute; bottom: 44px; left: 56px; right: 56px;
-      display: flex; justify-content: space-between; align-items: center;
-      z-index: 10;
-    }
-    .s-foot-txt {
-      font-family: var(--sgf-mono); font-size: 10.5px; letter-spacing: 0.10em;
-    }
-
-    /* ════════════════════════════════
-       SLIDE 1 — CAPA
-    ════════════════════════════════ */
-    .s1 { background: var(--ink); }
-    .s1 .s-logo { color: var(--ivory); }
-    .s1 .s-counter { color: var(--ivory); }
-
-    .s1-body {
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 0;
-      padding: 0 64px;
-    }
-
-    /* Rings BG */
-    .s1-rings {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -54%);
-      pointer-events: none;
-      opacity: 1;
-    }
-
-    .s1-shield {
-      width: 112px;
-      height: auto;
-      margin-bottom: 28px;
-      filter: drop-shadow(0 10px 28px rgba(192,90,53,0.40));
-    }
-
-    .s1-chip {
-      font-family: var(--sgf-mono);
-      font-size: 11px; font-weight: 700; letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: #C05A35;
-      background: rgba(192,90,53,0.14);
-      border: 1px solid rgba(192,90,53,0.38);
-      padding: 7px 20px; border-radius: 99px;
-      margin-bottom: 32px;
-    }
-
-    .s1-headline {
-      font-family: var(--sgf-serif);
-      font-size: 86px; font-weight: 900;
-      color: var(--ivory);
-      line-height: 0.95;
-      text-align: center;
-      letter-spacing: -2px;
-      margin-bottom: 12px;
-    }
-    .s1-headline em {
-      font-style: italic;
-      color: #C05A35;
-    }
-
-    .s1-sub {
-      font-family: var(--sgf-mono);
-      font-size: 13px; letter-spacing: 0.16em;
-      color: rgba(250,247,242,0.35);
-      text-transform: uppercase;
-      text-align: center;
-      margin-bottom: 52px;
-    }
-
-    /* 3 mode pills */
-    .s1-modes {
-      display: flex; gap: 14px;
-      flex-wrap: nowrap;
-      margin-bottom: 52px;
-    }
-    .s1-mode {
-      background: rgba(250,247,242,0.05);
-      border: 1px solid rgba(250,247,242,0.10);
-      border-radius: 10px;
-      padding: 16px 24px;
-      display: flex; flex-direction: column; align-items: center; gap: 8px;
-      width: 220px;
-      flex-shrink: 0;
-    }
-    .s1-mode.hl {
-      background: rgba(192,90,53,0.12);
-      border-color: rgba(192,90,53,0.35);
-    }
-    .s1-mode-icon {
-      font-size: 28px; line-height: 1;
-    }
-    .s1-mode-label {
-      font-family: var(--sgf-mono);
-      font-size: 10px; font-weight: 700; letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: rgba(250,247,242,0.55);
-      text-align: center;
-      line-height: 1.4;
-    }
-    .s1-mode.hl .s1-mode-label { color: #C05A35; }
-
-    /* Formula -->  */
-    .s1-formula {
-      width: 100%;
-      background: rgba(250,247,242,0.03);
-      border: 1px solid rgba(250,247,242,0.07);
-      border-radius: 8px;
-      padding: 20px 36px;
-      display: flex; align-items: center; justify-content: center; gap: 0;
-    }
-
-    /* ════════════════════════════════
-       SLIDES 2,3,4 — CALC MOCKUP
-    ════════════════════════════════ */
-    .s-calc { background: var(--ivory-2); }
-    .s-calc .s-logo { color: var(--ink); }
-    .s-calc .s-counter { color: var(--ink); }
-
-    .sc-header {
-      position: absolute;
-      top: 88px; left: 56px; right: 56px;
-    }
-    .sc-mode-tag {
-      font-family: var(--sgf-mono);
-      font-size: 10px; font-weight: 700; letter-spacing: 0.22em;
-      text-transform: uppercase;
-      padding: 5px 14px; border-radius: 99px;
-      display: inline-block; margin-bottom: 10px;
-    }
-    .sc-title {
-      font-family: var(--sgf-serif);
-      font-size: 46px; font-weight: 700;
-      color: var(--ink); line-height: 1.05;
-      letter-spacing: -0.5px;
-    }
-    .sc-title em { font-style: italic; }
-    .sc-desc {
-      font-size: 16px; font-weight: 300;
-      color: var(--ink-mute);
-      margin-top: 6px;
-    }
-
-    /* ── THE CALCULATOR MOCKUP ── */
-    .calc-mockup {
-      position: absolute;
-      top: 278px;
-      left: 56px; right: 56px;
-      bottom: 108px;
-      background: var(--calc-bg);
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow:
-        0 0 0 1px rgba(255,255,255,0.06),
-        0 24px 80px rgba(0,0,0,0.5);
-      display: flex;
-      flex-direction: column;
-    }
-
-    /* Mockup top chrome bar */
-    .cm-chrome {
-      background: var(--calc-surface);
-      height: 44px;
-      display: flex; align-items: center;
-      padding: 0 20px; gap: 8px;
-      border-bottom: 1px solid var(--calc-border);
-      flex-shrink: 0;
-    }
-    .cm-dot {
-      width: 12px; height: 12px; border-radius: 50%;
-    }
-    .cm-dot.r { background: #FF5F57; }
-    .cm-dot.y { background: #FFBD2E; }
-    .cm-dot.g { background: #28CA41; }
-    .cm-url {
-      margin-left: 12px;
-      background: rgba(255,255,255,0.06);
-      border-radius: 6px;
-      padding: 5px 14px;
-      font-family: var(--sgf-mono);
-      font-size: 11px;
-      color: rgba(255,255,255,0.30);
-      letter-spacing: 0.04em;
-    }
-
-    /* Mode tabs inside the app */
-    .cm-tabs {
-      display: flex; gap: 4px;
-      padding: 14px 24px 0;
-      flex-shrink: 0;
-    }
-    .cm-tab {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 12.5px; font-weight: 500;
-      padding: 8px 18px; border-radius: 8px 8px 0 0;
-      color: rgba(255,255,255,0.35);
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.07);
-      border-bottom: none;
-      white-space: nowrap;
-    }
-    .cm-tab.active {
-      background: rgba(99,202,183,0.12);
-      color: var(--calc-teal);
-      border-color: rgba(99,202,183,0.20);
-    }
-
-    /* App body */
-    .cm-body {
-      flex: 1;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      border-top: 1px solid var(--calc-border);
-      overflow: hidden;
-    }
-
-    /* Form side */
-    .cm-form {
-      padding: 28px 28px 24px;
-      border-right: 1px solid var(--calc-border);
-      display: flex; flex-direction: column; gap: 0;
-      overflow: hidden;
-    }
-
-    /* Field component */
-    .cf-label {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 10.5px; font-weight: 700;
-      letter-spacing: 0.07em; text-transform: uppercase;
-      color: rgba(255,255,255,0.38);
-      margin-bottom: 6px;
-      display: flex; align-items: baseline; gap: 6px;
-    }
-    .cf-label span {
-      font-weight: 400; text-transform: none;
-      letter-spacing: 0; font-size: 10.5px;
-      color: rgba(99,202,183,0.70);
-    }
-    .cf-input {
-      width: 100%;
-      background: rgba(255,255,255,0.05);
-      border: 1.5px solid rgba(255,255,255,0.10);
-      border-radius: 10px;
-      padding: 12px 15px;
-      font-family: 'DM Mono', monospace;
-      font-size: 16px; font-weight: 500;
-      color: #FAF7F2;
-      margin-bottom: 16px;
-      display: flex; align-items: center;
-    }
-    .cf-input.filled {
-      border-color: rgba(99,202,183,0.30);
-      background: rgba(99,202,183,0.06);
-    }
-    .cf-input.focus {
-      border-color: rgba(99,202,183,0.60);
-      background: rgba(99,202,183,0.08);
-      box-shadow: 0 0 0 3px rgba(99,202,183,0.10);
-    }
-    .cf-input-placeholder {
-      color: rgba(255,255,255,0.20);
-      font-weight: 400;
-    }
-    .cf-row2 {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
-      margin-bottom: 16px;
-    }
-    .cf-row2 .cf-input { margin-bottom: 0; }
-    .cf-hint {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 11px; color: rgba(255,255,255,0.25);
-      margin-top: -10px; margin-bottom: 12px;
-      letter-spacing: 0.02em;
-    }
-    .cf-hint.ok { color: rgba(99,202,183,0.65); }
-    .cf-divider {
-      height: 1px; background: rgba(255,255,255,0.07);
-      margin: 4px 0 16px;
-    }
-    .cf-select {
-      width: 100%;
-      background: rgba(255,255,255,0.05);
-      border: 1.5px solid rgba(255,255,255,0.10);
-      border-radius: 10px;
-      padding: 11px 15px;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 13px;
-      color: rgba(255,255,255,0.50);
-      margin-bottom: 18px;
-      display: flex; align-items: center;
-    }
-    .cf-select.picked { color: rgba(255,255,255,0.80); }
-    .cf-btn {
-      width: 100%; padding: 14px;
-      background: #C05A35;
-      border-radius: 10px;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 14px; font-weight: 700;
-      color: #FAF7F2; text-align: center;
-      margin-top: auto;
-      letter-spacing: 0.03em;
-    }
-
-    /* Result side */
-    .cm-result {
-      padding: 28px 28px 24px;
-      display: flex; flex-direction: column;
-    }
-
-    /* Main result box */
-    .cr-main {
-      border: 1.5px solid rgba(192,90,53,0.45);
-      border-radius: 14px;
-      padding: 22px 20px;
-      text-align: center;
-      margin-bottom: 18px;
-      background: rgba(192,90,53,0.06);
-    }
-    .cr-lbl {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 10px; font-weight: 700; letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.35);
-      margin-bottom: 8px;
-    }
-    .cr-val {
-      font-family: 'DM Serif Display', Georgia, serif;
-      font-size: 46px; font-weight: 400;
-      color: #C05A35;
-      letter-spacing: -1px; line-height: 1.0;
-      margin-bottom: 6px;
-    }
-    .cr-sub {
-      font-family: 'DM Mono', monospace;
-      font-size: 10px;
-      color: rgba(255,255,255,0.25);
-      letter-spacing: 0.04em;
-    }
-
-    /* Breakdown rows */
-    .cr-section-title {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 10px; font-weight: 700; letter-spacing: 0.10em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.25);
-      margin: 4px 0 8px;
-    }
-    .cr-row {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 8px 12px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 8px;
-      margin-bottom: 5px;
-    }
-    .cr-row.hi {
-      background: rgba(192,90,53,0.08);
-      border-color: rgba(192,90,53,0.18);
-    }
-    .cr-row-lbl {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 12px; color: rgba(255,255,255,0.45);
-    }
-    .cr-row-val {
-      font-family: 'DM Mono', monospace;
-      font-size: 12px; font-weight: 500;
-      color: rgba(255,255,255,0.75);
-    }
-    .cr-row.hi .cr-row-val { color: #C05A35; font-size: 13px; font-weight: 600; }
-
-    /* Teal result variant */
-    .cr-main.teal {
-      border-color: rgba(99,202,183,0.40);
-      background: rgba(99,202,183,0.05);
-    }
-    .cr-main.teal .cr-val { color: var(--calc-teal); }
-    .cr-row.hi-teal {
-      background: rgba(99,202,183,0.06);
-      border-color: rgba(99,202,183,0.15);
-    }
-    .cr-row.hi-teal .cr-row-val { color: var(--calc-teal); }
-
-    /* ─── FORMULA SVG inline helper ─── */
-    .s1-fml-token {
-      display: flex; flex-direction: column; align-items: center; gap: 4px;
-    }
-  </style>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cancelamento do Seguro Garantia: pro-rata e prazo curto | SGF</title>
+<meta name="description" content="Critérios de devolução de prêmio no seguro garantia. Fundamentação normativa, casos práticos e calculadora ajustada pela Circular SUSEP 256/2004.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<style>
+/* Estilos mantidos conforme original para preservar a identidade visual do SGF */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --terra: #7A3E10; --terra-deep: #5C2D08; --amber: #B8711E; --amber-light: #F5E8D0;
+  --amber-mid: #DEB87A; --ivory: #FAF6EE; --ivory-dark: #F0E9DC; --ink: #1C1410;
+  --ink-mid: #3A2A1C; --ink-light: #6B5540; --ink-muted: #9A8470; --border: rgba(122,62,16,0.15);
+  --border-mid: rgba(122,62,16,0.28); --page-bg: #F7F2EA; --serif: 'EB Garamond', Georgia, serif;
+  --mono: 'Courier Prime', 'Courier New', monospace; --pro-color: #2E7D5E; --cur-color: #8B3A10;
+}
+body { background: var(--page-bg); color: var(--ink); font-family: var(--serif); font-size: 17px; line-height: 1.75; -webkit-font-smoothing: antialiased; }
+.site-header { background: var(--ink); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 52px; position: sticky; top: 0; z-index: 200; border-bottom: 2px solid var(--amber); }
+.site-logo { font-family: var(--mono); font-size: 13px; font-weight: 700; color: var(--amber-light); text-decoration: none; text-transform: uppercase; }
+.site-logo span { color: var(--amber); }
+.hero { background: var(--ink); padding: 4.5rem 2rem 4rem; position: relative; overflow: hidden; }
+.hero-inner { max-width: 760px; margin: 0 auto; position: relative; z-index: 2; }
+.hero h1 { font-family: var(--serif); font-size: clamp(24px, 4vw, 38px); font-weight: 400; color: #FAF6EE; margin-bottom: 1rem; }
+.page-body { max-width: 760px; margin: 0 auto; padding: 3rem 2rem 5rem; }
+.reading-bar { position: fixed; top: 52px; left: 0; height: 2px; background: linear-gradient(90deg, var(--amber), var(--terra)); width: 0%; z-index: 199; }
+h2 { font-family: var(--serif); font-size: 22px; font-weight: 400; color: var(--terra); margin: 2.5rem 0 0.75rem; border-bottom: 1px solid var(--border-mid); }
+.calc-section { background: var(--ink); border-radius: 12px; padding: 2rem; margin: 2rem 0; color: var(--ivory); }
+.calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 1.25rem; }
+.calc-field label { display: block; font-family: var(--mono); font-size: 9.5px; text-transform: uppercase; color: var(--amber-mid); margin-bottom: 6px; }
+.calc-field input { width: 100%; background: rgba(255,255,255,0.06); border: 1px solid rgba(184,113,30,0.35); border-radius: 5px; color: var(--ivory); padding: 8px; font-family: var(--mono); }
+.calc-res-card { border-radius: 8px; padding: 1rem; margin-top: 10px; }
+.calc-res-card.pro { background: rgba(46,125,94,0.12); border: 1px solid rgba(46,125,94,0.25); }
+.calc-res-card.cur { background: rgba(139,58,16,0.12); border: 1px solid rgba(139,58,16,0.25); }
+.calc-res-val { font-family: var(--mono); font-size: 22px; font-weight: 700; }
+.int-table-wrap { overflow-x: auto; margin: 1.5rem 0; }
+table.int-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+table.int-table th { background: var(--terra); color: var(--ivory); padding: 10px; font-family: var(--mono); font-size: 9.5px; text-transform: uppercase; }
+table.int-table td { padding: 9px; border-bottom: 1px solid var(--border); }
+.formula { background: var(--ink); color: #EDD9B0; font-family: var(--mono); font-size: 12.5px; padding: 1.2rem; border-radius: 6px; border-left: 3px solid var(--amber); }
+</style>
 </head>
 <body>
 
-<p class="deck-label">SGF · Calculadoras · Carrossel · 4 slides · 1080 × 1080 px</p>
+<div class="reading-bar" id="readingBar"></div>
 
-<div class="deck">
+<header class="site-header">
+  <a class="site-logo" href="#">SGF <span>·</span> Seguro Garantia Fácil</a>
+</header>
 
-<!-- ══════════════════════════════════════════════════════
-     SLIDE 1 — CAPA
-══════════════════════════════════════════════════════ -->
-
-<div class="slide s1">
-  <div class="s-topbar"></div>
-
-  <div class="s-nav">
-    <span class="s-logo">SGF</span>
-    <div class="s-dots">
-      <div class="s-dot on"></div>
-      <div class="s-dot"></div>
-      <div class="s-dot"></div>
-      <div class="s-dot"></div>
-    </div>
-    <span class="s-counter">01 / 04</span>
+<section class="hero">
+  <div class="hero-inner">
+    <h1>Cancelamento do Seguro Garantia: Pro-rata vs Prazo Curto</h1>
+    <p style="color: rgba(250,246,238,0.6); font-style: italic;">Ajustado conforme Circular SUSEP 256/2004 e 662/2022.</p>
   </div>
+</section>
 
-  <!-- BG rings -->
+<main class="page-body">
+  <h2>A Lógica das 23 Faixas</h2>
+  <p>Diferente de modelos simplificados, a tabela de prazo curto do Seguro Garantia utiliza intervalos de 15 em 15 dias para definir a retenção. Isso garante que a seguradora seja remunerada adequadamente pelo risco assumido, especialmente em cancelamentos precoces por iniciativa do tomador.</p>
 
-  <svg class="s1-rings" width="780" height="780" viewBox="0 0 780 780" fill="none">
-    <circle cx="390" cy="390" r="378" stroke="rgba(250,247,242,0.03)" stroke-width="1"/>
-    <circle cx="390" cy="390" r="295" stroke="rgba(250,247,242,0.03)" stroke-width="1"/>
-    <circle cx="390" cy="390" r="212" stroke="rgba(192,90,53,0.06)" stroke-width="1"/>
-    <circle cx="390" cy="390" r="128" stroke="rgba(192,90,53,0.05)" stroke-width="1"/>
-  </svg>
-
-  <div class="s1-body">
-    <!-- Shield -->
-    <svg class="s1-shield" viewBox="0 0 100 115" fill="none">
-      <defs>
-        <filter id="sglow">
-          <feDropShadow dx="0" dy="8" stdDeviation="16" flood-color="#C05A35" flood-opacity="0.50"/>
-        </filter>
-      </defs>
-      <path d="M50 5 L90 22 L90 60 C90 82 70 100 50 108 C30 100 10 82 10 60 L10 22 Z"
-            fill="#C05A35" filter="url(#sglow)"/>
-      <path d="M50 12 L84 27 L84 60 C84 78 66 94 50 101 C34 94 16 78 16 60 L16 27 Z"
-            fill="rgba(255,255,255,0.06)"/>
-      <path d="M27 60 L43 77 L74 40"
-            stroke="#FAF7F2" stroke-width="8.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-    </svg>
-
-```
-<span class="s1-chip">Nova ferramenta gratuita</span>
-
-<div class="s1-headline">
-  Calcula&shy;doras<br><em>SGF</em>
-</div>
-<div class="s1-sub" style="margin-top:10px;">Prêmio · Taxa · Importância Segurada</div>
-
-<!-- 3 mode cards -->
-<div class="s1-modes">
-  <div class="s1-mode hl">
-    <div class="s1-mode-icon">💰</div>
-    <div class="s1-mode-label">Calcular<br>Prêmio</div>
-  </div>
-  <div class="s1-mode hl">
-    <div class="s1-mode-icon">📊</div>
-    <div class="s1-mode-label">Descobrir<br>Taxa Aplicada</div>
-  </div>
-  <div class="s1-mode hl">
-    <div class="s1-mode-icon">🔍</div>
-    <div class="s1-mode-label">Descobrir<br>Import. Segurada</div>
-  </div>
-</div>
-
-<!-- Formula bar -->
-<div class="s1-formula">
-  <svg width="760" height="72" viewBox="0 0 760 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <!-- P -->
-    <text x="54" y="24" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="rgba(250,247,242,0.28)" letter-spacing="2" font-weight="700">PRÊMIO</text>
-    <text x="54" y="56" text-anchor="middle" font-family="'DM Serif Display',Georgia,serif" font-size="30" fill="#FAF7F2" font-weight="400">P</text>
-    <!-- = -->
-    <text x="128" y="44" text-anchor="middle" font-family="Georgia,serif" font-size="26" fill="rgba(250,247,242,0.18)">=</text>
-    <!-- IS -->
-    <text x="210" y="24" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="#C05A35" letter-spacing="2" font-weight="700">IMPORTÂNCIA</text>
-    <text x="210" y="56" text-anchor="middle" font-family="'DM Serif Display',Georgia,serif" font-size="30" fill="#C05A35">IS</text>
-    <!-- × -->
-    <text x="282" y="44" text-anchor="middle" font-family="Georgia,serif" font-size="24" fill="rgba(250,247,242,0.12)">×</text>
-    <!-- τ -->
-    <text x="350" y="24" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="#C4900A" letter-spacing="2" font-weight="700">TAXA</text>
-    <text x="350" y="56" text-anchor="middle" font-family="'DM Serif Display',Georgia,serif" font-size="30" fill="#C4900A">τ</text>
-    <!-- × -->
-    <text x="420" y="44" text-anchor="middle" font-family="Georgia,serif" font-size="24" fill="rgba(250,247,242,0.12)">×</text>
-    <!-- t -->
-    <text x="490" y="24" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="rgba(250,247,242,0.40)" letter-spacing="2" font-weight="700">PRAZO</text>
-    <text x="490" y="56" text-anchor="middle" font-family="'DM Serif Display',Georgia,serif" font-size="30" fill="rgba(250,247,242,0.60)">t</text>
-    <!-- divider -->
-    <line x1="576" y1="10" x2="576" y2="62" stroke="rgba(250,247,242,0.07)" stroke-width="1"/>
-    <!-- sem IOF -->
-    <text x="664" y="35" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="rgba(250,247,242,0.22)" letter-spacing="1.5">ramos 0775/0776</text>
-    <text x="664" y="53" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="rgba(192,90,53,0.55)" letter-spacing="1.5" font-weight="700">sem IOF</text>
-  </svg>
-</div>
-```
-
-  </div>
-
-  <div class="s-foot">
-    <span class="s-foot-txt" style="color:rgba(250,247,242,0.22);">segurogarantiafacil.com/calculadora</span>
-    <span class="s-foot-txt" style="color:rgba(250,247,242,0.16);">@segurogarantiafaciloficial</span>
-  </div>
-</div>
-
-<!-- ══════════════════════════════════════════════════════
-     SLIDE 2 — MODO 1: CALCULAR PRÊMIO
-══════════════════════════════════════════════════════ -->
-
-<div class="slide s-calc">
-  <div class="s-topbar"></div>
-  <div class="s-nav">
-    <span class="s-logo">SGF</span>
-    <div class="s-dots">
-      <div class="s-dot"></div><div class="s-dot on"></div>
-      <div class="s-dot"></div><div class="s-dot"></div>
+  <div class="calc-section">
+    <h3 style="color: var(--amber); font-family: var(--mono); font-size: 12px; margin-bottom: 1rem;">CALCULADORA TÉCNICA</h3>
+    <div class="calc-grid">
+      <div class="calc-field">
+        <label>Prêmio total (R$)</label>
+        <input type="number" id="calcPremio" value="60000">
+      </div>
+      <div class="calc-field">
+        <label>Vigência total (dias)</label>
+        <input type="number" id="calcVigencia" value="365">
+      </div>
     </div>
-    <span class="s-counter">02 / 04</span>
-  </div>
-
-  <!-- Header -->
-
-  <div class="sc-header">
-    <span class="sc-mode-tag" style="background:rgba(192,90,53,0.12);border:1px solid rgba(192,90,53,0.30);color:#C05A35;">
-      💰 &nbsp;Modo 1 de 3
-    </span>
-    <div class="sc-title">Calcular <em style="color:#C05A35;">Prêmio</em></div>
-    <div class="sc-desc">Qual será o custo do seguro para o Tomador?</div>
-  </div>
-
-  <!-- Calculator mockup -->
-
-  <div class="calc-mockup">
-
-```
-<!-- Browser chrome -->
-<div class="cm-chrome">
-  <div class="cm-dot r"></div>
-  <div class="cm-dot y"></div>
-  <div class="cm-dot g"></div>
-  <div class="cm-url">segurogarantiafacil.com/calculadora</div>
-</div>
-
-<!-- Mode tabs -->
-<div class="cm-tabs">
-  <div class="cm-tab active">💰 Calcular Prêmio</div>
-  <div class="cm-tab">📊 Descobrir Taxa</div>
-  <div class="cm-tab">🔍 Descobrir IS</div>
-</div>
-
-<!-- Body: form + result -->
-<div class="cm-body">
-
-  <!-- FORM -->
-  <div class="cm-form">
-
-    <div class="cf-label">Importância Segurada (R$) <span>· valor garantido</span></div>
-    <div class="cf-input filled">500.000,00</div>
-
-    <div class="cf-label">Vigência <span>· início e fim da cobertura</span></div>
-    <div class="cf-row2">
-      <div class="cf-input filled" style="font-size:14px;">01/01/2025</div>
-      <div class="cf-input filled" style="font-size:14px;">31/12/2025</div>
-    </div>
-    <div class="cf-hint ok">→ 364 dias · 0,997 anos</div>
-
-    <div class="cf-divider"></div>
-
-    <div class="cf-label">Taxa anual (%) <span>· definida na subscrição</span></div>
-    <div class="cf-input focus">1,50</div>
-
-    <div class="cf-label" style="margin-top:-4px;">Referência de mercado</div>
-    <div class="cf-select picked">Garantia Judicial · ~1,50% a.a.</div>
-
-    <div class="cf-btn">Calcular Prêmio</div>
-  </div>
-
-  <!-- RESULT -->
-  <div class="cm-result" style="background:rgba(0,0,0,0.15);">
-
-    <div class="cr-main">
-      <div class="cr-lbl">Prêmio Total</div>
-      <div class="cr-val">R$ 7.479,45</div>
-      <div class="cr-sub">IS × taxa × (364 ÷ 365)</div>
+    <div class="calc-field">
+      <label>Dia do cancelamento: <span id="calcDayLabel">90</span></label>
+      <input type="range" min="1" max="365" value="90" id="calcSlider" style="width:100%;">
     </div>
 
-    <div class="cr-section-title">Detalhamento</div>
-
-    <div class="cr-row">
-      <span class="cr-row-lbl">Importância Segurada</span>
-      <span class="cr-row-val">R$ 500.000,00</span>
-    </div>
-    <div class="cr-row">
-      <span class="cr-row-lbl">Taxa anual</span>
-      <span class="cr-row-val">1,5000%</span>
-    </div>
-    <div class="cr-row">
-      <span class="cr-row-lbl">Prazo</span>
-      <span class="cr-row-val">364 dias (0,997 anos)</span>
-    </div>
-    <div class="cr-row">
-      <span class="cr-row-lbl">Prêmio base</span>
-      <span class="cr-row-val">R$ 7.479,45</span>
-    </div>
-    <div class="cr-row hi">
-      <span class="cr-row-lbl" style="color:rgba(255,255,255,0.70);font-weight:600;">Prêmio total</span>
-      <span class="cr-row-val">R$ 7.479,45</span>
-    </div>
-
-    <div class="cr-row" style="margin-top:6px;border-color:rgba(99,202,183,0.12);background:rgba(99,202,183,0.04);">
-      <span class="cr-row-lbl" style="color:rgba(99,202,183,0.55);font-size:11px;">IOF (Seguro Garantia)</span>
-      <span class="cr-row-val" style="color:rgba(99,202,183,0.55);font-size:11px;">isento — ramos 0775/0776</span>
-    </div>
-  </div>
-</div>
-```
-
-  </div>
-
-  <div class="s-foot">
-    <span class="s-foot-txt" style="color:var(--ink-mute);">segurogarantiafacil.com/calculadora</span>
-    <span class="s-foot-txt" style="color:rgba(60,50,40,0.35);">@segurogarantiafaciloficial</span>
-  </div>
-</div>
-
-<!-- ══════════════════════════════════════════════════════
-     SLIDE 3 — MODO 2: DESCOBRIR TAXA APLICADA
-══════════════════════════════════════════════════════ -->
-
-<div class="slide s-calc" style="background:#EDE8DF;">
-  <div class="s-topbar"></div>
-  <div class="s-nav">
-    <span class="s-logo">SGF</span>
-    <div class="s-dots">
-      <div class="s-dot"></div><div class="s-dot"></div>
-      <div class="s-dot on"></div><div class="s-dot"></div>
-    </div>
-    <span class="s-counter">03 / 04</span>
-  </div>
-
-  <div class="sc-header">
-    <span class="sc-mode-tag" style="background:rgba(196,144,10,0.12);border:1px solid rgba(196,144,10,0.28);color:#C4900A;">
-      📊 &nbsp;Modo 2 de 3
-    </span>
-    <div class="sc-title">Descobrir a <em style="color:#C4900A;">Taxa Aplicada</em></div>
-    <div class="sc-desc">Qual taxa foi cobrada nessa apólice? Audite antes de assinar.</div>
-  </div>
-
-  <div class="calc-mockup">
-    <div class="cm-chrome">
-      <div class="cm-dot r"></div>
-      <div class="cm-dot y"></div>
-      <div class="cm-dot g"></div>
-      <div class="cm-url">segurogarantiafacil.com/calculadora</div>
-    </div>
-
-```
-<div class="cm-tabs">
-  <div class="cm-tab">💰 Calcular Prêmio</div>
-  <div class="cm-tab active" style="background:rgba(196,144,10,0.10);color:#C4900A;border-color:rgba(196,144,10,0.20);">📊 Descobrir Taxa</div>
-  <div class="cm-tab">🔍 Descobrir IS</div>
-</div>
-
-<div class="cm-body">
-
-  <!-- FORM -->
-  <div class="cm-form">
-    <div class="cf-label">Prêmio pago (R$) <span>· valor cobrado na apólice</span></div>
-    <div class="cf-input filled">12.000,00</div>
-
-    <div class="cf-label">Importância Segurada (R$) <span>· teto da garantia</span></div>
-    <div class="cf-input filled">800.000,00</div>
-
-    <div class="cf-label">Vigência <span>· início e fim da cobertura</span></div>
-    <div class="cf-row2">
-      <div class="cf-input filled" style="font-size:14px;">15/03/2024</div>
-      <div class="cf-input filled" style="font-size:14px;">14/03/2026</div>
-    </div>
-    <div class="cf-hint ok">→ 730 dias · 2,000 anos</div>
-
-    <div class="cf-divider"></div>
-
-    <div style="height:20px;"></div>
-
-    <div class="cf-btn" style="background:#C4900A;">Descobrir Taxa</div>
-  </div>
-
-  <!-- RESULT -->
-  <div class="cm-result" style="background:rgba(0,0,0,0.15);">
-
-    <div class="cr-main teal">
-      <div class="cr-lbl">Taxa Anual Aplicada</div>
-      <div class="cr-val" style="color:var(--calc-teal);font-size:52px;">0,7500%</div>
-      <div class="cr-sub">= 12.000 ÷ (800.000 × 2,000)</div>
-    </div>
-
-    <div class="cr-section-title">Detalhamento</div>
-
-    <div class="cr-row">
-      <span class="cr-row-lbl">Prêmio informado</span>
-      <span class="cr-row-val">R$ 12.000,00</span>
-    </div>
-    <div class="cr-row">
-      <span class="cr-row-lbl">Importância Segurada</span>
-      <span class="cr-row-val">R$ 800.000,00</span>
-    </div>
-    <div class="cr-row">
-      <span class="cr-row-lbl">Prazo</span>
-      <span class="cr-row-val">730 dias (2,000 anos)</span>
-    </div>
-    <div class="cr-row hi-teal">
-      <span class="cr-row-lbl" style="color:rgba(255,255,255,0.70);font-weight:600;">Taxa encontrada</span>
-      <span class="cr-row-val" style="color:var(--calc-teal);">0,7500% a.a.</span>
-    </div>
-
-    <div class="cr-row" style="margin-top:6px;border-color:rgba(196,144,10,0.15);background:rgba(196,144,10,0.05);">
-      <span class="cr-row-lbl" style="color:rgba(196,144,10,0.60);font-size:11px;">Referência: Garantia Administrativa</span>
-      <span class="cr-row-val" style="color:rgba(196,144,10,0.60);font-size:11px;">~1,00% a.a.</span>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 1.5rem;">
+      <div class="calc-res-card pro">
+        <div style="font-family: var(--mono); font-size: 9px; color: #6BBFA0;">PRO-RATA (LINEAR)</div>
+        <div class="calc-res-val" id="calcResPro">R$ 0</div>
+        <div id="calcRetPro" style="font-family: var(--mono); font-size: 10px; color: rgba(250,246,238,0.5);">Retenção: 0%</div>
+      </div>
+      <div class="calc-res-card cur">
+        <div style="font-family: var(--mono); font-size: 9px; color: #D49070;">PRAZO CURTO (TABELA)</div>
+        <div class="calc-res-val" id="calcResCur">R$ 0</div>
+        <div id="calcRetCur" style="font-family: var(--mono); font-size: 10px; color: rgba(250,246,238,0.5);">Retenção: 0%</div>
+      </div>
     </div>
   </div>
 
-</div>
-```
-
+  <h2>Tabela de Referência</h2>
+  <div class="int-table-wrap">
+    <table class="int-table">
+      <thead>
+        <tr>
+          <th>Fração / Dias</th>
+          <th>% Tempo</th>
+          <th>% Retenção (Tabela)</th>
+          <th>Impacto vs Pro-rata</th>
+        </tr>
+      </thead>
+      <tbody id="prazoTbody"></tbody>
+    </table>
   </div>
 
-  <div class="s-foot">
-    <span class="s-foot-txt" style="color:var(--ink-mute);">segurogarantiafacil.com/calculadora</span>
-    <span class="s-foot-txt" style="color:rgba(60,50,40,0.35);">@segurogarantiafaciloficial</span>
+  <h3>Exemplo do Racional</h3>
+  <div class="formula">
+    <span style="color: #7A6A54;">// Cenário: Cancelamento com 24,66% do tempo decorrido</span><br>
+    Critério Pro-rata: Retém 24,66% do prêmio.<br>
+    Critério Prazo Curto: Pula para a faixa de <span style="color: var(--amber-mid);">40% de retenção</span>.<br>
+    <span style="color: #7A6A54;">// A diferença protege a estrutura de custos da seguradora.</span>
   </div>
-</div>
+</main>
 
-<!-- ══════════════════════════════════════════════════════
-     SLIDE 4 — MODO 3: DESCOBRIR IS
-══════════════════════════════════════════════════════ -->
+<script>
+/* ─── DADOS OFICIAIS CIRCULAR 256/2004 ─── */
+const PRAZO_TABLE = [
+  { maxPct: 4.11,  pct: 13, label: '15/365' },
+  { maxPct: 8.22,  pct: 20, label: '30/365' },
+  { maxPct: 12.33, pct: 27, label: '45/365' },
+  { maxPct: 16.44, pct: 30, label: '60/365' },
+  { maxPct: 20.55, pct: 37, label: '75/365' },
+  { maxPct: 24.66, pct: 40, label: '90/365' },
+  { maxPct: 28.77, pct: 46, label: '105/365' },
+  { maxPct: 32.88, pct: 50, label: '120/365' },
+  { maxPct: 36.99, pct: 56, label: '135/365' },
+  { maxPct: 41.10, pct: 60, label: '150/365' },
+  { maxPct: 45.21, pct: 66, label: '165/365' },
+  { maxPct: 53.42, pct: 73, label: '195/365' },
+  { maxPct: 57.53, pct: 75, label: '210/365' },
+  { maxPct: 61.64, pct: 78, label: '225/365' },
+  { maxPct: 65.75, pct: 80, label: '240/365' },
+  { maxPct: 69.86, pct: 83, label: '255/365' },
+  { maxPct: 73.97, pct: 85, label: '270/365' },
+  { maxPct: 78.08, pct: 88, label: '285/365' },
+  { maxPct: 82.19, pct: 90, label: '300/365' },
+  { maxPct: 86.30, pct: 93, label: '315/365' },
+  { maxPct: 90.41, pct: 95, label: '330/365' },
+  { maxPct: 94.52, pct: 98, label: '345/365' },
+  { maxPct: 100.0,  pct: 100, label: '365/365' }
+];
 
-<div class="slide s-calc" style="background:#F5F0E8;">
-  <div class="s-topbar"></div>
-  <div class="s-nav">
-    <span class="s-logo">SGF</span>
-    <div class="s-dots">
-      <div class="s-dot"></div><div class="s-dot"></div>
-      <div class="s-dot"></div><div class="s-dot on"></div>
-    </div>
-    <span class="s-counter">04 / 04</span>
-  </div>
+function fmt(n) { return 'R$ ' + Math.round(n).toLocaleString('pt-BR'); }
 
-  <div class="sc-header">
-    <span class="sc-mode-tag" style="background:rgba(28,23,18,0.08);border:1px solid rgba(28,23,18,0.18);color:#3D342A;">
-      🔍 &nbsp;Modo 3 de 3
-    </span>
-    <div class="sc-title">Descobrir a <em style="color:#C05A35;">Importância<br>Segurada</em></div>
-    <div class="sc-desc" style="margin-top:2px;">Qual IS posso contratar com este prêmio disponível?</div>
-  </div>
+function getPrazoRetPct(timePct) {
+  const faixa = PRAZO_TABLE.find(f => timePct <= f.maxPct);
+  return faixa ? faixa.pct : 100;
+}
 
-  <div class="calc-mockup" style="top:308px;">
-    <div class="cm-chrome">
-      <div class="cm-dot r"></div>
-      <div class="cm-dot y"></div>
-      <div class="cm-dot g"></div>
-      <div class="cm-url">segurogarantiafacil.com/calculadora</div>
-    </div>
+function updateCalc() {
+  const premio = parseFloat(document.getElementById('calcPremio').value) || 0;
+  const vigencia = parseInt(document.getElementById('calcVigencia').value) || 365;
+  const dias = parseInt(document.getElementById('calcSlider').value) || 0;
+  
+  document.getElementById('calcSlider').max = vigencia;
+  document.getElementById('calcDayLabel').textContent = dias + ' dias';
 
-```
-<div class="cm-tabs">
-  <div class="cm-tab">💰 Calcular Prêmio</div>
-  <div class="cm-tab">📊 Descobrir Taxa</div>
-  <div class="cm-tab active">🔍 Descobrir IS</div>
-</div>
+  const timePct = (dias / vigencia) * 100;
 
-<div class="cm-body">
+  // Pro-rata
+  const proRet = premio * (timePct / 100);
+  const proDev = premio - proRet;
 
-  <!-- FORM -->
-  <div class="cm-form">
-    <div class="cf-label">Prêmio disponível (R$) <span>· orçamento máximo</span></div>
-    <div class="cf-input filled">9.000,00</div>
+  // Prazo Curto
+  const curRetPct = getPrazoRetPct(timePct);
+  const curRet = premio * (curRetPct / 100);
+  const curDev = premio - curRet;
 
-    <div class="cf-label">Taxa anual esperada (%) <span>· estimativa de mercado</span></div>
-    <div class="cf-input filled">1,20</div>
+  document.getElementById('calcResPro').textContent = fmt(proDev);
+  document.getElementById('calcRetPro').textContent = `Retenção: ${fmt(proRet)} (${timePct.toFixed(2)}%)`;
+  
+  document.getElementById('calcResCur').textContent = fmt(Math.max(0, curDev));
+  document.getElementById('calcRetCur').textContent = `Retenção: ${fmt(curRet)} (${curRetPct}%)`;
+}
 
-    <div class="cf-label">Vigência <span>· início e fim da cobertura</span></div>
-    <div class="cf-row2">
-      <div class="cf-input filled" style="font-size:14px;">01/06/2025</div>
-      <div class="cf-input filled" style="font-size:14px;">31/05/2027</div>
-    </div>
-    <div class="cf-hint ok">→ 729 dias · 1,997 anos</div>
+// Popular Tabela Visual
+const tbody = document.getElementById('prazoTbody');
+PRAZO_TABLE.forEach(f => {
+  const tr = document.createElement('tr');
+  const diff = (f.pct - f.maxPct).toFixed(2);
+  tr.innerHTML = `
+    <td>${f.label}</td>
+    <td style="font-family:var(--mono)">${f.maxPct}%</td>
+    <td style="font-family:var(--mono); font-weight:700; color:var(--cur-color)">${f.pct}%</td>
+    <td><span style="background:rgba(139,58,16,0.1); color:var(--cur-color); padding:2px 6px; border-radius:10px; font-size:11px;">+${diff}% retido</span></td>
+  `;
+  tbody.appendChild(tr);
+});
 
-    <div class="cf-divider"></div>
+// Event Listeners
+['calcPremio', 'calcVigencia', 'calcSlider'].forEach(id => {
+  document.getElementById(id).addEventListener('input', updateCalc);
+});
 
-    <div class="cf-btn">Descobrir IS</div>
-  </div>
+// Reading Bar
+window.addEventListener('scroll', () => {
+  const pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+  document.getElementById('readingBar').style.width = pct + '%';
+});
 
-  <!-- RESULT -->
-  <div class="cm-result" style="background:rgba(0,0,0,0.15);">
-
-    <div class="cr-main">
-      <div class="cr-lbl">Importância Segurada máxima</div>
-      <div class="cr-val" style="font-size:42px;">R$ 375.939</div>
-      <div class="cr-sub">= 9.000 ÷ (1,20% × 1,997)</div>
-    </div>
-
-    <div class="cr-section-title">Detalhamento</div>
-
-    <div class="cr-row">
-      <span class="cr-row-lbl">Prêmio informado</span>
-      <span class="cr-row-val">R$ 9.000,00</span>
-    </div>
-    <div class="cr-row">
-      <span class="cr-row-lbl">Taxa anual</span>
-      <span class="cr-row-val">1,2000%</span>
-    </div>
-    <div class="cr-row">
-      <span class="cr-row-lbl">Prazo</span>
-      <span class="cr-row-val">729 dias (1,997 anos)</span>
-    </div>
-    <div class="cr-row hi">
-      <span class="cr-row-lbl" style="color:rgba(255,255,255,0.70);font-weight:600;">IS encontrada</span>
-      <span class="cr-row-val">R$ 375.939,85</span>
-    </div>
-
-    <!-- CTA row -->
-    <div style="margin-top:auto;padding-top:10px;text-align:center;">
-      <div style="font-family:'DM Sans',sans-serif;font-size:12px;color:rgba(255,255,255,0.28);margin-bottom:6px;letter-spacing:0.06em;">Acesse gratuitamente</div>
-      <div style="font-family:'Courier New',monospace;font-size:12px;font-weight:700;color:#C05A35;letter-spacing:0.08em;">segurogarantiafacil.com/calculadora</div>
-    </div>
-  </div>
-
-</div>
-```
-
-  </div>
-
-  <div class="s-foot">
-    <span class="s-foot-txt" style="color:var(--ink-mute);">segurogarantiafacil.com/calculadora</span>
-    <span class="s-foot-txt" style="color:rgba(60,50,40,0.35);">@segurogarantiafaciloficial</span>
-  </div>
-</div>
-
-</div><!-- /deck -->
+updateCalc();
+</script>
 </body>
 </html>
