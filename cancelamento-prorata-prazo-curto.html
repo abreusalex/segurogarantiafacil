@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cancelamento do Seguro Garantia: pro-rata e prazo curto | SGF</title>
+<meta name="description" content="Dois critérios, dois regimes de devolução de prêmio no cancelamento do seguro garantia. Fundamentação normativa, casos práticos e o que o clausulado deve prever.">
+<meta property="og:title" content="Cancelamento do Seguro Garantia: pro-rata e prazo curto">
+<meta property="og:description" content="Entenda a diferença entre os critérios pro-rata temporis e tabela de prazo curto na extinção antecipada da apólice de seguro garantia.">
+<meta property="og:type" content="article">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --terra:        #7A3E10;
+    --terra-deep:   #5C2D08;
+    --amber:        #B8711E;
+    --amber-light:  #F5E8D0;
+    --amber-mid:    #DEB87A;
+    --ivory:        #FAF6EE;
+    --ivory-dark:   #F0E9DC;
+    --ink:          #1C1410;
+    --ink-mid:      #3A2A1C;
+    --ink-light:    #6B5540;
+    --ink-muted:    #9A8470;
+    --border:       rgba(122,62,16,0.15);
+    --border-mid:   rgba(122,62,16,0.25);
+    --page-bg:      #F7F2EA;
+    --serif:        'EB Garamond', Georgia, serif;
+    --mono:         'Courier Prime', 'Courier New', monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--page-bg);
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: 17px;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── HEADER ── */
+  .site-header {
+    background: var(--ink);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 52px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 2px solid var(--amber);
+  }
+  .site-logo {
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--amber-light);
+    letter-spacing: 0.12em;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+  .site-logo span { color: var(--amber); }
+  .site-nav {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    color: var(--ink-muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--ink);
+    padding: 4rem 2rem 3.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 60px,
+      rgba(184,113,30,0.04) 60px,
+      rgba(184,113,30,0.04) 61px
+    );
+    pointer-events: none;
+  }
+  .hero-inner {
+    max-width: 760px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .kicker {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .kicker::before {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 1px;
+    background: var(--amber);
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(24px, 4vw, 36px);
+    font-weight: 400;
+    line-height: 1.25;
+    color: #FAF6EE;
+    margin-bottom: 1rem;
+  }
+  .hero-sub {
+    font-family: var(--serif);
+    font-size: 16px;
+    color: rgba(250,246,238,0.65);
+    font-style: italic;
+    line-height: 1.6;
+    max-width: 640px;
+    margin-bottom: 2rem;
+  }
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .tag {
+    font-family: var(--mono);
+    font-size: 9.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: rgba(184,113,30,0.18);
+    color: var(--amber-mid);
+    border: 1px solid rgba(184,113,30,0.3);
+    padding: 3px 10px;
+    border-radius: 2px;
+  }
+
+  /* ── LAYOUT ── */
+  .page-body {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 3rem 2rem 5rem;
+  }
+
+  /* ── TYPOGRAPHY ── */
+  p {
+    font-size: 16.5px;
+    line-height: 1.82;
+    color: var(--ink-mid);
+    margin-bottom: 1.2rem;
+  }
+
+  h2 {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--terra);
+    margin: 2.5rem 0 0.75rem;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border-mid);
+  }
+
+  h3 {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin: 2rem 0 0.6rem;
+  }
+
+  /* ── CALLOUT ── */
+  .callout {
+    background: var(--ivory);
+    border-left: 4px solid var(--amber);
+    padding: 1.1rem 1.4rem;
+    margin: 1.75rem 0;
+    border-radius: 0 6px 6px 0;
+  }
+  .callout-label {
+    font-family: var(--mono);
+    font-size: 9.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--amber);
+    margin-bottom: 8px;
+  }
+  .callout p {
+    font-size: 15px;
+    color: var(--ink-mid);
+    font-style: italic;
+    margin: 0;
+    line-height: 1.7;
+  }
+
+  /* ── ALERT BOX ── */
+  .alert {
+    background: #FFF8EE;
+    border: 1px solid var(--amber-mid);
+    border-radius: 6px;
+    padding: 1rem 1.25rem;
+    margin: 1.75rem 0;
+  }
+  .alert-label {
+    font-family: var(--mono);
+    font-size: 9.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--terra);
+    margin-bottom: 8px;
+  }
+  .alert p {
+    font-size: 14.5px;
+    color: var(--ink-mid);
+    margin: 0;
+    line-height: 1.7;
+  }
+
+  /* ── NORM PILLS ── */
+  .norm-pill {
+    display: inline-block;
+    background: var(--amber-light);
+    border: 1px solid var(--amber-mid);
+    border-radius: 3px;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--terra);
+    padding: 2px 9px;
+    margin: 2px 2px 2px 0;
+    white-space: nowrap;
+  }
+
+  /* ── COMPARE GRID ── */
+  .compare-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 1.75rem 0;
+  }
+  @media (max-width: 600px) { .compare-grid { grid-template-columns: 1fr; } }
+
+  .compare-card {
+    background: var(--ivory);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.1rem 1.25rem;
+  }
+  .compare-card .cc-head {
+    font-family: var(--mono);
+    font-size: 9.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--amber);
+    margin-bottom: 6px;
+  }
+  .compare-card h4 {
+    font-family: var(--serif);
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--terra);
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+  .compare-card ul {
+    padding-left: 16px;
+    list-style: disc;
+  }
+  .compare-card li {
+    font-size: 13.5px;
+    color: var(--ink-mid);
+    margin-bottom: 5px;
+    line-height: 1.55;
+  }
+
+  /* ── FORMULA ── */
+  .formula {
+    background: var(--ink);
+    color: #EDD9B0;
+    font-family: var(--mono);
+    font-size: 12.5px;
+    padding: 1.1rem 1.4rem;
+    border-radius: 6px;
+    margin: 1.25rem 0;
+    line-height: 2;
+    border-left: 3px solid var(--amber);
+    overflow-x: auto;
+  }
+  .formula .cm { color: #7A6A54; }
+  .formula .hl { color: var(--amber-mid); font-weight: 700; }
+
+  /* ── TABLES ── */
+  .tbl-wrap { overflow-x: auto; margin: 1.25rem 0 1.75rem; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+  }
+  table th {
+    font-family: var(--mono);
+    font-size: 9.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+    text-align: left;
+    padding: 8px 12px;
+    border-bottom: 2px solid var(--amber);
+    color: var(--ink-light);
+    background: var(--ivory-dark);
+  }
+  table td {
+    padding: 7px 12px;
+    border-bottom: 1px solid var(--border);
+    color: var(--ink-mid);
+    vertical-align: top;
+    line-height: 1.5;
+  }
+  table tr:last-child td { border-bottom: none; }
+
+  /* Tabela prazo curto — cabeçalho escuro */
+  table.prazo th {
+    background: var(--terra);
+    color: var(--ivory);
+    border-bottom: none;
+  }
+  table.prazo td.num {
+    font-family: var(--mono);
+    font-weight: 700;
+    color: var(--terra);
+    font-size: 13px;
+  }
+  table.prazo tr:nth-child(even) td {
+    background: rgba(122,62,16,0.03);
+  }
+
+  /* Tabela normativa */
+  table.ref td:first-child {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--terra);
+    white-space: pre-line;
+    line-height: 1.5;
+    min-width: 180px;
+  }
+
+  /* ── CHECKLIST ── */
+  .checklist {
+    list-style: none;
+    padding: 0;
+    margin: 0.75rem 0 1.5rem;
+  }
+  .checklist li {
+    font-size: 14.5px;
+    color: var(--ink-mid);
+    padding: 8px 0 8px 28px;
+    border-bottom: 1px dashed var(--border);
+    position: relative;
+    line-height: 1.55;
+  }
+  .checklist li::before {
+    content: '◆';
+    position: absolute;
+    left: 0;
+    color: var(--amber);
+    font-size: 9px;
+    top: 13px;
+  }
+  .checklist li:last-child { border-bottom: none; }
+
+  /* ── BIBLIOGRAPHY ── */
+  .bib-section {
+    margin-top: 3rem;
+    border-top: 2px solid var(--terra);
+    padding-top: 1.5rem;
+  }
+  .bib-list {
+    list-style: none;
+    padding: 0;
+  }
+  .bib-list li {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-muted);
+    border-bottom: 1px dashed var(--border);
+    padding: 8px 0;
+    line-height: 1.7;
+  }
+  .bib-list li:last-child { border-bottom: none; }
+  .bib-list strong { color: var(--terra); font-weight: 700; }
+
+  /* ── FOOTER ── */
+  .site-footer {
+    background: var(--ink);
+    border-top: 2px solid var(--amber);
+    padding: 2rem;
+    text-align: center;
+  }
+  .footer-logo {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 8px;
+  }
+  .footer-sub {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--ink-muted);
+    line-height: 1.8;
+  }
+  .footer-sub a {
+    color: var(--amber-mid);
+    text-decoration: none;
+  }
+  .footer-sub a:hover { text-decoration: underline; }
+
+  /* ── DIVIDER ── */
+  hr.div {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 2rem 0;
+  }
+
+  /* ── SCROLL ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .fade-up {
+    animation: fadeUp 0.55s ease both;
+  }
+  .fade-up:nth-child(2) { animation-delay: 0.08s; }
+  .fade-up:nth-child(3) { animation-delay: 0.16s; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    .site-header { padding: 0 1rem; }
+    .hero { padding: 3rem 1rem 2.5rem; }
+    .page-body { padding: 2rem 1rem 4rem; }
+    .formula { font-size: 11.5px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <a class="site-logo" href="https://segurogarantiafacil.com">SGF <span>·</span> Seguro Garantia Fácil</a>
+  <nav class="site-nav">Conhecimento técnico</nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="kicker fade-up">Seguro Garantia · Cancelamento · Prêmio</div>
+    <h1 class="fade-up">Cancelamento do Seguro Garantia: quando aplicar <em>pro-rata</em> e quando aplicar a tabela de prazo curto</h1>
+    <p class="hero-sub fade-up">Dois critérios, dois regimes de devolução de prêmio — e consequências muito diferentes para tomadores, segurados e seguradoras.</p>
+    <div class="hero-meta">
+      <span class="tag">Circular SUSEP 662/2022</span>
+      <span class="tag">Circular SUSEP 621/2021</span>
+      <span class="tag">Lei nº 15.040/2024</span>
+      <span class="tag">Decreto 6.306/2007</span>
+      <span class="tag">Nível: intermediário</span>
+    </div>
+  </div>
+</section>
+
+<!-- BODY -->
+<main class="page-body">
+
+  <h2>Por que isso importa</h2>
+
+  <p>Quando uma apólice de seguro garantia é cancelada antes do término da vigência, surge uma questão imediata: quem deve quanto a quem? A resposta depende de um detalhe frequentemente negligenciado nos clausulados — qual critério de devolução proporcional de prêmio foi adotado.</p>
+
+  <p>Existem dois métodos principais: o <strong>pro-rata temporis</strong> e a <strong>tabela de prazo curto</strong>. A diferença entre eles não é meramente matemática — é uma diferença de lógica econômica, de quem suporta o custo da rescisão antecipada e de como o risco foi estruturado atuarialmente.</p>
+
+  <div class="callout">
+    <div class="callout-label">Analogia de base</div>
+    <p>Pense nos dois critérios como dois tipos de régua. O pro-rata é uma régua milimetrada: cada dia de vigência consome exatamente o mesmo percentual do prêmio. A tabela de prazo curto é uma régua de escala logarítmica: os primeiros dias "custam" mais, porque os custos de emissão, análise de risco e constituição de provisão técnica se concentram no início do contrato.</p>
+  </div>
+
+  <h2>A evolução regulatória: onde estava a tabela de prazo curto</h2>
+
+  <p>A tabela de prazo curto nasceu e se consolidou nos seguros de danos massificados — especialmente no seguro auto. Sua obrigatoriedade foi estabelecida pelas Circulares SUSEP nº 239/2003 e nº 256/2004, que determinavam sua aplicação em qualquer cancelamento ou redução de vigência, independentemente do motivo.</p>
+
+  <p>Esse quadro mudou com a publicação da <strong>Circular SUSEP nº 621/2021</strong>, em vigor desde 1.º de março de 2021, que revogou expressamente as Circulares 239/2003 e 256/2004. A nova norma substituiu a rigidez da tabela obrigatória por um modelo de maior liberdade contratual:</p>
+
+  <div class="alert">
+    <div class="alert-label">Circular SUSEP nº 621/2021 — Art. 36</div>
+    <p>No caso de fracionamento do prêmio único, configurada a falta de pagamento de qualquer uma das parcelas subsequentes à primeira, o prazo de vigência da cobertura será ajustado de forma proporcional ao prêmio efetivamente pago. As condições contratuais <em>poderão estabelecer critério diverso</em>, desde que leve em consideração o prêmio já pago.</p>
+  </div>
+
+  <p>Com isso, a tabela de prazo curto deixou de ser obrigatória nos seguros de danos massificados — passou a ser uma das opções disponíveis, desde que expressamente prevista nas condições contratuais. A mudança reflete a postura de intervenção mínima que a SUSEP adotou a partir de 2021, valorizando a liberdade contratual e a responsabilidade das seguradoras na concepção dos seus produtos.</p>
+
+  <h2>O regime específico do Seguro Garantia: Circular SUSEP nº 662/2022</h2>
+
+  <p>O seguro garantia tem regulação própria, estabelecida pela Circular SUSEP nº 662/2022, em vigor desde maio de 2022 e com adaptação obrigatória encerrada em 1.º de janeiro de 2023. Diferente do modelo anterior — que impunha condições padronizadas pela própria SUSEP —, a Circular 662 conferiu às seguradoras a responsabilidade de elaborar os clausulados específicos de cada modalidade.</p>
+
+  <p>Quanto à devolução de prêmio na extinção antecipada da apólice, a Circular 662 estabelece que o critério deve ser definido nas próprias condições contratuais, com a exigência de que seja compatível com o risco efetivamente coberto até a data da extinção. Isso cria um vácuo normativo intencional — e uma obrigação de coerência técnica entre o critério adotado e o modelo atuarial do produto.</p>
+
+  <h2>Os dois critérios em detalhe</h2>
+
+  <div class="compare-grid">
+    <div class="compare-card">
+      <div class="cc-head">Critério 1</div>
+      <h4>Pro-rata temporis (pro-rata die)</h4>
+      <ul>
+        <li>Devolução proporcional ao tempo não decorrido</li>
+        <li>Lógica linear: 1 dia = 1/365 do prêmio anual</li>
+        <li>Típico quando a rescisão é por iniciativa da seguradora</li>
+        <li>Adequado também na extinção do objeto garantido (ex.: distrato do contrato principal)</li>
+        <li>Mais favorável ao tomador</li>
+      </ul>
+    </div>
+    <div class="compare-card">
+      <div class="cc-head">Critério 2</div>
+      <h4>Tabela de prazo curto</h4>
+      <ul>
+        <li>Percentuais fixos por faixas de dias de cobertura</li>
+        <li>Lógica não-linear: primeiros dias consomem maior percentual</li>
+        <li>Típico quando a rescisão é por iniciativa do tomador</li>
+        <li>Também aplicável em cancelamentos por inadimplência</li>
+        <li>Mais favorável à seguradora nos cancelamentos antecipados</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>A tabela de prazo curto — estrutura padrão</h3>
+
+  <div class="tbl-wrap">
+    <table class="prazo">
+      <thead>
+        <tr>
+          <th>Período de cobertura utilizado</th>
+          <th>% do prêmio retido</th>
+          <th>% devolvido ao tomador</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Até 15 dias</td><td class="num">20%</td><td>80%</td></tr>
+        <tr><td>16 a 30 dias</td><td class="num">25%</td><td>75%</td></tr>
+        <tr><td>31 a 60 dias</td><td class="num">30%</td><td>70%</td></tr>
+        <tr><td>61 a 90 dias</td><td class="num">40%</td><td>60%</td></tr>
+        <tr><td>91 a 120 dias</td><td class="num">50%</td><td>50%</td></tr>
+        <tr><td>121 a 150 dias</td><td class="num">60%</td><td>40%</td></tr>
+        <tr><td>151 a 180 dias</td><td class="num">70%</td><td>30%</td></tr>
+        <tr><td>181 a 210 dias</td><td class="num">75%</td><td>25%</td></tr>
+        <tr><td>211 a 240 dias</td><td class="num">80%</td><td>20%</td></tr>
+        <tr><td>241 a 270 dias</td><td class="num">85%</td><td>15%</td></tr>
+        <tr><td>271 a 300 dias</td><td class="num">90%</td><td>10%</td></tr>
+        <tr><td>301 a 330 dias</td><td class="num">95%</td><td>5%</td></tr>
+        <tr><td>331 a 365 dias</td><td class="num">100%</td><td>0%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Fórmulas aplicadas</h3>
+
+  <div class="formula">
+<span class="cm">// Pro-rata temporis</span>
+Devolução = Prêmio × (Dias restantes ÷ Dias totais de vigência)
+
+<span class="cm">// Exemplo: apólice R$60.000 / 365 dias / cancelamento no 90.º dia pela seguradora</span>
+Devolução = R$60.000 × (275 ÷ 365) = <span class="hl">R$45.205,48</span>
+
+<span class="cm">// Tabela de prazo curto — mesmo cancelamento, mas por iniciativa do tomador</span>
+Percentual retido (90 dias) = 40%  →  Retenção = R$24.000
+Devolução = R$60.000 − R$24.000 = <span class="hl">R$36.000,00</span>
+
+<span class="cm">// Diferença entre os critérios, no mesmo evento: R$9.205,48</span>
+  </div>
+
+  <p>O mesmo evento (cancelamento no 90.º dia) gera devoluções radicalmente diferentes dependendo de quem provocou a rescisão e do critério previsto em contrato. Essa diferença de R$9.205 não é exceção — é a regra em cancelamentos antecipados de apólices de prazo longo e prêmios significativos.</p>
+
+  <h2>Atenção especial: não incide IOF no Seguro Garantia</h2>
+
+  <p>Um ponto que diferencia radicalmente o seguro garantia dos demais ramos de danos: o prêmio do seguro garantia é <strong>isento de IOF</strong>, por força do Decreto nº 6.306/2007, art. 22, § 1.º, inciso I, alínea "g". Isso significa que o cálculo de devolução em caso de rescisão é mais direto — não há retenção de IOF sobre o valor restituído, ao contrário do que ocorre, por exemplo, no seguro auto, onde o IOF (tipicamente 7,38%) é deduzido do montante devolvido.</p>
+
+  <div class="callout">
+    <div class="callout-label">Ponto prático</div>
+    <p>Ao calcular a restituição de prêmio de uma apólice de seguro garantia cancelada antecipadamente, não aplique o desconto de IOF praticado em outros ramos. A base de devolução é o prêmio integral — sem essa dedução. Qualquer clausulado que preveja retenção de IOF na devolução de prêmio de seguro garantia merece revisão imediata.</p>
+  </div>
+
+  <h2>O que o clausulado deve prever (obrigatoriamente)</h2>
+
+  <p>Com a Circular 662/2022, a responsabilidade pela correta definição do critério de devolução migrou integralmente para as condições contratuais de cada seguradora. Uma apólice que silencia sobre o critério aplicável em cada hipótese de extinção cria passivo regulatório e de litígio. O clausulado deve, no mínimo, conter:</p>
+
+  <ul class="checklist">
+    <li>Indicação expressa do critério (pro-rata ou tabela de prazo curto) para cada hipótese de extinção — rescisão pela seguradora, pelo tomador, por extinção do objeto e por inadimplência</li>
+    <li>Coerência entre o critério adotado e o modelo atuarial aprovado na nota técnica do produto</li>
+    <li>Procedimento formal de notificação ao tomador em caso de cancelamento por inadimplência, com indicação expressa do prazo residual de cobertura</li>
+    <li>Ausência de dedução de IOF na devolução de prêmio — ou vedação expressa a essa prática</li>
+    <li>Previsão do critério aplicável quando a extinção decorre de sinistro com pagamento de indenização integral</li>
+  </ul>
+
+  <h2>Fundamentação normativa</h2>
+
+  <div class="tbl-wrap">
+    <table class="ref">
+      <thead>
+        <tr><th>Norma</th><th>Relevância para o tema</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Decreto nº 6.306/2007
+art. 22, § 1.º, I, "g"</td>
+          <td>Isenção de IOF sobre o prêmio do seguro garantia — afasta a dedução tributária na devolução de prêmio</td>
+        </tr>
+        <tr>
+          <td>Circular SUSEP
+nº 239/2003</td>
+          <td>Origem da tabela de prazo curto nos seguros de danos — <em>revogada pela Circular 621/2021</em></td>
+        </tr>
+        <tr>
+          <td>Circular SUSEP
+nº 256/2004</td>
+          <td>Consolidação da obrigatoriedade da tabela — <em>revogada pela Circular 621/2021 com efeitos a partir de 01/03/2021</em></td>
+        </tr>
+        <tr>
+          <td>Circular SUSEP
+nº 621/2021 — arts. 36 e 54</td>
+          <td>Norma atual para seguros de danos massificados: encerrou a obrigatoriedade da tabela; o critério passa a ser definido nas condições contratuais, com proporcionalidade ao prêmio pago como piso mínimo</td>
+        </tr>
+        <tr>
+          <td>Circular SUSEP
+nº 662/2022 — arts. 22 e 27</td>
+          <td>Regime específico do seguro garantia: critério de devolução definido nas condições contratuais; deve ser compatível com o risco efetivamente coberto; liberdade de clausulado com responsabilidade técnica</td>
+        </tr>
+        <tr>
+          <td>Lei nº 14.133/2021</td>
+          <td>Nova Lei de Licitações — referência para modalidades de seguro garantia em contratos públicos</td>
+        </tr>
+        <tr>
+          <td>Lei nº 15.040/2024</td>
+          <td>Marco Legal do Seguro — principiologia de transparência, boa-fé objetiva e proteção do tomador</td>
+        </tr>
+        <tr>
+          <td>Decreto-Lei nº 73/1966</td>
+          <td>Base do sistema nacional de seguros privados; fundamenta as competências normativas da SUSEP</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="bib-section">
+    <h2>Referências doutrinárias</h2>
+    <ul class="bib-list">
+      <li><strong>POLIDO, Walter Antonio.</strong> Contrato de Seguro. São Paulo: Roncarati, 2020. (referência central em tabela de prazo curto e abusividade frente ao CDC)</li>
+      <li><strong>ALVIM, Pedro.</strong> O Contrato de Seguro. 3.ª ed. Rio de Janeiro: Forense, 1999.</li>
+      <li><strong>TZIRULNIK, Ernesto; CAVALCANTI, Flávio de Queiroz B.; PIMENTEL, Ayrton.</strong> O Contrato de Seguro de acordo com o Novo Código Civil Brasileiro. São Paulo: Roncarati, 2013.</li>
+      <li><strong>SUSEP.</strong> Guia de Orientação ao Segurado — Seguro de Danos. Disponível em: gov.br/susep</li>
+      <li><strong>Demarest Advogados.</strong> SUSEP publica Circular nº 621/2021 dispondo sobre os novos critérios para operação dos seguros de danos, 2021.</li>
+      <li><strong>DR&amp;A Advogados.</strong> Circular SUSEP 662: as Novas Regras do Seguro Garantia. Editora Roncarati, abril 2022.</li>
+    </ul>
+  </div>
+
+  <hr class="div" style="margin-top: 3rem;">
+  <p style="font-family: var(--mono); font-size: 10.5px; color: var(--ink-muted); line-height: 1.8;">
+    Este artigo tem caráter estritamente educativo e não constitui aconselhamento jurídico, regulatório ou securitário individual. Para análise de casos concretos, consulte profissional habilitado.<br>
+    Seguro Garantia Fácil · <a href="https://segurogarantiafacil.com" style="color: var(--amber); text-decoration: none;">segurogarantiafacil.com</a>
+  </p>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-logo">SGF · Seguro Garantia Fácil</div>
+  <div class="footer-sub">
+    Educação técnica para tomadores, corretores, advogados e beneficiários do seguro garantia.<br>
+    <a href="https://segurogarantiafacil.com">segurogarantiafacil.com</a> · Conteúdo educativo · Não constitui aconselhamento individual
+  </div>
+</footer>
+
+</body>
+</html>
