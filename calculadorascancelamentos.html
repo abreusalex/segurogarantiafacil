@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -59,31 +58,6 @@ body {
   position: fixed; top: 0; left: 0; height: 2px; width: 0;
   background: linear-gradient(90deg, var(--amber), var(--terra));
   z-index: 999; transition: width 0.1s linear;
-}
-
-/* ═══════════════════════════════════════
-   HEADER
-═══════════════════════════════════════ */
-.site-header {
-  background: var(--ink);
-  border-bottom: 2px solid var(--amber);
-  height: 52px;
-  display: flex; align-items: center;
-  justify-content: space-between;
-  padding: 0 2rem;
-  position: sticky; top: 0; z-index: 100;
-}
-.site-logo {
-  font-family: var(--mono); font-size: 13px; font-weight: 700;
-  color: var(--amber-light); letter-spacing: 0.13em;
-  text-decoration: none; text-transform: uppercase;
-}
-.site-logo em { color: var(--amber); font-style: normal; }
-.header-pill {
-  font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.1em;
-  text-transform: uppercase; color: var(--amber);
-  border: 1px solid rgba(184,113,30,0.35);
-  padding: 3px 10px; border-radius: 2px;
 }
 
 /* ═══════════════════════════════════════
@@ -528,97 +502,64 @@ input[type="range"]::-webkit-slider-thumb:hover {
 .footer-sub { font-family: var(--mono); font-size: 10px; color: var(--ink-muted); line-height: 1.8; }
 .footer-sub a { color: var(--amber-mid); text-decoration: none; }
 
-.print-header, .print-footer {
-  display: none;
-}
-
 /* ── PRINT ── */
-@page { size: A4 portrait; margin: 12mm; }
 @media print {
-  html, body { width: auto; min-height: auto; background: #fff; color: #000; }
-  body { margin: 0; padding: 0; }
-  .site-header, .hero, .qm-btn, .export-row, .chart-tabs, .site-footer, .reading-bar, .footer-sub, .header-pill, .export-row button, .ct-btn { display: none !important; }
-  .main { max-width: none; margin: 0; padding: 0; }
-  .form-card, .res-card, .diff-card, .chart-card, .faixa-card, .nota-iof, .timeline-visual, .field, .cancel-section { page-break-inside: avoid; break-inside: avoid; }
-  .form-card, .res-card, .diff-card, .chart-card, .faixa-card, .nota-iof { border-color: #ccc !important; box-shadow: none !important; }
-  .form-card-body, .chart-card, .res-card, .diff-card, .faixa-card, .nota-iof { padding: 1rem !important; }
-  .results-grid { display: block !important; }
-  .res-card { width: auto !important; margin-bottom: 1rem !important; }
-  .chart-card { page-break-after: avoid; }
-  .faixa-card { margin-bottom: 1rem !important; }
-  .diff-card { grid-template-columns: 1fr; }
-  .diff-divider { display: none !important; }
-  .footer-logo { display: none !important; }
-  .site-header, .hero, .export-row, .site-footer { display: none !important; }
-  .print-header, .print-footer {
-    width: 100%;
-    margin: 0 auto;
-    padding: 10px 0;
-    text-align: center;
-    font-family: var(--mono);
-    font-size: 11px;
-    color: #333;
-    border-color: #ccc;
-  }
-  .print-header {
-    display: flex !important;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 10px;
-    border-bottom: 1px solid #ccc;
-  }
-  .print-footer {
-    display: block !important;
-    border-top: 1px solid #ccc;
-    margin-top: 10px;
-  }
-  .print-header-text {
-    flex: 1;
-    text-align: center;
-  }
-  .print-qr-link {
-    display: inline-flex;
-    width: 50px;
-    height: 50px;
-    text-decoration: none;
-  }
-  .print-qr-img {
-    width: 50px;
-    height: 50px;
-    display: block;
-    object-fit: contain;
-  }
-  .print-footer {
-    border-top: 1px solid #ccc;
-    margin-top: 10px;
-  }
-  * { -webkit-print-color-adjust: exact; color-adjust: exact; }
+  nav, .hero, .qm-btn, .export-row, .chart-tabs, .site-footer { display: none !important; }
+  body { background: #fff; }
+  .form-card, .res-card, .diff-card, .chart-card { break-inside: avoid; }
 }
 
 /* ── RESPONSIVE ── */
 @media (max-width: 640px) {
-  .site-header { padding: 0 1rem; }
   .hero { padding: 2.5rem 1rem 2.5rem; }
   .main { padding: 1.75rem 1rem 4rem; }
   .form-card-body { padding: 1.1rem; }
+}
+
+/* ── NAV ── */
+nav {
+  background: var(--ink);
+  border-bottom: 2px solid var(--amber);
+  height: 52px;
+  display: flex; align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  position: sticky; top: 0; z-index: 200;
+}
+.nav-logo {
+  font-family: var(--mono); font-size: 13px; font-weight: 700;
+  color: var(--amber-light); letter-spacing: 0.13em;
+  text-decoration: none; text-transform: uppercase;
+}
+.nav-logo em { color: var(--amber); font-style: normal; }
+.btn-voltar {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.09em;
+  text-transform: uppercase; color: var(--amber-mid);
+  text-decoration: none; border: 1px solid rgba(184,113,30,0.3);
+  padding: 5px 12px; border-radius: 3px;
+  display: flex; align-items: center; gap: 6px;
+  transition: border-color 0.18s, color 0.18s;
+}
+.btn-voltar:hover { border-color: var(--amber); color: var(--amber); }
+@media (max-width: 480px) {
+  nav { padding: 0 1rem; }
+  .btn-voltar span { display: none; }
 }
 </style>
 </head>
 <body>
 
 <div class="reading-bar" id="readingBar"></div>
-<div class="print-header">
-  <a class="print-qr-link" href="https://segurogarantiafacil.com" target="_blank" rel="noreferrer">
-    <img class="print-qr-img" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXIAAAFyAQAAAADAX2ykAAAC8UlEQVR4nO1abY6jMAx9NkjzE6Q9wBwFbtAj7Zn2BuQoc4CR4GclkFd2Mm2X7ga6UhFM/X5kMvipsmL5Kw4JHkHgh+iA8/PgBfkczs+DF+RzOD8PXpDP4fw8eEE+h/Nf4XwooQQClaB2KAEMRLZEtBvqsx78APeF+Y0oet3pgmoEtSjEFsO2+qwGr6e+JL9Mf4caaH5phXw6k+i/EuoCggEgoBg30oed/xT7XjG8CcJJQE1f01335OefB+/evtUnWZAWDBev3U4fdv5T7Fupp2osbvoJAkwlmk4jNdTS///77Pw9nE+wErnW7fAm1GqQhu0wxfJ5W31Wg9dTX5JPf7ufJFSf6tjFXXz2+8lj9r8tJrq2viIfb4JGzoRQT7S9PuvBD3BfkY/Y3XbVGHfpa6WeW4mg6QuV6s54e9Ofnb/6fILeXzUyQjp14s7ur6ozUTsQSXfHXwN2/g76I2p6iGZdvZDUKqvqrf+FBLJOqd5KH3b+E+IzgCKGZovUsf/tKg3I128enw+cf3FJs2ZalTSSkvANPP8e0r5Q54ym1SFDMjeSzb/M7fY9rH1noVmsyEJxqZ9Tde3+e1j7FjoftOWSeisVxPjs9j00Xzprg3Shd826QxroizVJobZJ8Hb6rAc/wMWr90fDD/XkSYO0joO7xNGZQ7lT/dn5WZS2pg5X82849RauR4S616rqT76fZx680/q5L27K5NgaNX3qiaPU66sj+y/sBsPe4kxlfJ8DnMmCtH6Lu/3pz85fk38RUYwSk3AlOiTsLSePGrjL5Mp+nnnwzt9PUmtPJ7Vqbr5eUiKQTfo31Gc1eD31tfMvUpq1WytteON80GAzJc+/34FPP9WJqb6UW70NDt1/v8n7SQnvZ5JwUtN+lKNo7UU71p+d/9D7yYShHPVVuxVZetMxfb3T8vPMg3fGx+2rnDgETvn3ev/s+febvZ/8N8Le9GfnZ8F58R2cnwcvyOdwfh68IJ/D+XnwgnwO5+fx7PrqN+/quddzF42MAAAAAElFTkSuQmCC" alt="QR code Seguro Garantia Fácil" />
-  </a>
-  <div class="print-header-text">Calculadora de Devolução de Prêmio - Seguro Garantia Fácil</div>
-</div>
 
-<!-- ═══ HEADER ═══ -->
-<header class="site-header">
-  <a class="site-logo" href="https://segurogarantiafacil.com">SGF <em>·</em> Seguro Garantia Fácil</a>
-  <span class="header-pill">Calculadora</span>
-</header>
+<nav>
+  <a href="index.html" class="nav-logo">Seguro Garantia <em>Fácil</em></a>
+  <a href="index.html" class="btn-voltar">
+    <svg width="15" height="15" viewBox="0 0 16 16" fill="none">
+      <path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    Voltar para Seguro Garantia Fácil
+  </a>
+</nav>
 
 <!-- ═══ HERO ═══ -->
 <section class="hero">
@@ -718,7 +659,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
   <section class="results-section" id="resultsSection">
     <div class="state-empty" id="stateEmpty">
       <div class="se-icon">⚖️</div>
-      <p id="stateMessage">Preencha os campos acima para calcular</p>
+      <p>Preencha os campos acima para calcular</p>
     </div>
 
     <div id="resultsContent" style="display:none;">
@@ -867,7 +808,6 @@ input[type="range"]::-webkit-slider-thumb:hover {
     <a href="https://segurogarantiafacil.com">segurogarantiafacil.com</a> · Não constitui aconselhamento jurídico individual
   </div>
 </footer>
-<div class="print-footer">Calculadora de Devolução de Prêmio - Seguro Garantia Fácil</div>
 
 <script>
 /* ══════════════════════════════════════
@@ -876,53 +816,40 @@ input[type="range"]::-webkit-slider-thumb:hover {
    aplicável como critério contratual conforme Circular 662/2022
 ══════════════════════════════════════ */
 const PRAZO_TABLE = [
-  { maxPct: 4.11,  pct: 13, label: 'Até 15 dias' },
-  { maxPct: 8.22,  pct: 20, label: 'Até 30 dias' },
-  { maxPct: 12.33, pct: 27, label: 'Até 45 dias' },
-  { maxPct: 16.44, pct: 30, label: 'Até 60 dias' },
-  { maxPct: 20.55, pct: 37, label: 'Até 75 dias' },
-  { maxPct: 24.66, pct: 40, label: 'Até 90 dias' },
-  { maxPct: 28.77, pct: 46, label: 'Até 105 dias' },
-  { maxPct: 32.88, pct: 50, label: 'Até 120 dias' },
-  { maxPct: 36.99, pct: 56, label: 'Até 135 dias' },
-  { maxPct: 41.10, pct: 60, label: 'Até 150 dias' },
-  { maxPct: 45.21, pct: 66, label: 'Até 165 dias' },
-  { maxPct: 53.42, pct: 73, label: 'Até 195 dias' },
-  { maxPct: 57.53, pct: 75, label: 'Até 210 dias' },
-  { maxPct: 61.64, pct: 78, label: 'Até 225 dias' },
-  { maxPct: 65.75, pct: 80, label: 'Até 240 dias' },
-  { maxPct: 69.86, pct: 83, label: 'Até 255 dias' },
-  { maxPct: 73.97, pct: 85, label: 'Até 270 dias' },
-  { maxPct: 78.08, pct: 88, label: 'Até 285 dias' },
-  { maxPct: 82.19, pct: 90, label: 'Até 300 dias' },
-  { maxPct: 86.30, pct: 93, label: 'Até 315 dias' },
-  { maxPct: 90.41, pct: 95, label: 'Até 330 dias' },
-  { maxPct: 94.52, pct: 98, label: 'Até 345 dias' },
-  { maxPct: 100.00, pct: 100, label: 'Até 365 dias' },
+  { maxDias: 15,  pct: 20 },
+  { maxDias: 30,  pct: 25 },
+  { maxDias: 60,  pct: 30 },
+  { maxDias: 90,  pct: 40 },
+  { maxDias: 120, pct: 50 },
+  { maxDias: 150, pct: 60 },
+  { maxDias: 180, pct: 70 },
+  { maxDias: 210, pct: 75 },
+  { maxDias: 240, pct: 80 },
+  { maxDias: 270, pct: 85 },
+  { maxDias: 300, pct: 90 },
+  { maxDias: 330, pct: 95 },
+  { maxDias: 365, pct: 100 },
 ];
 
-function getPrazoRetPct(timePct) {
-  let selected = PRAZO_TABLE[0];
+const PRAZO_LABELS = [
+  'Até 15 dias', '16 a 30 dias', '31 a 60 dias', '61 a 90 dias',
+  '91 a 120 dias', '121 a 150 dias', '151 a 180 dias', '181 a 210 dias',
+  '211 a 240 dias', '241 a 270 dias', '271 a 300 dias', '301 a 330 dias',
+  '331 a 365 dias'
+];
+
+function getPrazoRetPct(dias) {
   for (let i = 0; i < PRAZO_TABLE.length; i++) {
-    if (timePct >= PRAZO_TABLE[i].maxPct) {
-      selected = PRAZO_TABLE[i];
-    } else {
-      break;
-    }
+    if (dias <= PRAZO_TABLE[i].maxDias) return PRAZO_TABLE[i].pct;
   }
-  return selected.pct;
+  return 100;
 }
 
-function getPrazoFaixaLabel(timePct) {
-  let selected = PRAZO_TABLE[0];
+function getPrazoFaixaLabel(dias) {
   for (let i = 0; i < PRAZO_TABLE.length; i++) {
-    if (timePct >= PRAZO_TABLE[i].maxPct) {
-      selected = PRAZO_TABLE[i];
-    } else {
-      break;
-    }
+    if (dias <= PRAZO_TABLE[i].maxDias) return PRAZO_LABELS[i] + ' → ' + PRAZO_TABLE[i].pct + '% de retenção';
   }
-  return timePct.toFixed(2).replace('.', ',') + '% do tempo → ' + selected.pct + '% de retenção';
+  return '331 a 365 dias → 100%';
 }
 
 /* ══════════════════════════════════════
@@ -949,18 +876,6 @@ function fmtBRL(v) {
 }
 
 function fmtPct(v) { return v.toFixed(2).replace('.', ',') + '%'; }
-
-function getValidationMessage() {
-  if (!state.dtInicio) return 'Informe a data de início da vigência.';
-  if (!state.dtFinal) return 'Informe a data final da vigência.';
-  if (state.dtFinal <= state.dtInicio) return 'A data final deve ser posterior à data de início.';
-  if (state.premioDue == null) return 'Informe o valor do prêmio devido.';
-  if (!state.dtCancelamento) return 'Informe a data de cancelamento para calcular a tabela de prazo curto.';
-  if (state.dtCancelamento < state.dtInicio || state.dtCancelamento > state.dtFinal) {
-    return 'A data de cancelamento deve estar dentro do período da apólice.';
-  }
-  return 'Preencha os campos acima para calcular.';
-}
 
 /* ══════════════════════════════════════
    READING BAR
@@ -1113,7 +1028,6 @@ function compute() {
              state.dtCancelamento >= state.dtInicio &&
              state.dtCancelamento <= state.dtFinal;
 
-  document.getElementById('stateMessage').textContent = getValidationMessage();
   document.getElementById('stateEmpty').style.display  = ok ? 'none' : 'flex';
   document.getElementById('resultsContent').style.display = ok ? 'block' : 'none';
   if (!ok) return;
@@ -1123,23 +1037,21 @@ function compute() {
   const diasRest    = vigTotal - diasDec;
   const premDue     = state.premioDue;
   const premPaid    = state.premioPaid != null ? state.premioPaid : premDue;
-  const usedTimePct = (diasDec / vigTotal) * 100;
 
   /* — pro-rata — */
-  const proRetPct  = usedTimePct;
-  const proRetBase = (proRetPct / 100) * premDue;
-  const proRet     = Math.min(premPaid, proRetBase);
-  const proDevol   = Math.max(0, premPaid - proRet);
+  const proRetPct  = (diasDec / vigTotal) * 100;
+  const proRet     = premDue * (proRetPct / 100);
+  const proDevol   = premDue - proRet;
+  const proDevNet  = proDevol - Math.max(0, proRet - premPaid); // restituição real
 
   /* — prazo curto — */
-  const curRetPct  = getPrazoRetPct(usedTimePct);
-  const curRetBase = (curRetPct / 100) * premDue;
-  const curRet     = Math.min(premPaid, curRetBase);
-  const curDevol   = Math.max(0, premPaid - curRet);
+  const curRetPct  = getPrazoRetPct(diasDec);
+  const curRet     = premDue * (curRetPct / 100);
+  const curDevol   = Math.max(0, premDue - curRet);
 
   /* — diferencial — */
   const diff       = proDevol - curDevol;
-  const faixaLabel = getPrazoFaixaLabel(usedTimePct);
+  const faixaLabel = getPrazoFaixaLabel(diasDec);
 
   /* — render — */
   document.getElementById('faixaVal').textContent = faixaLabel;
@@ -1161,7 +1073,7 @@ function compute() {
     ? 'Pro-rata devolve mais ao tomador'
     : 'Prazo curto devolve mais ao tomador');
 
-  buildChart(premPaid, vigTotal, currentChartMode);
+  buildChart(premDue, vigTotal, currentChartMode);
 }
 
 function set(id, v) { document.getElementById(id).textContent = v; }
@@ -1175,42 +1087,34 @@ function animBar(id, pct) {
 /* ══════════════════════════════════════
    CHART
 ══════════════════════════════════════ */
-function buildChart(premAmount, vigTotal, mode) {
-  if (!premAmount || !vigTotal) return;
+function buildChart(premDue, vigTotal, mode) {
+  if (!premDue || !vigTotal) return;
 
-  const points = Array.from(new Set(PRAZO_TABLE
-    .map(b => Math.ceil(vigTotal * b.maxPct / 100))
-    .filter(d => d > 0 && d <= vigTotal)))
-    .sort((a, b) => a - b);
+  const points = PRAZO_TABLE.map(b => b.maxDias).filter(d => d <= vigTotal);
   if (!points.includes(vigTotal)) points.push(vigTotal);
+  points.sort((a,b) => a-b);
 
   const labels = points.map(d => d + 'd');
 
   let datasets;
   if (mode === 'dev') {
     datasets = [
-      { label: 'Pro-rata — devolução', data: points.map(d => Math.round(premAmount * (1 - d / vigTotal))),
+      { label: 'Pro-rata — devolução', data: points.map(d => Math.round(premDue*(1-d/vigTotal))),
         borderColor:'#1E6E50', backgroundColor:'rgba(30,110,80,0.08)', tension:0.35, pointRadius:4, pointHoverRadius:7 },
-      { label: 'Prazo curto — devolução', data: points.map(d => {
-          const timePct = (d / vigTotal) * 100;
-          return Math.round(premAmount * (1 - getPrazoRetPct(timePct) / 100));
-        }),
+      { label: 'Prazo curto — devolução', data: points.map(d => Math.round(premDue*(1-getPrazoRetPct(d)/100))),
         borderColor:'#8B3A10', backgroundColor:'rgba(139,58,16,0.08)', tension:0.35, pointRadius:4, pointHoverRadius:7 },
     ];
   } else if (mode === 'ret') {
     datasets = [
-      { label: 'Pro-rata — % retido', data: points.map(d => +(d / vigTotal * 100).toFixed(2)),
+      { label: 'Pro-rata — % retido', data: points.map(d => +(d/vigTotal*100).toFixed(2)),
         borderColor:'#1E6E50', backgroundColor:'rgba(30,110,80,0.08)', tension:0.35, pointRadius:4, pointHoverRadius:7 },
-      { label: 'Prazo curto — % retido', data: points.map(d => getPrazoRetPct((d / vigTotal) * 100)),
+      { label: 'Prazo curto — % retido', data: points.map(d => getPrazoRetPct(d)),
         borderColor:'#8B3A10', backgroundColor:'rgba(139,58,16,0.08)', tension:0.35, pointRadius:4, pointHoverRadius:7 },
     ];
   } else {
     datasets = [
       { label: 'Diferencial em favor do tomador (pro-rata)',
-        data: points.map(d => {
-          const timePct = (d / vigTotal) * 100;
-          return Math.round(premAmount * (1 - d / vigTotal)) - Math.round(premAmount * (1 - getPrazoRetPct(timePct) / 100));
-        }),
+        data: points.map(d => Math.round(premDue*(1-d/vigTotal)) - Math.round(premDue*(1-getPrazoRetPct(d)/100))),
         borderColor:'#B8711E', backgroundColor:'rgba(184,113,30,0.12)',
         fill:true, tension:0.35, pointRadius:4, pointHoverRadius:7 },
     ];
@@ -1252,8 +1156,7 @@ function setChart(mode, btn) {
   currentChartMode = mode;
   document.querySelectorAll('.ct-btn').forEach(b => b.classList.remove('active'));
   if (btn) btn.classList.add('active');
-  const premPaid = state.premioPaid != null ? state.premioPaid : state.premioDue;
-  if (premPaid && state.diasVigTotal) buildChart(premPaid, state.diasVigTotal, mode);
+  if (state.premioDue && state.diasVigTotal) buildChart(state.premioDue, state.diasVigTotal, mode);
 }
 
 /* ══════════════════════════════════════
