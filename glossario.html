@@ -7,36 +7,58 @@
   <meta name="description" content="Série Glossário: 11 conceitos essenciais do Seguro Garantia explicados com precisão regulatória e linguagem direta.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Outfit:wght@300;400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,700;0,8..60,900;1,8..60,300;1,8..60,700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --ivory:      #FAF7F2;
-      --ivory2:     #EDE5D8;
-      --ivory3:     #D6C9B8;
-      --ink:        #1C1712;
+      --ivory:      #FBF8F2;
+      --ivory-2:    #F4EFE4;
+      --ivory-3:    #EDE6D6;
+      --ivory2:     #F4EFE4;
+      --ivory3:     #EDE6D6;
+      --ink:        #1A1612;
       --ink-mid:    #3D342A;
-      --ink-soft:   #6B5C50;
+      --ink-soft:   #6B5E52;
+      --ink-mute:   #9C9088;
       --terra:      #C05A35;
+      --terra-lt:   #D97A52;
       --terra-dark: #9A3E20;
       --terra-pale: #F3E6DF;
       --amber:      #C4900A;
       --amber-pale: #FBF3E0;
-      --serif:      'Playfair Display', Georgia, serif;
-      --sans:       'DM Sans', system-ui, sans-serif;
-      --mono:       'Courier New', Courier, monospace;
+      --line:       rgba(90,70,50,0.12);
+      --serif:      'Source Serif 4', 'Lora', Georgia, serif;
+      --body:       'Lora', Georgia, serif;
+      --ui:         'Outfit', system-ui, sans-serif;
+      --sans:       'Outfit', system-ui, sans-serif;
+      --mono:       'DM Mono', ui-monospace, monospace;
+      --ease:       cubic-bezier(0.4, 0, 0.2, 1);
       --sidebar-w:  272px;
       --content-max: 720px;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-    body { background: var(--ivory); color: var(--ink); font-family: var(--sans); font-weight: 300; line-height: 1.75; }
-    .top-bar { position: fixed; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--terra), var(--amber)); z-index: 1000; }
-    .site-header { position: fixed; top: 4px; left: 0; right: 0; height: 54px; background: var(--ivory); border-bottom: 1px solid var(--ivory3); display: flex; align-items: center; padding: 0 28px; gap: 12px; z-index: 999; }
-    .site-header a { font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink); text-decoration: none; }
-    .site-header .sep { color: var(--ivory3); }
-    .site-header .current { font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--terra); }
-    .layout { display: flex; min-height: 100vh; padding-top: 58px; }
-    .sidebar { width: var(--sidebar-w); flex-shrink: 0; position: sticky; top: 58px; height: calc(100vh - 58px); overflow-y: auto; border-right: 1px solid var(--ivory3); padding: 36px 0; scrollbar-width: thin; scrollbar-color: var(--ivory3) transparent; }
+    body { background: var(--ivory); color: var(--ink-mid); font-family: var(--body); font-weight: 400; line-height: 1.75; -webkit-font-smoothing: antialiased; }
+    #reading-progress { position: fixed; top: 0; left: 0; height: 3px; z-index: 200; background: linear-gradient(90deg, var(--terra), var(--amber)); width: 0%; transition: width 0.1s; }
+    nav { position: fixed; top: 3px; left: 0; right: 0; z-index: 100; background: rgba(251,248,242,0.93); backdrop-filter: blur(18px); border-bottom: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; padding: 0 56px; height: 64px; transition: box-shadow 0.3s; }
+    nav.scrolled { box-shadow: 0 4px 24px rgba(28,18,12,0.08); }
+    .nav-logo { font-family: var(--serif); font-size: 17px; font-weight: 700; color: var(--ink); text-decoration: none; letter-spacing: -0.01em; }
+    .nav-logo em { font-style: italic; color: var(--terra); }
+    .nav-links { display: flex; gap: 36px; list-style: none; align-items: center; }
+    .nav-links a { font-family: var(--ui); font-size: 13.5px; font-weight: 500; color: var(--ink-soft); text-decoration: none; letter-spacing: 0.01em; transition: color 0.2s; position: relative; padding-bottom: 3px; }
+    .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--terra); transform: scaleX(0); transition: transform 0.25s; border-radius: 99px; }
+    .nav-links a:hover { color: var(--terra); }
+    .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
+    .nav-links a.active { color: var(--terra); }
+    .nav-cta { background: var(--terra) !important; color: #fff !important; padding: 8px 20px !important; border-radius: 99px !important; font-size: 13px !important; }
+    .nav-cta::after { display: none !important; }
+    .nav-cta:hover { background: var(--terra-lt) !important; color: #fff !important; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--ink); border-radius: 2px; transition: all 0.3s; }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .layout { display: flex; min-height: 100vh; padding-top: 67px; }
+    .sidebar { width: var(--sidebar-w); flex-shrink: 0; position: sticky; top: 67px; height: calc(100vh - 67px); overflow-y: auto; border-right: 1px solid var(--ivory3); padding: 36px 0; scrollbar-width: thin; scrollbar-color: var(--ivory3) transparent; }
     .sidebar-label { font-family: var(--mono); font-size: 9px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-soft); padding: 0 24px; margin-bottom: 14px; }
     .sidebar nav { display: flex; flex-direction: column; }
     .sidebar nav a { display: flex; align-items: baseline; gap: 10px; padding: 9px 24px; text-decoration: none; color: var(--ink-soft); font-size: 12.5px; font-weight: 400; border-left: 2px solid transparent; transition: all 0.18s; line-height: 1.3; }
@@ -48,8 +70,8 @@
     .hero { background: var(--ink); color: var(--ivory); padding: 72px 60px 64px; position: relative; overflow: hidden; }
     .hero::before { content: ''; position: absolute; top: -100px; right: -100px; width: 420px; height: 420px; border-radius: 50%; border: 90px solid rgba(192,90,53,0.10); pointer-events: none; }
     .hero-chip { font-family: var(--mono); font-size: 10px; font-weight: 700; letter-spacing: 0.20em; text-transform: uppercase; color: var(--terra); margin-bottom: 18px; }
-    .hero h1 { font-family: var(--serif); font-size: clamp(30px, 3.5vw, 48px); font-weight: 600; line-height: 1.15; margin-bottom: 18px; max-width: 540px; }
-    .hero p { font-size: 15px; font-weight: 300; color: rgba(250,247,242,0.60); max-width: 460px; }
+    .hero h1 { font-family: var(--serif); font-size: clamp(30px, 3.5vw, 48px); font-weight: 700; line-height: 1.15; margin-bottom: 18px; max-width: 540px; }
+    .hero p { font-size: 15px; font-weight: 400; color: rgba(250,247,242,0.60); max-width: 460px; font-family: var(--body); }
     .hero-meta { margin-top: 36px; display: flex; gap: 36px; flex-wrap: wrap; }
     .hero-meta-item .label { font-family: var(--mono); font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(250,247,242,0.30); margin-bottom: 3px; }
     .hero-meta-item .value { font-size: 12.5px; color: rgba(250,247,242,0.65); }
@@ -58,8 +80,8 @@
     .article-eyebrow { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; }
     .article-num { font-family: var(--mono); font-size: 9px; font-weight: 700; letter-spacing: 0.18em; color: var(--terra); background: var(--terra-pale); padding: 4px 9px; border-radius: 2px; }
     .article-category { font-family: var(--mono); font-size: 9px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-soft); }
-    .article h2 { font-family: var(--serif); font-size: clamp(24px, 2.8vw, 36px); font-weight: 600; line-height: 1.15; color: var(--ink); margin-bottom: 10px; }
-    .article-lead { font-size: 15.5px; font-weight: 300; color: var(--ink-soft); border-left: 3px solid var(--terra); padding-left: 18px; margin-bottom: 0; line-height: 1.65; }
+    .article h2 { font-family: var(--serif); font-size: clamp(24px, 2.8vw, 36px); font-weight: 700; line-height: 1.15; color: var(--ink); margin-bottom: 10px; }
+    .article-lead { font-size: 15.5px; font-weight: 400; color: var(--ink-soft); border-left: 3px solid var(--terra); padding-left: 18px; margin-bottom: 0; line-height: 1.65; font-family: var(--body); }
     .article-body { max-width: var(--content-max); margin-top: 44px; }
     .article-body p { font-size: 15px; line-height: 1.82; color: var(--ink-mid); margin-bottom: 20px; }
     .article-body h3 { font-family: var(--serif); font-size: 19px; font-weight: 600; color: var(--ink); margin: 40px 0 12px; }
@@ -92,28 +114,43 @@
     .nav-label { font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-soft); display: block; margin-bottom: 4px; }
     .formula { background: var(--ink); color: var(--ivory); font-family: var(--mono); font-size: 14px; letter-spacing: 0.06em; padding: 20px 28px; border-radius: 4px; margin: 24px 0; line-height: 1.7; }
     .formula .f-comment { color: rgba(250,247,242,0.35); font-size: 11px; }
+    .back-home-btn { position: absolute; top: 20px; right: 60px; display: inline-flex; align-items: center; gap: 5px; font-family: var(--ui); font-size: 12px; font-weight: 500; color: var(--ink-soft); text-decoration: none; padding: 5px 12px; border-radius: 99px; border: 1px solid var(--line); background: var(--ivory); transition: all 0.2s var(--ease); z-index: 1; }
+    .back-home-btn:hover { color: var(--terra); border-color: var(--terra); background: var(--terra-pale); }
     .site-footer { background: var(--ink); color: var(--ivory); padding: 44px 60px; display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; }
     .site-footer .footer-brand { font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; }
     .site-footer .footer-copy { font-size: 12px; color: rgba(250,247,242,0.30); }
     @media (max-width: 860px) {
+      nav { padding: 0 24px; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .nav-links.mobile-open { display: flex; flex-direction: column; position: fixed; top: 67px; left: 0; right: 0; background: var(--ivory); padding: 20px 24px; gap: 12px; border-bottom: 1px solid var(--line); z-index: 99; list-style: none; }
       .layout { flex-direction: column; }
       .sidebar { width: 100%; height: auto; position: static; border-right: none; border-bottom: 1px solid var(--ivory3); padding: 20px 0; overflow-x: auto; }
       .sidebar nav { flex-direction: row; padding: 0 12px; gap: 2px; white-space: nowrap; flex-wrap: nowrap; }
       .sidebar nav a { border-left: none; border-bottom: 2px solid transparent; padding: 7px 12px; flex-shrink: 0; }
       .sidebar nav a:hover, .sidebar nav a.active { border-left: none; border-bottom-color: var(--terra); }
       .hero, .article, .site-footer { padding-left: 24px; padding-right: 24px; }
+      .back-home-btn { right: 24px; top: 16px; font-size: 11px; padding: 4px 10px; }
     }
   </style>
 </head>
 <body>
 
-<div class="top-bar"></div>
+<div id="reading-progress"></div>
 
-<header class="site-header">
-  <a href="/">SGF</a>
-  <span class="sep">·</span>
-  <span class="current">Série Glossário</span>
-</header>
+<nav id="main-nav">
+  <a href="https://segurogarantiafacil.com" class="nav-logo">Seguro Garantia <em>Fácil</em></a>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="https://segurogarantiafacil.com">Início</a></li>
+    <li><a href="glossario.html" class="active">Série Conceitos</a></li>
+    <li><a href="calculadora.html">Calculadora</a></li>
+    <li><a href="artigos.html">Conteúdo</a></li>
+    <li><a href="https://segurogarantiafacil.com#contato" class="nav-cta">Fale comigo</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
 
 <div class="layout">
   <aside class="sidebar">
@@ -987,15 +1024,40 @@
 </div>
 
 <script>
+  document.querySelectorAll('.article').forEach(function(article) {
+    const btn = document.createElement('a');
+    btn.href = 'https://segurogarantiafacil.com';
+    btn.className = 'back-home-btn';
+    btn.innerHTML = '← Início';
+    btn.title = 'Voltar à página inicial';
+    article.appendChild(btn);
+  });
+
+  const progressBar = document.getElementById('reading-progress');
   const articles = document.querySelectorAll('.article[id]');
-  const navLinks  = document.querySelectorAll('#sidebar-nav a');
+  const sidebarLinks = document.querySelectorAll('#sidebar-nav a');
+
   function setActive() {
     let current = '';
     articles.forEach(a => { if (window.scrollY >= a.offsetTop - 100) current = a.id; });
-    navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + current));
+    sidebarLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + current));
   }
-  window.addEventListener('scroll', setActive, { passive: true });
+
+  window.addEventListener('scroll', function() {
+    if (progressBar) {
+      const scrolled = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+      progressBar.style.width = Math.min(scrolled, 100) + '%';
+    }
+    document.getElementById('main-nav').classList.toggle('scrolled', window.scrollY > 20);
+    setActive();
+  }, { passive: true });
+
   setActive();
+
+  function toggleMenu() {
+    document.getElementById('nav-links').classList.toggle('mobile-open');
+    document.getElementById('hamburger').classList.toggle('open');
+  }
 </script>
 </body>
 </html>
