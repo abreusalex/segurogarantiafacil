@@ -57,8 +57,9 @@
     .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
     .hamburger.open span:nth-child(2) { opacity: 0; }
     .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-    .layout { display: flex; min-height: 100vh; padding-top: 67px; }
-    .sidebar { width: var(--sidebar-w); flex-shrink: 0; position: sticky; top: 67px; height: calc(100vh - 67px); overflow-y: auto; border-right: 1px solid var(--ivory3); padding: 36px 0; scrollbar-width: thin; scrollbar-color: var(--ivory3) transparent; }
+    .layout { display: block; padding-top: 67px; }
+    .sidebar { position: fixed; top: 67px; left: 0; width: var(--sidebar-w); height: calc(100vh - 67px); overflow-y: auto; border-right: 1px solid var(--ivory3); padding: 36px 0; scrollbar-width: thin; scrollbar-color: var(--ivory3) transparent; z-index: 50; background: var(--ivory); }
+    .main { margin-left: var(--sidebar-w); }
     .sidebar-label { font-family: var(--mono); font-size: 9px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-soft); padding: 0 24px; margin-bottom: 14px; }
     .sidebar nav { display: flex; flex-direction: column; }
     .sidebar nav a { display: flex; align-items: baseline; gap: 10px; padding: 9px 24px; text-decoration: none; color: var(--ink-soft); font-size: 12.5px; font-weight: 400; border-left: 2px solid transparent; transition: all 0.18s; line-height: 1.3; }
@@ -124,8 +125,8 @@
       .nav-links { display: none; }
       .hamburger { display: flex; }
       .nav-links.mobile-open { display: flex; flex-direction: column; position: fixed; top: 67px; left: 0; right: 0; background: var(--ivory); padding: 20px 24px; gap: 12px; border-bottom: 1px solid var(--line); z-index: 99; list-style: none; }
-      .layout { flex-direction: column; }
-      .sidebar { width: 100%; height: auto; position: static; border-right: none; border-bottom: 1px solid var(--ivory3); padding: 20px 0; overflow-x: auto; }
+      .sidebar { position: static; width: 100%; height: auto; border-right: none; border-bottom: 1px solid var(--ivory3); padding: 20px 0; overflow-x: auto; }
+      .main { margin-left: 0; }
       .sidebar nav { flex-direction: row; padding: 0 12px; gap: 2px; white-space: nowrap; flex-wrap: nowrap; }
       .sidebar nav a { border-left: none; border-bottom: 2px solid transparent; padding: 7px 12px; flex-shrink: 0; }
       .sidebar nav a:hover, .sidebar nav a.active { border-left: none; border-bottom-color: var(--terra); }
