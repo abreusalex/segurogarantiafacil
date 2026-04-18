@@ -39,8 +39,8 @@
     html { scroll-behavior: smooth; }
     body { background: var(--ivory); color: var(--ink-mid); font-family: var(--body); font-weight: 400; line-height: 1.75; -webkit-font-smoothing: antialiased; }
     #reading-progress { position: fixed; top: 0; left: 0; height: 3px; z-index: 200; background: linear-gradient(90deg, var(--terra), var(--amber)); width: 0%; transition: width 0.1s; }
-    nav { position: fixed; top: 3px; left: 0; right: 0; z-index: 100; background: rgba(251,248,242,0.93); backdrop-filter: blur(18px); border-bottom: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; padding: 0 56px; height: 64px; transition: box-shadow 0.3s; }
-    nav.scrolled { box-shadow: 0 4px 24px rgba(28,18,12,0.08); }
+    #main-nav { position: fixed; top: 3px; left: 0; right: 0; z-index: 100; background: rgba(251,248,242,0.93); backdrop-filter: blur(18px); border-bottom: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; padding: 0 56px; height: 64px; transition: box-shadow 0.3s; }
+    #main-nav.scrolled { box-shadow: 0 4px 24px rgba(28,18,12,0.08); }
     .nav-logo { font-family: var(--serif); font-size: 17px; font-weight: 700; color: var(--ink); text-decoration: none; letter-spacing: -0.01em; }
     .nav-logo em { font-style: italic; color: var(--terra); }
     .nav-links { display: flex; gap: 36px; list-style: none; align-items: center; }
@@ -120,7 +120,7 @@
     .site-footer .footer-brand { font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; }
     .site-footer .footer-copy { font-size: 12px; color: rgba(250,247,242,0.30); }
     @media (max-width: 860px) {
-      nav { padding: 0 24px; }
+      #main-nav { padding: 0 24px; }
       .nav-links { display: none; }
       .hamburger { display: flex; }
       .nav-links.mobile-open { display: flex; flex-direction: column; position: fixed; top: 67px; left: 0; right: 0; background: var(--ivory); padding: 20px 24px; gap: 12px; border-bottom: 1px solid var(--line); z-index: 99; list-style: none; }
