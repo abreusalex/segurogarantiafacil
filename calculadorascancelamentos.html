@@ -816,40 +816,43 @@ nav {
    aplicável como critério contratual conforme Circular 662/2022
 ══════════════════════════════════════ */
 const PRAZO_TABLE = [
-  { maxDias: 15,  pct: 20 },
-  { maxDias: 30,  pct: 25 },
-  { maxDias: 60,  pct: 30 },
-  { maxDias: 90,  pct: 40 },
-  { maxDias: 120, pct: 50 },
-  { maxDias: 150, pct: 60 },
-  { maxDias: 180, pct: 70 },
-  { maxDias: 210, pct: 75 },
-  { maxDias: 240, pct: 80 },
-  { maxDias: 270, pct: 85 },
-  { maxDias: 300, pct: 90 },
-  { maxDias: 330, pct: 95 },
-  { maxDias: 365, pct: 100 },
+  { maxPct:  4.11, pct: 13,  label: 'Até 15 dias' },
+  { maxPct:  8.22, pct: 20,  label: 'Até 30 dias' },
+  { maxPct: 12.33, pct: 27,  label: 'Até 45 dias' },
+  { maxPct: 16.44, pct: 30,  label: 'Até 60 dias' },
+  { maxPct: 20.55, pct: 37,  label: 'Até 75 dias' },
+  { maxPct: 24.66, pct: 40,  label: 'Até 90 dias' },
+  { maxPct: 28.77, pct: 46,  label: 'Até 105 dias' },
+  { maxPct: 32.88, pct: 50,  label: 'Até 120 dias' },
+  { maxPct: 36.99, pct: 56,  label: 'Até 135 dias' },
+  { maxPct: 41.10, pct: 60,  label: 'Até 150 dias' },
+  { maxPct: 45.21, pct: 66,  label: 'Até 165 dias' },
+  { maxPct: 53.42, pct: 73,  label: 'Até 195 dias' },
+  { maxPct: 57.53, pct: 75,  label: 'Até 210 dias' },
+  { maxPct: 61.64, pct: 78,  label: 'Até 225 dias' },
+  { maxPct: 65.75, pct: 80,  label: 'Até 240 dias' },
+  { maxPct: 69.86, pct: 83,  label: 'Até 255 dias' },
+  { maxPct: 73.97, pct: 85,  label: 'Até 270 dias' },
+  { maxPct: 78.08, pct: 88,  label: 'Até 285 dias' },
+  { maxPct: 82.19, pct: 90,  label: 'Até 300 dias' },
+  { maxPct: 86.30, pct: 93,  label: 'Até 315 dias' },
+  { maxPct: 90.41, pct: 95,  label: 'Até 330 dias' },
+  { maxPct: 94.52, pct: 98,  label: 'Até 345 dias' },
+  { maxPct:100.00, pct: 100, label: 'Até 365 dias' },
 ];
 
-const PRAZO_LABELS = [
-  'Até 15 dias', '16 a 30 dias', '31 a 60 dias', '61 a 90 dias',
-  '91 a 120 dias', '121 a 150 dias', '151 a 180 dias', '181 a 210 dias',
-  '211 a 240 dias', '241 a 270 dias', '271 a 300 dias', '301 a 330 dias',
-  '331 a 365 dias'
-];
-
-function getPrazoRetPct(dias) {
+function getPrazoRetPct(pctElapsed) {
   for (let i = 0; i < PRAZO_TABLE.length; i++) {
-    if (dias <= PRAZO_TABLE[i].maxDias) return PRAZO_TABLE[i].pct;
+    if (pctElapsed <= PRAZO_TABLE[i].maxPct) return PRAZO_TABLE[i].pct;
   }
   return 100;
 }
 
-function getPrazoFaixaLabel(dias) {
+function getPrazoFaixaLabel(pctElapsed) {
   for (let i = 0; i < PRAZO_TABLE.length; i++) {
-    if (dias <= PRAZO_TABLE[i].maxDias) return PRAZO_LABELS[i] + ' → ' + PRAZO_TABLE[i].pct + '% de retenção';
+    if (pctElapsed <= PRAZO_TABLE[i].maxPct) return PRAZO_TABLE[i].label + ' → ' + PRAZO_TABLE[i].pct + '% de retenção';
   }
-  return '331 a 365 dias → 100%';
+  return PRAZO_TABLE[PRAZO_TABLE.length - 1].label + ' → 100%';
 }
 
 /* ══════════════════════════════════════
@@ -1045,13 +1048,13 @@ function compute() {
   const proDevNet  = proDevol - Math.max(0, proRet - premPaid); // restituição real
 
   /* — prazo curto — */
-  const curRetPct  = getPrazoRetPct(diasDec);
+  const curRetPct  = getPrazoRetPct(proRetPct);
   const curRet     = premDue * (curRetPct / 100);
   const curDevol   = Math.max(0, premDue - curRet);
 
   /* — diferencial — */
   const diff       = proDevol - curDevol;
-  const faixaLabel = getPrazoFaixaLabel(diasDec);
+  const faixaLabel = getPrazoFaixaLabel(proRetPct);
 
   /* — render — */
   document.getElementById('faixaVal').textContent = faixaLabel;
@@ -1090,7 +1093,7 @@ function animBar(id, pct) {
 function buildChart(premDue, vigTotal, mode) {
   if (!premDue || !vigTotal) return;
 
-  const points = PRAZO_TABLE.map(b => b.maxDias).filter(d => d <= vigTotal);
+  const points = PRAZO_TABLE.map(b => Math.round(b.maxPct / 100 * vigTotal)).filter(d => d <= vigTotal);
   if (!points.includes(vigTotal)) points.push(vigTotal);
   points.sort((a,b) => a-b);
 
@@ -1101,20 +1104,20 @@ function buildChart(premDue, vigTotal, mode) {
     datasets = [
       { label: 'Pro-rata — devolução', data: points.map(d => Math.round(premDue*(1-d/vigTotal))),
         borderColor:'#1E6E50', backgroundColor:'rgba(30,110,80,0.08)', tension:0.35, pointRadius:4, pointHoverRadius:7 },
-      { label: 'Prazo curto — devolução', data: points.map(d => Math.round(premDue*(1-getPrazoRetPct(d)/100))),
+      { label: 'Prazo curto — devolução', data: points.map(d => Math.round(premDue*(1-getPrazoRetPct(d/vigTotal*100)/100))),
         borderColor:'#8B3A10', backgroundColor:'rgba(139,58,16,0.08)', tension:0.35, pointRadius:4, pointHoverRadius:7 },
     ];
   } else if (mode === 'ret') {
     datasets = [
       { label: 'Pro-rata — % retido', data: points.map(d => +(d/vigTotal*100).toFixed(2)),
         borderColor:'#1E6E50', backgroundColor:'rgba(30,110,80,0.08)', tension:0.35, pointRadius:4, pointHoverRadius:7 },
-      { label: 'Prazo curto — % retido', data: points.map(d => getPrazoRetPct(d)),
+      { label: 'Prazo curto — % retido', data: points.map(d => getPrazoRetPct(d/vigTotal*100)),
         borderColor:'#8B3A10', backgroundColor:'rgba(139,58,16,0.08)', tension:0.35, pointRadius:4, pointHoverRadius:7 },
     ];
   } else {
     datasets = [
       { label: 'Diferencial em favor do tomador (pro-rata)',
-        data: points.map(d => Math.round(premDue*(1-d/vigTotal)) - Math.round(premDue*(1-getPrazoRetPct(d)/100))),
+        data: points.map(d => Math.round(premDue*(1-d/vigTotal)) - Math.round(premDue*(1-getPrazoRetPct(d/vigTotal*100)/100))),
         borderColor:'#B8711E', backgroundColor:'rgba(184,113,30,0.12)',
         fill:true, tension:0.35, pointRadius:4, pointHoverRadius:7 },
     ];
