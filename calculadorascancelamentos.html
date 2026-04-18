@@ -61,18 +61,44 @@ body {
 }
 
 /* ═══════════════════════════════════════
+   HEADER
+═══════════════════════════════════════ */
+.site-header {
+  background: var(--ink);
+  border-bottom: 2.5px solid var(--terra);
+  height: 56px;
+  display: flex; align-items: center;
+  justify-content: space-between;
+  padding: 0 2.2rem;
+  position: sticky; top: 0; z-index: 100;
+}
+.site-logo {
+  font-family: var(--mono); font-size: 13px; font-weight: 700;
+  color: var(--amber-light); letter-spacing: 0.13em;
+  text-decoration: none; text-transform: uppercase;
+}
+.site-logo em { color: var(--amber); font-style: normal; }
+.header-pill {
+  font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--amber);
+  border: 1px solid rgba(184,113,30,0.35);
+  padding: 3px 10px; border-radius: 2px;
+}
+
+/* ═══════════════════════════════════════
    HERO / BANNER
 ═══════════════════════════════════════ */
 .hero {
-  background: var(--ink);
-  padding: 3.5rem 2rem 3rem;
+  background: var(--ivory);
+  padding: 4rem 2rem 3.5rem;
   position: relative; overflow: hidden;
+  border-bottom: 1px solid var(--border);
 }
 .hero-grid {
   position: absolute; inset: 0; pointer-events: none;
   background-image:
-    linear-gradient(rgba(184,113,30,0.055) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(184,113,30,0.055) 1px, transparent 1px);
+    linear-gradient(rgba(184,113,30,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(184,113,30,0.02) 1px, transparent 1px);
   background-size: 44px 44px;
   animation: gridDrift 24s linear infinite;
 }
@@ -83,23 +109,23 @@ body {
 .hero-inner { max-width: 860px; margin: 0 auto; position: relative; z-index: 2; }
 
 .hero-eyebrow {
-  font-family: var(--mono); font-size: 10px; letter-spacing: 0.16em;
-  text-transform: uppercase; color: var(--amber);
-  display: flex; align-items: center; gap: 10px; margin-bottom: 1.1rem;
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--terra);
+  display: flex; align-items: center; gap: 10px; margin-bottom: 1.4rem;
   opacity: 0; animation: fadeUp 0.6s 0.1s ease forwards;
 }
-.hero-eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--amber); }
+.hero-eyebrow::before { content: ''; width: 32px; height: 1.2px; background: var(--terra); }
 
 .hero h1 {
   font-family: var(--serif); font-weight: 400;
-  font-size: clamp(22px, 3.5vw, 34px); line-height: 1.25;
-  color: var(--ivory); margin-bottom: 0.6rem;
+  font-size: clamp(28px, 5vw, 52px); line-height: 1.15;
+  color: var(--ink); margin-bottom: 0.8rem;
   opacity: 0; animation: fadeUp 0.6s 0.2s ease forwards;
 }
 .hero-sub {
   font-family: var(--serif); font-style: italic;
-  font-size: 15px; color: rgba(250,246,238,0.55);
-  line-height: 1.6; max-width: 580px;
+  font-size: 20px; color: var(--terra);
+  line-height: 1.7; max-width: 620px;
   opacity: 0; animation: fadeUp 0.6s 0.3s ease forwards;
 }
 
@@ -122,7 +148,7 @@ body {
 /* ═══════════════════════════════════════
    MAIN LAYOUT
 ═══════════════════════════════════════ */
-.main { max-width: 860px; margin: 0 auto; padding: 2.5rem 2rem 5rem; }
+.main { max-width: 860px; margin: 0 auto; padding: 3rem 2rem 6rem; }
 
 /* ═══════════════════════════════════════
    FORM CARD
@@ -489,6 +515,11 @@ input[type="range"]::-webkit-slider-thumb:hover {
 .exp-btn:hover { border-color: var(--amber); color: var(--terra); }
 .exp-btn.primary { background: var(--terra); color: var(--ivory); border-color: var(--terra); }
 .exp-btn.primary:hover { background: var(--terra-deep); }
+.export-settings { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-bottom: 14px; }
+.export-settings-label { font-family: var(--mono); font-size: 10px; text-transform: uppercase; color: var(--ink-muted); }
+.export-options { display: flex; flex-wrap: wrap; gap: 10px; }
+.export-options label { font-family: var(--mono); font-size: 10px; color: var(--ink); cursor: pointer; display: inline-flex; align-items: center; gap: 4px; }
+.export-options input { accent-color: var(--terra); }
 
 /* ── FOOTER ── */
 .site-footer {
@@ -502,64 +533,233 @@ input[type="range"]::-webkit-slider-thumb:hover {
 .footer-sub { font-family: var(--mono); font-size: 10px; color: var(--ink-muted); line-height: 1.8; }
 .footer-sub a { color: var(--amber-mid); text-decoration: none; }
 
+/* ── MODAL ── */
+.modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(28,20,16,0.7); z-index: 1000; align-items: center; justify-content: center; }
+.modal-overlay.active { display: flex; }
+.modal-content { background: var(--ivory); border-radius: 12px; padding: 24px; max-width: 500px; width: 90%; box-shadow: 0 20px 60px rgba(28,20,16,0.3); }
+.modal-close { position: absolute; top: 14px; right: 14px; background: none; border: none; cursor: pointer; font-size: 24px; color: var(--ink-light); }
+.modal-close:hover { color: var(--terra); }
+.modal-title { font-family: var(--serif); font-size: 18px; color: var(--ink); margin-bottom: 12px; }
+.modal-subtitle { font-family: var(--mono); font-size: 10px; color: var(--ink-muted); margin-bottom: 16px; }
+.bug-form { display: flex; flex-direction: column; gap: 12px; }
+.bug-form label { font-family: var(--mono); font-size: 10px; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 4px; }
+.bug-form input, .bug-form textarea { font-family: var(--mono); font-size: 12px; padding: 10px; border: 1px solid var(--border-mid); border-radius: 6px; color: var(--ink); background: var(--ivory-dark); outline: none; }
+.bug-form input:focus, .bug-form textarea:focus { border-color: var(--amber); box-shadow: 0 0 0 3px rgba(184,113,30,0.12); }
+.bug-form textarea { resize: vertical; min-height: 100px; }
+.bug-form-row { display: flex; gap: 10px; }
+.bug-form-row > * { flex: 1; }
+.modal-actions { display: flex; gap: 10px; margin-top: 16px; }
+.modal-btn { flex: 1; padding: 10px 14px; border-radius: 6px; font-family: var(--mono); font-size: 10px; text-transform: uppercase; cursor: pointer; border: 1px solid; transition: all 0.18s; }
+.modal-btn.primary { background: var(--terra); color: var(--ivory); border-color: var(--terra); }
+.modal-btn.primary:hover { background: var(--terra-deep); }
+.modal-btn.secondary { background: var(--ivory); color: var(--ink); border-color: var(--border-mid); }
+.modal-btn.secondary:hover { border-color: var(--amber); color: var(--terra); }
+.bug-info { background: rgba(184,113,30,0.08); border: 1px solid rgba(184,113,30,0.2); border-radius: 6px; padding: 10px; margin-bottom: 12px; font-family: var(--mono); font-size: 9px; color: var(--ink-muted); line-height: 1.5; }
+
+.modal-content .site-info { background: var(--amber-light); border-radius: 8px; padding: 12px; margin-top: 16px; border-left: 4px solid var(--terra); }
+.modal-content .site-info-title { font-family: var(--mono); font-size: 10px; font-weight: 700; color: var(--terra); margin-bottom: 6px; text-transform: uppercase; }
+.modal-content .site-info-text { font-family: var(--mono); font-size: 10px; color: var(--ink); line-height: 1.6; }
+.modal-content .site-info-text em { color: var(--terra); font-style: italic; }
+
+.print-header, .print-footer {
+  display: none;
+}
+
 /* ── PRINT ── */
+@page { size: A4 portrait; margin: 12mm; }
 @media print {
-  nav, .hero, .qm-btn, .export-row, .chart-tabs, .site-footer { display: none !important; }
-  body { background: #fff; }
-  .form-card, .res-card, .diff-card, .chart-card { break-inside: avoid; }
+  html, body { width: auto; min-height: auto; background: #fff; color: #000; }
+  body { margin: 0; padding: 0; }
+  .site-header, .hero, .qm-btn, .export-row, .export-settings, .chart-tabs, .site-footer, .reading-bar, .footer-sub, .header-pill, .export-row button, .ct-btn { display: none !important; }
+  .main { max-width: none; margin: 0; padding: 0; }
+  .form-card, .res-card, .diff-card, .chart-card, .faixa-card, .nota-iof, .timeline-visual, .field, .cancel-section { page-break-inside: avoid; break-inside: avoid; }
+  .form-card, .res-card, .diff-card, .chart-card, .faixa-card, .nota-iof { border-color: #ccc !important; box-shadow: none !important; }
+  .form-card-body, .chart-card, .res-card, .diff-card, .faixa-card, .nota-iof { padding: 0.75rem !important; }
+  .results-grid { display: block !important; }
+  .res-card { width: auto !important; margin-bottom: 0.75rem !important; }
+  .chart-card { page-break-after: avoid; }
+  .faixa-card { margin-bottom: 0.75rem !important; }
+  .diff-card { grid-template-columns: 1fr; }
+  .diff-divider { display: none !important; }
+  .footer-logo { display: none !important; }
+  .site-header, .hero, .export-row, .site-footer { display: none !important; }
+  .print-header { padding: 12px 12px; gap: 10px; }
+  .print-header-title { font-size: 20px; }
+  .print-header-subtitle { font-size: 11px; }
+  .print-header-values { gap: 0.35rem 0.9rem; font-size: 9px; }
+  .print-qr-link { width: 72px; height: 72px; min-width: 72px; min-height: 72px; padding: 5px; }
+  .print-qr-img { border-radius: 8px; }
+  .res-row .rl, .res-row .rv, .ds-label, .ds-val, .dc-val, .dc-label { font-size: 10px; }
+  .rpb-label span { font-size: 8px; }
+  .chart-card-head, .faixa-card .ft-label, .res-card-head, .res-card-name { font-size: 11px; }
+  .chart-card { margin-bottom: 0.75rem !important; }
+  .nota-iof { margin-bottom: 0.75rem !important; }
+  .nota-iof p { font-size: 9.5px; }
+  .canvas-wrap { min-height: 150px !important; }
+  @page { size: A4 portrait; margin: 10mm; }
+  .print-header, .print-footer {
+    width: 100%;
+    margin: 0 auto;
+    padding: 16px 18px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink);
+    border-color: var(--border);
+    background: var(--ivory);
+  }
+  .print-header {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    border-bottom: 1px solid var(--border);
+  }
+  .print-header-left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+  }
+  .print-header-title {
+    font-family: var(--serif);
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.05;
+    color: var(--ink);
+  }
+  .print-header-title span {
+    color: var(--terra);
+    font-style: normal;
+  }
+  .print-header-subtitle {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink-muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .print-header-values {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem 1.2rem;
+    margin-top: 0.35rem;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--ink);
+  }
+  .print-header-values span {
+    min-width: 140px;
+  }
+  .print-qr-link {
+    display: inline-flex;
+    width: 88px;
+    height: 88px;
+    min-width: 88px;
+    min-height: 88px;
+    background: var(--amber-light);
+    border: 2px solid var(--amber);
+    border-radius: 14px;
+    align-items: center;
+    justify-content: center;
+    padding: 6px;
+    text-decoration: none;
+  }
+  .print-qr-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 10px;
+  }
+  .print-footer {
+    display: block !important;
+    border-top: 1px solid var(--border);
+    margin-top: 10px;
+    color: var(--ink-muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .print-header-values span {
+    min-width: 140px;
+  }
+  body[data-print-mode="pro"] .res-card.cur,
+  body[data-print-mode="pro"] .faixa-card,
+  body[data-print-mode="pro"] .diff-card,
+  body[data-print-mode="pro"] .chart-card {
+    display: none !important;
+  }
+  body[data-print-mode="cur"] .res-card.pro,
+  body[data-print-mode="cur"] .faixa-card,
+  body[data-print-mode="cur"] .diff-card,
+  body[data-print-mode="cur"] .chart-card {
+    display: none !important;
+  }
+  .print-qr-link {
+    display: inline-flex;
+    width: 88px;
+    height: 88px;
+    min-width: 88px;
+    min-height: 88px;
+    background: var(--amber-light);
+    border: 2px solid var(--amber);
+    border-radius: 14px;
+    align-items: center;
+    justify-content: center;
+    padding: 6px;
+    text-decoration: none;
+  }
+  .print-qr-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 10px;
+  }
+  .print-footer {
+    display: block !important;
+    border-top: 1px solid var(--border);
+    margin-top: 10px;
+    color: var(--ink-muted);
+  }
+  .print-footer {
+    border-top: 1px solid #ccc;
+    margin-top: 10px;
+  }
+  * { -webkit-print-color-adjust: exact; color-adjust: exact; }
 }
 
 /* ── RESPONSIVE ── */
 @media (max-width: 640px) {
+  .site-header { padding: 0 1rem; }
   .hero { padding: 2.5rem 1rem 2.5rem; }
   .main { padding: 1.75rem 1rem 4rem; }
   .form-card-body { padding: 1.1rem; }
-}
-
-/* ── NAV ── */
-nav {
-  background: var(--ink);
-  border-bottom: 2px solid var(--amber);
-  height: 52px;
-  display: flex; align-items: center;
-  justify-content: space-between;
-  padding: 0 2rem;
-  position: sticky; top: 0; z-index: 200;
-}
-.nav-logo {
-  font-family: var(--mono); font-size: 13px; font-weight: 700;
-  color: var(--amber-light); letter-spacing: 0.13em;
-  text-decoration: none; text-transform: uppercase;
-}
-.nav-logo em { color: var(--amber); font-style: normal; }
-.btn-voltar {
-  font-family: var(--mono); font-size: 10px; letter-spacing: 0.09em;
-  text-transform: uppercase; color: var(--amber-mid);
-  text-decoration: none; border: 1px solid rgba(184,113,30,0.3);
-  padding: 5px 12px; border-radius: 3px;
-  display: flex; align-items: center; gap: 6px;
-  transition: border-color 0.18s, color 0.18s;
-}
-.btn-voltar:hover { border-color: var(--amber); color: var(--amber); }
-@media (max-width: 480px) {
-  nav { padding: 0 1rem; }
-  .btn-voltar span { display: none; }
 }
 </style>
 </head>
 <body>
 
 <div class="reading-bar" id="readingBar"></div>
-
-<nav>
-  <a href="index.html" class="nav-logo">Seguro Garantia <em>Fácil</em></a>
-  <a href="index.html" class="btn-voltar">
-    <svg width="15" height="15" viewBox="0 0 16 16" fill="none">
-      <path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-    Voltar para Seguro Garantia Fácil
+<div class="print-header">
+  <div class="print-header-left">
+    <div class="print-header-title">Seguro Garantia <span>Fácil</span></div>
+    <div class="print-header-subtitle">Calculadora de Devolução de Prêmio</div>
+    <div class="print-header-values">
+      <span id="printDtInicio">Início: —</span>
+      <span id="printDtFinal">Fim: —</span>
+      <span id="printPremDue">Prêmio devido: —</span>
+      <span id="printPremPaid">Prêmio pago: —</span>
+      <span id="printDtCancel">Cancelamento: —</span>
+    </div>
+  </div>
+  <a class="print-qr-link" href="https://segurogarantiafacil.com" target="_blank" rel="noreferrer">
+    <img class="print-qr-img" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXIAAAFyAQAAAADAX2ykAAAC8UlEQVR4nO1abY6jMAx9NkjzE6Q9wBwFbtAj7Zn2BuQoc4CR4GclkFd2Mm2X7ga6UhFM/X5kMvipsmL5Kw4JHkHgh+iA8/PgBfkczs+DF+RzOD8PXpDP4fw8eEE+h/Nf4XwooQQClaB2KAEMRLZEtBvqsx78APeF+Y0oet3pgmoEtSjEFsO2+qwGr6e+JL9Mf4caaH5phXw6k+i/EuoCggEgoBg30oed/xT7XjG8CcJJQE1f01335OefB+/evtUnWZAWDBev3U4fdv5T7Fupp2osbvoJAkwlmk4jNdTS///77Pw9nE+wErnW7fAm1GqQhu0wxfJ5W31Wg9dTX5JPf7ufJFSf6tjFXXz2+8lj9r8tJrq2viIfb4JGzoRQT7S9PuvBD3BfkY/Y3XbVGHfpa6WeW4mg6QuV6s54e9Ofnb/6fILeXzUyQjp14s7ur6ozUTsQSXfHXwN2/g76I2p6iGZdvZDUKqvqrf+FBLJOqd5KH3b+E+IzgCKGZovUsf/tKg3I128enw+cf3FJs2ZalTSSkvANPP8e0r5Q54ym1SFDMjeSzb/M7fY9rH1noVmsyEJxqZ9Tde3+e1j7FjoftOWSeisVxPjs9j00Xzprg3Shd826QxroizVJobZJ8Hb6rAc/wMWr90fDD/XkSYO0joO7xNGZQ7lT/dn5WZS2pg5X82849RauR4S616rqT76fZx680/q5L27K5NgaNX3qiaPU66sj+y/sBsPe4kxlfJ8DnMmCtH6Lu/3pz85fk38RUYwSk3AlOiTsLSePGrjL5Mp+nnnwzt9PUmtPJ7Vqbr5eUiKQTfo31Gc1eD31tfMvUpq1WytteON80GAzJc+/34FPP9WJqb6UW70NDt1/v8n7SQnvZ5JwUtN+lKNo7UU71p+d/9D7yYShHPVVuxVZetMxfb3T8vPMg3fGx+2rnDgETvn3ev/s+febvZ/8N8Le9GfnZ8F58R2cnwcvyOdwfh68IJ/D+XnwgnwO5+fx7PrqN+/quddzF42MAAAAAElFTkSuQmCC" alt="QR code Seguro Garantia Fácil" />
   </a>
-</nav>
+</div>
+
+<!-- ═══ HEADER ═══ -->
+<header class="site-header">
+  <a class="site-logo" href="https://segurogarantiafacil.com">SGF <em>·</em> Seguro Garantia Fácil</a>
+  <span class="header-pill">Calculadora</span>
+</header>
 
 <!-- ═══ HERO ═══ -->
 <section class="hero">
@@ -567,7 +767,7 @@ nav {
   <div class="hero-inner">
     <div class="hero-eyebrow">Ferramenta · Cancelamento de Prêmio</div>
     <h1>Calculadora de Devolução de Prêmio</h1>
-    <p class="hero-sub">Compare os critérios <em>pro-rata temporis</em> e tabela de prazo curto em tempo real. Sem incidência de IOF.</p>
+    <p class="hero-sub">Compare os critérios <em>pro-rata temporis</em> e tabela de prazo curto em tempo real.</p>
     <div class="hero-badges">
       <span class="badge">Pro-rata temporis</span>
       <span class="badge">Tabela de prazo curto</span>
@@ -602,14 +802,14 @@ nav {
           <label>Prêmio devido <span>valor total da apólice (R$)</span></label>
           <div class="input-wrap">
             <span class="input-prefix">R$</span>
-            <input type="number" id="premioDue" class="has-prefix" placeholder="0,00" min="0" step="0.01" />
+            <input type="text" id="premioDue" class="has-prefix" placeholder="0,00" inputmode="decimal" />
           </div>
         </div>
         <div class="field">
           <label>Prêmio pago <span>valor efetivamente pago (R$)</span></label>
           <div class="input-wrap">
             <span class="input-prefix">R$</span>
-            <input type="number" id="premioPaid" class="has-prefix" placeholder="0,00" min="0" step="0.01" />
+            <input type="text" id="premioPaid" class="has-prefix" placeholder="0,00" inputmode="decimal" />
           </div>
         </div>
       </div>
@@ -659,7 +859,7 @@ nav {
   <section class="results-section" id="resultsSection">
     <div class="state-empty" id="stateEmpty">
       <div class="se-icon">⚖️</div>
-      <p>Preencha os campos acima para calcular</p>
+      <p id="stateMessage">Preencha os campos acima para calcular</p>
     </div>
 
     <div id="resultsContent" style="display:none;">
@@ -772,14 +972,19 @@ nav {
                 font-size="7" fill="var(--amber)" font-weight="700">IOF</text>
         </svg>
         <p>
-          <strong>Sem incidência de IOF</strong> — O prêmio do seguro garantia é isento do Imposto sobre Operações Financeiras,
-          por força do <strong>Decreto nº 6.306/2007, art. 22, § 1.º, inciso I, alínea "g"</strong>.
-          Ao contrário de outros ramos (ex.: seguro auto, onde o IOF de ~7,38% é deduzido na devolução),
-          no seguro garantia o valor restituído é calculado sobre o prêmio integral, sem qualquer retenção tributária.
+          <strong>Atenção:</strong>a demonstração acima é apenas ilustrativa, uma estimativa do cálculo de cancelamento de apólices de Seguro Garantia, e <strong>não constitui aconselhamento jurídico individual</strong>.Procure sempre um profissional qualificado para análise de casos específicos.
         </p>
       </div>
 
       <!-- EXPORT -->
+      <div class="export-settings">
+        <div class="export-settings-label">Imprimir / salvar PDF:</div>
+        <div class="export-options">
+          <label><input type="radio" name="printMode" value="both" checked /> Ambos critérios</label>
+          <label><input type="radio" name="printMode" value="pro" /> Apenas pro-rata</label>
+          <label><input type="radio" name="printMode" value="cur" /> Apenas prazo curto</label>
+        </div>
+      </div>
       <div class="export-row">
         <button class="exp-btn primary" onclick="exportPDF()">
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="2" y="1" width="10" height="12" rx="1.5" stroke="currentColor" stroke-width="1.2"/><line x1="4" y1="5" x2="10" y2="5" stroke="currentColor" stroke-width="1"/><line x1="4" y1="7.5" x2="10" y2="7.5" stroke="currentColor" stroke-width="1"/><line x1="4" y1="10" x2="8" y2="10" stroke="currentColor" stroke-width="1"/></svg>
@@ -793,10 +998,56 @@ nav {
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7a5 5 0 005 5 5 5 0 004.8-3.6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><path d="M12 7a5 5 0 00-5-5 5 5 0 00-4.8 3.6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><polyline points="10,4 12,7 9,7" fill="currentColor"/></svg>
           Limpar
         </button>
+        <button class="exp-btn" onclick="openBugReport()" style="margin-left: auto; border-color: var(--terra); color: var(--terra);">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.2"/><path d="M7 4v3M7 9.5v0.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+          Reportar erro
+        </button>
       </div>
 
     </div>
   </section>
+
+  <!-- BUG REPORT MODAL -->
+  <div class="modal-overlay" id="bugReportModal">
+    <div class="modal-content" onclick="event.stopPropagation()" style="position: relative;">
+      <button class="modal-close" onclick="closeBugReport()">✕</button>
+      <h3 class="modal-title">Reportar erro de cálculo</h3>
+      <p class="modal-subtitle">Ajude a melhorar esta ferramenta livre</p>
+      
+      <div class="bug-info">
+        <strong>Atenção:</strong> Os dados preenchidos abaixo serão incluídos no relatório para análise.
+      </div>
+
+      <form class="bug-form" id="bugForm" onsubmit="submitBugReport(event)">
+        <div>
+          <label>Descrição do erro *</label>
+          <textarea id="bugDescription" placeholder="Descreva o erro encontrado..." required></textarea>
+        </div>
+        <div class="bug-form-row">
+          <div>
+            <label>Seu email (opcional)</label>
+            <input type="email" id="bugEmail" placeholder="seuemail@exemplo.com" />
+          </div>
+          <div>
+            <label>Seu nome (opcional)</label>
+            <input type="text" id="bugName" placeholder="Seu nome" />
+          </div>
+        </div>
+      </form>
+
+      <div class="site-info">
+        <div class="site-info-title">🔓 Ferramenta Livre</div>
+        <div class="site-info-text">
+          Esta é uma ferramenta <em>educativa e comunitária</em>. Seus apontamentos e contribuições são <em>fundamentais</em> para manter a qualidade dos cálculos.
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button class="modal-btn secondary" onclick="closeBugReport()">Cancelar</button>
+        <button class="modal-btn primary" onclick="submitBugReport(event)">Enviar relatório</button>
+      </div>
+    </div>
+  </div>
 
 </main>
 
@@ -808,6 +1059,7 @@ nav {
     <a href="https://segurogarantiafacil.com">segurogarantiafacil.com</a> · Não constitui aconselhamento jurídico individual
   </div>
 </footer>
+<div class="print-footer">Calculadora de Devolução de Prêmio - Seguro Garantia Fácil</div>
 
 <script>
 /* ══════════════════════════════════════
@@ -816,43 +1068,53 @@ nav {
    aplicável como critério contratual conforme Circular 662/2022
 ══════════════════════════════════════ */
 const PRAZO_TABLE = [
-  { maxPct:  4.11, pct: 13,  label: 'Até 15 dias' },
-  { maxPct:  8.22, pct: 20,  label: 'Até 30 dias' },
-  { maxPct: 12.33, pct: 27,  label: 'Até 45 dias' },
-  { maxPct: 16.44, pct: 30,  label: 'Até 60 dias' },
-  { maxPct: 20.55, pct: 37,  label: 'Até 75 dias' },
-  { maxPct: 24.66, pct: 40,  label: 'Até 90 dias' },
-  { maxPct: 28.77, pct: 46,  label: 'Até 105 dias' },
-  { maxPct: 32.88, pct: 50,  label: 'Até 120 dias' },
-  { maxPct: 36.99, pct: 56,  label: 'Até 135 dias' },
-  { maxPct: 41.10, pct: 60,  label: 'Até 150 dias' },
-  { maxPct: 45.21, pct: 66,  label: 'Até 165 dias' },
-  { maxPct: 53.42, pct: 73,  label: 'Até 195 dias' },
-  { maxPct: 57.53, pct: 75,  label: 'Até 210 dias' },
-  { maxPct: 61.64, pct: 78,  label: 'Até 225 dias' },
-  { maxPct: 65.75, pct: 80,  label: 'Até 240 dias' },
-  { maxPct: 69.86, pct: 83,  label: 'Até 255 dias' },
-  { maxPct: 73.97, pct: 85,  label: 'Até 270 dias' },
-  { maxPct: 78.08, pct: 88,  label: 'Até 285 dias' },
-  { maxPct: 82.19, pct: 90,  label: 'Até 300 dias' },
-  { maxPct: 86.30, pct: 93,  label: 'Até 315 dias' },
-  { maxPct: 90.41, pct: 95,  label: 'Até 330 dias' },
-  { maxPct: 94.52, pct: 98,  label: 'Até 345 dias' },
-  { maxPct:100.00, pct: 100, label: 'Até 365 dias' },
+  { maxPct: 4.11,  pct: 13, label: 'Até 15 dias' },
+  { maxPct: 8.22,  pct: 20, label: 'Até 30 dias' },
+  { maxPct: 12.33, pct: 27, label: 'Até 45 dias' },
+  { maxPct: 16.44, pct: 30, label: 'Até 60 dias' },
+  { maxPct: 20.55, pct: 37, label: 'Até 75 dias' },
+  { maxPct: 24.66, pct: 40, label: 'Até 90 dias' },
+  { maxPct: 28.77, pct: 46, label: 'Até 105 dias' },
+  { maxPct: 32.88, pct: 50, label: 'Até 120 dias' },
+  { maxPct: 36.99, pct: 56, label: 'Até 135 dias' },
+  { maxPct: 41.10, pct: 60, label: 'Até 150 dias' },
+  { maxPct: 45.21, pct: 66, label: 'Até 165 dias' },
+  { maxPct: 53.42, pct: 73, label: 'Até 195 dias' },
+  { maxPct: 57.53, pct: 75, label: 'Até 210 dias' },
+  { maxPct: 61.64, pct: 78, label: 'Até 225 dias' },
+  { maxPct: 65.75, pct: 80, label: 'Até 240 dias' },
+  { maxPct: 69.86, pct: 83, label: 'Até 255 dias' },
+  { maxPct: 73.97, pct: 85, label: 'Até 270 dias' },
+  { maxPct: 78.08, pct: 88, label: 'Até 285 dias' },
+  { maxPct: 82.19, pct: 90, label: 'Até 300 dias' },
+  { maxPct: 86.30, pct: 93, label: 'Até 315 dias' },
+  { maxPct: 90.41, pct: 95, label: 'Até 330 dias' },
+  { maxPct: 94.52, pct: 98, label: 'Até 345 dias' },
+  { maxPct: 100.00, pct: 100, label: 'Até 365 dias' },
 ];
 
-function getPrazoRetPct(pctElapsed) {
+function getPrazoRetPct(timePct) {
+  let selected = PRAZO_TABLE[0];
   for (let i = 0; i < PRAZO_TABLE.length; i++) {
-    if (pctElapsed <= PRAZO_TABLE[i].maxPct) return PRAZO_TABLE[i].pct;
+    if (timePct >= PRAZO_TABLE[i].maxPct) {
+      selected = PRAZO_TABLE[i];
+    } else {
+      break;
+    }
   }
-  return 100;
+  return selected.pct;
 }
 
-function getPrazoFaixaLabel(pctElapsed) {
+function getPrazoFaixaLabel(timePct) {
+  let selected = PRAZO_TABLE[0];
   for (let i = 0; i < PRAZO_TABLE.length; i++) {
-    if (pctElapsed <= PRAZO_TABLE[i].maxPct) return PRAZO_TABLE[i].label + ' → ' + PRAZO_TABLE[i].pct + '% de retenção';
+    if (timePct >= PRAZO_TABLE[i].maxPct) {
+      selected = PRAZO_TABLE[i];
+    } else {
+      break;
+    }
   }
-  return PRAZO_TABLE[PRAZO_TABLE.length - 1].label + ' → 100%';
+  return timePct.toFixed(2).replace('.', ',') + '% do tempo → ' + selected.pct + '% de retenção';
 }
 
 /* ══════════════════════════════════════
@@ -878,7 +1140,68 @@ function fmtBRL(v) {
   return 'R$ ' + Math.abs(v).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
 
+function parseCurrencyInput(value) {
+  if (value == null) return null;
+  const raw = String(value).trim().replace(/[R$\s]/g, '');
+  const hasComma = raw.includes(',');
+  const hasDot = raw.includes('.');
+  let normalized = raw;
+  if (hasComma && hasDot) {
+    normalized = raw.replace(/\./g, '').replace(/,/g, '.');
+  } else if (hasComma) {
+    normalized = raw.replace(/,/g, '.');
+  }
+  const parsed = parseFloat(normalized);
+  return Number.isFinite(parsed) ? parsed : null;
+}
+
+function formatCurrencyInput(value) {
+  if (value == null || value === '') return '';
+  const amount = parseCurrencyInput(value);
+  if (!Number.isFinite(amount)) return String(value);
+  return amount.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
+function sanitizeCurrencyField(field) {
+  const parsed = parseCurrencyInput(field.value);
+  if (parsed == null) {
+    field.value = field.value.replace(/[^\d,\.\-]/g, '');
+    return;
+  }
+  field.value = formatCurrencyInput(parsed);
+}
+
+function getSelectedPrintMode() {
+  return document.querySelector('input[name="printMode"]:checked')?.value || 'both';
+}
+
+function updatePrintModeAttr() {
+  document.body.dataset.printMode = getSelectedPrintMode();
+}
+
+function exportPDF() { updatePrintModeAttr(); window.print(); }
+
 function fmtPct(v) { return v.toFixed(2).replace('.', ',') + '%'; }
+
+function updatePrintHeader() {
+  document.getElementById('printDtInicio').textContent = 'Início: ' + fmtDate(state.dtInicio);
+  document.getElementById('printDtFinal').textContent = 'Fim: ' + fmtDate(state.dtFinal);
+  document.getElementById('printPremDue').textContent = 'Prêmio devido: ' + fmtBRL(state.premioDue);
+  document.getElementById('printPremPaid').textContent = 'Prêmio pago: ' + fmtBRL(state.premioPaid);
+  document.getElementById('printDtCancel').textContent = 'Cancelamento: ' + fmtDate(state.dtCancelamento);
+}
+
+function getValidationMessage() {
+  if (!state.dtInicio) return 'Informe a data de início da vigência.';
+  if (!state.dtFinal) return 'Informe a data final da vigência.';
+  if (state.dtFinal <= state.dtInicio) return 'A data final deve ser posterior à data de início.';
+  if (state.premioDue == null) return 'Informe o valor do prêmio devido.';
+  if (!state.dtCancelamento) return 'Informe a data de cancelamento para calcular a tabela de prazo curto.';
+  if (state.dtCancelamento < state.dtInicio || state.dtCancelamento > state.dtFinal) {
+    return 'A data de cancelamento deve estar dentro do período da apólice.';
+  }
+  return 'Preencha os campos acima para calcular.';
+}
 
 /* ══════════════════════════════════════
    READING BAR
@@ -910,17 +1233,24 @@ let currentChartMode = 'dev';
 ══════════════════════════════════════ */
 const inputs = ['dtInicio','dtFinal','dtCancelamento','premioDue','premioPaid'];
 inputs.forEach(id => document.getElementById(id).addEventListener('input', onInput));
+['premioDue','premioPaid'].forEach(id => {
+  const field = document.getElementById(id);
+  field.addEventListener('blur', () => sanitizeCurrencyField(field));
+  field.addEventListener('paste', () => setTimeout(() => sanitizeCurrencyField(field), 0));
+});
 
 function onInput() {
   state.dtInicio       = parseDateLocal(document.getElementById('dtInicio').value);
   state.dtFinal        = parseDateLocal(document.getElementById('dtFinal').value);
   state.dtCancelamento = parseDateLocal(document.getElementById('dtCancelamento').value);
-  state.premioDue      = parseFloat(document.getElementById('premioDue').value) || null;
-  state.premioPaid     = parseFloat(document.getElementById('premioPaid').value) || null;
+  state.premioDue      = parseCurrencyInput(document.getElementById('premioDue').value);
+  state.premioPaid     = parseCurrencyInput(document.getElementById('premioPaid').value);
 
   updateSlider();
   updateTimeline();
   compute();
+  updatePrintHeader();
+  updatePrintModeAttr();
 }
 
 /* ══════════════════════════════════════
@@ -1031,6 +1361,7 @@ function compute() {
              state.dtCancelamento >= state.dtInicio &&
              state.dtCancelamento <= state.dtFinal;
 
+  document.getElementById('stateMessage').textContent = getValidationMessage();
   document.getElementById('stateEmpty').style.display  = ok ? 'none' : 'flex';
   document.getElementById('resultsContent').style.display = ok ? 'block' : 'none';
   if (!ok) return;
@@ -1040,21 +1371,23 @@ function compute() {
   const diasRest    = vigTotal - diasDec;
   const premDue     = state.premioDue;
   const premPaid    = state.premioPaid != null ? state.premioPaid : premDue;
+  const usedTimePct = (diasDec / vigTotal) * 100;
 
   /* — pro-rata — */
-  const proRetPct  = (diasDec / vigTotal) * 100;
-  const proRet     = premDue * (proRetPct / 100);
-  const proDevol   = premDue - proRet;
-  const proDevNet  = proDevol - Math.max(0, proRet - premPaid); // restituição real
+  const proRetPct  = usedTimePct;
+  const proRetBase = (proRetPct / 100) * premDue;
+  const proRet     = Math.min(premPaid, proRetBase);
+  const proDevol   = Math.max(0, premPaid - proRet);
 
   /* — prazo curto — */
-  const curRetPct  = getPrazoRetPct(proRetPct);
-  const curRet     = premDue * (curRetPct / 100);
-  const curDevol   = Math.max(0, premDue - curRet);
+  const curRetPct  = getPrazoRetPct(usedTimePct);
+  const curRetBase = (curRetPct / 100) * premDue;
+  const curRet     = Math.min(premPaid, curRetBase);
+  const curDevol   = Math.max(0, premPaid - curRet);
 
   /* — diferencial — */
   const diff       = proDevol - curDevol;
-  const faixaLabel = getPrazoFaixaLabel(proRetPct);
+  const faixaLabel = getPrazoFaixaLabel(usedTimePct);
 
   /* — render — */
   document.getElementById('faixaVal').textContent = faixaLabel;
@@ -1076,7 +1409,7 @@ function compute() {
     ? 'Pro-rata devolve mais ao tomador'
     : 'Prazo curto devolve mais ao tomador');
 
-  buildChart(premDue, vigTotal, currentChartMode);
+  buildChart(premPaid, vigTotal, currentChartMode);
 }
 
 function set(id, v) { document.getElementById(id).textContent = v; }
@@ -1090,34 +1423,42 @@ function animBar(id, pct) {
 /* ══════════════════════════════════════
    CHART
 ══════════════════════════════════════ */
-function buildChart(premDue, vigTotal, mode) {
-  if (!premDue || !vigTotal) return;
+function buildChart(premAmount, vigTotal, mode) {
+  if (!premAmount || !vigTotal) return;
 
-  const points = PRAZO_TABLE.map(b => Math.round(b.maxPct / 100 * vigTotal)).filter(d => d <= vigTotal);
+  const points = Array.from(new Set(PRAZO_TABLE
+    .map(b => Math.ceil(vigTotal * b.maxPct / 100))
+    .filter(d => d > 0 && d <= vigTotal)))
+    .sort((a, b) => a - b);
   if (!points.includes(vigTotal)) points.push(vigTotal);
-  points.sort((a,b) => a-b);
 
   const labels = points.map(d => d + 'd');
 
   let datasets;
   if (mode === 'dev') {
     datasets = [
-      { label: 'Pro-rata — devolução', data: points.map(d => Math.round(premDue*(1-d/vigTotal))),
+      { label: 'Pro-rata — devolução', data: points.map(d => Math.round(premAmount * (1 - d / vigTotal))),
         borderColor:'#1E6E50', backgroundColor:'rgba(30,110,80,0.08)', tension:0.35, pointRadius:4, pointHoverRadius:7 },
-      { label: 'Prazo curto — devolução', data: points.map(d => Math.round(premDue*(1-getPrazoRetPct(d/vigTotal*100)/100))),
+      { label: 'Prazo curto — devolução', data: points.map(d => {
+          const timePct = (d / vigTotal) * 100;
+          return Math.round(premAmount * (1 - getPrazoRetPct(timePct) / 100));
+        }),
         borderColor:'#8B3A10', backgroundColor:'rgba(139,58,16,0.08)', tension:0.35, pointRadius:4, pointHoverRadius:7 },
     ];
   } else if (mode === 'ret') {
     datasets = [
-      { label: 'Pro-rata — % retido', data: points.map(d => +(d/vigTotal*100).toFixed(2)),
+      { label: 'Pro-rata — % retido', data: points.map(d => +(d / vigTotal * 100).toFixed(2)),
         borderColor:'#1E6E50', backgroundColor:'rgba(30,110,80,0.08)', tension:0.35, pointRadius:4, pointHoverRadius:7 },
-      { label: 'Prazo curto — % retido', data: points.map(d => getPrazoRetPct(d/vigTotal*100)),
+      { label: 'Prazo curto — % retido', data: points.map(d => getPrazoRetPct((d / vigTotal) * 100)),
         borderColor:'#8B3A10', backgroundColor:'rgba(139,58,16,0.08)', tension:0.35, pointRadius:4, pointHoverRadius:7 },
     ];
   } else {
     datasets = [
       { label: 'Diferencial em favor do tomador (pro-rata)',
-        data: points.map(d => Math.round(premDue*(1-d/vigTotal)) - Math.round(premDue*(1-getPrazoRetPct(d/vigTotal*100)/100))),
+        data: points.map(d => {
+          const timePct = (d / vigTotal) * 100;
+          return Math.round(premAmount * (1 - d / vigTotal)) - Math.round(premAmount * (1 - getPrazoRetPct(timePct) / 100));
+        }),
         borderColor:'#B8711E', backgroundColor:'rgba(184,113,30,0.12)',
         fill:true, tension:0.35, pointRadius:4, pointHoverRadius:7 },
     ];
@@ -1159,13 +1500,76 @@ function setChart(mode, btn) {
   currentChartMode = mode;
   document.querySelectorAll('.ct-btn').forEach(b => b.classList.remove('active'));
   if (btn) btn.classList.add('active');
-  if (state.premioDue && state.diasVigTotal) buildChart(state.premioDue, state.diasVigTotal, mode);
+  const premPaid = state.premioPaid != null ? state.premioPaid : state.premioDue;
+  if (premPaid && state.diasVigTotal) buildChart(premPaid, state.diasVigTotal, mode);
 }
 
 /* ══════════════════════════════════════
    EXPORT / UTILS
 ══════════════════════════════════════ */
-function exportPDF() { window.print(); }
+function closeBugReport() {
+  document.getElementById('bugReportModal').classList.remove('active');
+}
+
+function openBugReport() {
+  document.getElementById('bugReportModal').classList.add('active');
+  document.getElementById('bugDescription').focus();
+}
+
+function submitBugReport(event) {
+  event.preventDefault();
+  const desc = document.getElementById('bugDescription').value.trim();
+  const email = document.getElementById('bugEmail').value.trim();
+  const name = document.getElementById('bugName').value.trim();
+  
+  if (!desc) {
+    alert('Por favor, descreva o erro encontrado.');
+    return;
+  }
+
+  const dtInicio = state.dtInicio ? state.dtInicio.toLocaleDateString('pt-BR') : '—';
+  const dtFinal = state.dtFinal ? state.dtFinal.toLocaleDateString('pt-BR') : '—';
+  const dtCancel = state.dtCancelamento ? state.dtCancelamento.toLocaleDateString('pt-BR') : '—';
+  const premDue = state.premioDue || '—';
+  const premPaid = state.premioPaid || '—';
+
+  const body = `RELATÓRIO DE ERRO - Calculadora SGF
+========================================
+
+Descrição do erro:
+${desc}
+
+--- Dados da apólice ---
+Data de início: ${dtInicio}
+Data final: ${dtFinal}
+Data de cancelamento: ${dtCancel}
+Prêmio devido: ${premDue}
+Prêmio pago: ${premPaid}
+
+--- Informações do usuário ---
+Nome: ${name || '(não informado)'}
+Email: ${email || '(não informado)'}
+
+--- Ambiente ---
+Data/hora: ${new Date().toLocaleString('pt-BR')}
+Browser: ${navigator.userAgent}
+`;
+
+  const mailtoLink = `mailto:contato@abreusalex.com?subject=BUG REPORT - Calculadora SGF&body=${encodeURIComponent(body)}`;
+  window.location.href = mailtoLink;
+  
+  setTimeout(() => {
+    closeBugReport();
+    document.getElementById('bugForm').reset();
+  }, 500);
+}
+
+/* Close modal on overlay click */
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('bugReportModal').addEventListener('click', (e) => {
+    if (e.target.id === 'bugReportModal') closeBugReport();
+  });
+});
 
 function copyResult() {
   const lines = [
