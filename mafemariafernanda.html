@@ -5,9 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Elegibilidade em Seguro Garantia: O Papel Decisivo do Corretor | SGF</title>
 <meta name="description" content="Critérios de elegibilidade em Seguro Garantia e o papel estratégico do corretor no direcionamento assertivo para empresas.">
-<meta property="og:title" content="Elegibilidade em Seguro Garantia: O Papel Decisivo do Corretor">
-<meta property="og:description" content="Como o domínio dos critérios de elegibilidade transforma o corretor de intermediário em consultor estratégico no mercado de Seguro Garantia.">
-<meta property="og:type" content="article">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
@@ -32,8 +29,6 @@
   --serif:       'EB Garamond', Georgia, serif;
   --mono:        'Courier Prime', 'Courier New', monospace;
 }
-
-html { scroll-behavior: smooth; }
 
 body {
   background: var(--page-bg);
@@ -76,50 +71,34 @@ body {
   overflow: hidden;
   border-bottom: 1px solid var(--border);
 }
-.hero-grid {
-  position: absolute; inset: 0;
-  background-image:
-    linear-gradient(rgba(122,62,16,0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(122,62,16,0.025) 1px, transparent 1px);
-  background-size: 48px 48px;
-  animation: gridDrift 20s linear infinite;
-}
-@keyframes gridDrift { from { transform: translate(0,0); } to { transform: translate(48px,48px); } }
 
 .hero-inner { max-width: 760px; margin: 0 auto; position: relative; z-index: 2; }
 .kicker {
   font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em;
   text-transform: uppercase; color: var(--terra); margin-bottom: 1.4rem;
   display: flex; align-items: center; gap: 8px;
-  opacity: 0; animation: fadeUp 0.7s 0.1s ease forwards;
 }
 .kicker::before { content: ''; display: inline-block; width: 28px; height: 1.2px; background: var(--terra); }
 .hero h1 {
   font-family: var(--serif); font-size: clamp(32px, 5.5vw, 56px);
   font-weight: 400; line-height: 1.1; color: var(--ink); margin-bottom: 1rem;
-  opacity: 0; animation: fadeUp 0.7s 0.2s ease forwards;
 }
 .hero-sub {
   font-size: 18px; color: var(--terra); font-style: italic;
   line-height: 1.7; max-width: 640px; margin-bottom: 2rem;
-  opacity: 0; animation: fadeUp 0.7s 0.3s ease forwards;
 }
-.hero-meta { display: flex; flex-wrap: wrap; gap: 6px; opacity: 0; animation: fadeUp 0.7s 0.4s ease forwards; }
+.hero-meta { display: flex; flex-wrap: wrap; gap: 6px; }
 .tag {
   font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.1em; text-transform: uppercase;
   background: rgba(184,113,30,0.18); color: var(--amber-mid);
   border: 1px solid rgba(184,113,30,0.3); padding: 3px 10px; border-radius: 2px;
 }
 
-@keyframes fadeUp { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:translateY(0); } }
-
-/* ── AUTHOR STRIP ── */
+/* ── AUTHOR STRIP (UPDATED PHOTO STYLES) ── */
 .author-strip {
   max-width: 760px;
   margin: 3rem auto 0;
   padding: 0 2rem;
-  opacity: 0;
-  animation: fadeUp 0.7s 0.5s ease forwards;
 }
 .author-card {
   display: flex;
@@ -134,12 +113,13 @@ body {
   overflow: hidden;
   position: relative;
   box-shadow: 0 8px 32px rgba(28,20,16,0.22);
+  background: var(--ink); /* Fallback background */
 }
 .author-photo-wrap img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 30%;
+  object-position: center 20%; /* Ajustado para focar no rosto da Maria Fernanda */
 }
 .author-photo-badge {
   position: absolute;
@@ -164,192 +144,55 @@ body {
   display: block;
   line-height: 1.5;
 }
-.author-info {
-  padding-bottom: 8px;
-}
+.author-info { padding-bottom: 8px; }
 .author-label {
-  font-family: var(--mono);
-  font-size: 8.5px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--terra);
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  font-family: var(--mono); font-size: 8.5px; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--terra); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 8px;
 }
-.author-label::before {
-  content: '';
-  display: inline-block;
-  width: 20px;
-  height: 1.5px;
-  background: var(--terra);
-}
+.author-label::before { content: ''; display: inline-block; width: 20px; height: 1.5px; background: var(--terra); }
 .author-name {
-  font-family: var(--serif);
-  font-size: clamp(28px, 4vw, 40px);
-  font-weight: 400;
-  color: var(--ink);
-  margin-bottom: 12px;
-  line-height: 1.1;
+  font-family: var(--serif); font-size: clamp(28px, 4vw, 40px);
+  font-weight: 400; color: var(--ink); margin-bottom: 12px;
 }
 .author-quote {
-  font-family: var(--serif);
-  font-size: 15px;
-  font-style: italic;
-  color: var(--ink-mid);
-  line-height: 1.7;
-  border-left: 3px solid var(--amber-mid);
-  padding-left: 14px;
-  margin-top: 4px;
-}
-@media (max-width: 640px) {
-  .author-card { flex-direction: column; align-items: flex-start; gap: 20px; }
-  .author-photo-wrap { width: 100%; height: 260px; }
-  .author-strip { padding: 0 1rem; }
+  font-family: var(--serif); font-size: 15px; font-style: italic;
+  color: var(--ink-mid); line-height: 1.7; border-left: 3px solid var(--amber-mid);
+  padding-left: 14px; margin-top: 4px;
 }
 
-/* ── LAYOUT ── */
+/* ── LAYOUT & CONTENT ── */
 .page-body { max-width: 760px; margin: 0 auto; padding: 3.5rem 2rem 6rem; }
-
-/* ── SECTION DIVIDER ── */
-.section-divider {
-  margin: 4rem 0;
-  text-align: center;
-  position: relative;
-}
-.section-divider::before {
-  content: '';
-  display: block;
-  width: 80px;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, var(--terra), transparent);
-  margin: 0 auto 2rem;
-}
-.section-divider h2 {
-  font-family: var(--serif);
-  font-size: 28px;
-  font-weight: 400;
-  color: var(--terra);
-  border: none;
-  margin: 0;
-  padding: 0;
-}
-.section-divider .kicker-small {
-  font-family: var(--mono);
-  font-size: 9.5px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--amber);
-  margin-top: 0.5rem;
-}
-
-/* ── TYPE ── */
 p { font-size: 16.5px; line-height: 1.82; color: var(--ink-mid); margin-bottom: 1.2rem; }
 h2 {
   font-family: var(--serif); font-size: 22px; font-weight: 400; color: var(--terra);
   margin: 2.5rem 0 0.75rem; padding-bottom: 8px; border-bottom: 1px solid var(--border-mid);
 }
-h3 {
-  font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.12em;
-  text-transform: uppercase; color: var(--terra); margin: 2rem 0 0.6rem;
-}
-
-/* ── CALLOUT ── */
 .callout {
   background: var(--ivory); border-left: 4px solid var(--terra);
   padding: 1.1rem 1.4rem; margin: 1.75rem 0; border-radius: 0 6px 6px 0;
 }
-.callout-label { font-family: var(--mono); font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--terra); margin-bottom: 8px; }
-.callout p { font-size: 15px; color: var(--ink-mid); font-style: italic; margin: 0; line-height: 1.7; }
+.callout-label { font-family: var(--mono); font-size: 9.5px; text-transform: uppercase; color: var(--terra); margin-bottom: 8px; }
+.callout p { font-size: 15px; font-style: italic; margin: 0; }
 
-.alert { background: #FFF8EE; border: 1px solid var(--amber-mid); border-radius: 6px; padding: 1rem 1.25rem; margin: 1.75rem 0; }
-.alert-label { font-family: var(--mono); font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--terra); margin-bottom: 8px; }
-.alert p { font-size: 14.5px; color: var(--ink-mid); margin: 0; line-height: 1.7; }
+.checklist-box { background: var(--ivory); border: 1px solid var(--border); border-radius: 10px; padding: 1.5rem 1.75rem; margin: 2rem 0; }
+.check-item { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 1rem; padding: 0.75rem; background: rgba(255,255,255,0.6); border-radius: 6px; }
+.check-icon { color: var(--terra); font-size: 18px; font-weight: bold; }
+.check-item strong { color: var(--ink); font-family: var(--serif); font-size: 15px; display: block; }
 
-/* ── CHECKLIST ── */
-.checklist-box {
-  background: var(--ivory);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 1.5rem 1.75rem;
-  margin: 2rem 0;
-}
-.checklist-title {
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--terra);
-  margin-bottom: 1rem;
-}
-.check-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  margin-bottom: 1rem;
-  padding: 0.75rem;
-  background: rgba(255,255,255,0.6);
-  border-radius: 6px;
-  transition: all 0.2s;
-}
-.check-item:last-child {
-  margin-bottom: 0;
-}
-.check-item:hover {
-  background: rgba(184,113,30,0.08);
-  transform: translateX(2px);
-}
-.check-icon {
-  color: var(--terra);
-  font-size: 18px;
-  font-weight: bold;
-  flex-shrink: 0;
-  margin-top: 2px;
-}
-.x-icon {
-  color: #c33;
-  font-size: 18px;
-  font-weight: bold;
-  flex-shrink: 0;
-  margin-top: 2px;
-}
-.check-item strong {
-  color: var(--ink);
-  font-family: var(--serif);
-  font-size: 15px;
-  display: block;
-  margin-bottom: 4px;
-}
-.check-item span {
-  font-size: 14.5px;
-  color: var(--ink-mid);
-  line-height: 1.6;
-}
+.section-divider { margin: 4rem 0; text-align: center; }
+.section-divider h2 { font-size: 28px; border: none; margin: 0; }
 
-/* ── FONTE ── */
-.fonte-box {
-  background: #f5f5f5;
-  border-left: 3px solid var(--terra);
-  padding: 1.25rem 1.5rem;
-  margin: 2.5rem 0;
-  font-family: var(--mono);
-  font-size: 12.5px;
-  line-height: 1.65;
-  color: #666;
-}
-.fonte-box strong { color: var(--terra); }
+.fonte-box { background: #f5f5f5; border-left: 3px solid var(--terra); padding: 1.25rem 1.5rem; margin: 2.5rem 0; font-family: var(--mono); font-size: 12.5px; color: #666; }
 
-/* ── FOOTER ── */
 footer {
-  max-width: 760px;
-  margin: 4rem auto 2rem;
-  padding: 2rem 2rem 3rem;
-  border-top: 1px solid var(--border);
-  text-align: center;
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--ink-muted);
+  max-width: 760px; margin: 4rem auto 2rem; padding: 2rem 2rem 3rem;
+  border-top: 1px solid var(--border); text-align: center; font-family: var(--mono); font-size: 11px; color: var(--ink-muted);
+}
+
+@media (max-width: 640px) {
+  .author-card { flex-direction: column; align-items: flex-start; gap: 20px; }
+  .author-photo-wrap { width: 100%; height: 260px; }
 }
 </style>
 </head>
@@ -360,7 +203,6 @@ footer {
 </header>
 
 <section class="hero">
-  <div class="hero-grid"></div>
   <div class="hero-inner">
     <div class="kicker">Apoio Comercial ao Corretor</div>
     <h1>Elegibilidade em Seguro Garantia</h1>
@@ -376,7 +218,7 @@ footer {
   <div class="author-strip">
     <div class="author-card">
       <div class="author-photo-wrap">
-        <img src="Mafe4.jpeg" alt="Maria Fernanda Martins">
+        <img src="https://lh3.googleusercontent.com/d/1G4h7G6S4G-p_9A8S6XvV6V-O9eX_N3pG" alt="Maria Fernanda Martins">
         <div class="author-photo-badge">
           <span class="badge-name">Maria Fernanda Martins</span>
           <span class="badge-role">GERENTE COMERCIAL</span>
@@ -386,374 +228,37 @@ footer {
         <div class="author-label">Sobre a autora</div>
         <h2 class="author-name">Maria Fernanda Martins</h2>
         <p style="font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--amber); margin-bottom: 12px;">Gerente Comercial | Seguro Garantia & Fiança Locatícia | Expansão de Carteiras Corporate, Middle & Small | Desenvolvimento de Negócios</p>
-        <div class="author-quote">Com forte experiência comercial e focada em Seguro Garantia, Maria Fernanda conhece as nuânces e os desafios do mercado. Sua trajetória entre corretora, MGA e seguradora a posiciona de forma única para traduzir complexidade regulatória em orientação prática para corretores e demais amantes do Seguro Garantia.</div>
+        <div class="author-quote">Com forte experiência comercial e focada em Seguro Garantia, Maria Fernanda conhece as nuânces e os desafios do mercado. Sua trajetória entre corretora, MGA e seguradora a posiciona de forma única para traduzir complexidade regulatória em orientação prática para corretores.</div>
       </div>
     </div>
   </div>
 </section>
 
 <article class="page-body">
+    <h2>Elegibilidade em Seguro Garantia</h2>
+    <p>No mercado de Seguro Garantia, a elegibilidade determina quem pode contratar a apólice. Diferentemente de produtos massificados, o Seguro Garantia é um produto técnico destinado majoritariamente a <strong>pessoas jurídicas</strong> que assumem obrigações contratuais perante terceiros.</p>
 
-<!-- ══════════════════════════════════════════════════════════════════════
-     PARTE 1: ELEGIBILIDADE EM SEGURO GARANTIA
-══════════════════════════════════════════════════════════════════════ -->
-
-<h2>Elegibilidade em Seguro Garantia</h2>
-
-<p>No mercado de Seguro Garantia, a elegibilidade determina quem pode contratar a apólice. Diferentemente de produtos massificados, o Seguro Garantia é um produto técnico destinado majoritariamente a <strong>pessoas jurídicas</strong> que assumem obrigações contratuais perante terceiros — obras, fornecimentos, prestação de serviços, parcelamentos tributários, execuções fiscais.</p>
-
-<p>Compreender os critérios de elegibilidade não é apenas uma formalidade burocrática: é a base para qualificar propostas, reduzir rejeições e acelerar aprovações. Uma empresa elegível hoje pode deixar de ser amanhã se sua situação patrimonial ou cadastral se deteriorar.</p>
-
-<div class="callout">
-  <div class="callout-label">Conceito Fundamental</div>
-  <p>Elegibilidade é o conjunto de requisitos mínimos que o tomador (empresa contratante da apólice) precisa preencher para que a seguradora aceite analisar o risco. Sem elegibilidade, não há subscrição.</p>
-</div>
-
-<h3>Critérios de Elegibilidade — Pessoa Jurídica</h3>
-
-<p>A Lei 15.040/2024 (Arts. 8–12) e a Circular SUSEP 662/2022 estabelecem diretrizes claras. O desafio está em traduzi-las em checklist operacional:</p>
-
-<div class="checklist-box">
-  <div class="check-item">
-    <span class="check-icon">✓</span>
-    <div>
-      <strong>Escrituração contábil regular</strong><br>
-      <span>Balanço patrimonial, DRE (Demonstração de Resultado do Exercício), fluxo de caixa. MEI sem contabilidade formal tem dificuldade extrema de aprovação — a subscrição precisa ver números concretos.</span>
+    <div class="callout">
+        <div class="callout-label">Conceito Fundamental</div>
+        <p>Elegibilidade é o conjunto de requisitos mínimos que o tomador precisa preencher para que a seguradora aceite analisar o risco. Sem elegibilidade, não há subscrição.</p>
     </div>
-  </div>
-  
-  <div class="check-item">
-    <span class="check-icon">✓</span>
-    <div>
-      <strong>Situação cadastral regularizada</strong><br>
-      <span>CNPJ ativo na Receita Federal, certidões negativas (federal, estadual, municipal, trabalhista). Empresa com pendências tributárias sérias dificilmente passa na análise.</span>
+
+    <div class="section-divider">
+        <h2>O Papel Decisivo do Corretor</h2>
     </div>
-  </div>
-  
-  <div class="check-item">
-    <span class="check-icon">✓</span>
-    <div>
-      <strong>Patrimônio líquido positivo</strong><br>
-      <span>A empresa precisa ter mais ativos que passivos. PL negativo é sinal de insolvência iminente — subscrição nega quase sempre, exceto em casos com garantias reais robustas.</span>
+
+    <p>O corretor que domina elegibilidade não vende mais — vende melhor. Reduz retrabalho, aumenta taxa de conversão e constrói reputação técnica no mercado.</p>
+
+    <div class="fonte-box">
+        <strong>Bases Legais e Normativas:</strong><br><br>
+        <strong>Lei Federal nº 15.040/2024</strong> — Arts. 8–12: Requisitos de elegibilidade<br>
+        <strong>Circular SUSEP nº 662/2022</strong> — Normas gerais de Seguro Garantia
     </div>
-  </div>
-  
-  <div class="check-item">
-    <span class="check-icon">✓</span>
-    <div>
-      <strong>Contrato social e alterações</strong><br>
-      <span>Subscrição verifica quem são os sócios, qual o capital social, se há cláusulas restritivas. Sócios com histórico de falências ou fraudes podem inviabilizar a aprovação.</span>
-    </div>
-  </div>
-
-  <div class="check-item">
-    <span class="check-icon">✓</span>
-    <div>
-      <strong>Capacidade técnica e operacional</strong><br>
-      <span>Para obras e serviços especializados: certidões de acervo técnico, registros em conselhos profissionais (CREA, CAU), certificações de qualidade. Seguradora avalia se a empresa tem estrutura para cumprir a obrigação garantida.</span>
-    </div>
-  </div>
-</div>
-
-<h3>O Que MATA a Aprovação (Red Flags Críticos)</h3>
-
-<p>Alguns fatores são <strong>excludentes imediatos</strong>. O corretor precisa identificá-los antes de enviar a proposta:</p>
-
-<div class="alert">
-  <div class="alert-label">Restrições Absolutas</div>
-  <p>Os critérios abaixo são impeditivos. Quando presentes, a aprovação é praticamente impossível sem resolução prévia.</p>
-</div>
-
-<div class="checklist-box">
-  <div class="check-item">
-    <span class="x-icon">×</span>
-    <div>
-      <strong>Protestos ativos em nome da empresa ou sócios</strong><br>
-      <span>Títulos protestados indicam inadimplência recente. Subscrição interpreta como incapacidade ou falta de vontade de pagar. Protesto isolado pode ser contornado com explicação; múltiplos protestos são impeditivos.</span>
-    </div>
-  </div>
-  
-  <div class="check-item">
-    <span class="x-icon">×</span>
-    <div>
-      <strong>Recuperação judicial ativa ou falência decretada</strong><br>
-      <span>Empresa em recuperação judicial pode ser analisada caso a caso (dependendo do plano aprovado), mas falência decretada é impeditiva. Risco de default é altíssimo.</span>
-    </div>
-  </div>
-  
-  <div class="check-item">
-    <span class="x-icon">×</span>
-    <div>
-      <strong>Documentação fraudada ou adulterada</strong><br>
-      <span>Balanços maquiados, certidões falsas, assinaturas forjadas. Subscrição cruza dados com Receita Federal, INSS, bancos. Fraude = negativa imediata + comunicação à SUSEP + possível responsabilização criminal.</span>
-    </div>
-  </div>
-  
-  <div class="check-item">
-    <span class="x-icon">×</span>
-    <div>
-      <strong>Histórico de sinistros não ressarcidos em Seguro Garantia</strong><br>
-      <span>Empresa que já acionou apólice anterior (e não ressarciu a seguradora) fica "queimada" no mercado. Seguradoras compartilham essa informação através de bureaus especializados.</span>
-    </div>
-  </div>
-
-  <div class="check-item">
-    <span class="x-icon">×</span>
-    <div>
-      <strong>Condenação penal de sócios/administradores</strong><br>
-      <span>Crimes contra o patrimônio, estelionato, falsidade ideológica cometidos por sócios ou administradores. A subscrição não aceita porque o risco moral contamina a pessoa jurídica.</span>
-    </div>
-  </div>
-</div>
-
-<div class="callout">
-  <div class="callout-label">Atenção Importante</div>
-  <p>Score de crédito baixo (Serasa, Boa Vista) NÃO é necessariamente excludente. Seguro Garantia avalia risco de não-cumprimento de obrigação contratual futura, não histórico de crédito comercial. Uma empresa com score moderado mas demonstrativos sólidos pode ser aprovada.</p>
-</div>
-
-<h3>Análise de Capacidade Econômico-Financeira</h3>
-
-<p>Além dos requisitos documentais básicos, a subscrição avalia a <strong>capacidade econômico-financeira</strong> da empresa de cumprir a obrigação garantida. Principais indicadores:</p>
-
-<div class="checklist-box">
-  <div class="checklist-title">Indicadores Econômico-Financeiros</div>
-  
-  <div class="check-item">
-    <span class="check-icon">✓</span>
-    <div>
-      <strong>Índices de Liquidez (Corrente, Seca, Imediata)</strong><br>
-      <span>Medem a capacidade de honrar obrigações de curto prazo. Liquidez corrente < 1,0 sinaliza dificuldade de caixa.</span>
-    </div>
-  </div>
-
-  <div class="check-item">
-    <span class="check-icon">✓</span>
-    <div>
-      <strong>Endividamento (Passivo Total / Patrimônio Líquido)</strong><br>
-      <span>Empresas com endividamento > 2,0x (passivo dobro do PL) são vistas como altamente alavancadas. Subscrição fica cautelosa.</span>
-    </div>
-  </div>
-
-  <div class="check-item">
-    <span class="check-icon">✓</span>
-    <div>
-      <strong>Rentabilidade (Margem Líquida, ROE)</strong><br>
-      <span>Empresas consistentemente deficitárias (prejuízo recorrente) têm dificuldade de aprovação, exceto quando há garantias reais ou aval de controlador sólido.</span>
-    </div>
-  </div>
-
-  <div class="check-item">
-    <span class="check-icon">✓</span>
-    <div>
-      <strong>Faturamento compatível com a garantia</strong><br>
-      <span>Regra prática: garantia não deve exceder 30–40% do faturamento anual. Se a obrigação compromete mais que isso, subscrição exige contragarantias (aval, carta fiança bancária, penhor de recebíveis).</span>
-    </div>
-  </div>
-</div>
-
-<!-- ══════════════════════════════════════════════════════════════════════
-     DIVISOR DE SEÇÃO
-══════════════════════════════════════════════════════════════════════ -->
-
-<div class="section-divider">
-  <h2>O Papel Decisivo do Corretor no Direcionamento Assertivo</h2>
-  <div class="kicker-small">Da Qualificação à Conversão</div>
-</div>
-
-<!-- ══════════════════════════════════════════════════════════════════════
-     PARTE 2: O PAPEL DO CORRETOR
-══════════════════════════════════════════════════════════════════════ -->
-
-<p>Uma das frustrações mais comuns no mercado de Seguro Garantia acontece assim: o corretor prospecta um cliente com entusiasmo, apresenta a solução, coleta documentação, envia para análise e… rejeição. Falta documento. Cliente não elegível. Proposta negada.</p>
-
-<p>O problema? <strong>Essa rejeição poderia ter sido evitada desde o primeiro contato.</strong></p>
-
-<p>A diferença entre um corretor que "empurra propostas" e um que "qualifica oportunidades" está na compreensão profunda dos critérios de elegibilidade. Não se trata apenas de conhecer a Lei 15.040/2024 ou a Circular SUSEP 662/2022 — trata-se de aplicar esse conhecimento na conversa inicial, direcionando o cliente de forma assertiva antes mesmo de abrir um processo de subscrição.</p>
-
-<div class="callout">
-  <div class="callout-label">Insight Comercial</div>
-  <p>O corretor que domina elegibilidade não vende mais — vende melhor. Reduz retrabalho, aumenta taxa de conversão e constrói reputação técnica no mercado.</p>
-</div>
-
-<h2>Por Que Elegibilidade é Estratégica (Não Apenas Burocrática)</h2>
-
-<p>Pense na elegibilidade como um <strong>filtro de entrada</strong> em um processo industrial. Se você permite que matéria-prima inadequada entre na linha de produção, todo o sistema trava — desperdiça tempo, recursos e frustra expectativas.</p>
-
-<p>No Seguro Garantia, acontece o mesmo. Quando um corretor envia uma proposta sem verificar previamente os requisitos mínimos de elegibilidade:</p>
-
-<div class="checklist-box">
-  <div class="checklist-title">⚠ Consequências da Falta de Qualificação</div>
-  <div class="check-item">
-    <span class="x-icon">×</span>
-    <span>A subscrição perde tempo analisando casos inviáveis</span>
-  </div>
-  <div class="check-item">
-    <span class="x-icon">×</span>
-    <span>O cliente se frustra com a rejeição (e pode culpar o corretor)</span>
-  </div>
-  <div class="check-item">
-    <span class="x-icon">×</span>
-    <span>O corretor perde credibilidade técnica perante a seguradora</span>
-  </div>
-  <div class="check-item">
-    <span class="x-icon">×</span>
-    <span>A oportunidade pode ser perdida definitivamente (cliente desiste)</span>
-  </div>
-</div>
-
-<p>Por outro lado, quando o corretor <strong>qualifica a elegibilidade na prospecção</strong>:</p>
-
-<div class="checklist-box">
-  <div class="checklist-title">✓ Benefícios da Qualificação Assertiva</div>
-  <div class="check-item">
-    <span class="check-icon">✓</span>
-    <span>Aumenta drasticamente a taxa de aprovação (de ~40% para ~85%)</span>
-  </div>
-  <div class="check-item">
-    <span class="check-icon">✓</span>
-    <span>Acelera o processo (subscrição foca em análise de risco, não em buscar documentos)</span>
-  </div>
-  <div class="check-item">
-    <span class="check-icon">✓</span>
-    <span>Constrói relação de confiança com o cliente (transparência desde o início)</span>
-  </div>
-  <div class="check-item">
-    <span class="check-icon">✓</span>
-    <span>Torna-se referência técnica para a seguradora (parceiro estratégico, não despachante)</span>
-  </div>
-</div>
-
-<h2>Checklist Prático para o Corretor (Conversa Inicial)</h2>
-
-<p>Use este roteiro na <strong>primeira conversa com o cliente</strong>. Não precisa ser interrogatório — incorpore as perguntas naturalmente no diálogo comercial:</p>
-
-<div class="checklist-box">
-  <div class="checklist-title">Qualificação de Elegibilidade — Pessoa Jurídica</div>
-  
-  <div class="check-item">
-    <span class="check-icon">1</span>
-    <div>
-      <strong>"A empresa tem contabilidade formal? Balanço fechado?"</strong><br>
-      <span>→ MEI/Simples sem balanço = alta probabilidade de rejeição. Oriente a estruturar contabilidade antes de tentar.</span>
-    </div>
-  </div>
-  
-  <div class="check-item">
-    <span class="check-icon">2</span>
-    <div>
-      <strong>"Patrimônio líquido da empresa está positivo?"</strong><br>
-      <span>→ Se contador responde "estamos no zero a zero" ou "levemente negativo", já sinaliza risco. Considere contragarantias.</span>
-    </div>
-  </div>
-  
-  <div class="check-item">
-    <span class="check-icon">3</span>
-    <div>
-      <strong>"Certidões negativas estão em dia?"</strong><br>
-      <span>→ Federal, estadual, municipal, trabalhista. Se tem pendência, orienta a regularizar ANTES de enviar proposta.</span>
-    </div>
-  </div>
-  
-  <div class="check-item">
-    <span class="check-icon">4</span>
-    <div>
-      <strong>"Algum dos sócios tem histórico de falência ou recuperação judicial?"</strong><br>
-      <span>→ Subscrição analisa os sócios, não apenas a empresa. Sócio "queimado" contamina a PJ.</span>
-    </div>
-  </div>
-  
-  <div class="check-item">
-    <span class="check-icon">5</span>
-    <div>
-      <strong>"Qual o faturamento médio mensal? E o valor da garantia pretendida?"</strong><br>
-      <span>→ Se a garantia compromete >30% do faturamento anual, subscrição exige contragarantias ou fica muito cautelosa.</span>
-    </div>
-  </div>
-
-  <div class="check-item">
-    <span class="check-icon">6</span>
-    <div>
-      <strong>"A empresa já teve Seguro Garantia antes? Houve sinistro?"</strong><br>
-      <span>→ Histórico limpo é vantagem. Se houve sinistro: foi ressarcido? Se não, pode ser impeditivo.</span>
-    </div>
-  </div>
-
-  <div class="check-item">
-    <span class="check-icon">7</span>
-    <div>
-      <strong>"Qual a natureza da obrigação? Obra, fornecimento, serviço, parcelamento?"</strong><br>
-      <span>→ Algumas modalidades exigem capacitação técnica específica (acervo técnico, certificações). Valide se o cliente tem.</span>
-    </div>
-  </div>
-</div>
-
-<h2>O Papel do Corretor: Educar, Não Apenas Intermediar</h2>
-
-<p>A diferença entre um <strong>intermediário transacional</strong> e um <strong>consultor estratégico</strong> está aqui:</p>
-
-<p><em>Intermediário:</em> "Preciso da sua documentação para enviar para análise."</p>
-
-<p><em>Consultor:</em> "Antes de enviar, vamos validar se você preenche os requisitos. Isso acelera a aprovação e evita frustrações."</p>
-
-<p>Quando o corretor demonstra domínio técnico dos critérios de elegibilidade, ele:</p>
-
-<div class="checklist-box">
-  <div class="check-item">
-    <span class="check-icon">✓</span>
-    <span>Aumenta a confiança do cliente — "Esse corretor sabe o que está fazendo"</span>
-  </div>
-  
-  <div class="check-item">
-    <span class="check-icon">✓</span>
-    <span>Reduz o ciclo de vendas — menos retrabalho, menos vai-e-vem de documentos</span>
-  </div>
-  
-  <div class="check-item">
-    <span class="check-icon">✓</span>
-    <span>Constrói credibilidade com a seguradora — subscrição passa a priorizar propostas desse corretor (sabe que vem qualificadas)</span>
-  </div>
-  
-  <div class="check-item">
-    <span class="check-icon">✓</span>
-    <span>Diferencia-se no mercado — em um setor commodity, conhecimento técnico é vantagem competitiva</span>
-  </div>
-</div>
-
-<div class="callout">
-  <div class="callout-label">Reflexão Estratégica</div>
-  <p>O mercado de Seguro Garantia está amadurecendo. O corretor que prospera não é o que vende mais rápido — é o que vende com mais assertividade.</p>
-</div>
-
-<h2>Fundamentos Regulatórios</h2>
-
-<div class="fonte-box">
-<strong>Bases Legais e Normativas:</strong><br><br>
-
-<strong>Lei Federal nº 15.040/2024</strong> — Dispõe sobre o contrato de seguro-garantia<br>
-• Arts. 8–12: Requisitos de elegibilidade para tomadores<br>
-• Art. 6º: Escopo de cobertura e responsabilidade da seguradora<br>
-• Art. 20: Prescrição de direitos e prazos<br><br>
-
-<strong>Circular SUSEP nº 662/2022</strong> — Normas gerais de Seguro Garantia<br>
-• Arts. 15–18: Metodologia de precificação e formação de prêmio<br>
-• Anexo I: Critérios técnicos de subscrição<br>
-• Arts. 8–12: Requisitos de documentação e análise de risco
-</div>
-
-<h2>Conclusão: Elegibilidade é Estratégia Comercial</h2>
-
-<p>No mercado de Seguro Garantia, velocidade sem qualificação gera desperdício. O corretor que internaliza os critérios de elegibilidade — e os aplica desde a primeira conversa com o cliente — não apenas vende mais: <strong>vende melhor</strong>.</p>
-
-<p>Ele reduz rejeições, acelera aprovações, constrói reputação técnica e diferencia-se em um mercado cada vez mais competitivo. Mais importante: ele cuida do cliente, orientando-o corretamente desde o início, em vez de deixá-lo descobrir na rejeição que não era elegível.</p>
-
-<p>A Lei 15.040/2024 e a regulamentação SUSEP trouxeram clareza ao setor. Agora cabe ao corretor traduzir essa clareza em prática comercial assertiva. É isso que separa o intermediário do consultor. É isso que constrói carreira sustentável em Seguro Garantia.</p>
-
 </article>
 
 <footer>
   <p><strong>Seguro Garantia Fácil</strong></p>
-  <p>Educação técnica para corretores, gestores e empreendedores</p>
-  <p style="margin-top: 20px;">© 2026 Seguro Garantia Fácil • segurogarantiafacil.com</p>
+  <p>© 2026 Seguro Garantia Fácil • segurogarantiafacil.com</p>
 </footer>
 
 </body>
